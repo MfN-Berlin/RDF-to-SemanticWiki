@@ -1,0 +1,11 @@
+#mwImportOWL
+Import an ontology into a semantic MediaWiki
+
+Maintaining a semantic MediaWiki can be a lot of work. 
+A solution is to apply model-based development. 
+The ontology becomes the model, and the semantic MediaWiki is its implementation.
+
+Usage:
+# Build an ontology, e.g. using Protege (webprotege.stanford.edu)
+# Visualize your ontology e.g. using VOWL (http://vowl.visualdataweb.org/webvowl.html)
+# When you're done, import the ontology into MediaWiki (TODO)
