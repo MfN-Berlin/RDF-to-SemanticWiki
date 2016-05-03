@@ -1,0 +1,206 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE Ontology [
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY xml "http://www.w3.org/XML/1998/namespace" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://mfn-berlin.de/sammlung/calendar"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     ontologyIRI="http://mfn-berlin.de/sammlung/calendar">
+    <Prefix name="" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <Class IRI="#Calendar"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Description"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Display"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Entry"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Event"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasDescription"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasDisplay"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasEntry"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasEvent"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasColorValue"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasDetails"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasEndDate"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasLocation"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasStartDate"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasSubject"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#isWholeDay"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Color1"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#Calendar"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasEntry"/>
+            <Class IRI="#Entry"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Entry"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasDescription"/>
+            <Class IRI="#Description"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Entry"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasDisplay"/>
+            <Class IRI="#Display"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Entry"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#hasEvent"/>
+            <Class IRI="#Event"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasColorValue"/>
+        <NamedIndividual IRI="#Color1"/>
+        <Literal datatypeIRI="&rdf;PlainLiteral">#ff0000</Literal>
+    </DataPropertyAssertion>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasDescription"/>
+        <Class IRI="#Entry"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasDisplay"/>
+        <Class IRI="#Entry"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasEntry"/>
+        <Class IRI="#Calendar"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasEvent"/>
+        <Class IRI="#Entry"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasDescription"/>
+        <Class IRI="#Description"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasDisplay"/>
+        <Class IRI="#Display"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasEntry"/>
+        <Class IRI="#Entry"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasEvent"/>
+        <Class IRI="#Event"/>
+    </ObjectPropertyRange>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasColorValue"/>
+        <Class IRI="#Display"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasDetails"/>
+        <Class IRI="#Description"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasEndDate"/>
+        <Class IRI="#Event"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasLocation"/>
+        <Class IRI="#Entry"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasStartDate"/>
+        <Class IRI="#Event"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasSubject"/>
+        <Class IRI="#Description"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#isWholeDay"/>
+        <Class IRI="#Event"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasColorValue"/>
+        <DataOneOf>
+            <Literal datatypeIRI="&rdf;PlainLiteral">#0000ff</Literal>
+            <Literal datatypeIRI="&rdf;PlainLiteral">#00ff00</Literal>
+            <Literal datatypeIRI="&rdf;PlainLiteral">#00ffff</Literal>
+            <Literal datatypeIRI="&rdf;PlainLiteral">#ff0000</Literal>
+            <Literal datatypeIRI="&rdf;PlainLiteral">#ff00ff</Literal>
+            <Literal datatypeIRI="&rdf;PlainLiteral">#ffff00</Literal>
+            <Literal datatypeIRI="&rdf;PlainLiteral">#ffffff</Literal>
+        </DataOneOf>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasDetails"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasEndDate"/>
+        <Datatype abbreviatedIRI="xsd:dateTime"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasStartDate"/>
+        <Datatype abbreviatedIRI="xsd:dateTime"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasSubject"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#isWholeDay"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+
