@@ -6,7 +6,7 @@ Created on 02.05.2016
 import unittest
 from pyMwImportOWL.parser.OWLParser import OWLParser
 
-class Test(unittest.TestCase):
+class OWLParserTest(unittest.TestCase):
     parser = None
     owlpath = "C:/Users/alvaro.ortiz/Workspace/mwImportOWL/testdata/Calendar.owl"
 

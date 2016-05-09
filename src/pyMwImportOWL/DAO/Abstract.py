@@ -7,10 +7,10 @@ DAO objects accessing the MediaWiki API.
 
 class AbstractDAOManager():
     def commit(self, key, value):
-        pass
+        raise NotImplementedError
     
     def getSemanticPropertyDAO(self):
-        pass
+        raise NotImplementedError
 
 class AbstractDAO:
     def create(self, obj):

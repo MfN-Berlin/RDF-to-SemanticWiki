@@ -28,4 +28,5 @@ class OWLImporter:
         '''Import OWL file
         @param path: OWL file to import
         '''
+        model = self._parser.parse( path )
         

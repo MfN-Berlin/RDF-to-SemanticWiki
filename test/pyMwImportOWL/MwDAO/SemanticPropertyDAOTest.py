@@ -7,23 +7,14 @@ Tests the DAO classes without persisting to a back-end
 @author: Alvaro.Ortiz
 '''
 import unittest
-from pyMwImportOWL.DAO.MwAPIDAO import MwAPIDAOManager
+from test.pyMwImportOWL.MwDAO.DummyDAOManager import DummyDAOManager
 from pyMwImportOWL.parser.SemanticModel import SemanticProperty
 
-class DummyDAOManager(MwAPIDAOManager):
-    key = None
-    value = None
-    
-    '''A dummy class for testing'''
-    def commit(self, key, value):
-        self.key = key
-        self.value = value 
 
-
-class Test(unittest.TestCase):
+class SemanticPropertyDAOTest(unittest.TestCase):
 
     def testDatePropertyDAO(self):
-        manager = DummyDAOManager(None)
+        manager = DummyDAOManager( None )
         sprop = SemanticProperty( "test date" )
         sprop.type= "dateTime"
         propDAO = manager.getSemanticPropertyDAO()
@@ -33,7 +24,7 @@ class Test(unittest.TestCase):
         
         
     def testOneOfPropertyDAO(self):
-        manager = DummyDAOManager(None)
+        manager = DummyDAOManager( None )
         sprop = SemanticProperty( "test oneOf" )
         sprop.type= "DataOneOf"
         sprop.allowedValues = ['#0000ff', '#00ff00', '#00ffff', '#ff0000', '#ff00ff', '#ffff00', '#ffffff']
@@ -46,7 +37,7 @@ class Test(unittest.TestCase):
 
 
     def testDefaultTypePropertyDAO(self):
-        manager = DummyDAOManager(None)
+        manager = DummyDAOManager( None )
         sprop = SemanticProperty( "test date" )
         sprop.type= "xxx"
         propDAO = manager.getSemanticPropertyDAO()

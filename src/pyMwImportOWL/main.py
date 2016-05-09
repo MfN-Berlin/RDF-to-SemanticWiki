@@ -14,7 +14,7 @@ def run():
         converter = None
         connector = None
         importer = OWLImporter( parser, converter, connector )
-        
+        importer.run()
         
     except:
         traceback.print_exc( file=sys.stdout )
