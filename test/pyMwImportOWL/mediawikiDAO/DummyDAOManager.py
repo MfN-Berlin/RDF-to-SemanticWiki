@@ -4,9 +4,9 @@ A DAO Manager which doesn't persist, for testing.
 
 @author: Alvaro.Ortiz
 '''
-from pyMwImportOWL.MwDAO.DAOManager import DAOManager
+from pyMwImportOWL.mediawikiDAO.Manager import Manager
 
-class DummyDAOManager(DAOManager):
+class DummyDAOManager( Manager ):
     key = None
     value = None
     

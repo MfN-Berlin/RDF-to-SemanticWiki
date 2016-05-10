@@ -7,7 +7,7 @@ Tests the DAO classes without persisting to a back-end
 @author: Alvaro.Ortiz
 '''
 import unittest
-from test.pyMwImportOWL.MwDAO.DummyDAOManager import DummyDAOManager
+from test.pyMwImportOWL.mediawikiDAO.DummyDAOManager import DummyDAOManager
 from pyMwImportOWL.model.SemanticProperty import SemanticProperty
 
 

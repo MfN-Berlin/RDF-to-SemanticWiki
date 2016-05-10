@@ -5,7 +5,7 @@ using the MediaWiki API
 
 @author: Alvaro.Ortiz
 '''
-from pyMwImportOWL.DAO.Abstract import AbstractDAO
+from pyMwImportOWL.mediawikiDAO.AbstractDAO import AbstractDAO
 
 class SemanticPropertyDAO(AbstractDAO):
     
@@ -19,7 +19,7 @@ class SemanticPropertyDAO(AbstractDAO):
         
     
     def create(self, sprop):
-        '''Create a Semantic MediaWiki page for the property
+        '''Create a Semantic MediaWiki property page for the property
         @param sprop: SemanticProperty
         '''
         datatype = "Text" # default

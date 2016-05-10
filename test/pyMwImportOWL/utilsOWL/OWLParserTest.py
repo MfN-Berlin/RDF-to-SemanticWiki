@@ -4,7 +4,7 @@ Created on 02.05.2016
 @author: Alvaro.Ortiz
 '''
 import unittest
-from pyMwImportOWL.OWL.OWLParser import OWLParser
+from pyMwImportOWL.utilsOWL.OWLParser import OWLParser
 
 class OWLParserTest(unittest.TestCase):
     parser = None
@@ -33,9 +33,13 @@ class OWLParserTest(unittest.TestCase):
         self.assertTrue( "Calendar" in classNames )
         self.assertTrue( "Event" in classNames )
         self.assertTrue( "Entry" in classNames )
-        self.assertTrue( "Display" in classNames )
+        self.assertTrue( "Location" in classNames )
         self.assertTrue( "Description" in classNames )
 
+    def testParseUnion(self):
+        model = self.parser.parse( self.owlpath )
+        entry = model.classes["Entry"]
+        self.assertEquals( 3, len( entry.unionOf ) ) # Entry is composed of classes Event, Description and Location
 
     def testParseDomains(self):
         model = self.parser.parse( self.owlpath )
@@ -48,12 +52,13 @@ class OWLParserTest(unittest.TestCase):
         propNames = sclass.getPropertyNames()
         self.assertTrue( "hasSubject" in propNames )
         self.assertTrue( "hasDetails" in propNames )
-        sclass = model.classes[ 'Display' ]
+        sclass = model.classes[ 'Location' ]
         propNames = sclass.getPropertyNames()
-        self.assertTrue( "hasColorValue" in propNames )
+        self.assertTrue( "hasName" in propNames )
+        self.assertTrue( "hasDirections" in propNames )
         sclass = model.classes[ 'Entry' ]
         propNames = sclass.getPropertyNames()
-        self.assertTrue( "hasLocation" in propNames )
+        self.assertTrue( "hasPriority" in propNames )
         
         
     def testParseRanges(self):
@@ -62,13 +67,6 @@ class OWLParserTest(unittest.TestCase):
         self.assertEqual( "dateTime", sclass.properties["hasEndDate"].type )
         self.assertEqual( "dateTime", sclass.properties["hasStartDate"].type )
         self.assertEqual( "boolean", sclass.properties["isWholeDay"].type )
-
-        
-    def testParseRangeOneOf(self):
-        model = self.parser.parse( self.owlpath )
-        sclass = model.classes[ 'Display' ]
-        self.assertEqual( "DataOneOf", sclass.properties["hasColorValue"].type )
-        self.assertEqual( ['#0000ff', '#00ff00', '#00ffff', '#ff0000', '#ff00ff', '#ffff00', '#ffffff'], sclass.properties["hasColorValue"].allowedValues )
         
 
 if __name__ == "__main__":

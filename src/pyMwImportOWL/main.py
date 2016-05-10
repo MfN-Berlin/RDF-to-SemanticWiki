@@ -5,8 +5,8 @@ Import an Ontology in OWL format into a semantic MediaWiki
 @author: Alvaro.Ortiz
 '''
 import sys, traceback
-from pyMwImportOWL.OWLImporter import OWLImporter
-from pyMwImportOWL.OWl.OWLParser import OWLParser
+from pyMwImportOWL.utilsOWL.OWLImporter import OWLImporter
+from pyMwImportOWL.utilsOWL.OWLParser import OWLParser
 
 def run():
     try:
