@@ -4,11 +4,11 @@ Created on 02.05.2016
 @author: Alvaro.Ortiz
 '''
 import unittest
-from pyMwImportOWL.parser.OWLParser import OWLParser
+from pyMwImportOWL.OWL.OWLParser import OWLParser
 
 class OWLParserTest(unittest.TestCase):
     parser = None
-    owlpath = "C:/Users/alvaro.ortiz/Workspace/mwImportOWL/testdata/Calendar.owl"
+    owlpath = "../../../example/Calendar.owl"
 
     def setUp(self):
         self.parser = OWLParser()

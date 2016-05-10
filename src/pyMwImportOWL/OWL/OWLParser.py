@@ -4,7 +4,9 @@ Parse an OWL file in XML format
 @author: Alvaro.Ortiz
 '''
 from xml.dom import minidom
-from pyMwImportOWL.parser.SemanticModel import SemanticModel, SemanticClass, SemanticProperty
+from pyMwImportOWL.model.SemanticModel import SemanticModel
+from pyMwImportOWL.model.SemanticClass import SemanticClass
+from pyMwImportOWL.model.SemanticProperty import SemanticProperty
 
 class OWLParser:
     _doc = None

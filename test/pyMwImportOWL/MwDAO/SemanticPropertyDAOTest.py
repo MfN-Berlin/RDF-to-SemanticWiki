@@ -8,7 +8,7 @@ Tests the DAO classes without persisting to a back-end
 '''
 import unittest
 from test.pyMwImportOWL.MwDAO.DummyDAOManager import DummyDAOManager
-from pyMwImportOWL.parser.SemanticModel import SemanticProperty
+from pyMwImportOWL.model.SemanticProperty import SemanticProperty
 
 
 class SemanticPropertyDAOTest(unittest.TestCase):
