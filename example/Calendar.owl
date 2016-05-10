@@ -13,25 +13,22 @@
     <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
     <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
     <Declaration>
-        <DataProperty IRI="#hasLocation"/>
-    </Declaration>
-    <Declaration>
         <ObjectProperty IRI="#hasEntry"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Display"/>
-    </Declaration>
-    <Declaration>
         <DataProperty IRI="#hasEndDate"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasColorValue"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Description"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#hasDetails"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasPriority"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Location"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#hasSubject"/>
@@ -46,7 +43,13 @@
         <Class IRI="#Entry"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="#hasName"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#Calendar"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasDirections"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#isPartOfEntry"/>
@@ -64,11 +67,6 @@
             <Class IRI="#Entry"/>
         </ObjectSomeValuesFrom>
     </SubClassOf>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#hasColorValue"/>
-        <NamedIndividual IRI="#Color1"/>
-        <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">#ff0000</Literal>
-    </DataPropertyAssertion>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#hasEntry"/>
         <Class IRI="#Calendar"/>
@@ -77,8 +75,8 @@
         <ObjectProperty IRI="#isPartOfEntry"/>
         <ObjectUnionOf>
             <Class IRI="#Description"/>
-            <Class IRI="#Display"/>
             <Class IRI="#Event"/>
+            <Class IRI="#Location"/>
         </ObjectUnionOf>
     </ObjectPropertyDomain>
     <ObjectPropertyRange>
@@ -90,19 +88,23 @@
         <Class IRI="#Entry"/>
     </ObjectPropertyRange>
     <DataPropertyDomain>
-        <DataProperty IRI="#hasColorValue"/>
-        <Class IRI="#Display"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
         <DataProperty IRI="#hasDetails"/>
         <Class IRI="#Description"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasDirections"/>
+        <Class IRI="#Location"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="#hasEndDate"/>
         <Class IRI="#Event"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
-        <DataProperty IRI="#hasLocation"/>
+        <DataProperty IRI="#hasName"/>
+        <Class IRI="#Location"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasPriority"/>
         <Class IRI="#Entry"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
@@ -118,20 +120,16 @@
         <Class IRI="#Event"/>
     </DataPropertyDomain>
     <DataPropertyRange>
-        <DataProperty IRI="#hasColorValue"/>
-        <DataOneOf>
-            <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">#0000ff</Literal>
-            <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">#00ff00</Literal>
-            <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">#00ffff</Literal>
-            <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">#ff0000</Literal>
-            <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">#ff00ff</Literal>
-            <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">#ffff00</Literal>
-            <Literal datatypeIRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#PlainLiteral">#ffffff</Literal>
-        </DataOneOf>
-    </DataPropertyRange>
-    <DataPropertyRange>
         <DataProperty IRI="#hasEndDate"/>
         <Datatype abbreviatedIRI="xsd:dateTime"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasPriority"/>
+        <Datatype abbreviatedIRI="xsd:int"/>
     </DataPropertyRange>
     <DataPropertyRange>
         <DataProperty IRI="#hasStartDate"/>

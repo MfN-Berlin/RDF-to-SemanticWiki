@@ -38,7 +38,7 @@ class OWLParser:
         @return: array of class names'''
         declarations = self._doc.getElementsByTagName("Declaration")
         if declarations == None or len(declarations) == 0:
-            raise Exception("No class declarations found n OWL file")
+            raise Exception("No class declarations found in OWL file")
         
         # go through the "Class" OWL-elements and add them to the model 
         for element in declarations:
@@ -49,7 +49,48 @@ class OWLParser:
                     sclass = SemanticClass(className)
                     self._parsePropertyDomains( sclass )
                     self._model.addClass(sclass) # add class to model 
-                
+                    
+        # Look for unions in the model
+        self._parseUnions()
+
+    
+    def _parseUnions(self):
+        domains = self._doc.getElementsByTagName("ObjectPropertyDomain")
+        ranges = self._doc.getElementsByTagName("ObjectPropertyRange")
+        
+        # go through ObjectPropertyDomain elements
+        for domain in domains:
+            items = []
+            parentClassName = None
+            # look if element contains ObjectUnionOf elements
+            for node1 in domain.childNodes:
+                # Find elements in the union
+                if node1.nodeName == "ObjectUnionOf":
+                    for node2 in node1.childNodes:
+                        if node2.nodeName == "Class":
+                            items.append( node2.attributes["IRI"].value[1:] ) # pop leading hash
+                            
+                # Find the name of the property            
+                if node1.nodeName == "ObjectProperty":
+                    foundName = node1.attributes["IRI"].value[1:] # pop leading hash
+                    
+            if len(items) > 0: # if a non-empty union was found 
+                for r in ranges:
+                    for node1 in r.childNodes:
+                        if node1.nodeName == "ObjectProperty":
+                            propName = node1.attributes["IRI"].value[1:]
+                        if node1.nodeName == "Class":
+                            className = node1.attributes["IRI"].value[1:]
+
+                    # if the ObjectProperty in the range is the same as the objectProperty in the domain
+                    # then the remember this class                            
+                    if propName == foundName:
+                        parentClassName = className
+
+                if parentClassName:
+                    for item in items:
+                        self._model.classes[parentClassName].uniteWith( self._model.classes[ item ] )
+        
     
     def _parsePropertyDomains(self, sclass):
         '''Get the OWL properties for a given class, 

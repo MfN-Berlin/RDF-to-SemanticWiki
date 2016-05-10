@@ -10,12 +10,21 @@ class SemanticClass:
     '''
     name = None
     properties = {}
+    unionOf = {}
     
     def __init__(self, name):
+        '''
+        Initialize a class with a given name
+        @param name: string
+        '''
         self.name = name
     
     
     def addProperty(self, prop):
+        '''
+        Add a property to the class
+        @param prop: SemanticProperty 
+        '''
         self.properties[ prop.name ] = prop
         
     
@@ -24,3 +33,9 @@ class SemanticClass:
         @return array of strings
         '''
         return self.properties.keys()
+    
+    
+    def uniteWith(self, sclass):
+        '''Unite this class with another class'''  
+        self.unionOf[sclass.name] = sclass
+    
