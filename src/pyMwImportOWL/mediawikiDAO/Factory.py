@@ -5,10 +5,11 @@ DAO objects accessing the MediaWiki API.
 
 @author: Alvaro.Ortiz
 '''
+from pyMwImportOWL.mediawikiDAO.AbstractFactory import AbstractFactory
 from pyMwImportOWL.mediawikiDAO.SemanticPropertyDAO import SemanticPropertyDAO
 from pyMwImportOWL.mediawikiDAO.SemanticClassDAO import SemanticClassDAO
 
-class Factory():
+class Factory( AbstractFactory ):
     _connector = None
     _propertyDAO = None
     _classDAO = None

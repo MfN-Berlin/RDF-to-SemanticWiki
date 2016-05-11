@@ -22,6 +22,7 @@ def run():
         parser =  OWLParser() # A parser which can parse OWL
         connector = MediaWikiApiConnector( config ) # A connector which can login to a MediaWiki through the API
         daoFactory = Factory( connector ) # A factory for DAO objects which can persist a SemanticModel
+        
         importer = OWLImporter( parser, daoFactory ) # A wrapper for the import process
         importer.run()
         
