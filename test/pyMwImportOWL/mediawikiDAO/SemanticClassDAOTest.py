@@ -7,37 +7,37 @@ Tests the DAO classes without persisting to a back-end
 @author: Alvaro.Ortiz
 '''
 import unittest
-from test.pyMwImportOWL.mediawikiDAO.DummyDAOManager import DummyDAOManager
+from test.pyMwImportOWL.mediawikiDAO.DummyDAOFactory import DummyDAOFactory
 from pyMwImportOWL.model.SemanticClass import SemanticClass
 from pyMwImportOWL.model.SemanticProperty import SemanticProperty
 
 class SemanticClassDAOTest(unittest.TestCase):
 
     def testSimpleClass(self):
-        manager = DummyDAOManager( None )
+        factory = DummyDAOFactory( None )
         sclass = SemanticClass( "test class" )
         sprop = SemanticProperty( "test property" )
         sclass.addProperty( sprop )
-        classDAO = manager.getSemanticClassDAO()
+        classDAO = factory.getSemanticClassDAO()
         self.assertTrue( classDAO )
         classDAO.create( sclass )
-        self.assertTrue( "=test class=" in manager.value) # Class name is header 1
-        self.assertTrue( "'''test property'''" in manager.value) # Properties names are in bold
-        self.assertTrue( "[[test property::{{{test property|}}}]]" in manager.value) # properties are in semantic mediawiki syntax
+        self.assertTrue( "=test class=" in factory.value) # Class name is header 1
+        self.assertTrue( "'''test property'''" in factory.value) # Properties names are in bold
+        self.assertTrue( "[[test property::{{{test property|}}}]]" in factory.value) # properties are in semantic mediawiki syntax
 
 
     def testUnionClass(self):
-        manager = DummyDAOManager( None )
+        factory = DummyDAOFactory( None )
         sclass = SemanticClass( "test class" )
         uclass = SemanticClass( "test class 2" )
         uclass.addProperty( SemanticProperty( "test property" ) )
         sclass.uniteWith( uclass )
-        classDAO = manager.getSemanticClassDAO()
+        classDAO = factory.getSemanticClassDAO()
         classDAO.create( sclass )
-        self.assertTrue( "{{test class" in manager.value)
-        self.assertTrue( "==test class 2==" in manager.value) # union class names are header 2
-        self.assertTrue( "{{test class 2" in manager.value) # a call to the template of the union class
-        self.assertTrue( "| test property = {{{test property|}}}" in manager.value) # the property value is passed to the template
+        self.assertTrue( "{{test class" in factory.value)
+        self.assertTrue( "==test class 2==" in factory.value) # union class names are header 2
+        self.assertTrue( "{{test class 2" in factory.value) # a call to the template of the union class
+        self.assertTrue( "| test property = {{{test property|}}}" in factory.value) # the property value is passed to the template
 
 
 if __name__ == "__main__":

@@ -4,7 +4,7 @@ Created on 02.05.2016
 @author: Alvaro.Ortiz
 '''
 import unittest
-from pyMwImportOWL.utilsOWL.OWLParser import OWLParser
+from pyMwImportOWL.parser.OWLParser import OWLParser
 
 class OWLParserTest(unittest.TestCase):
     parser = None

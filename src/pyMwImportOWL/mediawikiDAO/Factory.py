@@ -8,13 +8,13 @@ DAO objects accessing the MediaWiki API.
 from pyMwImportOWL.mediawikiDAO.SemanticPropertyDAO import SemanticPropertyDAO
 from pyMwImportOWL.mediawikiDAO.SemanticClassDAO import SemanticClassDAO
 
-class Manager():
-    _connection = None
+class Factory():
+    _connector = None
     _propertyDAO = None
     _classDAO = None
     
-    def __init__(self, connection):
-        self._connection = connection
+    def __init__(self, connector):
+        self._connector = connector
     
     
     def commit(self, key, value):

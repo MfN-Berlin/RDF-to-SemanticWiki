@@ -9,10 +9,9 @@ class OWLImporter:
     Import an OWL file into a semantic MediaWiki
     '''
     _parser = None
-    _converter = None
-    _connector = None
+    _daoFactory = None
 
-    def __init__(self, parser, converter, connector):
+    def __init__(self, parser, daoFactory ):
         '''
         Constructor
         @param parser: parses an OWL file into a dom object
@@ -20,8 +19,7 @@ class OWLImporter:
         @param connector: connects to the MediaWiki semantic API 
         '''
         self._parser = parser
-        self._converter = converter
-        self._connector = connector
+        self._daoFactory = daoFactory
 
 
     def run(self, path):
@@ -29,4 +27,5 @@ class OWLImporter:
         @param path: OWL file to import
         '''
         model = self._parser.parse( path )
+        
         
