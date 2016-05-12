@@ -6,6 +6,9 @@ Created on 11.05.2016
 
 class AbstractFactory:
     
+    def commit(self):
+        raise NotImplementedError
+    
     def getSemanticPropertyDAO(self):
         raise NotImplementedError
     

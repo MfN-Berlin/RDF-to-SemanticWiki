@@ -8,9 +8,7 @@ using the MediaWiki API
 from pyMwImportOWL.mediawikiDAO.AbstractDAO import AbstractDAO
 
 class SemanticPropertyDAO(AbstractDAO):
-    
-    _manager = None
-    
+        
     def __init__(self, manager):
         '''Instantiate the DAO class and associate it with a DAO manager, which manages the connection
         @param manager: class implementing AbstractDAOManager 

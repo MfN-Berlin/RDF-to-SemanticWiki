@@ -16,23 +16,23 @@ class Factory( AbstractFactory ):
     
     def __init__(self, connector):
         self._connector = connector
-    
-    
+
+        
     def commit(self, key, value):
         '''
         Commit the operation in this case using MediaWiki API
         @param key: a string corresponding to a page name
         @param value: a string corresponding to page contents in markdown
         '''
-        pass
-    
-    
+        self._connector.createPage( key, value )
+
+
     def getSemanticPropertyDAO(self):
         '''
         get a DAO object for the pyMwImportOWL.parser.SemanticModel.SemanticProperty class
         '''
         if self._propertyDAO == None:
-            self._propertyDAO = SemanticPropertyDAO(self)
+            self._propertyDAO = SemanticPropertyDAO( self )
         return self._propertyDAO
 
     
@@ -41,7 +41,7 @@ class Factory( AbstractFactory ):
         get a DAO object for the pyMwImportOWL.parser.SemanticModel.SemanticClass class
         '''
         if self._classDAO == None:
-            self._classDAO = SemanticClassDAO(self)
+            self._classDAO = SemanticClassDAO( self )
         return self._classDAO
 
 

@@ -8,9 +8,6 @@ class SemanticClass:
     A class for representing a semantic class in an object oriented way.
     Class properties are stored in a dictionary.
     '''
-    name = None
-    properties = {}
-    unionOf = {}
     
     def __init__(self, name):
         '''
@@ -18,6 +15,8 @@ class SemanticClass:
         @param name: string
         '''
         self.name = name
+        self.properties = {}
+        self.unionOf = {}
     
     
     def addProperty(self, prop):

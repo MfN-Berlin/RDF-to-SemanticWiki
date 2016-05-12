@@ -36,10 +36,18 @@ class OWLParserTest(unittest.TestCase):
         self.assertTrue( "Location" in classNames )
         self.assertTrue( "Description" in classNames )
 
+
     def testParseUnion(self):
         model = self.parser.parse( self.owlpath )
         entry = model.classes["Entry"]
         self.assertEquals( 3, len( entry.unionOf ) ) # Entry is composed of classes Event, Description and Location
+
+
+    def testParseNotUnion(self):
+        model = self.parser.parse( self.owlpath )
+        entry = model.classes["Description"] 
+        self.assertEquals( 0, len( entry.unionOf ) ) # Description doesn't have union classes
+
 
     def testParseDomains(self):
         model = self.parser.parse( self.owlpath )

@@ -30,6 +30,8 @@ class OWLParser( AbstractParser ):
             raise Exception( "Not an OWL file: " + message + "  " + path)
         
         self._parseClasses()
+        # Look for unions in the model
+        self._parseUnions()
         
         return self._model
 
@@ -51,8 +53,6 @@ class OWLParser( AbstractParser ):
                     self._parsePropertyDomains( sclass )
                     self._model.addClass(sclass) # add class to model 
                     
-        # Look for unions in the model
-        self._parseUnions()
 
     
     def _parseUnions(self):
@@ -63,6 +63,7 @@ class OWLParser( AbstractParser ):
         for domain in domains:
             items = []
             parentClassName = None
+            foundName = None
             # look if element contains ObjectUnionOf elements
             for node1 in domain.childNodes:
                 # Find elements in the union
@@ -71,7 +72,7 @@ class OWLParser( AbstractParser ):
                         if node2.nodeName == "Class":
                             items.append( node2.attributes["IRI"].value[1:] ) # pop leading hash
                             
-                # Find the name of the property            
+                # Find the name of the property
                 if node1.nodeName == "ObjectProperty":
                     foundName = node1.attributes["IRI"].value[1:] # pop leading hash
                     
@@ -85,7 +86,7 @@ class OWLParser( AbstractParser ):
 
                     # if the ObjectProperty in the range is the same as the objectProperty in the domain
                     # then the remember this class                            
-                    if propName == foundName:
+                    if propName == foundName:                        
                         parentClassName = className
 
                 if parentClassName:

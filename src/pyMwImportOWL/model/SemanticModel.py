@@ -9,7 +9,10 @@ class SemanticModel:
     A class for representing a semantic model in an object oriented way.
     Classes are stored in a dictionary.
     '''
-    classes = {}
+    
+    def __init__(self):
+        self.classes = {}
+        
     
     def addClass(self, sclass):
         self.classes[ sclass.name ] = sclass
