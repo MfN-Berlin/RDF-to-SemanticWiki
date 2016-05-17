@@ -26,6 +26,19 @@ class OWLImporter:
         '''Import OWL file
         @param path: OWL file to import
         '''
+        # parse the OWL file
         model = self._parser.parse( path )
+        
+        # create DAO objects
+        classDao = self._factory.getSemanticClassDAO()
+        propDao = self._factory.getSemanticPropertyDAO()
+        
+        # create all the class pages
+        for sclass in model.classes.values():
+            classDao.create( sclass )
+            # create all the property pages
+            for sprop in sclass.properties.values():
+                propDao.create( sprop )
+
         
         

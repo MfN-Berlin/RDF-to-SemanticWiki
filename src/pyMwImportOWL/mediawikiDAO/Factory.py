@@ -13,6 +13,7 @@ class Factory( AbstractFactory ):
     _connector = None
     _propertyDAO = None
     _classDAO = None
+    _modelDAO = None
     
     def __init__(self, connector):
         self._connector = connector
@@ -29,7 +30,7 @@ class Factory( AbstractFactory ):
 
     def getSemanticPropertyDAO(self):
         '''
-        get a DAO object for the pyMwImportOWL.parser.SemanticModel.SemanticProperty class
+        get a DAO object for the pyMwImportOWL.model.SemanticProperty class
         '''
         if self._propertyDAO == None:
             self._propertyDAO = SemanticPropertyDAO( self )
@@ -38,7 +39,7 @@ class Factory( AbstractFactory ):
     
     def getSemanticClassDAO(self):
         '''
-        get a DAO object for the pyMwImportOWL.parser.SemanticModel.SemanticClass class
+        get a DAO object for the pyMwImportOWL.model.SemanticClass class
         '''
         if self._classDAO == None:
             self._classDAO = SemanticClassDAO( self )

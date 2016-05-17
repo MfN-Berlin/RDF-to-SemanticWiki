@@ -15,15 +15,6 @@ class SemanticClassDAO( AbstractDAO ):
         self._manager = manager
 
 
-    def commit(self, key, value):
-        '''
-        Commit the operation in this case using MediaWiki API
-        @param key: a string corresponding to a page name
-        @param value: a string corresponding to page contents in markdown
-        '''
-        
-
-
     def create( self, sclass ):
         '''Create a Semantic MediaWiki template for the class
         @param sprop: SemanticClass

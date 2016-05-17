@@ -11,6 +11,10 @@ from pyMwImportOWL.mediawikiDAO.Factory import Factory
 
 
 class CreateTemplateFromOWLTest(unittest.TestCase):
+    '''
+    Test creating pages in the wiki (e.g. using a test wiki)
+    The connector actually creates pages here
+    '''
     # path to configuration file
     configPath = "../../example/config.ini"
     # path to example OWL file
@@ -32,8 +36,21 @@ class CreateTemplateFromOWLTest(unittest.TestCase):
 
 
     def tearDown(self):
-        pass
+        self.connector.deletePage( "Template:Entry" )
+        self.connector.deletePage( "Template:Event" )
+        self.connector.deletePage( "Template:Location" )
+        self.connector.deletePage( "Template:Description" )
+        self.connector.deletePage( "Property:hasPriority" )
+
  
+    def testProperty(self):
+        # The "Event" class has a property called "Priority"
+        prop = self.model.classes[ 'Entry' ].properties[ 'hasPriority' ]
+        dao = self.factory.getSemanticPropertyDAO()
+        dao.create( prop )
+        resp = self.connector.loadPage( "Property:" + prop.name )
+        self.assertTrue( resp )
+
 
     def testSimpleClass(self):
         simpleClass = self.model.classes[ 'Description' ]
@@ -41,8 +58,6 @@ class CreateTemplateFromOWLTest(unittest.TestCase):
         dao.create( simpleClass ) 
         # the template should be in the wiki
         resp = self.connector.loadPage( "Template:" + simpleClass.name )
-        self.assertTrue( resp )
-        resp = self.connector.deletePage( "Template:" + simpleClass.name )
         self.assertTrue( resp )
 
 

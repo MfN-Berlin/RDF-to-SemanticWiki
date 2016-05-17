@@ -22,7 +22,7 @@ class OWLParser( AbstractParser ):
     
         @param path:string path to a file 
         @return SemanticModel: a object representing the parsed OWL
-        @raise exception: if not an OWL file 
+        @raise exception: if not an OWL file Parse the OWL fle
         '''
         self._doc = minidom.parse( path )
         check, message = self._checkOWL()

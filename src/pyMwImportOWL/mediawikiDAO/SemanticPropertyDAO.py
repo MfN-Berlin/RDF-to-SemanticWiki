@@ -39,4 +39,4 @@ class SemanticPropertyDAO(AbstractDAO):
                 response += "[[Allows value::%s]]\n" % value
         
         # Send to MediaWiki    
-        self._manager.commit( sprop.name, response )
+        self._manager.commit( "property:" + sprop.name, response )

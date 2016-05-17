@@ -11,6 +11,7 @@ class SemanticModel:
     '''
     
     def __init__(self):
+        '''A dictionary of name -> class'''
         self.classes = {}
         
     

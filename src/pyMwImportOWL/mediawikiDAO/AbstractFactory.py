@@ -15,5 +15,3 @@ class AbstractFactory:
     def getSemanticClassDAO(self):
         raise NotImplementedError
 
-    def getSemanticModelDAO(self):
-        raise NotImplementedError
