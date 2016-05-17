@@ -31,12 +31,16 @@ class SemanticPropertyDAO(AbstractDAO):
             datatype = "Text"
             
         # markdown goes in the MediaWiki page
-        response = "This is a property of type [[Has type::%s]].\n" % datatype 
+        self.value = "This is a property of type [[Has type::%s]].\n" % datatype 
         
         if sprop.type == "DataOneOf":
-            response += "The allowed values for this property are:\n"
-            for value in sprop.allowedValues:
-                response += "[[Allows value::%s]]\n" % value
+            self.value += "The allowed values for this property are:\n"
+            for item in sprop.allowedValues:
+                self.value += "[[Allows value::%s]]\n" % item
         
-        # Send to MediaWiki    
-        self._manager.commit( "property:" + sprop.name, response )
+        # Send to MediaWiki
+        self._manager.commit( "property:" + sprop.name, self.value )
+        
+ 
+    def getValue(self):
+        return self.value

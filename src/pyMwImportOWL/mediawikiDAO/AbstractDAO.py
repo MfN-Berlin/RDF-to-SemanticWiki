@@ -12,16 +12,19 @@ class AbstractDAO:
         Example:
         
         class myDAO( AbstractDAO ):
-           manager = None
+           _manager = None
            
            __init__( self, myDAOManagermanager ):
-              self.manager = myDAOManager
+              self._manager = myDAOManager
         
            create( self, myObj ):
               query = "...put some SQL here..."
-              self.manager.commit( myObj.name, query ) 
+              self._manager.commit( myObj.name, query ) 
         
         '''
         raise NotImplementedError
     
-    
+    def getValue(self):
+        '''Returns a string representation of the query used for persisting the in-memory object'''
+        raise NotImplementedError
+        

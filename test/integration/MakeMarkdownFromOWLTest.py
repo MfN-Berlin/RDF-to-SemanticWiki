@@ -24,7 +24,7 @@ class MakeMarkdownFromOWLTest(unittest.TestCase):
     def setUp(self):
         self.parser = OWLParser()
         self.model = self.parser.parse( self.owlpath )
-        self.factory = DummyDAOFactory( None ) # stores markdown in factory.value, does not create mediawiki pages
+        self.factory = DummyDAOFactory(  ) # stores markdown in factory.value, does not create mediawiki pages
 
 
     def tearDown(self):
@@ -36,30 +36,30 @@ class MakeMarkdownFromOWLTest(unittest.TestCase):
         prop = self.model.classes[ 'Entry' ].properties[ 'hasPriority' ]
         dao = self.factory.getSemanticPropertyDAO()
         dao.create( prop )
-        self.assertTrue( "This is a property of type [[Has type::Text]].\n" in self.factory.value)
+        self.assertTrue( "This is a property of type [[Has type::Text]].\n" in self.factory._manager.value)
 
 
     def testSimpleClass(self):
         simpleClass = self.model.classes[ 'Description' ]
-        dao = self.factory.getSemanticClassDAO()
-        dao.create( simpleClass )
-        self.assertTrue( "=Description=" in self.factory.value )
-        self.assertTrue( "'''hasSubject''': [[hasSubject::{{{hasSubject|}}}]]" in self.factory.value )
-        self.assertTrue( "'''hasDetails''': [[hasDetails::{{{hasDetails|}}}]]" in self.factory.value )
+        classDAO = self.factory.getSemanticClassDAO()
+        classDAO.create( simpleClass )
+        self.assertTrue( "=Description=" in self.factory._manager.value )
+        self.assertTrue( "'''hasSubject''': [[hasSubject::{{{hasSubject|}}}]]" in classDAO.getValue() )
+        self.assertTrue( "'''hasDetails''': [[hasDetails::{{{hasDetails|}}}]]" in classDAO.getValue() )
         # Don't create a "Location" template if doing a "Description" template (don't mix up class variables with instance variables)
-        self.assertFalse( "{{Location" in self.factory.value )
+        self.assertFalse( "{{Location" in classDAO.getValue() )
 
 
     def testUnionClass(self):
         uclass = self.model.classes[ 'Entry' ]
-        dao = self.factory.getSemanticClassDAO()
-        dao.create( uclass )
-        self.assertTrue( "=Entry=" in self.factory.value ) 
-        self.assertTrue( "'''hasPriority''': [[hasPriority::{{{hasPriority|}}}]]" in self.factory.value )
-        self.assertTrue( "==Event==" in self.factory.value ) 
-        self.assertTrue( "==Description==" in self.factory.value ) 
-        self.assertTrue( "==Location==" in self.factory.value ) 
-        self.assertFalse( "==Calendar==" in self.factory.value ) 
+        classDAO = self.factory.getSemanticClassDAO()
+        classDAO.create( uclass )
+        self.assertTrue( "=Entry=" in classDAO.getValue() ) 
+        self.assertTrue( "'''hasPriority''': [[hasPriority::{{{hasPriority|}}}]]" in classDAO.getValue() )
+        self.assertTrue( "==Event==" in classDAO.getValue() ) 
+        self.assertTrue( "==Description==" in classDAO.getValue() ) 
+        self.assertTrue( "==Location==" in classDAO.getValue() ) 
+        self.assertFalse( "==Calendar==" in classDAO.getValue() ) 
         
 
 if __name__ == "__main__":

@@ -22,19 +22,23 @@ class SemanticClassDAO( AbstractDAO ):
         '''
         
         # Mark-down for the class properties
-        response = "=%s=\n" % sclass.name
+        self.value = "=%s=\n" % sclass.name
         for name in sclass.getPropertyNames():
-            response += "'''%s''': " % name
-            response += "[[%s::{{{%s|}}}]] \n" % ( name, name )
+            self.value += "'''%s''': " % name
+            self.value += "[[%s::{{{%s|}}}]] \n" % ( name, name )
             
         # Mark-down for the properties of union classes
         # Make a call to the template of the class
         for part in sclass.unionOf.values():
-            response += "==%s==\n" % part.name
-            response += "{{%s\n" % part.name
+            self.value += "==%s==\n" % part.name
+            self.value += "{{%s\n" % part.name
             for name in part.getPropertyNames():
-                response += "| %s = {{{%s|}}}\n" % (name, name)
-            response += "}}\n"
+                self.value += "| %s = {{{%s|}}}\n" % (name, name)
+            self.value += "}}\n"
                 
         # Send to MediaWiki    
-        self._manager.commit( "template:" + sclass.name, response )
+        self._manager.commit( "template:" + sclass.name, self.value )
+
+
+    def getValue(self):
+        return self.value
