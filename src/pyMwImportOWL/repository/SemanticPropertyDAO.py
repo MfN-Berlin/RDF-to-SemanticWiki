@@ -5,7 +5,7 @@ using the MediaWiki API
 
 @author: Alvaro.Ortiz
 '''
-from pyMwImportOWL.mediawikiDAO.AbstractDAO import AbstractDAO
+from pyMwImportOWL.repository.AbstractDAO import AbstractDAO
 
 class SemanticPropertyDAO(AbstractDAO):
         

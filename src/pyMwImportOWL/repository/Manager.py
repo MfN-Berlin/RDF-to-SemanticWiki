@@ -3,7 +3,7 @@ Created on 17.05.2016
 
 @author: Alvaro.Ortiz
 '''
-from pyMwImportOWL.mediawikiDAO.AbstractManager import AbstractManager
+from pyMwImportOWL.repository.AbstractManager import AbstractManager
 
 class Manager( AbstractManager ):
     _connector = None

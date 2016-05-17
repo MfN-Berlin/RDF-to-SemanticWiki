@@ -4,8 +4,8 @@ A DAO Manager which doesn't persist, for testing.
 
 @author: Alvaro.Ortiz
 '''
-from pyMwImportOWL.mediawikiDAO.Factory import Factory
-from pyMwImportOWL.mediawikiDAO.Manager import Manager
+from pyMwImportOWL.repository.Factory import Factory
+from pyMwImportOWL.repository.Manager import Manager
 
 class DummyDAOFactory( Factory ):
     '''

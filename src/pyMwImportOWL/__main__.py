@@ -7,7 +7,7 @@ Import an Ontology in OWL format into a semantic MediaWiki
 import sys, traceback, ConfigParser
 from pyMwImportOWL.OWLImporter import OWLImporter
 from pyMwImportOWL.parser.OWLParser import OWLParser
-from pyMwImportOWL.mediawikiDAO.Factory import Factory
+from pyMwImportOWL.repository.Factory import Factory
 from pyMwImportOWL.connector.MediaWikiApiConnector import MediaWikiApiConnector
 
 '''Path to configuration file.'''

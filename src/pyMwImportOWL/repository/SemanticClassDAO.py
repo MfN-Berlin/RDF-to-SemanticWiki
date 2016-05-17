@@ -3,7 +3,7 @@ Created on 10.05.2016
 
 @author: Alvaro.Ortiz
 '''
-from pyMwImportOWL.mediawikiDAO.AbstractDAO import AbstractDAO
+from pyMwImportOWL.repository.AbstractDAO import AbstractDAO
 
 class SemanticClassDAO( AbstractDAO ):
     _manager = None

@@ -5,7 +5,7 @@ Created on 12.05.2016
 '''
 import unittest
 from pyMwImportOWL.parser.OWLParser import OWLParser
-from test.pyMwImportOWL.mediawikiDAO.DummyDAOFactory import DummyDAOFactory
+from test.pyMwImportOWL.repository.DummyDAOFactory import DummyDAOFactory
 
 class MakeMarkdownFromOWLTest(unittest.TestCase):
     '''

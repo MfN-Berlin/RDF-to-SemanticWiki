@@ -7,7 +7,7 @@ Reads an OWL file, parses it and stores the correspondin templates in a wiki.
 import unittest, ConfigParser
 from pyMwImportOWL.parser.OWLParser import OWLParser
 from pyMwImportOWL.connector.MediaWikiApiConnector import MediaWikiApiConnector
-from pyMwImportOWL.mediawikiDAO.Factory import Factory
+from pyMwImportOWL.repository.Factory import Factory
 
 
 class CreateTemplateFromOWLTest(unittest.TestCase):
