@@ -5,7 +5,11 @@ using the MediaWiki API
 
 @author: Alvaro.Ortiz
 '''
+<<<<<<< HEAD
 from pyMwImportOWL.repository.AbstractDAO import AbstractDAO
+=======
+from pyMwImportOWL.mediawikiDAO.AbstractDAO import AbstractDAO
+>>>>>>> branch 'master' of https://github.com/AlvaroOrtizTroncoso/mwImportOWL.git
 
 class SemanticPropertyDAO(AbstractDAO):
         

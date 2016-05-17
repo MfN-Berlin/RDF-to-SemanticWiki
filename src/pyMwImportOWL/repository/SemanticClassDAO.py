@@ -3,7 +3,11 @@ Created on 10.05.2016
 
 @author: Alvaro.Ortiz
 '''
+<<<<<<< HEAD
 from pyMwImportOWL.repository.AbstractDAO import AbstractDAO
+=======
+from pyMwImportOWL.mediawikiDAO.AbstractDAO import AbstractDAO
+>>>>>>> branch 'master' of https://github.com/AlvaroOrtizTroncoso/mwImportOWL.git
 
 class SemanticClassDAO( AbstractDAO ):
     _manager = None
