@@ -11,7 +11,7 @@ class SemanticPropertyDAO(AbstractDAO):
         
     def __init__(self, manager):
         '''Instantiate the DAO class and associate it with a DAO manager, which manages the connection
-        @param manager: class implementing AbstractDAOManager 
+        @param manager: class implementing AbstractManager 
         '''
         self._manager = manager
         self.values = {}

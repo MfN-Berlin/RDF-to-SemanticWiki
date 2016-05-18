@@ -1,9 +1,13 @@
 # mwImportOWL
 Import an ontology into a semantic MediaWiki
 
-Maintaining a semantic MediaWiki can be a lot of work. 
-A solution is to apply model-based development. 
-The ontology becomes the model, and the semantic MediaWiki is its implementation.
+Maintaining a semantic MediaWiki can be a lot of work, as any reasonably complex semantic wiki will require dozens of templates, properties and forms.
+A solution is to model the semantic relationships as an ontology, using a modeling tool such as Protege, and then importing the ontology into the wiki.
+By separating the model from its implementation, it becomes easier to keep an overview of the entities and properties used. 
+Additionally, ontologies can be visualized using VOWL, and discussed with less technical stakeholders. 
+
+This project is a proof-of-concept. The provided example ontology is very simple. It can be automatically imported into a semantic MediaWiki using the scripts provided. 
+The semantic Mediawiki templates, properties and forms created can be used to test the viability of the concept.
 
 ## Usage example
 An example ontology is included in the folder "example". This ontology, Calendar.owl, models an event calendar, such as from thunderbird etc. 
