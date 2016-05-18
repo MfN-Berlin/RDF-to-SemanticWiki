@@ -5,11 +5,7 @@ using the MediaWiki API
 
 @author: Alvaro.Ortiz
 '''
-<<<<<<< HEAD
 from pyMwImportOWL.repository.AbstractDAO import AbstractDAO
-=======
-from pyMwImportOWL.mediawikiDAO.AbstractDAO import AbstractDAO
->>>>>>> branch 'master' of https://github.com/AlvaroOrtizTroncoso/mwImportOWL.git
 
 class SemanticPropertyDAO(AbstractDAO):
         
@@ -18,7 +14,8 @@ class SemanticPropertyDAO(AbstractDAO):
         @param manager: class implementing AbstractDAOManager 
         '''
         self._manager = manager
-        
+        self.values = {}
+
     
     def create(self, sprop):
         '''Create a Semantic MediaWiki property page for the property
@@ -35,16 +32,21 @@ class SemanticPropertyDAO(AbstractDAO):
             datatype = "Text"
             
         # markdown goes in the MediaWiki page
-        self.value = "This is a property of type [[Has type::%s]].\n" % datatype 
+        markdown = "This is a property of type [[Has type::%s]].\n" % datatype 
         
         if sprop.type == "DataOneOf":
-            self.value += "The allowed values for this property are:\n"
+            markdown += "The allowed values for this property are:\n"
             for item in sprop.allowedValues:
-                self.value += "[[Allows value::%s]]\n" % item
+                markdown += "[[Allows value::%s]]\n" % item
+        
+        self.values['property'] = markdown
         
         # Send to MediaWiki
-        self._manager.commit( "property:" + sprop.name, self.value )
+        self._manager.commit( sprop.name, self.values )
         
  
-    def getValue(self):
-        return self.value
+    def getValues(self):
+        '''
+        @return dictionary
+        '''
+        return self.values

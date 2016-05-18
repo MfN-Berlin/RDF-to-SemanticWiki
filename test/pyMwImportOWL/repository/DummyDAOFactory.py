@@ -23,6 +23,5 @@ class DummyManager( Manager ):
     '''A dummy class for testing
     Values are stored in the value property, not saved to a back-end
     '''
-    def commit(self, key, value):
-        self.key = key
-        self.value = value 
+    def commit(self, name, values):
+        self.values = values 

@@ -5,5 +5,5 @@ Created on 17.05.2016
 '''
 class AbstractManager():
     
-    def commit(self):
+    def commit(self, name, values):
         raise NotImplementedError

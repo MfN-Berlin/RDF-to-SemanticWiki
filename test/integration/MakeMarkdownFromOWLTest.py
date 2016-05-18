@@ -36,30 +36,33 @@ class MakeMarkdownFromOWLTest(unittest.TestCase):
         prop = self.model.classes[ 'Entry' ].properties[ 'hasPriority' ]
         dao = self.factory.getSemanticPropertyDAO()
         dao.create( prop )
-        self.assertTrue( "This is a property of type [[Has type::Text]].\n" in self.factory._manager.value)
+        result = dao.getValues()['property']
+        self.assertTrue( "This is a property of type [[Has type::Text]].\n" in result )
 
 
     def testSimpleClass(self):
         simpleClass = self.model.classes[ 'Description' ]
         classDAO = self.factory.getSemanticClassDAO()
         classDAO.create( simpleClass )
-        self.assertTrue( "=Description=" in self.factory._manager.value )
-        self.assertTrue( "'''hasSubject''': [[hasSubject::{{{hasSubject|}}}]]" in classDAO.getValue() )
-        self.assertTrue( "'''hasDetails''': [[hasDetails::{{{hasDetails|}}}]]" in classDAO.getValue() )
+        result = classDAO.getValues()['template']
+        self.assertTrue( "=Description=" in result )
+        self.assertTrue( "'''hasSubject''': [[hasSubject::{{{hasSubject|}}}]]" in result )
+        self.assertTrue( "'''hasDetails''': [[hasDetails::{{{hasDetails|}}}]]" in result )
         # Don't create a "Location" template if doing a "Description" template (don't mix up class variables with instance variables)
-        self.assertFalse( "{{Location" in classDAO.getValue() )
+        self.assertFalse( "{{Location" in result )
 
 
     def testUnionClass(self):
         uclass = self.model.classes[ 'Entry' ]
         classDAO = self.factory.getSemanticClassDAO()
         classDAO.create( uclass )
-        self.assertTrue( "=Entry=" in classDAO.getValue() ) 
-        self.assertTrue( "'''hasPriority''': [[hasPriority::{{{hasPriority|}}}]]" in classDAO.getValue() )
-        self.assertTrue( "==Event==" in classDAO.getValue() ) 
-        self.assertTrue( "==Description==" in classDAO.getValue() ) 
-        self.assertTrue( "==Location==" in classDAO.getValue() ) 
-        self.assertFalse( "==Calendar==" in classDAO.getValue() ) 
+        result = classDAO.getValues()['template']
+        self.assertTrue( "=Entry=" in result ) 
+        self.assertTrue( "'''hasPriority''': [[hasPriority::{{{hasPriority|}}}]]" in result )
+        self.assertTrue( "==Event==" in result ) 
+        self.assertTrue( "==Description==" in result ) 
+        self.assertTrue( "==Location==" in result ) 
+        self.assertFalse( "==Calendar==" in result ) 
         
 
 if __name__ == "__main__":

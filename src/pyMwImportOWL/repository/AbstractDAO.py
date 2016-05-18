@@ -24,7 +24,9 @@ class AbstractDAO:
         '''
         raise NotImplementedError
     
-    def getValue(self):
-        '''Returns a string representation of the query used for persisting the in-memory object'''
+    def getValues(self):
+        '''Returns a dictionary of string representations of the queries used for persisting the in-memory object
+        e.g. template->a template, form->a form
+        '''
         raise NotImplementedError
         

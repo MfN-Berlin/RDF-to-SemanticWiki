@@ -16,35 +16,38 @@ class SemanticPropertyDAOTest(unittest.TestCase):
 
     def testDatePropertyDAO(self):
         factory = DummyDAOFactory(  )
-        sprop = SemanticProperty( "test date" )
+        sprop = SemanticProperty( "testDate" )
         sprop.type= "dateTime"
         propDAO = factory.getSemanticPropertyDAO()
         self.assertTrue( propDAO )
         propDAO.create( sprop )
-        self.assertEqual( "This is a property of type [[Has type::Date]].\n", propDAO.getValue())
+        result = propDAO.getValues()['property']
+        self.assertEqual( "This is a property of type [[Has type::Date]].\n", result )
         
         
     def testOneOfPropertyDAO(self):
         factory = DummyDAOFactory(  )
-        sprop = SemanticProperty( "test oneOf" )
+        sprop = SemanticProperty( "testOneOf" )
         sprop.type= "DataOneOf"
         sprop.allowedValues = ['#0000ff', '#00ff00', '#00ffff', '#ff0000', '#ff00ff', '#ffff00', '#ffffff']
         propDAO = factory.getSemanticPropertyDAO()
         self.assertTrue( propDAO )
         propDAO.create( sprop )
-        self.assertTrue( "This is a property of type [[Has type::Text]].\n" in propDAO.getValue())
-        self.assertTrue( "[[Allows value::#0000ff]]\n" in propDAO.getValue())
-        self.assertTrue( "[[Allows value::#ffffff]]\n" in propDAO.getValue())
+        result = propDAO.getValues()['property']
+        self.assertTrue( "This is a property of type [[Has type::Text]].\n" in result )
+        self.assertTrue( "[[Allows value::#0000ff]]\n" in result )
+        self.assertTrue( "[[Allows value::#ffffff]]\n" in result )
 
 
     def testDefaultTypePropertyDAO(self):
         factory = DummyDAOFactory(  )
-        sprop = SemanticProperty( "test date" )
+        sprop = SemanticProperty( "testDate" )
         sprop.type= "xxx"
         propDAO = factory.getSemanticPropertyDAO()
         self.assertTrue( propDAO )
         propDAO.create( sprop )
-        self.assertEqual( "This is a property of type [[Has type::Text]].\n", propDAO.getValue())
+        result = propDAO.getValues()['property']
+        self.assertEqual( "This is a property of type [[Has type::Text]].\n", result )
         
 
 if __name__ == "__main__":

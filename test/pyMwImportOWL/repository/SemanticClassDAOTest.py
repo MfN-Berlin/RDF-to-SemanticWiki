@@ -21,9 +21,10 @@ class SemanticClassDAOTest(unittest.TestCase):
         classDAO = factory.getSemanticClassDAO()
         self.assertTrue( classDAO )
         classDAO.create( sclass )
-        self.assertTrue( "=test class=" in classDAO.getValue()) # Class name is header 1
-        self.assertTrue( "'''test property'''" in classDAO.getValue()) # Properties names are in bold
-        self.assertTrue( "[[test property::{{{test property|}}}]]" in classDAO.getValue()) # properties are in semantic mediawiki syntax
+        template = classDAO.getValues()['template']
+        self.assertTrue( "=test class=" in template) # Class name is header 1
+        self.assertTrue( "'''test property'''" in template) # Properties names are in bold
+        self.assertTrue( "[[test property::{{{test property|}}}]]" in template) # properties are in semantic mediawiki syntax
 
 
     def testUnionClass(self):
@@ -34,10 +35,11 @@ class SemanticClassDAOTest(unittest.TestCase):
         sclass.uniteWith( uclass )
         classDAO = factory.getSemanticClassDAO()
         classDAO.create( sclass )
-        self.assertTrue( "{{test class" in classDAO.getValue())
-        self.assertTrue( "==test class 2==" in classDAO.getValue()) # union class names are header 2
-        self.assertTrue( "{{test class 2" in classDAO.getValue()) # a call to the template of the union class
-        self.assertTrue( "| test property = {{{test property|}}}" in classDAO.getValue()) # the property value is passed to the template
+        template = classDAO.getValues()['template']
+        self.assertTrue( "{{test class" in template )
+        self.assertTrue( "==test class 2==" in template ) # union class names are header 2
+        self.assertTrue( "{{test class 2" in template ) # a call to the template of the union class
+        self.assertTrue( "| test property = {{{test property|}}}" in template ) # the property value is passed to the template
 
 
 if __name__ == "__main__":
