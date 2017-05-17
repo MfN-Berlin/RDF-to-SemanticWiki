@@ -4,9 +4,9 @@ Connector for the MediaWiki http API
 @author: Alvaro.Ortiz
 '''
 import requests
-import urlparse
+import urllib.parse
 import sys, traceback
-from pyMwImportOWL.connector.AbstractConnector import AbstractConnector
+from src.pyMwImportOWL.connector.AbstractConnector import AbstractConnector
 
 class MediaWikiApiConnector( AbstractConnector ):
     """Connect to the MediaWiki API"""
@@ -27,8 +27,8 @@ class MediaWikiApiConnector( AbstractConnector ):
     
     def __init__(self, config):
         baseMwUrl = config.get( 'defaults', 'baseMwURL' )
-        self._apiUrl = urlparse.urljoin( baseMwUrl, 'api.php')
-        self._contentUrl = urlparse.urljoin( baseMwUrl, 'index.php')
+        self._apiUrl = urllib.parse.urljoin( baseMwUrl, 'api.php')
+        self._contentUrl = urllib.parse.urljoin( baseMwUrl, 'index.php')
         self._username = config.get( 'defaults', 'username' )
         self._password = config.get( 'defaults', 'password' )
 

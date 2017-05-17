@@ -4,8 +4,8 @@ Created on 15.03.2016
 @author: Alvaro.Ortiz
 '''
 import unittest
-import ConfigParser
-from pyMwImportOWL.connector.MediaWikiApiConnector import MediaWikiApiConnector
+import configparser
+from src.pyMwImportOWL.connector.MediaWikiApiConnector import MediaWikiApiConnector
 
 class Test(unittest.TestCase):
     '''Path to configuration file'''
@@ -15,7 +15,7 @@ class Test(unittest.TestCase):
 
     def setUp(self):
         # Read the configuration file
-        self.config = ConfigParser.ConfigParser()
+        self.config = configparser.ConfigParser()
         self.config.read( self.configPath )
         
         # Instantiate the connector
