@@ -1,17 +1,23 @@
-'''
+"""
+Factory for DAO objects.
+
 Created on 11.05.2016
 
 @author: Alvaro.Ortiz
-'''
+"""
+
 
 class AbstractFactory:
-    
+    """Factory for DAO objects."""
+
     def getDAOManager(self):
-        raise NotImplementedError
-    
-    def getSemanticPropertyDAO(self):
-        raise NotImplementedError
-    
-    def getSemanticClassDAO(self):
+        """Get a manager object for managing commits and connection scope."""
         raise NotImplementedError
 
+    def getSemanticPropertyDAO(self):
+        """Create a DAO object for the corresponding semantic property class."""
+        raise NotImplementedError
+
+    def getSemanticClassDAO(self):
+        """Create a DAO object for the corresponding semantic class."""
+        raise NotImplementedError

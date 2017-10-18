@@ -1,47 +1,56 @@
-'''
+"""
+Test.
+
 Created on 10.05.2016
 
 Tests the DAO classes without persisting to a back-end
 (using DummyDAOManager)
 
 @author: Alvaro.Ortiz
-'''
+"""
 import unittest
 from repository.DummyDAOFactory import DummyDAOFactory
 from pyMwImportOWL.model.SemanticClass import SemanticClass
 from pyMwImportOWL.model.SemanticProperty import SemanticProperty
 
+
 class test_SemanticClassDAO(unittest.TestCase):
+    """Test."""
 
     def testSimpleClass(self):
-        factory = DummyDAOFactory(  )
-        sclass = SemanticClass( "test class" )
-        sprop = SemanticProperty( "test property" )
-        sclass.addProperty( sprop )
+        """Test that template markdown is correct."""
+        factory = DummyDAOFactory()
+        sclass = SemanticClass("test class")
+        sprop = SemanticProperty("test property")
+        sclass.addProperty(sprop)
         classDAO = factory.getSemanticClassDAO()
-        self.assertTrue( classDAO )
-        classDAO.create( sclass )
+        self.assertTrue(classDAO)
+        classDAO.create(sclass)
         template = classDAO.getValues()['template']
-        self.assertTrue( "=test class=" in template) # Class name is header 1
-        self.assertTrue( "'''test property'''" in template) # Properties names are in bold
-        self.assertTrue( "[[test property::{{{test property|}}}]]" in template) # properties are in semantic mediawiki syntax
-
+        self.assertTrue("=test class=" in template)  # Class name is header 1
+        self.assertTrue("'''test property'''" in template)  # Properties names are in bold
+        # properties are in semantic mediawiki syntax
+        self.assertTrue("[[test property::{{{test property|}}}]]" in template)
 
     def testUnionClass(self):
-        factory = DummyDAOFactory(  )
-        sclass = SemanticClass( "test class" )
-        uclass = SemanticClass( "test class 2" )
-        uclass.addProperty( SemanticProperty( "test property" ) )
-        sclass.uniteWith( uclass )
+        """Test that markdown generated from class unions is correct."""
+        factory = DummyDAOFactory()
+        sclass = SemanticClass("test class")
+        uclass = SemanticClass("test class 2")
+        uclass.addProperty(SemanticProperty("test property"))
+        sclass.uniteWith(uclass)
         classDAO = factory.getSemanticClassDAO()
-        classDAO.create( sclass )
+        classDAO.create(sclass)
         template = classDAO.getValues()['template']
-        self.assertTrue( "{{test class" in template )
-        self.assertTrue( "==test class 2==" in template ) # union class names are header 2
-        self.assertTrue( "{{test class 2" in template ) # a call to the template of the union class
-        self.assertTrue( "| test property = {{{test property|}}}" in template ) # the property value is passed to the template
+        self.assertTrue("{{test class" in template)
+        # union class names are header 2
+        self.assertTrue("==test class 2==" in template)
+        # a call to the template of the union class
+        self.assertTrue("{{test class 2" in template)
+        # the property value is passed to the template
+        self.assertTrue("| test property = {{{test property|}}}" in template)
 
 
 if __name__ == "__main__":
-    #import sys;sys.argv = ['', 'Test.testName']
+    # import sys;sys.argv = ['', 'Test.testName']
     unittest.main()

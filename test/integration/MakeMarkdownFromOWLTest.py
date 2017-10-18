@@ -1,17 +1,22 @@
-'''
+"""
+Test.
+
 Created on 12.05.2016
 
 @author: Alvaro.Ortiz
-'''
+"""
+
 import unittest
 from pyMwImportOWL.parser.OWLParser import OWLParser
 from test.pyMwImportOWL.repository.DummyDAOFactory import DummyDAOFactory
 
+
 class test_MakeMarkdownFromOWL(unittest.TestCase):
-    '''
-    Test creating wiki markdown
+    """
+    Test creating wiki markdown.
+
     The connector is a dummy which does not actually create pages
-    '''
+    """
 
     # path to example OWL file
     owlpath = "../../example/Calendar.owl"
@@ -20,51 +25,49 @@ class test_MakeMarkdownFromOWL(unittest.TestCase):
     model = None
     factory = None
 
-
     def setUp(self):
+        """Setup."""
         self.parser = OWLParser()
-        self.model = self.parser.parse( self.owlpath )
-        self.factory = DummyDAOFactory(  ) # stores markdown in factory.value, does not create mediawiki pages
-
-
-    def tearDown(self):
-        pass
-
+        self.model = self.parser.parse(self.owlpath)
+        # stores markdown in factory.value, does not create mediawiki pages
+        self.factory = DummyDAOFactory()
 
     def testProperty(self):
+        """Test that property markdown is correct."""
         # The "Event" class has a property called "Priority"
-        prop = self.model.classes[ 'Entry' ].properties[ 'hasPriority' ]
+        prop = self.model.classes['Entry'].properties['hasPriority']
         dao = self.factory.getSemanticPropertyDAO()
-        dao.create( prop )
+        dao.create(prop)
         result = dao.getValues()['property']
-        self.assertTrue( "This is a property of type [[Has type::Text]].\n" in result )
-
+        self.assertTrue("This is a property of type [[Has type::Text]].\n" in result)
 
     def testSimpleClass(self):
-        simpleClass = self.model.classes[ 'Description' ]
+        """Test that template markdown is correct."""
+        simpleClass = self.model.classes['Description']
         classDAO = self.factory.getSemanticClassDAO()
-        classDAO.create( simpleClass )
+        classDAO.create(simpleClass)
         result = classDAO.getValues()['template']
-        self.assertTrue( "=Description=" in result )
-        self.assertTrue( "'''hasSubject''': [[hasSubject::{{{hasSubject|}}}]]" in result )
-        self.assertTrue( "'''hasDetails''': [[hasDetails::{{{hasDetails|}}}]]" in result )
-        # Don't create a "Location" template if doing a "Description" template (don't mix up class variables with instance variables)
-        self.assertFalse( "{{Location" in result )
-
+        self.assertTrue("=Description=" in result)
+        self.assertTrue("'''hasSubject''': [[hasSubject::{{{hasSubject|}}}]]" in result)
+        self.assertTrue("'''hasDetails''': [[hasDetails::{{{hasDetails|}}}]]" in result)
+        # Don't create a "Location" template if doing a "Description" template
+        # (don't mix up class variables with instance variables)
+        self.assertFalse("{{Location" in result)
 
     def testUnionClass(self):
-        uclass = self.model.classes[ 'Entry' ]
+        """Test that pages creted from uniting classes have correct markdown."""
+        uclass = self.model.classes['Entry']
         classDAO = self.factory.getSemanticClassDAO()
-        classDAO.create( uclass )
+        classDAO.create(uclass)
         result = classDAO.getValues()['template']
-        self.assertTrue( "=Entry=" in result )
-        self.assertTrue( "'''hasPriority''': [[hasPriority::{{{hasPriority|}}}]]" in result )
-        self.assertTrue( "==Event==" in result )
-        self.assertTrue( "==Description==" in result )
-        self.assertTrue( "==Location==" in result )
-        self.assertFalse( "==Calendar==" in result )
+        self.assertTrue("=Entry=" in result)
+        self.assertTrue("'''hasPriority''': [[hasPriority::{{{hasPriority|}}}]]" in result)
+        self.assertTrue("==Event==" in result)
+        self.assertTrue("==Description==" in result)
+        self.assertTrue("==Location==" in result)
+        self.assertFalse("==Calendar==" in result)
 
 
 if __name__ == "__main__":
-    #import sys;sys.argv = ['', 'Test.testName']
+    # import sys;sys.argv = ['', 'Test.testName']
     unittest.main()

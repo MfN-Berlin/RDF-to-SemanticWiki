@@ -1,20 +1,26 @@
-'''
+"""
+Test.
+
 Created on 12.05.2016
 Reads an OWL file, parses it and stores the correspondin templates in a wiki.
 
 @author: Alvaro.Ortiz
-'''
-import unittest, ConfigParser
+"""
+import unittest
+import ConfigParser
 from pyMwImportOWL.parser.OWLParser import OWLParser
 from pyMwImportOWL.connector.MediaWikiApiConnector import MediaWikiApiConnector
 from pyMwImportOWL.repository.Factory import Factory
 
 
 class test_CreateTemplateFromOWL(unittest.TestCase):
-    '''
+    """
+    Test.
+
     Test creating pages in the wiki (e.g. using a test wiki)
     The connector actually creates pages here
-    '''
+    """
+
     # path to configuration file
     configPath = "../../example/config.ini"
     # path to example OWL file
@@ -25,42 +31,43 @@ class test_CreateTemplateFromOWL(unittest.TestCase):
     factory = None
 
     def setUp(self):
-        #Read the configuration file
+        """Setup."""
+        # Read the configuration file
         config = ConfigParser.ConfigParser()
-        config.read( self.configPath )
+        config.read(self.configPath)
 
         self.parser = OWLParser()
-        self.model = self.parser.parse( self.owlpath )
-        self.connector = MediaWikiApiConnector( config )
-        self.factory = Factory( self.connector )
-
+        self.model = self.parser.parse(self.owlpath)
+        self.connector = MediaWikiApiConnector(config)
+        self.factory = Factory(self.connector)
 
     def tearDown(self):
-        self.connector.deletePage( "Template:Entry" )
-        self.connector.deletePage( "Template:Event" )
-        self.connector.deletePage( "Template:Location" )
-        self.connector.deletePage( "Template:Description" )
-        self.connector.deletePage( "Property:hasPriority" )
-
+        """Teardown."""
+        self.connector.deletePage("Template:Entry")
+        self.connector.deletePage("Template:Event")
+        self.connector.deletePage("Template:Location")
+        self.connector.deletePage("Template:Description")
+        self.connector.deletePage("Property:hasPriority")
 
     def testProperty(self):
+        """Test that a property page can be created."""
         # The "Event" class has a property called "Priority"
-        prop = self.model.classes[ 'Entry' ].properties[ 'hasPriority' ]
+        prop = self.model.classes['Entry'].properties['hasPriority']
         dao = self.factory.getSemanticPropertyDAO()
-        dao.create( prop )
-        resp = self.connector.loadPage( "Property:" + prop.name )
-        self.assertTrue( resp )
-
+        dao.create(prop)
+        resp = self.connector.loadPage("Property:" + prop.name)
+        self.assertTrue(resp)
 
     def testSimpleClass(self):
-        simpleClass = self.model.classes[ 'Description' ]
+        """Test that a template can be created."""
+        simpleClass = self.model.classes['Description']
         dao = self.factory.getSemanticClassDAO()
-        dao.create( simpleClass )
+        dao.create(simpleClass)
         # the template should be in the wiki
-        resp = self.connector.loadPage( "Template:" + simpleClass.name )
-        self.assertTrue( resp )
+        resp = self.connector.loadPage("Template:" + simpleClass.name)
+        self.assertTrue(resp)
 
 
 if __name__ == "__main__":
-    #import sys;sys.argv = ['', 'Test.testName']
+    # import sys;sys.argv = ['', 'Test.testName']
     unittest.main()
