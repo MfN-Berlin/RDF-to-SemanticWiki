@@ -6,9 +6,9 @@ Created on 02.05.2016
 import unittest
 from pyMwImportOWL.parser.OWLParser import OWLParser
 
-class OWLParserTest(unittest.TestCase):
+class test_OWLParser(unittest.TestCase):
     parser = None
-    owlpath = "../../../example/Calendar.owl"
+    owlpath = "../example/Calendar.owl"
 
     def setUp(self):
         self.parser = OWLParser()
@@ -24,7 +24,7 @@ class OWLParserTest(unittest.TestCase):
 
     def testLoadOWLFile(self):
         self.assertTrue( self.parser.parse( self.owlpath ) )
-        
+
 
     def testParseClasses(self):
         model = self.parser.parse( self.owlpath )
@@ -45,7 +45,7 @@ class OWLParserTest(unittest.TestCase):
 
     def testParseNotUnion(self):
         model = self.parser.parse( self.owlpath )
-        entry = model.classes["Description"] 
+        entry = model.classes["Description"]
         self.assertEquals( 0, len( entry.unionOf ) ) # Description doesn't have union classes
 
 
@@ -67,15 +67,15 @@ class OWLParserTest(unittest.TestCase):
         sclass = model.classes[ 'Entry' ]
         propNames = sclass.getPropertyNames()
         self.assertTrue( "hasPriority" in propNames )
-        
-        
+
+
     def testParseRanges(self):
         model = self.parser.parse( self.owlpath )
         sclass = model.classes[ 'Event' ]
         self.assertEqual( "dateTime", sclass.properties["hasEndDate"].type )
         self.assertEqual( "dateTime", sclass.properties["hasStartDate"].type )
         self.assertEqual( "boolean", sclass.properties["isWholeDay"].type )
-        
+
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

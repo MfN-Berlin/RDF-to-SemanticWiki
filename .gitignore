@@ -1,4 +1,8 @@
 .project
 .pydevproject
 __pycache__
+__init__.py
 example/catalog-v001.xml
+example/config.ini
+test/.coverage
+*.pyc

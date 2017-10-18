@@ -7,12 +7,12 @@ Tests the DAO classes without persisting to a back-end
 @author: Alvaro.Ortiz
 '''
 import unittest
-from test.pyMwImportOWL.repository.DummyDAOFactory import DummyDAOFactory
-from test.pyMwImportOWL.repository.DummyDAOFactory import DummyManager
+from repository.DummyDAOFactory import DummyDAOFactory
+from repository.DummyDAOFactory import DummyManager
 from pyMwImportOWL.model.SemanticProperty import SemanticProperty
 
 
-class SemanticPropertyDAOTest(unittest.TestCase):
+class test_SemanticPropertyDAO(unittest.TestCase):
 
     def testDatePropertyDAO(self):
         factory = DummyDAOFactory(  )
@@ -23,8 +23,8 @@ class SemanticPropertyDAOTest(unittest.TestCase):
         propDAO.create( sprop )
         result = propDAO.getValues()['property']
         self.assertEqual( "This is a property of type [[Has type::Date]].\n", result )
-        
-        
+
+
     def testOneOfPropertyDAO(self):
         factory = DummyDAOFactory(  )
         sprop = SemanticProperty( "testOneOf" )
@@ -48,7 +48,7 @@ class SemanticPropertyDAOTest(unittest.TestCase):
         propDAO.create( sprop )
         result = propDAO.getValues()['property']
         self.assertEqual( "This is a property of type [[Has type::Text]].\n", result )
-        
+
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

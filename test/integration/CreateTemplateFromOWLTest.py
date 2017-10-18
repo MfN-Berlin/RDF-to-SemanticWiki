@@ -10,7 +10,7 @@ from pyMwImportOWL.connector.MediaWikiApiConnector import MediaWikiApiConnector
 from pyMwImportOWL.repository.Factory import Factory
 
 
-class CreateTemplateFromOWLTest(unittest.TestCase):
+class test_CreateTemplateFromOWL(unittest.TestCase):
     '''
     Test creating pages in the wiki (e.g. using a test wiki)
     The connector actually creates pages here
@@ -27,8 +27,8 @@ class CreateTemplateFromOWLTest(unittest.TestCase):
     def setUp(self):
         #Read the configuration file
         config = ConfigParser.ConfigParser()
-        config.read( self.configPath )        
-        
+        config.read( self.configPath )
+
         self.parser = OWLParser()
         self.model = self.parser.parse( self.owlpath )
         self.connector = MediaWikiApiConnector( config )
@@ -42,7 +42,7 @@ class CreateTemplateFromOWLTest(unittest.TestCase):
         self.connector.deletePage( "Template:Description" )
         self.connector.deletePage( "Property:hasPriority" )
 
- 
+
     def testProperty(self):
         # The "Event" class has a property called "Priority"
         prop = self.model.classes[ 'Entry' ].properties[ 'hasPriority' ]
@@ -55,7 +55,7 @@ class CreateTemplateFromOWLTest(unittest.TestCase):
     def testSimpleClass(self):
         simpleClass = self.model.classes[ 'Description' ]
         dao = self.factory.getSemanticClassDAO()
-        dao.create( simpleClass ) 
+        dao.create( simpleClass )
         # the template should be in the wiki
         resp = self.connector.loadPage( "Template:" + simpleClass.name )
         self.assertTrue( resp )

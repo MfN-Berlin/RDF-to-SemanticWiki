@@ -7,11 +7,11 @@ Tests the DAO classes without persisting to a back-end
 @author: Alvaro.Ortiz
 '''
 import unittest
-from test.pyMwImportOWL.repository.DummyDAOFactory import DummyDAOFactory
+from repository.DummyDAOFactory import DummyDAOFactory
 from pyMwImportOWL.model.SemanticClass import SemanticClass
 from pyMwImportOWL.model.SemanticProperty import SemanticProperty
 
-class SemanticClassDAOTest(unittest.TestCase):
+class test_SemanticClassDAO(unittest.TestCase):
 
     def testSimpleClass(self):
         factory = DummyDAOFactory(  )

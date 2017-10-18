@@ -7,7 +7,7 @@ import unittest
 from pyMwImportOWL.parser.OWLParser import OWLParser
 from test.pyMwImportOWL.repository.DummyDAOFactory import DummyDAOFactory
 
-class MakeMarkdownFromOWLTest(unittest.TestCase):
+class test_MakeMarkdownFromOWL(unittest.TestCase):
     '''
     Test creating wiki markdown
     The connector is a dummy which does not actually create pages
@@ -57,13 +57,13 @@ class MakeMarkdownFromOWLTest(unittest.TestCase):
         classDAO = self.factory.getSemanticClassDAO()
         classDAO.create( uclass )
         result = classDAO.getValues()['template']
-        self.assertTrue( "=Entry=" in result ) 
+        self.assertTrue( "=Entry=" in result )
         self.assertTrue( "'''hasPriority''': [[hasPriority::{{{hasPriority|}}}]]" in result )
-        self.assertTrue( "==Event==" in result ) 
-        self.assertTrue( "==Description==" in result ) 
-        self.assertTrue( "==Location==" in result ) 
-        self.assertFalse( "==Calendar==" in result ) 
-        
+        self.assertTrue( "==Event==" in result )
+        self.assertTrue( "==Description==" in result )
+        self.assertTrue( "==Location==" in result )
+        self.assertFalse( "==Calendar==" in result )
+
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
