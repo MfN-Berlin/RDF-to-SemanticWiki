@@ -1,0 +1,11 @@
+MarkupSafe>=0.23
+Unidecode>=0.04.21
+chardet>=2.3.0
+colorama>=0.3.9
+coverage==4.4.1
+green>=2.11.0
+lxml>=3.4.0
+requests>=2.4.3
+urllib3>=1.9.1
+wheel>=0.24.0
+configparser>=3.5.0

@@ -5,10 +5,10 @@ A solution is to model the semantic relationships as an ontology, using a modell
 By separating the model from its implementation, it becomes easier to keep an overview of the entities and properties used.
 Additionally, ontologies can modelled visually using UML and then converted into RDF (see https://github.com/AlvaroOrtizTroncoso/UML-ODM-to-OWL-XML).
 
-## Dependencies
-Depends on python3 >= 3.4.2; additional modules: requests >= 2.4.3, configparser >= 3.5.0, urllib3 >= 1.9.1
-
-MediaWiki, SemanticMediaWiki.
+## Prerequisites
+* Python 3
+* To install the necessary Python packages, do: pip3 install -r requirements.txt
+* MediaWiki, SemanticMediaWiki.
 
 ## Installation
 Make sure your Wiki is up and running, and that the Semantic MediaWiki extension is installed.
@@ -16,6 +16,15 @@ Make sure your Wiki is up and running, and that the Semantic MediaWiki extension
 Copy the file mwOWLBridge/example/example.ini to mwOWLBridge/example/config.ini
 Edit config.ini to suit your configuration.
 
+## Tests
+To run the tests, I recommend you install "green" and "coverage", which should be installed if you did `pip3 install -r requirements.txt`.
+
+To run the tests and get code coverage:
+
+```
+cd test
+bash test.sh
+```
 
 ## Importing an ontology into a semantic MediaWiki
 
