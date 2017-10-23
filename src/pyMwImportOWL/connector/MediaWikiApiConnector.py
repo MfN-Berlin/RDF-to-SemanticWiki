@@ -145,8 +145,7 @@ class MediaWikiApiConnector(AbstractConnector):
             self._checkRequest(r1)
 
             # Assuming there is only one page, get the page id
-            print(r1.json())
-            pageId = r1.json()['query']['pages'].keys()[0]
+            pageId = list(r1.json()['query']['pages'].keys())[0]
             # get the edit token
             edittoken = r1.json()['query']['pages'][pageId]['edittoken']
 

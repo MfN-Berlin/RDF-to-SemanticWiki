@@ -30,7 +30,8 @@ class test_MediaWikiApiConnector(unittest.TestCase):
 
     def tearDown(self):
         """Tear down."""
-        self.connector.deletePage('Test')
+        pass
+#        self.connector.deletePage('Test')
 
     def testReadConfigFile(self):
         """Test that the config file can be read."""
