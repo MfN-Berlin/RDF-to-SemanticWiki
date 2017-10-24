@@ -8,7 +8,7 @@ Created on 12.05.2016
 
 import unittest
 from pyMwImportOWL.parser.OWLParser import OWLParser
-from test.pyMwImportOWL.repository.DummyDAOFactory import DummyDAOFactory
+from repository.DummyDAOFactory import DummyDAOFactory
 
 
 class test_MakeMarkdownFromOWL(unittest.TestCase):
@@ -19,7 +19,7 @@ class test_MakeMarkdownFromOWL(unittest.TestCase):
     """
 
     # path to example OWL file
-    owlpath = "../../example/Calendar.owl"
+    owlpath = "../example/Calendar.owl"
     # class variables
     parser = None
     model = None

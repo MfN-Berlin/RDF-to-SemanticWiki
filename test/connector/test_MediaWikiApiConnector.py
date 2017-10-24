@@ -30,8 +30,7 @@ class test_MediaWikiApiConnector(unittest.TestCase):
 
     def tearDown(self):
         """Tear down."""
-        pass
-#        self.connector.deletePage('Test')
+        self.connector.deletePage('Test')
 
     def testReadConfigFile(self):
         """Test that the config file can be read."""
@@ -45,9 +44,8 @@ class test_MediaWikiApiConnector(unittest.TestCase):
         """Test that login succeeds."""
         self.assertTrue(self.connector.login())
 
-    @unittest.skip("needs more work")
     def testCreatePage(self):
-        """Test a page can be created."""
+        """Test that a page can be created."""
         # Note: page has to be regular content page for this test, not a special page
         self.assertTrue(self.connector.createPage('Test', 'Test content'))
         self.assertTrue(self.connector.loadPage('Test'))

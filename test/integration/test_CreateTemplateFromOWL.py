@@ -7,7 +7,7 @@ Reads an OWL file, parses it and stores the correspondin templates in a wiki.
 @author: Alvaro.Ortiz
 """
 import unittest
-import ConfigParser
+import configparser
 from pyMwImportOWL.parser.OWLParser import OWLParser
 from pyMwImportOWL.connector.MediaWikiApiConnector import MediaWikiApiConnector
 from pyMwImportOWL.repository.Factory import Factory
@@ -22,9 +22,9 @@ class test_CreateTemplateFromOWL(unittest.TestCase):
     """
 
     # path to configuration file
-    configPath = "../../example/config.ini"
+    configPath = "../example/config.ini"
     # path to example OWL file
-    owlpath = "../../example/Calendar.owl"
+    owlpath = "../example/Calendar.owl"
     # class variables
     parser = None
     model = None
@@ -33,7 +33,7 @@ class test_CreateTemplateFromOWL(unittest.TestCase):
     def setUp(self):
         """Setup."""
         # Read the configuration file
-        config = ConfigParser.ConfigParser()
+        config = configparser.ConfigParser()
         config.read(self.configPath)
 
         self.parser = OWLParser()
@@ -47,6 +47,7 @@ class test_CreateTemplateFromOWL(unittest.TestCase):
         self.connector.deletePage("Template:Event")
         self.connector.deletePage("Template:Location")
         self.connector.deletePage("Template:Description")
+        self.connector.deletePage("Form:Description")
         self.connector.deletePage("Property:hasPriority")
 
     def testProperty(self):
@@ -65,6 +66,7 @@ class test_CreateTemplateFromOWL(unittest.TestCase):
         dao.create(simpleClass)
         # the template should be in the wiki
         resp = self.connector.loadPage("Template:" + simpleClass.name)
+        self.connector.deletePage("Template:" + simpleClass.name)
         self.assertTrue(resp)
 
 
