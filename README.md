@@ -1,5 +1,5 @@
 
-# mwOWLBridge
+# RDF-to-MediaWiki
 Maintaining a semantic MediaWiki can be a lot of work, as any reasonably complex semantic wiki will require dozens of templates, properties and forms.
 A solution is to model the semantic relationships as an ontology, using a modelling tool such as Protege, and then importing the ontology into the wiki.
 By separating the model from its implementation, it becomes easier to keep an overview of the entities and properties used.
@@ -32,7 +32,7 @@ The provided example ontology is very simple. It can be automatically imported i
 The semantic Mediawiki templates, properties and forms created can be used to test the viability of the concept.
 
 ### Example
-An example ontology is included in the folder "example". This ontology, Calendar.owl, models an event calendar, such as from thunderbird etc.
+An example ontology is included in the folder "example". This ontology, Calendar.rdf, models an event calendar, such as from thunderbird etc.
 
 A graphical representation is provided in Calendar.svg. You can view the svg file using an SVG viewer.The graphical representation was made using VOWL (http://vowl.visualdataweb.org/webvowl.html).
 

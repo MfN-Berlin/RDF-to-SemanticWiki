@@ -10,7 +10,7 @@ Created on 04.05.2016
 """
 import unittest
 from repository.DummyDAOFactory import DummyDAOFactory
-from pyMwImportOWL.model.SemanticProperty import SemanticProperty
+from rdf2mw.model.SemanticProperty import SemanticProperty
 
 
 class test_SemanticPropertyDAO(unittest.TestCase):

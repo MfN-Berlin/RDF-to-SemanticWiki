@@ -5,8 +5,8 @@ Created on 09.05.2016
 
 @author: Alvaro.Ortiz
 """
-from pyMwImportOWL.repository.Factory import Factory
-from pyMwImportOWL.repository.Manager import Manager
+from rdf2mw.repository.Factory import Factory
+from rdf2mw.repository.Manager import Manager
 
 
 class DummyDAOFactory(Factory):

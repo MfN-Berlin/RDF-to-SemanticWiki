@@ -7,7 +7,7 @@ Created on 12.05.2016
 """
 
 import unittest
-from pyMwImportOWL.parser.OWLParser import OWLParser
+from rdf2mw.parser.OWLParser import OWLParser
 from repository.DummyDAOFactory import DummyDAOFactory
 
 

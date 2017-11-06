@@ -8,9 +8,9 @@ Reads an OWL file, parses it and stores the correspondin templates in a wiki.
 """
 import unittest
 import configparser
-from pyMwImportOWL.parser.OWLParser import OWLParser
-from pyMwImportOWL.connector.MediaWikiApiConnector import MediaWikiApiConnector
-from pyMwImportOWL.repository.Factory import Factory
+from rdf2mw.parser.OWLParser import OWLParser
+from rdf2mw.connector.MediaWikiApiConnector import MediaWikiApiConnector
+from rdf2mw.repository.Factory import Factory
 
 
 class test_CreateTemplateFromOWL(unittest.TestCase):

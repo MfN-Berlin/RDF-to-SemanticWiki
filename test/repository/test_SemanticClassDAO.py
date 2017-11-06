@@ -10,8 +10,8 @@ Tests the DAO classes without persisting to a back-end
 """
 import unittest
 from repository.DummyDAOFactory import DummyDAOFactory
-from pyMwImportOWL.model.SemanticClass import SemanticClass
-from pyMwImportOWL.model.SemanticProperty import SemanticProperty
+from rdf2mw.model.SemanticClass import SemanticClass
+from rdf2mw.model.SemanticProperty import SemanticProperty
 
 
 class test_SemanticClassDAO(unittest.TestCase):

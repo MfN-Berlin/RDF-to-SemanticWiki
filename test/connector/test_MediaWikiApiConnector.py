@@ -7,7 +7,7 @@ Created on 15.03.2016
 """
 import unittest
 import configparser
-from src.pyMwImportOWL.connector.MediaWikiApiConnector import MediaWikiApiConnector
+from rdf2mw.connector.MediaWikiApiConnector import MediaWikiApiConnector
 
 
 class test_MediaWikiApiConnector(unittest.TestCase):
