@@ -19,7 +19,7 @@ class AbstractDAO:
         class myDAO( AbstractDAO ):
            _manager = None
 
-           __init__( self, myDAOManagermanager ):
+           __init__( self, myDAOManager ):
               self._manager = myDAOManager
 
            create( self, myObj ):

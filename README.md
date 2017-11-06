@@ -42,3 +42,6 @@ The provided example ontology can be imported into a semantic MediaWiki followin
 
 
 The semantic Mediawiki templates, properties and forms created can be used to test the viability of the concept.
+
+## Developer documentation
+The directory docs contains UML diagrams. These can be opened using [ArgoUML](http://argouml.tigris.org).
