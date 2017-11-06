@@ -5,10 +5,10 @@ Created on 04.05.2016
 
 @author: Alvaro.Ortiz
 """
-from rdf2mw.repository.AbstractFactory import AbstractFactory
-from rdf2mw.repository.SemanticPropertyDAO import SemanticPropertyDAO
-from rdf2mw.repository.SemanticClassDAO import SemanticClassDAO
-from rdf2mw.repository.Manager import Manager
+from rdf2mw.AbstractFactory import AbstractFactory
+from rdf2mw.mediawiki.SemanticPropertyDAO import SemanticPropertyDAO
+from rdf2mw.mediawiki.SemanticClassDAO import SemanticClassDAO
+from rdf2mw.mediawiki.Manager import Manager
 
 
 class Factory(AbstractFactory):

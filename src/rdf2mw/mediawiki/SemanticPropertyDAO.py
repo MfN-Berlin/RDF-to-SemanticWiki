@@ -6,7 +6,7 @@ Created on 09.05.2016
 @author: Alvaro.Ortiz
 """
 
-from pyMwImportOWL.repository.AbstractDAO import AbstractDAO
+from rdf2mw.AbstractDAO import AbstractDAO
 
 
 class SemanticPropertyDAO(AbstractDAO):

@@ -9,7 +9,7 @@ Created on 04.05.2016
 @author: Alvaro.Ortiz
 """
 import unittest
-from repository.DummyDAOFactory import DummyDAOFactory
+from DummyDAOFactory import DummyDAOFactory
 from rdf2mw.model.SemanticProperty import SemanticProperty
 
 

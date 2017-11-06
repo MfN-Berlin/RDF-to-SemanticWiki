@@ -7,8 +7,8 @@ Created on 12.05.2016
 """
 
 import unittest
-from rdf2mw.parser.OWLParser import OWLParser
-from repository.DummyDAOFactory import DummyDAOFactory
+from rdf2mw.OWLParser import OWLParser
+from DummyDAOFactory import DummyDAOFactory
 
 
 class test_MakeMarkdownFromOWL(unittest.TestCase):

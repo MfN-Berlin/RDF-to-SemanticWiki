@@ -5,7 +5,7 @@ Created on 17.05.2016
 
 @author: Alvaro.Ortiz
 """
-from pyMwImportOWL.repository.AbstractManager import AbstractManager
+from rdf2mw.AbstractManager import AbstractManager
 
 
 class Manager(AbstractManager):

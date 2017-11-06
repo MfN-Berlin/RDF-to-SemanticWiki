@@ -6,7 +6,7 @@ Created on 02.05.2016
 @author: Alvaro.Ortiz
 """
 import unittest
-from rdf2mw.parser.OWLParser import OWLParser
+from rdf2mw.OWLParser import OWLParser
 
 
 class test_OWLParser(unittest.TestCase):

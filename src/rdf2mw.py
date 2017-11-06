@@ -9,10 +9,10 @@ Created on 02.05.2016
 import sys
 import traceback
 import ConfigParser
-from pyMwImportOWL.OWLImporter import OWLImporter
-from pyMwImportOWL.parser.OWLParser import OWLParser
-from pyMwImportOWL.repository.Factory import Factory
-from pyMwImportOWL.connector.MediaWikiApiConnector import MediaWikiApiConnector
+from rdf2mw.OWLImporter import OWLImporter
+from rdf2mw.OWLParser import OWLParser
+from rdf2mw.mediawiki.Factory import Factory
+from rdf2mw.mediawiki.MediaWikiApiConnector import MediaWikiApiConnector
 
 configPath = "../../example/config.ini"
 """Path to configuration file."""

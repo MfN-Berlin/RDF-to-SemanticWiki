@@ -5,7 +5,7 @@ Created on 10.05.2016
 
 @author: Alvaro.Ortiz
 """
-from rdf2mw.repository.AbstractDAO import AbstractDAO
+from rdf2mw.AbstractDAO import AbstractDAO
 
 
 class SemanticClassDAO(AbstractDAO):

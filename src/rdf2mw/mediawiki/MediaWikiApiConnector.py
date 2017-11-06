@@ -8,7 +8,7 @@ import requests
 import urllib.parse
 import sys
 import traceback
-from src.rdf2mw.connector.AbstractConnector import AbstractConnector
+from src.rdf2mw.AbstractConnector import AbstractConnector
 
 
 class MediaWikiApiConnector(AbstractConnector):

@@ -9,7 +9,7 @@ Tests the DAO classes without persisting to a back-end
 @author: Alvaro.Ortiz
 """
 import unittest
-from repository.DummyDAOFactory import DummyDAOFactory
+from DummyDAOFactory import DummyDAOFactory
 from rdf2mw.model.SemanticClass import SemanticClass
 from rdf2mw.model.SemanticProperty import SemanticProperty
 

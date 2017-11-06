@@ -6,3 +6,4 @@ example/catalog-v001.xml
 example/config.ini
 test/.coverage
 *.pyc
+*.py~
