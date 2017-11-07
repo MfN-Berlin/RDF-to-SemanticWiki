@@ -178,21 +178,6 @@
     <owl:Class rdf:about="http://mfn-berlin.de/sammlung/calendar#Location"/>
     
 
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Individuals
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-    
-
-
-    <!-- http://mfn-berlin.de/sammlung/calendar#Color1 -->
-
-    <owl:NamedIndividual rdf:about="http://mfn-berlin.de/sammlung/calendar#Color1"/>
 </rdf:RDF>
 
 
