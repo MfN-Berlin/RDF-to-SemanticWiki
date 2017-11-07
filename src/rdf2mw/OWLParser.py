@@ -8,9 +8,7 @@ Created on 02.05.2016
 
 from xml.dom import minidom
 from rdf2mw.AbstractParser import AbstractParser
-from rdf2mw.model.SemanticModel import SemanticModel
-from rdf2mw.model.SemanticClass import SemanticClass
-from rdf2mw.model.SemanticProperty import SemanticProperty
+from rdf2mw.SemanticModel import SemanticModel, SemanticClass, SemanticProperty
 
 
 class OWLParser(AbstractParser):
