@@ -23,12 +23,8 @@ class test_CreateTemplateFromRDF(unittest.TestCase):
 
     # path to configuration file
     configPath = "../example/config.ini"
-    # path to example OWL file
+    # path to example RDF file
     rdfpath = "../example/Calendar.rdf"
-    # class variables
-    parser = None
-    model = None
-    factory = None
 
     def setUp(self):
         """Setup."""
