@@ -200,12 +200,12 @@ class MediaWikiApiConnector(AbstractConnector):
         if 'error' in r.json():
             if(r.json()['error']['code'] == 'missingtitle'):
                 raise PageDoesNotExistException(
-                    'Failed request %s : %s' % (self._apiUrl, r.json()['error']['info']))
+                    'Failed request %s : %s' % (r.url, r.json()['error']['info']))
             else:
                 raise ConnectionException(
-                    'Failed request %s : %s' % (self._apiUrl, r.json()['error']['info']))
+                    'Failed request %s : %s' % (r.url, r.json()['error']['info']))
 
     @property
     def content(self):
         """Get the content of a wiki page after it has been loaded with loadPage."""
-        return self._content
+        return str(self._content)

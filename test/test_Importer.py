@@ -74,6 +74,26 @@ class test_Importer(unittest.TestCase):
         self.assertTrue(self.connector.loadPage("Property:hasSubject"))
         self.assertTrue(self.connector.loadPage("Property:isWholeDay"))
 
+    def test_PropertiesAddedToClassTemplates(self):
+        """Test that the property markup is added to the template pages."""
+        self.importer.run(self.modelPath)
+        
+        self.connector.loadPage("Template:Entry")
+        self.assertTrue("hasPriority" in self.connector.content)
+
+        self.connector.loadPage("Template:Location")
+        self.assertTrue("hasDirections" in self.connector.content)
+        self.assertTrue("hasName" in self.connector.content)
+        
+        self.connector.loadPage("Template:Description")
+        self.assertTrue("hasDetails" in self.connector.content)
+        self.assertTrue("hasSubject" in self.connector.content)
+        
+        self.connector.loadPage("Template:Event")
+        self.assertTrue("hasStartDate" in self.connector.content)
+        self.assertTrue("hasEndDate" in self.connector.content)
+        self.assertTrue("isWholeDay" in self.connector.content)
+
     def tearDown(self):
         """Teardown."""
         self.connector.deletePage("Template:Entry")
@@ -92,6 +112,7 @@ class test_Importer(unittest.TestCase):
         self.connector.deletePage("Property:hasName")
         self.connector.deletePage("Property:hasPriority")
         self.connector.deletePage("Property:hasStartDate")
+        self.connector.deletePage("Property:hasEndDate")
         self.connector.deletePage("Property:hasSubject")
         self.connector.deletePage("Property:isWholeDay")
 
