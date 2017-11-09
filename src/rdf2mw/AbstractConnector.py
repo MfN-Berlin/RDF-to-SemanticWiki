@@ -42,3 +42,15 @@ class AbstractConnector:
     def content(self):
         """Get the content of a wiki page after it has been loaded with loadPage."""
         raise NotImplementedError
+
+
+class ConnectionException(Exception):
+    """Failed connection with the API."""
+
+    pass
+
+
+class PageDoesNotExistException(Exception):
+    """Requested page does not exist."""
+
+    pass

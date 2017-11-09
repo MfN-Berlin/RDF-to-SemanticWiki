@@ -8,7 +8,7 @@ import requests
 import urllib.parse
 import sys
 import traceback
-from rdf2mw.AbstractConnector import AbstractConnector
+from rdf2mw.AbstractConnector import AbstractConnector, PageDoesNotExistException, ConnectionException
 
 
 class MediaWikiApiConnector(AbstractConnector):
@@ -183,6 +183,10 @@ class MediaWikiApiConnector(AbstractConnector):
 
             return True
 
+        except PageDoesNotExistException:
+            # If the page does not exist, ignore the exception, and do nothing.
+            return True
+
         except:
             traceback.print_exc(file=sys.stdout)
             return False
@@ -195,10 +199,10 @@ class MediaWikiApiConnector(AbstractConnector):
         # Check response code
         if 'error' in r.json():
             if(r.json()['error']['code'] == 'missingtitle'):
-                pass
-                # print("Page %s doesn't exist, ignoring" % self._apiUrl)
+                raise PageDoesNotExistException(
+                    'Failed request %s : %s' % (self._apiUrl, r.json()['error']['info']))
             else:
-                raise Exception(
+                raise ConnectionException(
                     'Failed request %s : %s' % (self._apiUrl, r.json()['error']['info']))
 
     def content(self):
