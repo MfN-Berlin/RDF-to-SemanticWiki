@@ -33,14 +33,13 @@ class Importer:
 
         # create DAO objects
         classDao = self._daoFactory.getSemanticClassDAO()
-#        propDao = self._daoFactory.getSemanticPropertyDAO()
+        propDao = self._daoFactory.getSemanticPropertyDAO()
 
         # create all the class pages
         for sclass in model.classes.values():
             classDao.create(sclass)
             print("Created page for class %s" % sclass.name)
-                
-            # create all the property pages
- #           for sprop in sclass.properties.values():
- #               propDao.create(sprop)
 
+            # create all the property pages
+            for sprop in sclass.properties.values():
+                propDao.create(sprop)

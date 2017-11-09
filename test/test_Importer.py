@@ -27,7 +27,6 @@ class test_Importer(unittest.TestCase):
     # path to the ontology example
     modelPath = "../example/Calendar.rdf"
 
-
     def setUp(self):
         """Setup."""
         # Read the configuration file
@@ -41,19 +40,6 @@ class test_Importer(unittest.TestCase):
         self.daoFactory = Factory(self.connector)
         # A wrapper for the import process
         self.importer = Importer(self.parser, self.daoFactory)
-
-    def tearDown(self):
-        """Teardown."""
-        self.connector.deletePage("Template:Entry")
-        self.connector.deletePage("Template:Event")
-        self.connector.deletePage("Template:Location")
-        self.connector.deletePage("Template:Description")
-        self.connector.deletePage("Template:Calendar")
-        self.connector.deletePage("Form:Entry")
-        self.connector.deletePage("Form:Event")
-        self.connector.deletePage("Form:Location")
-        self.connector.deletePage("Form:Description")
-        self.connector.deletePage("Form:Calendar")
 
     def testImporterRun(self):
         """Test if the Importer runs at all."""
@@ -77,6 +63,37 @@ class test_Importer(unittest.TestCase):
         self.assertTrue(self.connector.loadPage("Form:Description"))
         self.assertTrue(self.connector.loadPage("Form:Calendar"))
 
+    def test_PropertyPagesCreated(self):
+        """Test that a property: page was created for each datatype property in the example ontology."""
+        self.importer.run(self.modelPath)
+        self.assertTrue(self.connector.loadPage("Property:hasDetails"))
+        self.assertTrue(self.connector.loadPage("Property:hasDirections"))
+        self.assertTrue(self.connector.loadPage("Property:hasName"))
+        self.assertTrue(self.connector.loadPage("Property:hasPriority"))
+        self.assertTrue(self.connector.loadPage("Property:hasStartDate"))
+        self.assertTrue(self.connector.loadPage("Property:hasSubject"))
+        self.assertTrue(self.connector.loadPage("Property:isWholeDay"))
+
+    def tearDown(self):
+        """Teardown."""
+        self.connector.deletePage("Template:Entry")
+        self.connector.deletePage("Template:Event")
+        self.connector.deletePage("Template:Location")
+        self.connector.deletePage("Template:Description")
+        self.connector.deletePage("Template:Calendar")
+        self.connector.deletePage("Form:Entry")
+        self.connector.deletePage("Form:Event")
+        self.connector.deletePage("Form:Location")
+        self.connector.deletePage("Form:Description")
+        self.connector.deletePage("Form:Calendar")
+
+        self.connector.deletePage("Property:hasDetails")
+        self.connector.deletePage("Property:hasDirections")
+        self.connector.deletePage("Property:hasName")
+        self.connector.deletePage("Property:hasPriority")
+        self.connector.deletePage("Property:hasStartDate")
+        self.connector.deletePage("Property:hasSubject")
+        self.connector.deletePage("Property:isWholeDay")
 
 if __name__ == "__main__":
     # import sys;sys.argv = ['', 'Test.testName']
