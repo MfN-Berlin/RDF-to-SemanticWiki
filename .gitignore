@@ -7,3 +7,4 @@ example/config.ini
 test/.coverage
 *.pyc
 *~
+*\#
