@@ -65,7 +65,9 @@ class RDFParser(AbstractParser):
             range = element.find(RDFParser.path('rdfs:range', startWith='descendant'))
             if range is not None:
                 rangeType = range.attrib[RDFParser.full('rdf:resource')].split('#')[1]
-                prop.type = rangeType
+                prop.range = rangeType
+            else:
+                prop.range = "Literal"
             # if the class exists, add the property
             if domainName in self._model.getClassNames():
                 self._model.classes[domainName].addProperty(prop)
@@ -74,19 +76,23 @@ class RDFParser(AbstractParser):
         """Get the object properties."""
         # go through ObjectProperty elements
         properties = self._doc.findall(RDFParser.full("owl:ObjectProperty"))
+
         # go through the "ObjectProperty" elements and add them to the model
         for element in properties:
             # propName is the name of this property
             propName = element.attrib[RDFParser.full('rdf:about')].split('#')[1]
             prop = ObjectProperty(propName)
+            
             # domainName is the name of the class this property belongs to
             domain = element.find(RDFParser.path('rdfs:domain', startWith='descendant'))
             domainName = domain.attrib[RDFParser.full('rdf:resource')].split('#')[1]
+            
             # rangeType is the variable type of this property
             range = element.find(RDFParser.path('rdfs:range', startWith='descendant'))
             if range is not None:
                 rangeType = range.attrib[RDFParser.full('rdf:resource')].split('#')[1]
-                prop.type = rangeType
+                prop.range = rangeType
+            
             # if the class exists, add the property
             if domainName in self._model.getClassNames():
                 self._model.classes[domainName].addProperty(prop)

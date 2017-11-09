@@ -45,15 +45,24 @@ class SemanticClassDAO(AbstractDAO):
         self.values["template"] = template
 
         # Mark-down for the form
-        form = "<noinclude>{{#forminput:form=%s}}</noinclude>" % sclass.name
-        form += "<includeonly>{{{for template|%s}}}" % sclass.name
-        form += "{{{end template}}}"
-        form += "{{{standard input|minor edit}}}"
-        form += "{{{standard input|watch}}}{{{standard input|save}}}"
-        form += "{{{standard input|changes}}} {{{standard input|cancel}}}"
-        form += "__NOTOC__"
-        form += "__NOEDITSECTION__"
-        form += "</includeonly>"
+        form = "<noinclude>{{#forminput:form=%s}}</noinclude>\n" % sclass.name
+        form += "<includeonly>\n{{{for template|%s}}}\n" % sclass.name
+
+        # Add form input fields
+        for prop in sclass.datatypeProperties:
+            form += "==%s==\n\n" % prop.name
+            if prop.range is "Literal":
+                form += "{{{field|%s|input type=textarea||editor=wikieditor|rows=10}}}\n" % prop.name
+            else:
+                form += "{{{field|%s|input type=text}}}\n" % prop.name
+
+        form += "{{{end template}}}\n\n"
+        form += "{{{standard input|minor edit}}}\n"
+        form += "{{{standard input|watch}}}{{{standard input|save}}}\n"
+        form += "{{{standard input|changes}}} {{{standard input|cancel}}}\n"
+        form += "__NOTOC__\n"
+        form += "__NOEDITSECTION__\n"
+        form += "</includeonly>\n"
 
         self.values["form"] = form
 

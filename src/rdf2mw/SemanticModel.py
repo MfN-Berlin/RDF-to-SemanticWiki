@@ -76,6 +76,32 @@ class SemanticClass:
         """Unite this class with another class."""
         self.unionOf[sclass.name] = sclass
 
+    @property
+    def datatypeProperties(self):
+        """
+        Get the datatype properties of this class.
+
+        @return a list of DatatypeProperty objects
+        """
+        resp = []
+        for prop in self.properties.values():
+            if isinstance(prop, DatatypeProperty):
+                resp.append(prop)
+        return resp
+
+    @property
+    def objectProperties(self):
+        """
+        Get the object properties of this class.
+
+        @return a list of ObjectProperty objects
+        """
+        resp = []
+        for prop in self.properties.values():
+            if isinstance(prop, ObjectProperty):
+                resp.append(prop)
+        return resp
+
 
 class SemanticProperty:
     """Represents a semantic property."""
@@ -104,4 +130,3 @@ class ObjectProperty(SemanticProperty):
         self.name = name
         self.domain = None
         self.range = None
-        self.allowedValues = None

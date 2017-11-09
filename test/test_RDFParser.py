@@ -62,9 +62,9 @@ class test_RDFParser(unittest.TestCase):
         """Test parsing ranges of data properties."""
         model = self.parser.parse(self.rdfpath)
         sclass = model.classes['Event']
-        self.assertEqual("dateTime", sclass.properties["hasEndDate"].type)
-        self.assertEqual("dateTime", sclass.properties["hasStartDate"].type)
-        self.assertEqual("boolean", sclass.properties["isWholeDay"].type)
+        self.assertEqual("dateTime", sclass.properties["hasEndDate"].range)
+        self.assertEqual("dateTime", sclass.properties["hasStartDate"].range)
+        self.assertEqual("boolean", sclass.properties["isWholeDay"].range)
 
     def testParseObjectProperties(self):
         """Test parsing object properties."""
@@ -87,13 +87,13 @@ class test_RDFParser(unittest.TestCase):
         model = self.parser.parse(self.rdfpath)
         # Entry -> Description
         sclass = model.classes['Entry']
-        self.assertEqual("Description", sclass.properties["hasDescription"].type)
+        self.assertEqual("Description", sclass.properties["hasDescription"].range)
         # Calendar -> Entry
         sclass = model.classes['Calendar']
-        self.assertEqual("Entry", sclass.properties["hasEntry"].type)
+        self.assertEqual("Entry", sclass.properties["hasEntry"].range)
         # Entry -> Event
         sclass = model.classes['Entry']
-        self.assertEqual("Event", sclass.properties["hasEvent"].type)
+        self.assertEqual("Event", sclass.properties["hasEvent"].range)
 
     @unittest.skip("Skipping RDF union for now")
     def testParseUnion(self):
