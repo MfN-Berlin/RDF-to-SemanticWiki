@@ -8,7 +8,7 @@ Created on 02.05.2016
 
 from lxml import etree
 from rdf2mw.AbstractParser import AbstractParser
-from rdf2mw.SemanticModel import SemanticModel, SemanticClass, SemanticProperty
+from rdf2mw.SemanticModel import SemanticModel, SemanticClass, DatatypeProperty, ObjectProperty
 
 
 class RDFParser(AbstractParser):
@@ -57,7 +57,7 @@ class RDFParser(AbstractParser):
         for element in properties:
             # propName is the name of this property
             propName = element.attrib[RDFParser.full('rdf:about')].split('#')[1]
-            prop = SemanticProperty(propName)
+            prop = DatatypeProperty(propName)
             # domainName is the name of the class this property belongs to
             domain = element.find(RDFParser.path('rdfs:domain', startWith='descendant'))
             domainName = domain.attrib[RDFParser.full('rdf:resource')].split('#')[1]
@@ -78,7 +78,7 @@ class RDFParser(AbstractParser):
         for element in properties:
             # propName is the name of this property
             propName = element.attrib[RDFParser.full('rdf:about')].split('#')[1]
-            prop = SemanticProperty(propName)
+            prop = ObjectProperty(propName)
             # domainName is the name of the class this property belongs to
             domain = element.find(RDFParser.path('rdfs:domain', startWith='descendant'))
             domainName = domain.attrib[RDFParser.full('rdf:resource')].split('#')[1]

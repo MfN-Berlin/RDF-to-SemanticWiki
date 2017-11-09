@@ -80,8 +80,26 @@ class SemanticClass:
 class SemanticProperty:
     """Represents a semantic property."""
 
+    def __init__(self):
+        """Make this class abstract."""
+        raise NotImplementedError
+
+
+class DatatypeProperty(SemanticProperty):
+    """Represents a datatype property."""
+
     def __init__(self, name):
-        """Construct the class."""
+        """Constructor."""
+        self.name = name
+        self.type = None
+        self.allowedValues = None
+
+
+class ObjectProperty(SemanticProperty):
+    """Represents an object property property."""
+
+    def __init__(self, name):
+        """Constructor."""
         self.name = name
         self.type = None
         self.allowedValues = None

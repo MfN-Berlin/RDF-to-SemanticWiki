@@ -5,7 +5,7 @@ Created on 02.05.2016
 
 @author: Alvaro.Ortiz
 """
-
+from rdf2mw.SemanticModel import DatatypeProperty
 
 class Importer:
     """Import an RDF or OWL file into a data sink (e.g. semantic MediaWiki API)."""
@@ -42,4 +42,5 @@ class Importer:
 
             # create all the property pages
             for sprop in sclass.properties.values():
-                propDao.create(sprop)
+                if isinstance(sprop, DatatypeProperty):
+                    propDao.create(sprop)

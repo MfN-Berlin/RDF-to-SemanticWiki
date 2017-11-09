@@ -10,7 +10,7 @@ Tests the DAO classes without persisting to a back-end
 """
 import unittest
 from DummyDAOFactory import DummyDAOFactory
-from rdf2mw.SemanticModel import SemanticClass, SemanticProperty
+from rdf2mw.SemanticModel import SemanticClass, DatatypeProperty
 
 
 class test_SemanticClassDAO(unittest.TestCase):
@@ -20,7 +20,7 @@ class test_SemanticClassDAO(unittest.TestCase):
         """Test that template markdown is correct."""
         factory = DummyDAOFactory()
         sclass = SemanticClass("test class")
-        sprop = SemanticProperty("test property")
+        sprop = DatatypeProperty("test property")
         sclass.addProperty(sprop)
         classDAO = factory.getSemanticClassDAO()
         self.assertTrue(classDAO)
@@ -36,7 +36,7 @@ class test_SemanticClassDAO(unittest.TestCase):
         factory = DummyDAOFactory()
         sclass = SemanticClass("test class")
         uclass = SemanticClass("test class 2")
-        uclass.addProperty(SemanticProperty("test property"))
+        uclass.addProperty(DatatypeProperty("test property"))
         sclass.uniteWith(uclass)
         classDAO = factory.getSemanticClassDAO()
         classDAO.create(sclass)

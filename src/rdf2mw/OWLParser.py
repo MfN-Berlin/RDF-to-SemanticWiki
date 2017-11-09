@@ -8,7 +8,7 @@ Created on 02.05.2016
 
 from xml.dom import minidom
 from rdf2mw.AbstractParser import AbstractParser
-from rdf2mw.SemanticModel import SemanticModel, SemanticClass, SemanticProperty
+from rdf2mw.SemanticModel import SemanticModel, SemanticClass, DatatypeProperty
 
 
 class OWLParser(AbstractParser):
@@ -113,7 +113,7 @@ class OWLParser(AbstractParser):
 
             # look for DataPropertyDomain elements associated with the given class
             if foundClassName == sclass.name:
-                prop = SemanticProperty(foundPropName)
+                prop = DatatypeProperty(foundPropName)
                 self._parsePropertyRanges(prop)
                 sclass.addProperty(prop)
 

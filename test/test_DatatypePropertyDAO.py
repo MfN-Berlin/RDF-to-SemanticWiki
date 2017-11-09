@@ -10,16 +10,16 @@ Created on 04.05.2016
 """
 import unittest
 from DummyDAOFactory import DummyDAOFactory
-from rdf2mw.SemanticModel import SemanticProperty
+from rdf2mw.SemanticModel import DatatypeProperty
 
 
-class test_SemanticPropertyDAO(unittest.TestCase):
+class test_DatatypePropertyDAO(unittest.TestCase):
     """Tests the DAO classes without persisting to a back-end (using DummyDAOManager)."""
 
     def testDatePropertyDAO(self):
         """Test a date property."""
         factory = DummyDAOFactory()
-        sprop = SemanticProperty("testDate")
+        sprop = DatatypeProperty("testDate")
         sprop.type = "dateTime"
         propDAO = factory.getSemanticPropertyDAO()
         self.assertTrue(propDAO)
@@ -30,7 +30,7 @@ class test_SemanticPropertyDAO(unittest.TestCase):
     def testOneOfPropertyDAO(self):
         """Test a one-off propety (an enum)."""
         factory = DummyDAOFactory()
-        sprop = SemanticProperty("testOneOf")
+        sprop = DatatypeProperty("testOneOf")
         sprop.type = "DataOneOf"
         sprop.allowedValues = [
             '#0000ff', '#00ff00', '#00ffff', '#ff0000', '#ff00ff', '#ffff00', '#ffffff']
@@ -45,7 +45,7 @@ class test_SemanticPropertyDAO(unittest.TestCase):
     def testDefaultTypePropertyDAO(self):
         """Test a default (text) property."""
         factory = DummyDAOFactory()
-        sprop = SemanticProperty("testDate")
+        sprop = DatatypeProperty("testDate")
         sprop.type = "xxx"
         propDAO = factory.getSemanticPropertyDAO()
         self.assertTrue(propDAO)
