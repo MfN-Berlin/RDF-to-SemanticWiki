@@ -205,6 +205,7 @@ class MediaWikiApiConnector(AbstractConnector):
                 raise ConnectionException(
                     'Failed request %s : %s' % (self._apiUrl, r.json()['error']['info']))
 
+    @property
     def content(self):
         """Get the content of a wiki page after it has been loaded with loadPage."""
         return self._content
