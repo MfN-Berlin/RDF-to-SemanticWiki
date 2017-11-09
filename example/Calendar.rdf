@@ -24,6 +24,7 @@
     <!-- http://mfn-berlin.de/sammlung/calendar#hasDescription -->
 
     <owl:ObjectProperty rdf:about="http://mfn-berlin.de/sammlung/calendar#hasDescription">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://mfn-berlin.de/sammlung/calendar#Entry"/>
         <rdfs:range rdf:resource="http://mfn-berlin.de/sammlung/calendar#Description"/>
     </owl:ObjectProperty>
@@ -42,6 +43,7 @@
     <!-- http://mfn-berlin.de/sammlung/calendar#hasEvent -->
 
     <owl:ObjectProperty rdf:about="http://mfn-berlin.de/sammlung/calendar#hasEvent">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://mfn-berlin.de/sammlung/calendar#Entry"/>
         <rdfs:range rdf:resource="http://mfn-berlin.de/sammlung/calendar#Event"/>
     </owl:ObjectProperty>
@@ -51,6 +53,7 @@
     <!-- http://mfn-berlin.de/sammlung/calendar#hasLocation -->
 
     <owl:ObjectProperty rdf:about="http://mfn-berlin.de/sammlung/calendar#hasLocation">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://mfn-berlin.de/sammlung/calendar#Entry"/>
         <rdfs:range rdf:resource="http://mfn-berlin.de/sammlung/calendar#Location"/>
     </owl:ObjectProperty>
@@ -176,8 +179,6 @@
     <!-- http://mfn-berlin.de/sammlung/calendar#Location -->
 
     <owl:Class rdf:about="http://mfn-berlin.de/sammlung/calendar#Location"/>
-    
-
 </rdf:RDF>
 
 

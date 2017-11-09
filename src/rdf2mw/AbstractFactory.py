@@ -14,8 +14,8 @@ class AbstractFactory:
         """Get a manager object for managing commits and connection scope."""
         raise NotImplementedError
 
-    def getSemanticPropertyDAO(self):
-        """Create a DAO object for the corresponding semantic property class."""
+    def getDatatypePropertyDAO(self):
+        """Create a DAO object for the corresponding datatype property class."""
         raise NotImplementedError
 
     def getSemanticClassDAO(self):

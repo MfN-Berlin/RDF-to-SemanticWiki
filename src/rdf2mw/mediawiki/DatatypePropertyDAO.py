@@ -9,7 +9,7 @@ Created on 09.05.2016
 from rdf2mw.AbstractDAO import AbstractDAO
 
 
-class SemanticPropertyDAO(AbstractDAO):
+class DatatypePropertyDAO(AbstractDAO):
     """Provides a property DAO object."""
 
     def __init__(self, manager):
@@ -27,19 +27,19 @@ class SemanticPropertyDAO(AbstractDAO):
     def create(self, sprop):
         """Override abstract method."""
         datatype = "Text"  # default
-        if sprop.type == "dateTime":
+        if sprop.range == "dateTime":
             datatype = "Date"
-        elif sprop.type == "boolean":
+        elif sprop.range == "boolean":
             datatype = "Boolean"
-        elif sprop.type == "string":
+        elif sprop.range == "string":
             datatype = "Text"
-        elif sprop.type == "DataOneOf":
+        elif sprop.range == "DataOneOf":
             datatype = "Text"
 
         # markdown goes in the MediaWiki page
         markdown = "This is a property of type [[Has type::%s]].\n" % datatype
 
-        if sprop.type == "DataOneOf":
+        if sprop.range == "DataOneOf":
             markdown += "The allowed values for this property are:\n"
             for item in sprop.allowedValues:
                 markdown += "[[Allows value::%s]]\n" % item

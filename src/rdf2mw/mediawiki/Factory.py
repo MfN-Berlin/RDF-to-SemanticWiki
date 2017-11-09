@@ -6,7 +6,7 @@ Created on 04.05.2016
 @author: Alvaro.Ortiz
 """
 from rdf2mw.AbstractFactory import AbstractFactory
-from rdf2mw.mediawiki.SemanticPropertyDAO import SemanticPropertyDAO
+from rdf2mw.mediawiki.DatatypePropertyDAO import DatatypePropertyDAO
 from rdf2mw.mediawiki.SemanticClassDAO import SemanticClassDAO
 from rdf2mw.mediawiki.Manager import Manager
 
@@ -34,10 +34,10 @@ class Factory(AbstractFactory):
             self._manager = Manager(self._connector)
         return self._manager
 
-    def getSemanticPropertyDAO(self):
+    def getDatatypePropertyDAO(self):
         """Override abstract method."""
         if self._propertyDAO is None:
-            self._propertyDAO = SemanticPropertyDAO(self.getDAOManager())
+            self._propertyDAO = DatatypePropertyDAO(self.getDAOManager())
         return self._propertyDAO
 
     def getSemanticClassDAO(self):

@@ -20,8 +20,8 @@ class test_DatatypePropertyDAO(unittest.TestCase):
         """Test a date property."""
         factory = DummyDAOFactory()
         sprop = DatatypeProperty("testDate")
-        sprop.type = "dateTime"
-        propDAO = factory.getSemanticPropertyDAO()
+        sprop.range = "dateTime"
+        propDAO = factory.getDatatypePropertyDAO()
         self.assertTrue(propDAO)
         propDAO.create(sprop)
         result = propDAO.getValues()['property']
@@ -31,10 +31,10 @@ class test_DatatypePropertyDAO(unittest.TestCase):
         """Test a one-off propety (an enum)."""
         factory = DummyDAOFactory()
         sprop = DatatypeProperty("testOneOf")
-        sprop.type = "DataOneOf"
+        sprop.range = "DataOneOf"
         sprop.allowedValues = [
             '#0000ff', '#00ff00', '#00ffff', '#ff0000', '#ff00ff', '#ffff00', '#ffffff']
-        propDAO = factory.getSemanticPropertyDAO()
+        propDAO = factory.getDatatypePropertyDAO()
         self.assertTrue(propDAO)
         propDAO.create(sprop)
         result = propDAO.getValues()['property']
@@ -46,8 +46,8 @@ class test_DatatypePropertyDAO(unittest.TestCase):
         """Test a default (text) property."""
         factory = DummyDAOFactory()
         sprop = DatatypeProperty("testDate")
-        sprop.type = "xxx"
-        propDAO = factory.getSemanticPropertyDAO()
+        sprop.range = "xxx"
+        propDAO = factory.getDatatypePropertyDAO()
         self.assertTrue(propDAO)
         propDAO.create(sprop)
         result = propDAO.getValues()['property']

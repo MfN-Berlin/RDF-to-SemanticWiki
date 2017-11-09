@@ -33,7 +33,7 @@ class Importer:
 
         # create DAO objects
         classDao = self._daoFactory.getSemanticClassDAO()
-        propDao = self._daoFactory.getSemanticPropertyDAO()
+        propDao = self._daoFactory.getDatatypePropertyDAO()
 
         # create all the class pages
         for sclass in model.classes.values():

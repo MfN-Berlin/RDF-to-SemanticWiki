@@ -50,7 +50,7 @@ class test_CreateTemplateFromRDF(unittest.TestCase):
         """Test that a property page can be created."""
         # The "Event" class has a property called "Priority"
         prop = self.model.classes['Entry'].properties['hasPriority']
-        dao = self.factory.getSemanticPropertyDAO()
+        dao = self.factory.getDatatypePropertyDAO()
         dao.create(prop)
         resp = self.connector.loadPage("Property:" + prop.name)
         self.assertTrue(resp)

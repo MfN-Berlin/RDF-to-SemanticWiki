@@ -36,7 +36,7 @@ class test_MakeMarkdownFromRDF(unittest.TestCase):
         """Test that property markdown is correct."""
         # The "Event" class has a property called "Priority"
         prop = self.model.classes['Entry'].properties['hasPriority']
-        dao = self.factory.getSemanticPropertyDAO()
+        dao = self.factory.getDatatypePropertyDAO()
         dao.create(prop)
         result = dao.getValues()['property']
         self.assertTrue("This is a property of type [[Has type::Text]].\n" in result)

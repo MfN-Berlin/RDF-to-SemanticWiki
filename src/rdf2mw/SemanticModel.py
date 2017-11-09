@@ -91,7 +91,8 @@ class DatatypeProperty(SemanticProperty):
     def __init__(self, name):
         """Constructor."""
         self.name = name
-        self.type = None
+        self.domain = None
+        self.range = None
         self.allowedValues = None
 
 
@@ -101,5 +102,6 @@ class ObjectProperty(SemanticProperty):
     def __init__(self, name):
         """Constructor."""
         self.name = name
-        self.type = None
+        self.domain = None
+        self.range = None
         self.allowedValues = None
