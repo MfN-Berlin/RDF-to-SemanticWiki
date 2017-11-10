@@ -27,7 +27,7 @@ class SemanticClassDAO(AbstractDAO):
 
     def create(self, sclass):
         """Override abstract method."""
-        # Mark-down for the class properties
+        # Markup for the class properties
         template = "=%s=\n" % sclass.name
 
         # Add datatype property fields
@@ -35,18 +35,27 @@ class SemanticClassDAO(AbstractDAO):
             template += "==%s==\n\n" % prop.name
             template += "[[%s::{{{%s|}}}]] \n" % (prop.name, prop.name)
 
-        # Mark-down for the properties of union classes
-        # Make a call to the template of the class
-        for part in sclass.unionOf.values():
-            template += "==%s==\n" % part.name
-            template += "{{%s\n" % part.name
-            for name in part.getPropertyNames():
-                template += "| %s = {{{%s|}}}\n" % (name, name)
-            template += "}}\n"
+        # Add object properties as semantic query for corresponding classes
+        for prop in sclass.objectProperties:
+            template += "==%s==\n" % prop.name
+            template += "{{#ask: [[Category:%s]]" % prop.range
+            template += "|format=ol"
+            template += "}}"
 
+        # Markup for the properties of union classes
+        # Make a call to the template of the class
+        # for part in sclass.unionOf.values():
+        #    template += "==%s==\n" % part.name
+        #    template += "{{%s\n" % part.name
+        #    for name in part.getPropertyNames():
+        #        template += "| %s = {{{%s|}}}\n" % (name, name)
+        #    template += "}}\n"
+
+        # Add a category for all classes using this template
+        template += "<includeonly>[[category:%s]]</includeonly>" % sclass.name
         self.values["template"] = template
 
-        # Mark-down for the form
+        # Markup for the form
         form = "<noinclude>{{#forminput:form=%s}}</noinclude>\n" % sclass.name
         form += "<includeonly>\n{{{for template|%s}}}\n" % sclass.name
 
@@ -57,7 +66,16 @@ class SemanticClassDAO(AbstractDAO):
                 form += "{{{field|%s|input type=textarea||editor=wikieditor|rows=10}}}\n" % prop.name
             else:
                 form += "{{{field|%s|input type=text}}}\n" % prop.name
-                
+
+        # Add object properties as semantic query for corresponding classes
+        # Add alink to create new entries of the object property
+        for prop in sclass.objectProperties:
+            form += "==%s==\n\n" % prop.name
+            form += "{{#ask: [[Category:%s]]" % prop.range
+            form += "|format=ol"
+            form += "}}\n\n"
+            form += "<div class=\"wt_toolbar\">[%sCategory:%s Add %s]</div>\n\n" % (self._manager.connector.baseURL, prop.range, prop.range)
+
         form += "{{{end template}}}\n\n"
         form += "{{{standard input|minor edit}}}\n"
         form += "{{{standard input|watch}}}{{{standard input|save}}}\n"
@@ -67,6 +85,11 @@ class SemanticClassDAO(AbstractDAO):
         form += "</includeonly>\n"
 
         self.values["form"] = form
+
+        # Markup for the category page
+        category = "{{#default_form:%s}}" % sclass.name
+        category += "{{#forminput:form=%s|autocomplete on category=%s}}" % (sclass.name, sclass.name)
+        self.values["category"] = category
 
         # Send to MediaWiki
         self._manager.commit(sclass.name, self.values)

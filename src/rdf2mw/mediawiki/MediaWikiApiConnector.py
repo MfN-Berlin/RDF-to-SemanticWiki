@@ -30,9 +30,9 @@ class MediaWikiApiConnector(AbstractConnector):
 
     def __init__(self, config):
         """Construct the connector."""
-        baseMwUrl = config.get('defaults', 'baseMwURL')
-        self._apiUrl = urllib.parse.urljoin(baseMwUrl, 'api.php')
-        self._contentUrl = urllib.parse.urljoin(baseMwUrl, 'index.php')
+        self.baseMwUrl = config.get('defaults', 'baseMwURL')
+        self._apiUrl = urllib.parse.urljoin(self.baseMwUrl, 'api.php')
+        self._contentUrl = urllib.parse.urljoin(self.baseMwUrl, 'index.php')
         self._username = config.get('defaults', 'username')
         self._password = config.get('defaults', 'password')
 
@@ -209,3 +209,8 @@ class MediaWikiApiConnector(AbstractConnector):
     def content(self):
         """Get the content of a wiki page after it has been loaded with loadPage."""
         return str(self._content)
+
+    @property
+    def baseURL(self):
+        """Get the base URL of the wiki."""
+        return self.baseMwUrl

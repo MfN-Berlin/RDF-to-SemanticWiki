@@ -56,6 +56,14 @@ class test_MakeMarkdownFromRDF(unittest.TestCase):
         # (don't mix up class variables with instance variables)
         self.assertFalse("{{Location" in result)
 
+    def testClassWithObjectProperties(self):
+        """Test that template markdown is correct."""
+        sClass = self.model.classes['Calendar']
+        classDAO = self.factory.getSemanticClassDAO()
+        classDAO.create(sClass)
+        result = classDAO.getValues()['template']
+        self.assertTrue("=hasEntry=" in result)
+
     @unittest.skip("Skipping RDF union for the moment.")
     def testUnionClass(self):
         """Test that pages creted from uniting classes have correct markdown."""

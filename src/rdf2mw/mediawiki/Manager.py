@@ -27,3 +27,8 @@ class Manager(AbstractManager):
             # values contains e.g. "template" and "form" page contents
             pageName = '%s:%s' % (key, name)
             self._connector.createPage(pageName, values[key])
+
+    @property
+    def connector(self):
+        """Get the connector."""
+        return self._connector

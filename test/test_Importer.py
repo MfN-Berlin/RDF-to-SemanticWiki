@@ -63,6 +63,15 @@ class test_Importer(unittest.TestCase):
         self.assertTrue(self.connector.loadPage("Form:Description"))
         self.assertTrue(self.connector.loadPage("Form:Calendar"))
 
+    def test_CategoryPagesCreated(self):
+        """Test that a Category: page was created for each class in the example ontology."""
+        self.importer.run(self.modelPath)
+        self.assertTrue(self.connector.loadPage("Category:Entry"))
+        self.assertTrue(self.connector.loadPage("Category:Event"))
+        self.assertTrue(self.connector.loadPage("Category:Location"))
+        self.assertTrue(self.connector.loadPage("Category:Description"))
+        self.assertTrue(self.connector.loadPage("Category:Calendar"))
+
     def test_PropertyPagesCreated(self):
         """Test that a property: page was created for each datatype property in the example ontology."""
         self.importer.run(self.modelPath)
@@ -101,11 +110,18 @@ class test_Importer(unittest.TestCase):
         self.connector.deletePage("Template:Location")
         self.connector.deletePage("Template:Description")
         self.connector.deletePage("Template:Calendar")
+
         self.connector.deletePage("Form:Entry")
         self.connector.deletePage("Form:Event")
         self.connector.deletePage("Form:Location")
         self.connector.deletePage("Form:Description")
         self.connector.deletePage("Form:Calendar")
+
+        self.connector.deletePage("Category:Entry")
+        self.connector.deletePage("Category:Event")
+        self.connector.deletePage("Category:Location")
+        self.connector.deletePage("Category:Description")
+        self.connector.deletePage("Category:Calendar")
 
         self.connector.deletePage("Property:hasDetails")
         self.connector.deletePage("Property:hasDirections")
