@@ -27,7 +27,7 @@ To run the tests and get code coverage:
 
 ```
 cd test
-./test.sh
+bash test.sh
 ```
 
 ### Example

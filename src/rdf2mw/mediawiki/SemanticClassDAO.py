@@ -29,9 +29,11 @@ class SemanticClassDAO(AbstractDAO):
         """Override abstract method."""
         # Mark-down for the class properties
         template = "=%s=\n" % sclass.name
-        for name in sclass.getPropertyNames():
-            template += "'''%s''': " % name
-            template += "[[%s::{{{%s|}}}]] \n" % (name, name)
+
+        # Add datatype property fields
+        for prop in sclass.datatypeProperties:
+            template += "==%s==\n\n" % prop.name
+            template += "[[%s::{{{%s|}}}]] \n" % (prop.name, prop.name)
 
         # Mark-down for the properties of union classes
         # Make a call to the template of the class
@@ -55,7 +57,7 @@ class SemanticClassDAO(AbstractDAO):
                 form += "{{{field|%s|input type=textarea||editor=wikieditor|rows=10}}}\n" % prop.name
             else:
                 form += "{{{field|%s|input type=text}}}\n" % prop.name
-
+                
         form += "{{{end template}}}\n\n"
         form += "{{{standard input|minor edit}}}\n"
         form += "{{{standard input|watch}}}{{{standard input|save}}}\n"

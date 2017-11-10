@@ -27,7 +27,7 @@ class test_SemanticClassDAO(unittest.TestCase):
         classDAO.create(sclass)
         template = classDAO.getValues()['template']
         self.assertTrue("=test class=" in template)  # Class name is header 1
-        self.assertTrue("'''test property'''" in template)  # Properties names are in bold
+        self.assertTrue("==test property==" in template)  # Properties names H2
         # properties are in semantic mediawiki syntax
         self.assertTrue("[[test property::{{{test property|}}}]]" in template)
 

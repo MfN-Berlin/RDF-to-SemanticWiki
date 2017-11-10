@@ -48,8 +48,10 @@ class test_MakeMarkdownFromRDF(unittest.TestCase):
         classDAO.create(simpleClass)
         result = classDAO.getValues()['template']
         self.assertTrue("=Description=" in result)
-        self.assertTrue("'''hasSubject''': [[hasSubject::{{{hasSubject|}}}]]" in result)
-        self.assertTrue("'''hasDetails''': [[hasDetails::{{{hasDetails|}}}]]" in result)
+        self.assertTrue("==hasSubject==" in result)
+        self.assertTrue("[[hasSubject::{{{hasSubject|}}}]]" in result)
+        self.assertTrue("==hasDetails==" in result)
+        self.assertTrue("[[hasDetails::{{{hasDetails|}}}]]" in result)
         # Don't create a "Location" template if doing a "Description" template
         # (don't mix up class variables with instance variables)
         self.assertFalse("{{Location" in result)
