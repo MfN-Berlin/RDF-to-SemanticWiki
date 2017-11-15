@@ -49,6 +49,13 @@ class DatatypePropertyDAO(AbstractDAO):
         # Send to MediaWiki
         self._manager.commit(sprop.name, self.values)
 
+    def delete(self, sprop):
+        """Override abstract method."""
+        pages = ['property']
+
+        # Send to MediaWiki
+        self._manager.delete(sprop.name, pages)
+
     def getValues(self):
         """Override abstract method."""
         return self.values

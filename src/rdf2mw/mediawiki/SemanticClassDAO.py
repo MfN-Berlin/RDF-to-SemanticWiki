@@ -94,6 +94,13 @@ class SemanticClassDAO(AbstractDAO):
         # Send to MediaWiki
         self._manager.commit(sclass.name, self.values)
 
+    def delete(self, sclass):
+        """Override abstract method."""
+        pages = ['template', 'form', 'category']
+
+        # Send to MediaWiki
+        self._manager.delete(sclass.name, pages)
+
     def getValues(self):
         """Override abstract method."""
         return self.values

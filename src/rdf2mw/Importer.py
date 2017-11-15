@@ -23,13 +23,14 @@ class Importer:
         self._parser = parser
         self._daoFactory = daoFactory
 
-    def run(self, path):
-        """Import RDF or OWL file.
+    def run(self, modelPath):
+        """
+        Import RDF or OWL file.
 
-        @param path: file to import
+        @param modelPath: ontology file to import
         """
         # parse the file
-        model = self._parser.parse(path)
+        model = self._parser.parse(modelPath)
 
         # create DAO objects
         classDao = self._daoFactory.getSemanticClassDAO()
@@ -38,9 +39,32 @@ class Importer:
         # create all the class pages
         for sclass in model.classes.values():
             classDao.create(sclass)
-            print("Created page for class %s" % sclass.name)
+            print("Created pages for class %s" % sclass.name)
 
             # create all the property pages
             for sprop in sclass.properties.values():
                 if isinstance(sprop, DatatypeProperty):
                     propDao.create(sprop)
+
+    def delete(self, modelPath):
+        """
+        Remove an ontology.
+
+        @param modelPath: ontology file to remove
+        """
+        # parse the file
+        model = self._parser.parse(modelPath)
+
+        # create DAO objects
+        classDao = self._daoFactory.getSemanticClassDAO()
+        propDao = self._daoFactory.getDatatypePropertyDAO()
+
+        # delete all the class pages
+        for sclass in model.classes.values():
+            classDao.delete(sclass)
+            print("Deleted pages for class %s" % sclass.name)
+
+            # delete all the property pages
+            for sprop in sclass.properties.values():
+                if isinstance(sprop, DatatypeProperty):
+                    propDao.delete(sprop)

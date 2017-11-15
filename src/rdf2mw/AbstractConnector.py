@@ -20,6 +20,7 @@ class AbstractConnector:
         The page content can be obtained from MediaWikiApiConnector::content()
 
         @param title: title of the wiki page to load
+        @return True (if page was loaded) or False (if page could not be loaded)
         """
         raise NotImplementedError
 
@@ -28,6 +29,7 @@ class AbstractConnector:
         Create a page.
 
         @param title: title of the wiki page to create
+        @return True (if page was created) or False (if page could not be created)
         """
         raise NotImplementedError
 
@@ -36,6 +38,7 @@ class AbstractConnector:
         Delete a page.
 
         @param title: title of the wiki page to delete
+        @return True (if page was deleted or did not exist) or False (if page could not be deleted)
         """
         raise NotImplementedError
 

@@ -14,7 +14,18 @@ class AbstractManager():
         """
         Commit the operation to persistent storage.
 
-        @param name: a string corresponding to a page name.
-        @param values: a list of page names and page contents.
+        @param name: string name of the semantic object to store
+        @param values: a list of pages and page contents.
         """
         raise NotImplementedError
+
+    def delete(self, name, pages):
+        """
+        Delete the backend representation of a semantic object.
+
+        @param name: string name of the semantic object to delete
+        @param values: a list of pages.
+        """
+        raise NotImplementedError
+
+

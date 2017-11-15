@@ -103,6 +103,22 @@ class test_Importer(unittest.TestCase):
         self.assertTrue("hasEndDate" in self.connector.content)
         self.assertTrue("isWholeDay" in self.connector.content)
 
+    def test_deleteOntologyFromWiki(self):
+        """Test that an ontology can be deleted from the wiki."""
+        self.importer.run(self.modelPath)
+
+        self.assertTrue(self.connector.loadPage("Template:Entry"))
+        self.assertTrue(self.connector.loadPage("Form:Entry"))
+        self.assertTrue(self.connector.loadPage("Category:Entry"))
+        self.assertTrue(self.connector.loadPage("Property:hasDetails"))
+
+        self.importer.delete(self.modelPath)
+
+        self.assertFalse(self.connector.loadPage("Template:Entry"))
+        self.assertFalse(self.connector.loadPage("Form:Entry"))
+        self.assertFalse(self.connector.loadPage("Category:Entry"))
+        self.assertFalse(self.connector.loadPage("Property:hasDetails"))
+
     def tearDown(self):
         """Teardown."""
         self.connector.deletePage("Template:Entry")

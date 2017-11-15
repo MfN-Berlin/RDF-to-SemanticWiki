@@ -15,15 +15,17 @@ from rdf2mw.mediawiki.MediaWikiApiConnector import MediaWikiApiConnector
 configPath = "example/config.ini"
 """Path to configuration file."""
 
+usage = "Usage:\nImport an ontology:\n\t./rdf2mw.sh path-to-rdf-file\nRemove an ontology:\n\t./rdf2mw.sh --remove path-to-rdf-file\n"
+
 try:
-    if len(sys.argv) != 2:
-        raise Exception("Expected 1 argument: RDF or OWL input file")
+    # Check number of arguments
+    if not(len(sys.argv) == 2 or len(sys.argv) == 3):
+        raise Exception("Wrong number of arguments")
 
-    # Read the configuration file
-    config = configparser.ConfigParser()
-    config.read(configPath)
-
-    modelPath = sys.argv[1]
+    # Check file type
+    modelPath = sys.argv[len(sys.argv)-1]  # path to ontology file is last argument
+    if not (".rdf" in modelPath or ".owl" in modelPath):
+        raise Exception("Unknown file type")
     if ".rdf" in modelPath:
         # A parser which can parse RDF
         from rdf2mw.RDFParser import RDFParser
@@ -35,6 +37,19 @@ try:
     else:
         raise Exception("Unknown input file format.")
 
+    # Check command
+    command = None
+    if len(sys.argv) == 3 and not sys.argv[1] in ['remove', 'import']:
+        raise Exception("Unknown command")
+    if len(sys.argv) == 3:
+        command = sys.argv[1]
+    else:
+        command = "import"
+
+    # Read the configuration file
+    config = configparser.ConfigParser()
+    config.read(configPath)
+
     # A connector which can login to a MediaWiki through the API
     connector = MediaWikiApiConnector(config)
     # A factory for DAO objects which can persist a SemanticModel
@@ -42,7 +57,17 @@ try:
     # A wrapper for the import process
     importer = Importer(parser, daoFactory)
 
-    importer.run(modelPath)
+    # Run the importer
+    if command == "import":
+        importer.run(modelPath)
+    elif command == "remove":
+        importer.delete(modelPath)
+    else:
+        raise Exception("Unknown error")
+
+    # return to bash
+    sys.exit(0)
 
 except Exception as e:
     print(e)
+    sys.exit(1)
