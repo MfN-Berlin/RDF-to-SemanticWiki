@@ -97,37 +97,6 @@ class RDFParser(AbstractParser):
             if domainName in self._model.getClassNames():
                 self._model.classes[domainName].addProperty(prop)
 
-    def _parsePropertyRanges(self, prop):
-        """
-        Get the property type for a given property.
-
-        @param prop: SemanticProperty
-        """
-        # go through DataPropertyRange elements
-        ranges = self._doc.getElementsByTagName("DataPropertyRange")
-        for element in ranges:
-            foundType = foundPropName = None
-
-            # read the DataProperty and Datatype names of each DataPropertyRange element
-            for node in element.childNodes:
-                if node.nodeName == "DataProperty":
-                    foundPropName = node.attributes["IRI"].value[1:]  # pop leading hash
-                if node.nodeName == "Datatype":
-                    # pop leading namespace
-                    foundType = node.attributes["abbreviatedIRI"].value.split(":")[1]
-                if node.nodeName == "DataOneOf":
-                    foundType = "DataOneOf"  # enumeration type values
-                    allowedValues = []
-                    for allowed in node.childNodes:
-                        if allowed.nodeName == "Literal":
-                            allowedValues.append(allowed.firstChild.nodeValue)
-
-            # look for DataType elements associated with the given property
-            if foundPropName == prop.name:
-                if foundType == "DataOneOf":
-                    prop.allowedValues = allowedValues
-                prop.type = foundType
-
     def _checkRDF(self):
         """
         Check that the loaded file is actually an OWL file.
