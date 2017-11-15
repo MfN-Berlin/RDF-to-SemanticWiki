@@ -30,17 +30,5 @@ cd test
 bash test.sh
 ```
 
-### Example
-An example ontology is included in the folder "example". This ontology, Calendar.rdf, models an event calendar, such as from thunderbird etc.
-
-A graphical representation is provided in Calendar.svg. You can view the svg file using an SVG viewer.The graphical representation was made using VOWL (http://vowl.visualdataweb.org/webvowl.html).
-
-To edit the example ontology, use an ontology editor such as Protege (http://webprotege.stanford.edu) to edit the Calendar.rdf file.
-
-The provided example ontology can be imported into a semantic MediaWiki following these steps.
-
-
-The semantic Mediawiki templates, properties and forms created can be used to test the viability of the concept.
-
 ## Developer documentation
 The directory docs contains UML diagrams. These can be opened using [ArgoUML](http://argouml.tigris.org).
