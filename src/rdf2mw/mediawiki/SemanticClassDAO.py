@@ -38,9 +38,8 @@ class SemanticClassDAO(AbstractDAO):
         # Add object properties as semantic query for corresponding classes
         for prop in sclass.objectProperties:
             template += "==%s==\n" % prop.name
-            template += "{{#ask: [[Category:%s]]" % prop.range
-            template += "|format=ol"
-            template += "}}"
+            template += "{{#arraymap:{{{%s|}}}|@|x|*[[%s::x]]|\n\n}}" % (prop.range, prop.range)
+            template += "{{#if: {{{%s}}} | {{#set: %s={{{%s|}}} }} |}}" % (prop.range, prop.range, prop.range)
 
         # Markup for the properties of union classes
         # Make a call to the template of the class
@@ -71,9 +70,14 @@ class SemanticClassDAO(AbstractDAO):
         # Add alink to create new entries of the object property
         for prop in sclass.objectProperties:
             form += "==%s==\n\n" % prop.name
-            form += "{{#ask: [[Category:%s]]" % prop.range
-            form += "|format=ol"
-            form += "}}\n\n"
+            form += "{{{field|%s\n" % prop.range
+            form += "   |property=%s\n" % prop.range
+            form += "   |input type=listbox\n"
+            form += "   | values from category=%s\n" % prop.range
+            form += "   |size=10\n"
+            form += "   |list\n"
+            form += "   |delimiter=@\n"
+            form += "}}}\n\n"
             form += "<div class=\"wt_toolbar\">[%sCategory:%s Add %s]</div>\n\n" % (self._manager.connector.baseURL, prop.range, prop.range)
 
         form += "{{{end template}}}\n\n"
