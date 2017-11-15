@@ -24,7 +24,7 @@ class test_CreateTemplateFromOWL(unittest.TestCase):
     # path to configuration file
     configPath = "../example/config.ini"
     # path to example OWL file
-    owlpath = "../example/Calendar.owl"
+    owlpath = "testdata/Test.owl"
     # class variables
     parser = None
     model = None

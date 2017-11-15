@@ -19,7 +19,7 @@ class test_MakeMarkdownFromRDF(unittest.TestCase):
     """
 
     # path to example RDF file
-    rdfpath = "../example/Calendar.rdf"
+    rdfpath = "testdata/Test.rdf"
     # class variables
     parser = None
     model = None

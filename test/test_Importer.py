@@ -25,7 +25,7 @@ class test_Importer(unittest.TestCase):
     # path to configuration file
     configPath = "../example/config.ini"
     # path to the ontology example
-    modelPath = "../example/Calendar.rdf"
+    modelPath = "testdata/Test.rdf"
 
     def setUp(self):
         """Setup."""

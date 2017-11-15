@@ -24,7 +24,7 @@ class test_CreateTemplateFromRDF(unittest.TestCase):
     # path to configuration file
     configPath = "../example/config.ini"
     # path to example RDF file
-    rdfpath = "../example/Calendar.rdf"
+    rdfpath = "testdata/Test.rdf"
 
     def setUp(self):
         """Setup."""

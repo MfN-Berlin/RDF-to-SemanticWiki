@@ -19,7 +19,7 @@ class test_MakeMarkdownFromOWL(unittest.TestCase):
     """
 
     # path to example OWL file
-    owlpath = "../example/Calendar.owl"
+    owlpath = "testdata/Test.owl"
     # class variables
     parser = None
     model = None

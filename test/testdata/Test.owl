@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <Ontology xmlns="http://www.w3.org/2002/07/owl#"
-     xml:base="http://mfn-berlin.de/sammlung/calendar_simple"
+     xml:base="http://mfn-berlin.de/sammlung/calendar"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     ontologyIRI="http://mfn-berlin.de/sammlung/calendar_simple">
+     ontologyIRI="http://mfn-berlin.de/sammlung/calendar">
     <Prefix name="" IRI="http://mfn-berlin.de/sammlung/calendar"/>
     <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
     <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
@@ -13,10 +13,16 @@
     <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
     <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
     <Declaration>
+        <ObjectProperty IRI="#hasEntry"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="#hasEndDate"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#hasSubject"/>
+        <Class IRI="#Description"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasDetails"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#hasPriority"/>
@@ -25,37 +31,82 @@
         <Class IRI="#Location"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#hasDetails"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasDirections"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Entry"/>
+        <DataProperty IRI="#hasSubject"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#isWholeDay"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#hasName"/>
+        <ObjectProperty IRI="#hasLocation"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#hasStartDate"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#hasLocation"/>
+        <ObjectProperty IRI="#hasEvent"/>
     </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasDescription"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Entry"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasName"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Calendar"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasDirections"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Event"/>
+    </Declaration>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#hasDescription"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#hasEvent"/>
+    </FunctionalObjectProperty>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#hasLocation"/>
+    </FunctionalObjectProperty>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasDescription"/>
+        <Class IRI="#Entry"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasEntry"/>
+        <Class IRI="#Calendar"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasEvent"/>
+        <Class IRI="#Entry"/>
+    </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#hasLocation"/>
         <Class IRI="#Entry"/>
     </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasDescription"/>
+        <Class IRI="#Description"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasEntry"/>
+        <Class IRI="#Entry"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasEvent"/>
+        <Class IRI="#Event"/>
+    </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#hasLocation"/>
         <Class IRI="#Location"/>
     </ObjectPropertyRange>
     <DataPropertyDomain>
         <DataProperty IRI="#hasDetails"/>
-        <Class IRI="#Entry"/>
+        <Class IRI="#Description"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="#hasDirections"/>
@@ -63,7 +114,7 @@
     </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="#hasEndDate"/>
-        <Class IRI="#Entry"/>
+        <Class IRI="#Event"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="#hasName"/>
@@ -75,15 +126,15 @@
     </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="#hasStartDate"/>
-        <Class IRI="#Entry"/>
+        <Class IRI="#Event"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="#hasSubject"/>
-        <Class IRI="#Entry"/>
+        <Class IRI="#Description"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="#isWholeDay"/>
-        <Class IRI="#Entry"/>
+        <Class IRI="#Event"/>
     </DataPropertyDomain>
     <DataPropertyRange>
         <DataProperty IRI="#hasEndDate"/>

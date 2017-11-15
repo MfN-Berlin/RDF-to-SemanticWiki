@@ -13,7 +13,7 @@ class test_OWLParser(unittest.TestCase):
     """Test."""
 
     parser = None
-    owlpath = "../example/Calendar.owl"
+    owlpath = "testdata/Test.owl"
 
     def setUp(self):
         """Setup."""

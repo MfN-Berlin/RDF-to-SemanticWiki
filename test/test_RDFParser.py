@@ -13,7 +13,7 @@ class test_RDFParser(unittest.TestCase):
     """Test."""
 
     parser = None
-    rdfpath = "../example/Calendar.rdf"
+    rdfpath = "testdata/Test.rdf"
 
     def setUp(self):
         """Setup."""
