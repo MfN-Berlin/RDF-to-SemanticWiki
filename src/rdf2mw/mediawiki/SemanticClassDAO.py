@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Provides a class DAO object.
 
@@ -25,14 +26,19 @@ class SemanticClassDAO(AbstractDAO):
         self._manager = manager
         self.values = {}
 
-    def create(self, sclass):
+    def create(self, sclass, language=None):
         """Override abstract method."""
         # Markup for the class properties
         template = "=%s=\n" % sclass.name
 
         # Add datatype property fields
         for prop in sclass.datatypeProperties:
-            template += "==%s==\n\n" % prop.name
+            # get localized property name
+            propName = prop.name
+            if language is not None and language in prop.label:
+                propName = prop.label[language]
+            # markup for property
+            template += "==%s==\n\n" % propName
             template += "[[%s::{{{%s|}}}]] \n" % (prop.name, prop.name)
 
         # Add object properties as semantic query for corresponding classes
@@ -60,7 +66,10 @@ class SemanticClassDAO(AbstractDAO):
 
         # Add form input fields
         for prop in sclass.datatypeProperties:
-            form += "==%s==\n\n" % prop.name
+            propName = prop.name
+            if language is not None and language in prop.label:
+                propName = prop.label[language]
+            form += "==%s==\n\n" % propName
             if prop.range is "Literal":
                 form += "{{{field|%s|input type=textarea||editor=wikieditor|rows=10}}}\n" % prop.name
             else:

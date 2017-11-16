@@ -26,7 +26,7 @@ try:
     language = None
     optionsParser.add_option("-l", "--language", dest="language", help="Language of the wiki")
     (options, args) = optionsParser.parse_args()
-    
+
     # Check file type
     if not (".rdf" in options.modelPath or ".owl" in options.modelPath):
         raise Exception("Unknown file type")
@@ -58,7 +58,7 @@ try:
 
     # Run the importer
     if options.command == "import":
-        importer.run(options.modelPath)
+        importer.run(options.modelPath, options.language)
     elif options.command == "remove":
         importer.delete(options.modelPath)
     else:

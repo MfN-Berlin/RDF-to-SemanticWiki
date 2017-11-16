@@ -24,7 +24,7 @@ class DatatypePropertyDAO(AbstractDAO):
         self._manager = manager
         self.values = {}
 
-    def create(self, sprop):
+    def create(self, sprop, langauge=None):
         """Override abstract method."""
         datatype = "Text"  # default
         if sprop.range == "dateTime":

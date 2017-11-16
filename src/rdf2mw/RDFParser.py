@@ -53,14 +53,24 @@ class RDFParser(AbstractParser):
         """Get the data properties."""
         # go through DataPropertyDomain elements
         properties = self._doc.findall(RDFParser.full("owl:DatatypeProperty"))
+
         # go through the "dataProperty" elements and add them to the model
         for element in properties:
+
             # propName is the name of this property
             propName = element.attrib[RDFParser.full('rdf:about')].split('#')[1]
             prop = DatatypeProperty(propName)
+
+            # localized names of the property
+            labels = element.findall(RDFParser.path('rdfs:label', startWith='descendant'))
+            for label in labels:
+                lang = label.attrib[RDFParser.full('xml:lang')]
+                prop.label[lang] = label.text
+
             # domainName is the name of the class this property belongs to
             domain = element.find(RDFParser.path('rdfs:domain', startWith='descendant'))
             domainName = domain.attrib[RDFParser.full('rdf:resource')].split('#')[1]
+
             # rangeType is the variable type of this property
             range = element.find(RDFParser.path('rdfs:range', startWith='descendant'))
             if range is not None:
@@ -68,6 +78,7 @@ class RDFParser(AbstractParser):
                 prop.range = rangeType
             else:
                 prop.range = "Literal"
+
             # if the class exists, add the property
             if domainName in self._model.getClassNames():
                 self._model.classes[domainName].addProperty(prop)

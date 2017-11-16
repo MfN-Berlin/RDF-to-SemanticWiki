@@ -66,6 +66,13 @@ class test_RDFParser(unittest.TestCase):
         self.assertEqual("dateTime", sclass.properties["hasStartDate"].range)
         self.assertEqual("boolean", sclass.properties["isWholeDay"].range)
 
+    def testParsedataPropertyLabels(self):
+        """Test parsing labels (localised property names) of data properties."""
+        model = self.parser.parse(self.rdfpath)
+        sclass = model.classes['Event']
+        self.assertEqual("Enddatum", sclass.properties["hasEndDate"].label['de'])
+        self.assertEqual("Start date", sclass.properties["hasStartDate"].label['en'])
+        
     def testParseObjectProperties(self):
         """Test parsing object properties."""
         model = self.parser.parse(self.rdfpath)

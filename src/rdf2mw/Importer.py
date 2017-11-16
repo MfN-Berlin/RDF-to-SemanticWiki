@@ -23,7 +23,7 @@ class Importer:
         self._parser = parser
         self._daoFactory = daoFactory
 
-    def run(self, modelPath):
+    def run(self, modelPath, language=None):
         """
         Import RDF or OWL file.
 
@@ -38,13 +38,13 @@ class Importer:
 
         # create all the class pages
         for sclass in model.classes.values():
-            classDao.create(sclass)
+            classDao.create(sclass, language)
             print("Created pages for class %s" % sclass.name)
 
             # create all the property pages
             for sprop in sclass.properties.values():
                 if isinstance(sprop, DatatypeProperty):
-                    propDao.create(sprop)
+                    propDao.create(sprop, language)
 
     def delete(self, modelPath):
         """

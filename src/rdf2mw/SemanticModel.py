@@ -119,6 +119,7 @@ class DatatypeProperty(SemanticProperty):
         self.name = name
         self.domain = None
         self.range = None
+        self.label = {}
         self.allowedValues = None
 
 
@@ -130,3 +131,4 @@ class ObjectProperty(SemanticProperty):
         self.name = name
         self.domain = None
         self.range = None
+        self.label = {}

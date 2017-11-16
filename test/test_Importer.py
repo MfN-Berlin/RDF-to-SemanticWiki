@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Test.
 
@@ -102,6 +103,16 @@ class test_Importer(unittest.TestCase):
         self.assertTrue("hasStartDate" in self.connector.content)
         self.assertTrue("hasEndDate" in self.connector.content)
         self.assertTrue("isWholeDay" in self.connector.content)
+
+    def test_PropertiesAreLocalized(self):
+        """Test that the localized property labels are added to the template pages."""
+        self.importer.run(self.modelPath, language='de')
+
+        self.connector.loadPage("Template:Description")
+        self.assertTrue("Beschreibung" in self.connector.content)
+
+        self.connector.loadPage("Template:Event")
+        self.assertTrue("Enddatum" in self.connector.content)
 
     def test_deleteOntologyFromWiki(self):
         """Test that an ontology can be deleted from the wiki."""

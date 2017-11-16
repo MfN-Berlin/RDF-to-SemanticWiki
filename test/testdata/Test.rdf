@@ -75,8 +75,8 @@
 
     <owl:DatatypeProperty rdf:about="http://mfn-berlin.de/sammlung/calendar#hasDetails">
         <rdfs:domain rdf:resource="http://mfn-berlin.de/sammlung/calendar#Description"/>
-        <rdfs:label xml:lang="de">Details</rdfs:label>
-        <rdfs:label xml:lang="en">Details</rdfs:label>
+        <rdfs:label xml:lang="de">Beschreibung</rdfs:label>
+        <rdfs:label xml:lang="en">Description</rdfs:label>
     </owl:DatatypeProperty>
     
 
