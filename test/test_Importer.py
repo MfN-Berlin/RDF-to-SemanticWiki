@@ -109,10 +109,16 @@ class test_Importer(unittest.TestCase):
         self.importer.run(self.modelPath, language='de')
 
         self.connector.loadPage("Template:Description")
-        self.assertTrue("Beschreibung" in self.connector.content)
+        # datatype property
+        self.assertTrue("Details" in self.connector.content)
 
         self.connector.loadPage("Template:Event")
+        # datatype property
         self.assertTrue("Enddatum" in self.connector.content)
+
+        self.connector.loadPage("Template:Entry")
+        # object property
+        self.assertTrue("Beschreibung" in self.connector.content)
 
     def test_deleteOntologyFromWiki(self):
         """Test that an ontology can be deleted from the wiki."""

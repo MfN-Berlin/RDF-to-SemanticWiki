@@ -110,6 +110,17 @@ class SemanticProperty:
         """Make this class abstract."""
         raise NotImplementedError
 
+    def getLabel(self, lang=None):
+        """Get the localized label of this property."""
+        resp = self.name
+        if lang is not None and lang in self._label:
+            resp = self._label[lang]
+        return resp
+
+    def addLabel(self, value, lang):
+        """Add a localized label to this property."""
+        self._label[lang] = value
+
 
 class DatatypeProperty(SemanticProperty):
     """Represents a datatype property."""
@@ -119,7 +130,7 @@ class DatatypeProperty(SemanticProperty):
         self.name = name
         self.domain = None
         self.range = None
-        self.label = {}
+        self._label = {}
         self.allowedValues = None
 
 
@@ -131,4 +142,4 @@ class ObjectProperty(SemanticProperty):
         self.name = name
         self.domain = None
         self.range = None
-        self.label = {}
+        self._label = {}

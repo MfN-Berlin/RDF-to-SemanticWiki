@@ -65,7 +65,7 @@ class RDFParser(AbstractParser):
             labels = element.findall(RDFParser.path('rdfs:label', startWith='descendant'))
             for label in labels:
                 lang = label.attrib[RDFParser.full('xml:lang')]
-                prop.label[lang] = label.text
+                prop.addLabel(label.text, lang)
 
             # domainName is the name of the class this property belongs to
             domain = element.find(RDFParser.path('rdfs:domain', startWith='descendant'))
@@ -98,6 +98,12 @@ class RDFParser(AbstractParser):
             domain = element.find(RDFParser.path('rdfs:domain', startWith='descendant'))
             domainName = domain.attrib[RDFParser.full('rdf:resource')].split('#')[1]
             
+            # localized names of the property
+            labels = element.findall(RDFParser.path('rdfs:label', startWith='descendant'))
+            for label in labels:
+                lang = label.attrib[RDFParser.full('xml:lang')]
+                prop.addLabel(label.text, lang)
+
             # rangeType is the variable type of this property
             range = element.find(RDFParser.path('rdfs:range', startWith='descendant'))
             if range is not None:

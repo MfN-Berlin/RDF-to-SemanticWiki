@@ -33,17 +33,13 @@ class SemanticClassDAO(AbstractDAO):
 
         # Add datatype property fields
         for prop in sclass.datatypeProperties:
-            # get localized property name
-            propName = prop.name
-            if language is not None and language in prop.label:
-                propName = prop.label[language]
             # markup for property
-            template += "==%s==\n\n" % propName
+            template += "==%s==\n\n" % prop.getLabel(language)
             template += "[[%s::{{{%s|}}}]] \n" % (prop.name, prop.name)
 
-        # Add object properties as semantic query for corresponding classes
+        # Add object properties as a link
         for prop in sclass.objectProperties:
-            template += "==%s==\n" % prop.name
+            template += "==%s==\n" % prop.getLabel(language)
             template += "{{#arraymap:{{{%s|}}}|@|x|*[[%s::x]]|\n\n}}" % (prop.range, prop.range)
             template += "{{#if: {{{%s}}} | {{#set: %s={{{%s|}}} }} |}}" % (prop.range, prop.range, prop.range)
 
@@ -66,19 +62,15 @@ class SemanticClassDAO(AbstractDAO):
 
         # Add form input fields
         for prop in sclass.datatypeProperties:
-            propName = prop.name
-            if language is not None and language in prop.label:
-                propName = prop.label[language]
-            form += "==%s==\n\n" % propName
+            form += "==%s==\n\n" % prop.getLabel(language)
             if prop.range is "Literal":
                 form += "{{{field|%s|input type=textarea||editor=wikieditor|rows=10}}}\n" % prop.name
             else:
                 form += "{{{field|%s|input type=text}}}\n" % prop.name
 
-        # Add object properties as semantic query for corresponding classes
-        # Add alink to create new entries of the object property
+        # Add object properties as a listbox 
         for prop in sclass.objectProperties:
-            form += "==%s==\n\n" % prop.name
+            form += "==%s==\n\n" % prop.getLabel(language)
             form += "{{{field|%s\n" % prop.range
             form += "   |property=%s\n" % prop.range
             form += "   |input type=listbox\n"

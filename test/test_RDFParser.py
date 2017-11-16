@@ -70,8 +70,8 @@ class test_RDFParser(unittest.TestCase):
         """Test parsing labels (localised property names) of data properties."""
         model = self.parser.parse(self.rdfpath)
         sclass = model.classes['Event']
-        self.assertEqual("Enddatum", sclass.properties["hasEndDate"].label['de'])
-        self.assertEqual("Start date", sclass.properties["hasStartDate"].label['en'])
+        self.assertEqual("Enddatum", sclass.properties["hasEndDate"].getLabel('de'))
+        self.assertEqual("Start date", sclass.properties["hasStartDate"].getLabel('en'))
         
     def testParseObjectProperties(self):
         """Test parsing object properties."""
