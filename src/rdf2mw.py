@@ -8,6 +8,7 @@ Created on 02.05.2016
 
 import sys
 import configparser
+from optparse import OptionParser
 from rdf2mw.Importer import Importer
 from rdf2mw.mediawiki.Factory import Factory
 from rdf2mw.mediawiki.MediaWikiApiConnector import MediaWikiApiConnector
@@ -15,22 +16,25 @@ from rdf2mw.mediawiki.MediaWikiApiConnector import MediaWikiApiConnector
 configPath = "example/config.ini"
 """Path to configuration file."""
 
-usage = "Usage:\nImport an ontology:\n\t./rdf2mw.sh path-to-rdf-file\nRemove an ontology:\n\t./rdf2mw.sh --remove path-to-rdf-file\n"
-
 try:
-    # Check number of arguments
-    if not(len(sys.argv) == 2 or len(sys.argv) == 3):
-        raise Exception("Wrong number of arguments")
-
+    # Parse command-line options
+    optionsParser = OptionParser()
+    command = None
+    optionsParser.add_option("-a", "--action", dest="command", help="Action can be one of import or remove")
+    modelPath = None
+    optionsParser.add_option("-i", "--input", dest="modelPath", help="Path to ontology file")
+    language = None
+    optionsParser.add_option("-l", "--language", dest="language", help="Language of the wiki")
+    (options, args) = optionsParser.parse_args()
+    
     # Check file type
-    modelPath = sys.argv[len(sys.argv)-1]  # path to ontology file is last argument
-    if not (".rdf" in modelPath or ".owl" in modelPath):
+    if not (".rdf" in options.modelPath or ".owl" in options.modelPath):
         raise Exception("Unknown file type")
-    if ".rdf" in modelPath:
+    if ".rdf" in options.modelPath:
         # A parser which can parse RDF
         from rdf2mw.RDFParser import RDFParser
         parser = RDFParser()
-    elif ".owl" in modelPath:
+    elif ".owl" in options.modelPath:
         # A parser which can parse OWL
         from rdf2mw.OWLParser import OWLParser
         parser = OWLParser()
@@ -38,13 +42,8 @@ try:
         raise Exception("Unknown input file format.")
 
     # Check command
-    command = None
-    if len(sys.argv) == 3 and not sys.argv[1] in ['remove', 'import']:
+    if options.command not in ['remove', 'import']:
         raise Exception("Unknown command")
-    if len(sys.argv) == 3:
-        command = sys.argv[1]
-    else:
-        command = "import"
 
     # Read the configuration file
     config = configparser.ConfigParser()
@@ -58,10 +57,10 @@ try:
     importer = Importer(parser, daoFactory)
 
     # Run the importer
-    if command == "import":
-        importer.run(modelPath)
-    elif command == "remove":
-        importer.delete(modelPath)
+    if options.command == "import":
+        importer.run(options.modelPath)
+    elif options.command == "remove":
+        importer.delete(options.modelPath)
     else:
         raise Exception("Unknown error")
 
@@ -70,4 +69,5 @@ try:
 
 except Exception as e:
     print(e)
+    optionsParser.print_help()
     sys.exit(1)
