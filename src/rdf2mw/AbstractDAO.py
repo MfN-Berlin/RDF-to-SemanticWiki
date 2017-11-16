@@ -9,7 +9,7 @@ Created on 04.05.2016
 class AbstractDAO:
     """Abstract base class for all DAO objects."""
 
-    def create(self, obj, langauge=None):
+    def create(self, obj, language=None):
         """
         Create whatever string or query is necessary for persisting the in-memory object.
 
