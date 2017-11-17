@@ -106,9 +106,18 @@ class SemanticClass:
 class SemanticProperty:
     """Represents a semantic property."""
 
-    def __init__(self):
-        """Make this class abstract."""
-        raise NotImplementedError
+    def __init__(self, name):
+        """
+        Construct.
+
+        Usually, you'd want to instantiate one of the child classes.
+        """
+        self.name = name
+        self.domain = None
+        self.range = None
+        self._label = {}
+        self._comment = {}
+        self.allowedValues = None
 
     def getLabel(self, lang=None):
         """Get the localized label of this property."""
@@ -121,25 +130,29 @@ class SemanticProperty:
         """Add a localized label to this property."""
         self._label[lang] = value
 
+    def getComment(self, lang=None):
+        """Get the localized comment of this property."""
+        resp = None
+        if lang is not None and lang in self._comment:
+            resp = self._comment[lang]
+        return resp
+
+    def addComment(self, value, lang):
+        """Add a localized comment to this property."""
+        self._comment[lang] = value
+
 
 class DatatypeProperty(SemanticProperty):
     """Represents a datatype property."""
 
     def __init__(self, name):
         """Constructor."""
-        self.name = name
-        self.domain = None
-        self.range = None
-        self._label = {}
-        self.allowedValues = None
+        super().__init__(name)
 
 
 class ObjectProperty(SemanticProperty):
-    """Represents an object property property."""
+    """Represents an object property."""
 
     def __init__(self, name):
         """Constructor."""
-        self.name = name
-        self.domain = None
-        self.range = None
-        self._label = {}
+        super().__init__(name)

@@ -24,7 +24,7 @@ class DatatypePropertyDAO(AbstractDAO):
         self._manager = manager
         self.values = {}
 
-    def create(self, sprop, langauge=None):
+    def create(self, sprop, language=None):
         """Override abstract method."""
         datatype = "Text"  # default
         if sprop.range == "dateTime":
@@ -37,7 +37,11 @@ class DatatypePropertyDAO(AbstractDAO):
             datatype = "Text"
 
         # markdown goes in the MediaWiki page
-        markdown = "This is a property of type [[Has type::%s]].\n" % datatype
+        markdown = ""
+        if sprop.getComment(language):
+            markdown += "''%s''" % sprop.getComment(language)
+
+        markdown += "This is a property of type [[Has type::%s]].\n" % datatype
 
         if sprop.range == "DataOneOf":
             markdown += "The allowed values for this property are:\n"

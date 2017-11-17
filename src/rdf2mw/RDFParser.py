@@ -61,11 +61,17 @@ class RDFParser(AbstractParser):
             propName = element.attrib[RDFParser.full('rdf:about')].split('#')[1]
             prop = DatatypeProperty(propName)
 
-            # localized names of the property
+            # localized labels of the property
             labels = element.findall(RDFParser.path('rdfs:label', startWith='descendant'))
             for label in labels:
                 lang = label.attrib[RDFParser.full('xml:lang')]
                 prop.addLabel(label.text, lang)
+
+            # localized comment of the property
+            comments = element.findall(RDFParser.path('rdfs:comment', startWith='descendant'))
+            for comment in comments:
+                lang = comment.attrib[RDFParser.full('xml:lang')]
+                prop.addComment(comment.text, lang)
 
             # domainName is the name of the class this property belongs to
             domain = element.find(RDFParser.path('rdfs:domain', startWith='descendant'))
@@ -98,11 +104,17 @@ class RDFParser(AbstractParser):
             domain = element.find(RDFParser.path('rdfs:domain', startWith='descendant'))
             domainName = domain.attrib[RDFParser.full('rdf:resource')].split('#')[1]
             
-            # localized names of the property
+            # localized labels of the property
             labels = element.findall(RDFParser.path('rdfs:label', startWith='descendant'))
             for label in labels:
                 lang = label.attrib[RDFParser.full('xml:lang')]
                 prop.addLabel(label.text, lang)
+                
+            # localized comments of the property
+            comments = element.findall(RDFParser.path('rdfs:comment', startWith='descendant'))
+            for comment in comments:
+                lang = comment.attrib[RDFParser.full('xml:lang')]
+                prop.addComment(comment.text, lang)
 
             # rangeType is the variable type of this property
             range = element.find(RDFParser.path('rdfs:range', startWith='descendant'))
@@ -131,42 +143,3 @@ class RDFParser(AbstractParser):
                 return False, "Unknown namespace"
 
         return True, None
-
-    def _parseUnions(self):
-        domains = self._doc.findall(RDFParser.path("owl:ObjectPropertyDomain"))
-        ranges = self._doc.findall(RDFParser.path("owl:ObjectPropertyRange"))
-
-        # go through ObjectPropertyDomain elements
-        for domain in domains:
-            items = []
-            parentClassName = None
-            foundName = None
-            # look if element contains ObjectUnionOf elements
-            for node1 in domain.childNodes:
-                # Find elements in the union
-                if node1.nodeName == "ObjectUnionOf":
-                    for node2 in node1.childNodes:
-                        if node2.nodeName == "Class":
-                            items.append(node2.attributes["IRI"].value[1:])  # pop leading hash
-
-                # Find the name of the property
-                if node1.nodeName == "ObjectProperty":
-                    foundName = node1.attributes["IRI"].value[1:]  # pop leading hash
-
-            if len(items) > 0:  # if a non-empty union was found
-                for r in ranges:
-                    for node1 in r.childNodes:
-                        if node1.nodeName == "ObjectProperty":
-                            propName = node1.attributes["IRI"].value[1:]
-                        if node1.nodeName == "Class":
-                            className = node1.attributes["IRI"].value[1:]
-
-                    # if the ObjectProperty in the range is the same
-                    # as the objectProperty in the domain
-                    # then the remember this class
-                    if propName == foundName:
-                        parentClassName = className
-
-                if parentClassName:
-                    for item in items:
-                        self._model.classes[parentClassName].uniteWith(self._model.classes[item])

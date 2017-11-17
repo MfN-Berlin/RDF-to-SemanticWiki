@@ -35,22 +35,17 @@ class SemanticClassDAO(AbstractDAO):
         for prop in sclass.datatypeProperties:
             # markup for property
             template += "==%s==\n\n" % prop.getLabel(language)
+            if prop.getComment(language):
+                template += "''%s''" % prop.getComment(language)
             template += "[[%s::{{{%s|}}}]] \n" % (prop.name, prop.name)
 
         # Add object properties as a link
         for prop in sclass.objectProperties:
             template += "==%s==\n" % prop.getLabel(language)
+            if prop.getComment(language):
+                template += "''%s''" % prop.getComment(language)
             template += "{{#arraymap:{{{%s|}}}|@|x|*[[%s::x]]|\n\n}}" % (prop.range, prop.range)
             template += "{{#if: {{{%s}}} | {{#set: %s={{{%s|}}} }} |}}" % (prop.range, prop.range, prop.range)
-
-        # Markup for the properties of union classes
-        # Make a call to the template of the class
-        # for part in sclass.unionOf.values():
-        #    template += "==%s==\n" % part.name
-        #    template += "{{%s\n" % part.name
-        #    for name in part.getPropertyNames():
-        #        template += "| %s = {{{%s|}}}\n" % (name, name)
-        #    template += "}}\n"
 
         # Add a category for all classes using this template
         template += "<includeonly>[[category:%s]]</includeonly>" % sclass.name
@@ -63,6 +58,8 @@ class SemanticClassDAO(AbstractDAO):
         # Add form input fields
         for prop in sclass.datatypeProperties:
             form += "==%s==\n\n" % prop.getLabel(language)
+            if prop.getComment(language):
+                form += "''%s''" % prop.getComment(language)
             if prop.range is "Literal":
                 form += "{{{field|%s|input type=textarea||editor=wikieditor|rows=10}}}\n" % prop.name
             else:
@@ -71,6 +68,8 @@ class SemanticClassDAO(AbstractDAO):
         # Add object properties as a listbox 
         for prop in sclass.objectProperties:
             form += "==%s==\n\n" % prop.getLabel(language)
+            if prop.getComment(language):
+                form += "''%s''" % prop.getComment(language)
             form += "{{{field|%s\n" % prop.range
             form += "   |property=%s\n" % prop.range
             form += "   |input type=listbox\n"

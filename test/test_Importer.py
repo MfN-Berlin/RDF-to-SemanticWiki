@@ -104,7 +104,7 @@ class test_Importer(unittest.TestCase):
         self.assertTrue("hasEndDate" in self.connector.content)
         self.assertTrue("isWholeDay" in self.connector.content)
 
-    def test_PropertiesAreLocalized(self):
+    def test_PropertyLabelsAreLocalized(self):
         """Test that the localized property labels are added to the template pages."""
         self.importer.run(self.modelPath, language='de')
 
@@ -119,6 +119,14 @@ class test_Importer(unittest.TestCase):
         self.connector.loadPage("Template:Entry")
         # object property
         self.assertTrue("Beschreibung" in self.connector.content)
+        
+    def test_PropertyCommentsAreLocalized(self):
+        """Test that the localized property comments are added to the template pages."""
+        self.importer.run(self.modelPath, language='de')
+
+        self.connector.loadPage("Template:Description")
+        # datatype property
+        self.assertTrue("Das ist der Absatz mit den ganzen Details." in self.connector.content)
 
     def test_deleteOntologyFromWiki(self):
         """Test that an ontology can be deleted from the wiki."""

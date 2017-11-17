@@ -82,6 +82,8 @@
 
     <owl:DatatypeProperty rdf:about="http://mfn-berlin.de/sammlung/calendar#hasDetails">
         <rdfs:domain rdf:resource="http://mfn-berlin.de/sammlung/calendar#Description"/>
+        <rdfs:comment xml:lang="de">Das ist der Absatz mit den ganzen Details.</rdfs:comment>
+        <rdfs:comment xml:lang="en">This is the section with all the details.</rdfs:comment>
         <rdfs:label xml:lang="de">Details</rdfs:label>
         <rdfs:label xml:lang="en">Details</rdfs:label>
     </owl:DatatypeProperty>
