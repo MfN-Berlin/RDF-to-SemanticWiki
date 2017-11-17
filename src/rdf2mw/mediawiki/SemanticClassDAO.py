@@ -61,9 +61,9 @@ class SemanticClassDAO(AbstractDAO):
             if prop.getComment(language):
                 form += "''%s''" % prop.getComment(language)
             if prop.range is "Literal":
-                form += "{{{field|%s|input type=textarea||editor=wikieditor|rows=10}}}\n" % prop.name
+                form += "{{{field|%s|property=%s|input type=textarea|editor=wikieditor|rows=10}}}\n" % (prop.name, prop.name)
             else:
-                form += "{{{field|%s|input type=text}}}\n" % prop.name
+                form += "{{{field|%s|property=%s|input type=text}}}\n" % (prop.name, prop.name)
 
         # Add object properties as a listbox 
         for prop in sclass.objectProperties:

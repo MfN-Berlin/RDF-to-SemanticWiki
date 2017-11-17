@@ -114,10 +114,22 @@ class SemanticProperty:
         """
         self.name = name
         self.domain = None
-        self.range = None
+        self._range = None
         self._label = {}
         self._comment = {}
-        self.allowedValues = None
+        self.allowedValues = {}
+
+    @property
+    def range(self):
+        """Getter for range property."""
+        return self._range
+
+    @range.setter
+    def range(self, value):
+        """Setter for range property."""
+        if value.casefold() == "boolean".casefold():
+            self.allowedValues = {'true', 'false'}
+        self._range = value
 
     def getLabel(self, lang=None):
         """Get the localized label of this property."""

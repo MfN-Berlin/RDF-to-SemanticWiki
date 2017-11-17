@@ -94,11 +94,11 @@ class test_Importer(unittest.TestCase):
         self.connector.loadPage("Template:Location")
         self.assertTrue("hasDirections" in self.connector.content)
         self.assertTrue("hasName" in self.connector.content)
-        
+
         self.connector.loadPage("Template:Description")
         self.assertTrue("hasDetails" in self.connector.content)
         self.assertTrue("hasSubject" in self.connector.content)
-        
+
         self.connector.loadPage("Template:Event")
         self.assertTrue("hasStartDate" in self.connector.content)
         self.assertTrue("hasEndDate" in self.connector.content)
@@ -119,7 +119,7 @@ class test_Importer(unittest.TestCase):
         self.connector.loadPage("Template:Entry")
         # object property
         self.assertTrue("Beschreibung" in self.connector.content)
-        
+
     def test_PropertyCommentsAreLocalized(self):
         """Test that the localized property comments are added to the template pages."""
         self.importer.run(self.modelPath, language='de')

@@ -31,7 +31,14 @@ class test_SemanticModel(unittest.TestCase):
         sclass.addProperty(dtp)
         sclass.addProperty(op)
         self.assertEqual(1, len(sclass.objectProperties))
-    
+
+    def test_BooleanDatatype(self):
+        """Test that Boolean dataytpe properties have the correct allowed values."""
+        dtp = DatatypeProperty("dtp")
+        dtp.range = "boolean"
+        self.assertEqual(2, len(dtp.allowedValues))
+
+
 if __name__ == "__main__":
     # import sys;sys.argv = ['', 'Test.testName']
     unittest.main()

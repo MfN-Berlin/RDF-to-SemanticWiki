@@ -43,7 +43,7 @@ class DatatypePropertyDAO(AbstractDAO):
 
         markdown += "This is a property of type [[Has type::%s]].\n" % datatype
 
-        if sprop.range == "DataOneOf":
+        if sprop.range == "DataOneOf" or sprop.range == "boolean":
             markdown += "The allowed values for this property are:\n"
             for item in sprop.allowedValues:
                 markdown += "[[Allows value::%s]]\n" % item
