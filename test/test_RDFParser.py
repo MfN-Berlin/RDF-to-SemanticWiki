@@ -113,7 +113,7 @@ class test_RDFParser(unittest.TestCase):
 
     @unittest.skip("Skipping RDF union for now")
     def testParseUnion(self):
-        """Tset parsing united classes."""
+        """Test parsing united classes."""
         model = self.parser.parse(self.rdfpath)
         entry = model.classes["Entry"]
         # Entry is composed of classes Event, Description and Location

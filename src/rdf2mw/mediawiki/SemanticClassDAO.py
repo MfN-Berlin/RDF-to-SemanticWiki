@@ -36,14 +36,14 @@ class SemanticClassDAO(AbstractDAO):
             # markup for property
             template += "==%s==\n\n" % prop.getLabel(language)
             if prop.getComment(language):
-                template += "''%s''" % prop.getComment(language)
+                template += "''%s''\n\n" % prop.getComment(language)
             template += "[[%s::{{{%s|}}}]] \n" % (prop.name, prop.name)
 
         # Add object properties as a link
         for prop in sclass.objectProperties:
             template += "==%s==\n" % prop.getLabel(language)
             if prop.getComment(language):
-                template += "''%s''" % prop.getComment(language)
+                template += "''%s''\n\n" % prop.getComment(language)
             template += "{{#arraymap:{{{%s|}}}|@|x|*[[%s::x]]|\n\n}}" % (prop.range, prop.range)
             template += "{{#if: {{{%s}}} | {{#set: %s={{{%s|}}} }} |}}" % (prop.range, prop.range, prop.range)
 
@@ -60,16 +60,22 @@ class SemanticClassDAO(AbstractDAO):
             form += "==%s==\n\n" % prop.getLabel(language)
             if prop.getComment(language):
                 form += "''%s''" % prop.getComment(language)
-            if prop.range is "Literal":
-                form += "{{{field|%s|property=%s|input type=textarea|editor=wikieditor|rows=10}}}\n" % (prop.name, prop.name)
+            if prop.range == "Literal":
+                form += "{{{field|%s|property=%s|input type=textarea|editor=wikieditor|rows=10}}}\n\n" % (prop.name, prop.name)
+            elif prop.range == "boolean":
+                form += "{{{field|%s|property=%s|input type=radiobutton| mandatory|default=false}}}\n\n" % (prop.name, prop.name)
+            elif prop.range == "dateTime":
+                form += "{{{field|%s|property=%s|input type=date}}}\n\n" % (prop.name, prop.name)                
+            elif prop.range == "int":
+                form += "{{{field|%s|property=%s|input type=text|size=10}}}\n\n" % (prop.name, prop.name)                
             else:
-                form += "{{{field|%s|property=%s|input type=text}}}\n" % (prop.name, prop.name)
+                form += "{{{field|%s|property=%s|input type=text}}}\n\n" % (prop.name, prop.name)
 
         # Add object properties as a listbox 
         for prop in sclass.objectProperties:
             form += "==%s==\n\n" % prop.getLabel(language)
             if prop.getComment(language):
-                form += "''%s''" % prop.getComment(language)
+                form += "''%s''\n\n" % prop.getComment(language)
             form += "{{{field|%s\n" % prop.range
             form += "   |property=%s\n" % prop.range
             form += "   |input type=listbox\n"
