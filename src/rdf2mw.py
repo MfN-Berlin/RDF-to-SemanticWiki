@@ -9,7 +9,7 @@ Created on 02.05.2016
 import sys
 import configparser
 from optparse import OptionParser
-from rdf2mw.Importer import Importer
+from rdf2mw.Importer import Importer, ImporterException
 from rdf2mw.mediawiki.Factory import Factory
 from rdf2mw.mediawiki.MediaWikiApiConnector import MediaWikiApiConnector
 
@@ -29,7 +29,7 @@ try:
 
     # Check file type
     if not (".rdf" in options.modelPath or ".owl" in options.modelPath):
-        raise Exception("Unknown file type")
+        raise ImporterException("Unknown file type")
     if ".rdf" in options.modelPath:
         # A parser which can parse RDF
         from rdf2mw.RDFParser import RDFParser
@@ -39,11 +39,11 @@ try:
         from rdf2mw.OWLParser import OWLParser
         parser = OWLParser()
     else:
-        raise Exception("Unknown input file format.")
+        raise ImporterException("Unknown input file format.")
 
     # Check command
     if options.command not in ['remove', 'import']:
-        raise Exception("Unknown command")
+        raise ImporterException("Unknown command")
 
     # Read the configuration file
     config = configparser.ConfigParser()
@@ -62,12 +62,12 @@ try:
     elif options.command == "remove":
         importer.delete(options.modelPath)
     else:
-        raise Exception("Unknown error")
+        raise ImporterException("Unknown error")
 
     # return to bash
     sys.exit(0)
 
-except Exception as e:
+except ImporterException as e:
     print(e)
     optionsParser.print_help()
     sys.exit(1)

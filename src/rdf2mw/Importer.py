@@ -68,3 +68,9 @@ class Importer:
             for sprop in sclass.properties.values():
                 if isinstance(sprop, DatatypeProperty):
                     propDao.delete(sprop)
+
+                    
+class ImporterException(Exception):
+    """Failed importer operation."""
+
+    pass

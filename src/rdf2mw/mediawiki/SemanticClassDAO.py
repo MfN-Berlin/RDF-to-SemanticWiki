@@ -37,7 +37,9 @@ class SemanticClassDAO(AbstractDAO):
             template += "==%s==\n\n" % prop.getLabel(language)
             if prop.getComment(language):
                 template += "''%s''\n\n" % prop.getComment(language)
+            # Link to attribute page
             template += "[[%s::{{{%s|}}}]] \n" % (prop.name, prop.name)
+            template += "[%sProperty:%s %s]\n\n" % (self._manager.connector.baseURL, prop.name, prop.getLabel(language))
 
         # Add object properties as a link
         for prop in sclass.objectProperties:
@@ -70,6 +72,8 @@ class SemanticClassDAO(AbstractDAO):
                 form += "{{{field|%s|property=%s|input type=text|size=10}}}\n\n" % (prop.name, prop.name)                
             else:
                 form += "{{{field|%s|property=%s|input type=text}}}\n\n" % (prop.name, prop.name)
+            # Link to attribute page
+            form += "[%sProperty:%s %s]\n\n" % (self._manager.connector.baseURL, prop.name, prop.getLabel(language))
 
         # Add object properties as a listbox 
         for prop in sclass.objectProperties:
