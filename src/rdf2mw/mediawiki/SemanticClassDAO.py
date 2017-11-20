@@ -6,6 +6,8 @@ Created on 10.05.2016
 
 @author: Alvaro.Ortiz
 """
+import os
+from lxml import etree
 from rdf2mw.AbstractDAO import AbstractDAO
 
 
@@ -13,6 +15,7 @@ class SemanticClassDAO(AbstractDAO):
     """Provides a class DAO objects accessing the MediaWiki API."""
 
     _manager = None
+    pageTemplatePath = "templates/page.xslt"
 
     def __init__(self, manager):
         """
@@ -28,30 +31,14 @@ class SemanticClassDAO(AbstractDAO):
 
     def create(self, sclass, language=None):
         """Override abstract method."""
-        # Markup for the class properties
-        template = "=%s=\n" % sclass.name
+        stree = sclass.asElementTree()
 
-        # Add datatype property fields
-        for prop in sclass.datatypeProperties:
-            # markup for property
-            template += "==%s==\n\n" % prop.getLabel(language)
-            if prop.getComment(language):
-                template += "''%s''\n\n" % prop.getComment(language)
-            # Link to attribute page
-            template += "[[%s::{{{%s|}}}]] \n" % (prop.name, prop.name)
-            template += "[%sProperty:%s %s]\n\n" % (self._manager.connector.baseURL, prop.name, prop.getLabel(language))
-
-        # Add object properties as a link
-        for prop in sclass.objectProperties:
-            template += "==%s==\n" % prop.getLabel(language)
-            if prop.getComment(language):
-                template += "''%s''\n\n" % prop.getComment(language)
-            template += "{{#arraymap:{{{%s|}}}|@|x|*[[%s::x]]|\n\n}}" % (prop.range, prop.range)
-            template += "{{#if: {{{%s}}} | {{#set: %s={{{%s|}}} }} |}}" % (prop.range, prop.range, prop.range)
-
-        # Add a category for all classes using this template
-        template += "<includeonly>[[category:%s]]</includeonly>" % sclass.name
-        self.values["template"] = template
+        # Apply the page.xslt template to create the markup for the wiki page
+        fullPath = os.path.join(os.path.dirname(__file__), SemanticClassDAO.pageTemplatePath)
+        template = etree.parse(fullPath)
+        transform = etree.XSLT(template)
+        page = transform(stree)
+        self.values["template"] = str(page)
 
         # Markup for the form
         form = "<noinclude>{{#forminput:form=%s}}</noinclude>\n" % sclass.name

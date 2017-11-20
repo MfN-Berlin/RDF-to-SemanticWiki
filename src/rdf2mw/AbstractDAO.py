@@ -55,7 +55,7 @@ class AbstractDAO:
               self._manager.delete( myObj.name, pages )
         """
         raise NotImplementedError
-    
+
     def getValues(self):
         """
         Get a representation of the DAO object.
@@ -66,3 +66,4 @@ class AbstractDAO:
         e.g. template->a template, form->a form
         """
         raise NotImplementedError
+

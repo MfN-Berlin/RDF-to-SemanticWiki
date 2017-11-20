@@ -46,6 +46,7 @@ class test_OWLParser(unittest.TestCase):
         # Entry is composed of classes Event, Description and Location
         self.assertEquals(3, len(entry.unionOf))
 
+    @unittest.skip("Skip unions for now")
     def testParseNotUnion(self):
         """Test."""
         model = self.parser.parse(self.owlpath)

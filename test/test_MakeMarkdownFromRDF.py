@@ -59,9 +59,11 @@ class test_MakeMarkdownFromRDF(unittest.TestCase):
     def testClassWithObjectProperties(self):
         """Test that template markdown is correct."""
         sClass = self.model.classes['Calendar']
+        print(sClass.serialize())
         classDAO = self.factory.getSemanticClassDAO()
         classDAO.create(sClass)
         result = classDAO.getValues()['template']
+        print(result)
         self.assertTrue("=hasEntry=" in result)
 
     @unittest.skip("Skipping RDF union for the moment.")

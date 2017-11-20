@@ -5,6 +5,7 @@ Created on 03.05.2016
 @author: Alvaro.Ortiz
 """
 
+from lxml import etree
 
 class SemanticModel:
     """
@@ -39,7 +40,83 @@ class SemanticModel:
         return self.classes.keys()
 
 
-class SemanticClass:
+class SemanticElement:
+    """Base class for all semantic elements."""
+
+    def __init__(self, name):
+        """
+        Construct.
+
+        Usually, you'd want to instantiate one of the child classes.
+        """
+        self.name = name
+        self._label = {}
+        self._comment = {}
+
+    def getLabel(self, lang=None):
+        """Get the localized label of this element."""
+        resp = self.name
+        if lang is not None and lang in self._label:
+            resp = self._label[lang]
+        return resp
+
+    def addLabel(self, value, lang):
+        """Add a localized label to this element."""
+        self._label[lang] = value
+
+    def getComment(self, lang=None):
+        """Get the localized comment of this element."""
+        resp = None
+        if lang is not None and lang in self._comment:
+            resp = self._comment[lang]
+        return resp
+
+    def addComment(self, value, lang):
+        """Add a localized comment to this element."""
+        self._comment[lang] = value
+
+    def asElementTree(self):
+        """
+        Get a representation of this semantic class as an XML element tree.
+
+        @return etree
+        """
+        # name
+        selm = etree.Element(self.__class__.__name__)
+        selm.set('name', self.name)
+
+        # labels
+        labels = etree.Element('labels')
+        for key, val in self._label.items():
+            label = etree.Element('label')
+            label.set('lang', key)
+            label.text = val
+            labels.append(label)
+        selm.append(labels)
+
+        # comments
+        comments = etree.Element('comments')
+        for key, val in self._comment.items():
+            comment = etree.Element('comment')
+            comment.set('lang', key)
+            comment.text = val
+            comments.append(comment)
+        selm.append(comments)
+
+        return(selm)
+
+    def serialize(self):
+        """
+        Get a string representation of this semantic class as an XML string.
+
+        @return String
+        """
+        stree = self.asElementTree()
+        resp = etree.tostring(stree, encoding="utf8", method="xml")
+        return(str(resp))
+
+
+class SemanticClass(SemanticElement):
     """
     A class for representing a semantic class in an object oriented way.
 
@@ -52,9 +129,8 @@ class SemanticClass:
 
         @param name: string
         """
-        self.name = name
+        super().__init__(name)
         self.properties = {}
-        self.unionOf = {}
 
     def addProperty(self, prop):
         """
@@ -72,9 +148,14 @@ class SemanticClass:
         """
         return self.properties.keys()
 
-    def uniteWith(self, sclass):
-        """Unite this class with another class."""
-        self.unionOf[sclass.name] = sclass
+    def asElementTree(self):
+        """Override."""
+        selm = super().asElementTree()
+
+        for prop in self.properties.values():
+            selm.append(prop.asElementTree())
+
+        return(selm)
 
     @property
     def datatypeProperties(self):
@@ -103,7 +184,7 @@ class SemanticClass:
         return resp
 
 
-class SemanticProperty:
+class SemanticProperty(SemanticElement):
     """Represents a semantic property."""
 
     def __init__(self, name):
@@ -112,11 +193,9 @@ class SemanticProperty:
 
         Usually, you'd want to instantiate one of the child classes.
         """
-        self.name = name
+        super().__init__(name)
         self.domain = None
         self._range = None
-        self._label = {}
-        self._comment = {}
         self.allowedValues = {}
 
     @property
@@ -130,28 +209,6 @@ class SemanticProperty:
         if value.casefold() == "boolean".casefold():
             self.allowedValues = {'true', 'false'}
         self._range = value
-
-    def getLabel(self, lang=None):
-        """Get the localized label of this property."""
-        resp = self.name
-        if lang is not None and lang in self._label:
-            resp = self._label[lang]
-        return resp
-
-    def addLabel(self, value, lang):
-        """Add a localized label to this property."""
-        self._label[lang] = value
-
-    def getComment(self, lang=None):
-        """Get the localized comment of this property."""
-        resp = None
-        if lang is not None and lang in self._comment:
-            resp = self._comment[lang]
-        return resp
-
-    def addComment(self, value, lang):
-        """Add a localized comment to this property."""
-        self._comment[lang] = value
 
 
 class DatatypeProperty(SemanticProperty):
