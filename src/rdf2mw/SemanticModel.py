@@ -211,6 +211,15 @@ class SemanticProperty(SemanticElement):
             self.allowedValues = {'true', 'false'}
         self._range = value
 
+    def asElementTree(self):
+        """Override."""
+        selm = super().asElementTree()
+        if self._range:
+            selm.set('range', self._range)
+        if self.domain:
+            selm.set('domain', self.domain)
+        return(selm)
+
 
 class DatatypeProperty(SemanticProperty):
     """Represents a datatype property."""

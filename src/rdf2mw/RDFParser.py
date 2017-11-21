@@ -48,6 +48,18 @@ class RDFParser(AbstractParser):
             className = element.attrib[RDFParser.full('rdf:about')].split('#')[1]
             sclass = SemanticClass(className)
             self._model.addClass(sclass)  # add class to model
+            
+            # localized labels of the property
+            labels = element.findall(RDFParser.path('rdfs:label', startWith='descendant'))
+            for label in labels:
+                lang = label.attrib[RDFParser.full('xml:lang')]
+                sclass.addLabel(label.text, lang)
+
+            # localized comment of the property
+            comments = element.findall(RDFParser.path('rdfs:comment', startWith='descendant'))
+            for comment in comments:
+                lang = comment.attrib[RDFParser.full('xml:lang')]
+                sclass.addComment(comment.text, lang)
 
     def _parseDataProperties(self):
         """Get the data properties."""
@@ -99,17 +111,17 @@ class RDFParser(AbstractParser):
             # propName is the name of this property
             propName = element.attrib[RDFParser.full('rdf:about')].split('#')[1]
             prop = ObjectProperty(propName)
-            
+
             # domainName is the name of the class this property belongs to
             domain = element.find(RDFParser.path('rdfs:domain', startWith='descendant'))
             domainName = domain.attrib[RDFParser.full('rdf:resource')].split('#')[1]
-            
+
             # localized labels of the property
             labels = element.findall(RDFParser.path('rdfs:label', startWith='descendant'))
             for label in labels:
                 lang = label.attrib[RDFParser.full('xml:lang')]
                 prop.addLabel(label.text, lang)
-                
+
             # localized comments of the property
             comments = element.findall(RDFParser.path('rdfs:comment', startWith='descendant'))
             for comment in comments:
@@ -121,7 +133,7 @@ class RDFParser(AbstractParser):
             if range is not None:
                 rangeType = range.attrib[RDFParser.full('rdf:resource')].split('#')[1]
                 prop.range = rangeType
-            
+
             # if the class exists, add the property
             if domainName in self._model.getClassNames():
                 self._model.classes[domainName].addProperty(prop)
