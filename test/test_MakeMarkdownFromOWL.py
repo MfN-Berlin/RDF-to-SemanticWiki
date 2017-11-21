@@ -47,14 +47,17 @@ class test_MakeMarkdownFromOWL(unittest.TestCase):
         classDAO = self.factory.getSemanticClassDAO()
         classDAO.create(simpleClass)
         result = classDAO.getValues()['template']
-        self.assertTrue("=Description=" in result)
+        self.assertTrue("Description" in result)
+
+        # Localized labels and comments are not implemented in OWLParser
+
         self.assertTrue("==hasSubject==" in result)
         self.assertTrue("[[hasSubject::{{{hasSubject|}}}]]" in result)
         self.assertTrue("==hasDetails==" in result)
         self.assertTrue("[[hasDetails::{{{hasDetails|}}}]]" in result)
         # Don't create a "Location" template if doing a "Description" template
         # (don't mix up class variables with instance variables)
-        self.assertFalse("{{Location" in result)
+        self.assertFalse("{{hasLocation" in result)
 
     @unittest.skip("Skip unions for now")
     def testUnionClass(self):

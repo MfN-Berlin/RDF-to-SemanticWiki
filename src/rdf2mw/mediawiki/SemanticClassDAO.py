@@ -29,9 +29,15 @@ class SemanticClassDAO(AbstractDAO):
         self._manager = manager
         self.values = {}
 
-    def create(self, sclass, language=None):
+    def create(self, sclass, language='en'):
         """Override abstract method."""
         stree = sclass.asElementTree()
+
+        # Add atributes to the element tree
+        if language is not None:
+            stree.set('lang', language)
+        # SemanticClassDAO and MediaWikiApiConnector are coupled anyway.
+        stree.set('baseUrl', self._manager.connector.baseURL)
 
         # Apply the page.xslt template to create the markup for the wiki page
         fullPath = os.path.join(os.path.dirname(__file__), SemanticClassDAO.pageTemplatePath)

@@ -6,6 +6,10 @@
   <!-- Output is MediaWiki markup-->
   <xsl:output method="text" encoding="UTF-8" />
 
+  <!-- Global variables -->
+  <xsl:variable name="lang" select="/SemanticClass/@lang" />
+  <xsl:variable name="baseUrl" select="/SemanticClass/@baseUrl" />
+  
   <!--
       ###########################################
       Process a semantic class and its properties
@@ -36,15 +40,15 @@
     ==<xsl:apply-templates select="." mode="label"/>==
 
     <!-- property comment -->
-    <xsl:if test="comments/comment">
-      ''<xsl:value-of select="comments/comment" />''
+    <xsl:if test="comments/comment[@lang=$lang]">
+      ''<xsl:value-of select="comments/comment[@lang=$lang]" />''
     </xsl:if>
 
     <!--Property value-->
     [[<xsl:value-of select="@name" />::{{{<xsl:value-of select="@name" />|}}}]]
     
     <!-- Link to attribute page -->
-    [<xsl:value-of select="@baseUrl" />Property:<xsl:value-of select="@name" /> <xsl:value-of select="labels/label" />]
+    [<xsl:value-of select="$baseUrl" />Property:<xsl:value-of select="@name" /> <xsl:value-of select="labels/label" />]
     
   </xsl:template>
   
@@ -58,9 +62,9 @@
     <!-- Property name (localized) -->
     ==<xsl:apply-templates select="." mode="label" />==
     
-    <!-- property comment -->
-    <xsl:if test="comments/comment">
-      ''<xsl:value-of select="comments/comment" />''
+    <!-- Property comment -->
+    <xsl:if test="comments/comment[@lang=$lang]">
+      ''<xsl:value-of select="comments/comment[@lang=$lang]" />''
     </xsl:if>
 
     <!--Property value-->
@@ -77,13 +81,13 @@
   -->
   <xsl:template match="SemanticClass|DatatypeProperty|ObjectProperty" mode="label">
     <xsl:choose>
-      <xsl:when test="labels/label[@lang='en']">
-	<xsl:value-of select="labels/label[@lang='en']" />
+      <xsl:when test="labels/label[@lang=$lang]">
+	<xsl:value-of select="labels/label[@lang=$lang]" />
       </xsl:when>
       <xsl:otherwise>
 	<xsl:value-of select="@name" />
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
-    
+
 </xsl:stylesheet>

@@ -7,6 +7,7 @@ Created on 03.05.2016
 
 from lxml import etree
 
+
 class SemanticModel:
     """
     A class for representing a semantic model in an object oriented way.

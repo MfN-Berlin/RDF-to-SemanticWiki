@@ -47,10 +47,10 @@ class test_MakeMarkdownFromRDF(unittest.TestCase):
         classDAO = self.factory.getSemanticClassDAO()
         classDAO.create(simpleClass)
         result = classDAO.getValues()['template']
-        self.assertTrue("=Description=" in result)
-        self.assertTrue("==hasSubject==" in result)
+        self.assertTrue("Description" in result)
+        self.assertTrue("==Subject==" in result)
         self.assertTrue("[[hasSubject::{{{hasSubject|}}}]]" in result)
-        self.assertTrue("==hasDetails==" in result)
+        self.assertTrue("==Details==" in result)
         self.assertTrue("[[hasDetails::{{{hasDetails|}}}]]" in result)
         # Don't create a "Location" template if doing a "Description" template
         # (don't mix up class variables with instance variables)
@@ -63,8 +63,7 @@ class test_MakeMarkdownFromRDF(unittest.TestCase):
         classDAO = self.factory.getSemanticClassDAO()
         classDAO.create(sClass)
         result = classDAO.getValues()['template']
-        print(result)
-        self.assertTrue("=hasEntry=" in result)
+        self.assertTrue("=Entry=" in result)
 
     @unittest.skip("Skipping RDF union for the moment.")
     def testUnionClass(self):
