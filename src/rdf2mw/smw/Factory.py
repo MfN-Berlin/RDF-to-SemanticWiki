@@ -6,9 +6,9 @@ Created on 04.05.2016
 @author: Alvaro.Ortiz
 """
 from rdf2mw.AbstractFactory import AbstractFactory
-from rdf2mw.mediawiki.DatatypePropertyDAO import DatatypePropertyDAO
-from rdf2mw.mediawiki.SemanticClassDAO import SemanticClassDAO
-from rdf2mw.mediawiki.Manager import Manager
+from rdf2mw.smw.DatatypePropertyDAO import DatatypePropertyDAO
+from rdf2mw.smw.SemanticClassDAO import SemanticClassDAO
+from rdf2mw.smw.Manager import Manager
 
 
 class Factory(AbstractFactory):

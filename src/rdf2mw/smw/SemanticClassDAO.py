@@ -16,6 +16,7 @@ class SemanticClassDAO(AbstractDAO):
 
     _manager = None
     pageTemplatePath = "templates/page.xslt"
+    formTemplatePath = "templates/form.xslt"
 
     def __init__(self, manager):
         """
@@ -45,6 +46,8 @@ class SemanticClassDAO(AbstractDAO):
         transform = etree.XSLT(template)
         page = transform(stree)
         self.values["template"] = str(page)
+
+        # Apply the form.xslt template to create the markup for the wiki form
 
         # Markup for the form
         form = "<noinclude>{{#forminput:form=%s}}</noinclude>\n" % sclass.name

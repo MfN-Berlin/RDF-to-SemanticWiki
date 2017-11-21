@@ -10,8 +10,8 @@ import sys
 import configparser
 from optparse import OptionParser
 from rdf2mw.Importer import Importer, ImporterException
-from rdf2mw.mediawiki.Factory import Factory
-from rdf2mw.mediawiki.MediaWikiApiConnector import MediaWikiApiConnector
+from rdf2mw.smw.Factory import Factory
+from rdf2mw.smw.MediaWikiApiConnector import MediaWikiApiConnector
 
 configPath = "example/config.ini"
 """Path to configuration file."""

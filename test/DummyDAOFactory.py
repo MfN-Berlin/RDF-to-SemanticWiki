@@ -5,9 +5,9 @@ Created on 09.05.2016
 
 @author: Alvaro.Ortiz
 """
-from rdf2mw.mediawiki.Factory import Factory
+from rdf2mw.smw.Factory import Factory
 from rdf2mw.AbstractConnector import AbstractConnector
-from rdf2mw.mediawiki.Manager import Manager
+from rdf2mw.smw.Manager import Manager
 
 
 class DummyDAOFactory(Factory):
