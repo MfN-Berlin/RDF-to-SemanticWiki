@@ -24,9 +24,14 @@
     &lt;includeonly&gt;
     {{{for template|<xsl:value-of select="@name" />}}}
     
-    <xsl:apply-templates match="DatatypeProperty" />
-    <xsl:apply-templates match="ObjectProperty" />
-    
+    <!-- Class comment -->
+    <xsl:if test="comments/comment[@lang=$lang]">
+      ''<xsl:value-of select="comments/comment[@lang=$lang]" />''
+    </xsl:if>
+
+    <xsl:apply-templates select="DatatypeProperty" />
+    <xsl:apply-templates select="ObjectProperty" />
+
     {{{end template}}}
 
     <!--Buttons-->
@@ -54,19 +59,18 @@
     <xsl:if test="comments/comment[@lang=$lang]">
       ''<xsl:value-of select="comments/comment[@lang=$lang]" />''
     </xsl:if>
-
     <!-- Form input fields -->
     <xsl:choose>
-      <xsl:when test="@range=Literal">
+      <xsl:when test="@range='Literal'">
 	{{{field|<xsl:value-of select="@name" />|property=<xsl:value-of select="@name" />|input type=textarea|editor=wikieditor|rows=10}}}
       </xsl:when>
-      <xsl:when test="@range=boolean">
+      <xsl:when test="@range='boolean'">
 	{{{field|<xsl:value-of select="@name" />|property=<xsl:value-of select="@name" />|input type=radiobutton| mandatory|default=false}}}
       </xsl:when>
-      <xsl:when test="@range=dateTime">
+      <xsl:when test="@range='dateTime'">
 	{{{field|<xsl:value-of select="@name" />|property=<xsl:value-of select="@name" />|input type=date}}}
       </xsl:when>
-      <xsl:when test="@range=int">
+      <xsl:when test="@range='int'">
 	{{{field|<xsl:value-of select="@name" />|property=<xsl:value-of select="@name" />|input type=text|size=10}}}
       </xsl:when>
       <xsl:otherwise>

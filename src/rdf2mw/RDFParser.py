@@ -48,14 +48,14 @@ class RDFParser(AbstractParser):
             className = element.attrib[RDFParser.full('rdf:about')].split('#')[1]
             sclass = SemanticClass(className)
             self._model.addClass(sclass)  # add class to model
-            
-            # localized labels of the property
+
+            # localized labels of the class
             labels = element.findall(RDFParser.path('rdfs:label', startWith='descendant'))
             for label in labels:
                 lang = label.attrib[RDFParser.full('xml:lang')]
                 sclass.addLabel(label.text, lang)
 
-            # localized comment of the property
+            # localized comment of the class
             comments = element.findall(RDFParser.path('rdfs:comment', startWith='descendant'))
             for comment in comments:
                 lang = comment.attrib[RDFParser.full('xml:lang')]

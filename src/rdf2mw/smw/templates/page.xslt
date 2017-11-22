@@ -18,10 +18,10 @@
       ###########################################
   -->
   <xsl:template match="/SemanticClass">
-    
-    <xsl:apply-templates match="DatatypeProperty" />
-    <xsl:apply-templates match="ObjectProperty" />
 
+    <xsl:apply-templates select="DatatypeProperty"/>
+    <xsl:apply-templates select="ObjectProperty"/>
+    
     <!--Suppress table-of-contents and paragraph edit links-->
     __NOTOC__
     __NOEDITSECTION__
