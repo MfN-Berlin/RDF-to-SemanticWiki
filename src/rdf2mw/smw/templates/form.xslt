@@ -21,7 +21,9 @@
   <xsl:template match="/SemanticClass">
     &lt;noinclude&gt;{{#forminput:form=<xsl:value-of select="@name" />}}&lt;/noinclude&gt;
 
-    &lt;includeonly&gt;    
+    &lt;includeonly&gt;
+    {{{for template|<xsl:value-of select="@name" />}}}
+    
     <xsl:apply-templates match="DatatypeProperty" />
     <xsl:apply-templates match="ObjectProperty" />
     
