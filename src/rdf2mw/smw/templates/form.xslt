@@ -25,9 +25,7 @@
     {{{for template|<xsl:value-of select="@name" />}}}
     
     <!-- Class comment -->
-    <xsl:if test="comments/comment[@lang=$lang]">
-      ''<xsl:value-of select="comments/comment[@lang=$lang]" />''
-    </xsl:if>
+    <xsl:apply-templates select="." mode="comment"/>
 
     <xsl:apply-templates select="DatatypeProperty" />
     <xsl:apply-templates select="ObjectProperty" />
@@ -35,9 +33,11 @@
     {{{end template}}}
 
     <!--Buttons-->
-    {{{standard input|minor edit}}}
-    {{{standard input|watch}}}{{{standard input|save}}}
-    {{{standard input|changes}}} {{{standard input|cancel}}}
+    {{{standard input|minor edit}}}{{{standard input|watch}}}
+
+    {{{standard input|save}}}{{{standard input|changes}}}
+
+    {{{standard input|cancel}}}
     
     <!--Suppress table-of-contents and paragraph edit links-->
     __NOTOC__
@@ -56,9 +56,8 @@
     ==<xsl:apply-templates select="." mode="label"/>==
 
     <!-- Property comment -->
-    <xsl:if test="comments/comment[@lang=$lang]">
-      ''<xsl:value-of select="comments/comment[@lang=$lang]" />''
-    </xsl:if>
+    <xsl:apply-templates select="." mode="comment"/>
+    
     <!-- Form input fields -->
     <xsl:choose>
       <xsl:when test="@range='Literal'">
@@ -92,13 +91,11 @@
     ==<xsl:apply-templates select="." mode="label" />==
     
     <!-- Property comment -->
-    <xsl:if test="comments/comment[@lang=$lang]">
-      ''<xsl:value-of select="comments/comment[@lang=$lang]" />''
-    </xsl:if>
+    <xsl:apply-templates select="." mode="comment"/>
     
     <!-- Object properties as a listbox -->
-    {{{field|<xsl:value-of select="@range" />
-    |property=<xsl:value-of select="@range" />
+    {{{field|<xsl:value-of select="@domain" />
+    |property=<xsl:value-of select="@domain" />
     |input type=listbox
     | values from category=<xsl:value-of select="@range" />
     |size=10

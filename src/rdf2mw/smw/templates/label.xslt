@@ -22,4 +22,16 @@
     </xsl:choose>
   </xsl:template>
 
+  <!--
+      ###########################
+      Process a localized comment
+      ###########################
+  -->
+  <xsl:template match="SemanticClass|DatatypeProperty|ObjectProperty" mode="comment">
+      <xsl:if test="comments/comment[@lang=$lang]">
+	&lt;div class="tip"&gt;<xsl:value-of select="comments/comment[@lang=$lang]" />&lt;/div&gt;
+	
+      </xsl:if>    
+  </xsl:template>
+  
 </xsl:stylesheet>

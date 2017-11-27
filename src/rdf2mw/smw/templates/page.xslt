@@ -19,6 +19,9 @@
   -->
   <xsl:template match="/SemanticClass">
 
+    <!-- Class comment -->
+    <xsl:apply-templates select="." mode="comment"/>
+    
     <xsl:apply-templates select="DatatypeProperty"/>
     <xsl:apply-templates select="ObjectProperty"/>
     
@@ -36,20 +39,19 @@
       ###########################
   -->
   <xsl:template match="DatatypeProperty">
-    <!-- Property name (localized) -->
-    ==<xsl:apply-templates select="." mode="label"/>==
+    <xsl:if test="@name!=''">
+      <!-- Property name (localized) -->
+      ==<xsl:apply-templates select="." mode="label"/>==
 
-    <!-- Property comment -->
-    <xsl:if test="comments/comment[@lang=$lang]">
-      ''<xsl:value-of select="comments/comment[@lang=$lang]" />''
+      <!-- Property comment -->
+      <xsl:apply-templates select="." mode="comment"/>
+
+      <!--Property value-->
+      [[<xsl:value-of select="@name" />::{{{<xsl:value-of select="@name" />|}}}]]
+      
+      <!-- Link to attribute page -->
+      [<xsl:value-of select="$baseUrl" />Property:<xsl:value-of select="@name" /><xsl:text> </xsl:text><xsl:apply-templates select="." mode="label" />]
     </xsl:if>
-
-    <!--Property value-->
-    [[<xsl:value-of select="@name" />::{{{<xsl:value-of select="@name" />|}}}]]
-    
-    <!-- Link to attribute page -->
-    [<xsl:value-of select="$baseUrl" />Property:<xsl:value-of select="@name" /><xsl:text> </xsl:text><xsl:apply-templates select="." mode="label" />]
-    
   </xsl:template>
   
   <!--
@@ -58,19 +60,20 @@
       ##########################
   -->
   <xsl:template match="ObjectProperty">
-    
-    <!-- Property name (localized) -->
-    ==<xsl:apply-templates select="." mode="label" />==
-    
-    <!-- Property comment -->
-    <xsl:if test="comments/comment[@lang=$lang]">
-      ''<xsl:value-of select="comments/comment[@lang=$lang]" />''
+
+    <xsl:if test="@range!=''">
+      <!-- Property name (localized) -->
+      ==<xsl:apply-templates select="." mode="label" />==
+      
+      <!-- Property comment -->
+      <xsl:apply-templates select="." mode="comment"/>
+
+      <!--Property value-->
+      {{#arraymap:{{{<xsl:value-of select="@domain" />|}}}|@|x|*[[<xsl:value-of select="@range" />::x]]|\n\n}}
+
+      {{#if: {{{<xsl:value-of select="@domain" />}}} | {{#set: %s={{{<xsl:value-of select="@domain" />|}}} }} |}}
+      
     </xsl:if>
-
-    <!--Property value-->
-    {{#arraymap:{{{<xsl:value-of select="@range" />|}}}|@|x|*[[<xsl:value-of select="@range" />::x]]|\n\n}}
-
-    {{#if: {{{<xsl:value-of select="@range" />}}} | {{#set: %s={{{<xsl:value-of select="@range" />|}}} }} |}}
 
   </xsl:template>
 
