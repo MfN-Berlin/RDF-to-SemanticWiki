@@ -18,6 +18,10 @@ class AbstractFactory:
         """Create a DAO object for the corresponding datatype property class."""
         raise NotImplementedError
 
+    def getObjectPropertyDAO(self):
+        """Create a DAO object for the corresponding object property class."""
+        raise NotImplementedError
+
     def getSemanticClassDAO(self):
         """Create a DAO object for the corresponding semantic class."""
         raise NotImplementedError

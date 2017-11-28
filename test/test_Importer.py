@@ -73,7 +73,7 @@ class test_Importer(unittest.TestCase):
         self.assertTrue(self.connector.loadPage("Category:Description"))
         self.assertTrue(self.connector.loadPage("Category:Calendar"))
 
-    def test_PropertyPagesCreated(self):
+    def test_DataPropertyPagesCreated(self):
         """Test that a property: page was created for each datatype property in the example ontology."""
         self.importer.run(self.modelPath)
         self.assertTrue(self.connector.loadPage("Property:hasDetails"))
@@ -84,10 +84,15 @@ class test_Importer(unittest.TestCase):
         self.assertTrue(self.connector.loadPage("Property:hasSubject"))
         self.assertTrue(self.connector.loadPage("Property:isWholeDay"))
 
+    def test_ObjectPropertyPagesCreated(self):
+        """Test that a property: page was created for each object property in the example ontology."""
+        self.importer.run(self.modelPath)
+        self.assertTrue(self.connector.loadPage("Property:hasLocation"))
+
     def test_PropertiesAddedToClassTemplates(self):
         """Test that the property markup is added to the template pages."""
         self.importer.run(self.modelPath)
-        
+
         self.connector.loadPage("Template:Entry")
         self.assertTrue("hasPriority" in self.connector.content)
 
@@ -172,6 +177,7 @@ class test_Importer(unittest.TestCase):
         self.connector.deletePage("Property:hasEndDate")
         self.connector.deletePage("Property:hasSubject")
         self.connector.deletePage("Property:isWholeDay")
+        self.connector.deletePage("Property:hasLocation")
 
 if __name__ == "__main__":
     # import sys;sys.argv = ['', 'Test.testName']

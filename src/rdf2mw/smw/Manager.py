@@ -31,7 +31,7 @@ class Manager(AbstractManager):
     def delete(self, name, pages):
         """Override abstract method."""
         for namespace in pages:
-            # namespace contains e.g. "template" and "form" page contents
+            # namespace contains e.g. "template", "form", "property" page contents
             pageName = '%s:%s' % (namespace, name)
             self._connector.deletePage(pageName)
 

@@ -20,15 +20,3 @@ The second step is to convert the ontology into templates, forms and attributes 
 ## Usage
 This is a work in progress. See https://github.com/AlvaroOrtizTroncoso/RDF-to-MediaWiki/wiki for usage.
 
-## Tests
-To run the tests, I recommend you install "green" and "coverage", which should be installed if you did `pip3 install -r requirements.txt`.
-
-To run the tests and get code coverage:
-
-```
-cd test
-bash test.sh
-```
-
-## Developer documentation
-The directory docs contains UML diagrams. These can be opened using [ArgoUML](http://argouml.tigris.org).

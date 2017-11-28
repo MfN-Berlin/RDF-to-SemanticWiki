@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 """
-Provides a class DAO object.
+Provides a property DAO object.
 
-Created on 10.05.2016
+Created on 09.05.2016
 
 @author: Alvaro.Ortiz
 """
@@ -11,13 +10,10 @@ from lxml import etree
 from rdf2mw.AbstractDAO import AbstractDAO
 
 
-class SemanticClassDAO(AbstractDAO):
-    """Provides a class DAO objects accessing the MediaWiki API."""
+class ObjectPropertyDAO(AbstractDAO):
+    """Provides a property DAO object."""
 
-    _manager = None
-    pageTemplatePath = "templates/page.xslt"
-    formTemplatePath = "templates/form.xslt"
-    categoryTemplatePath = "templates/category.xslt"
+    propertyTemplatePath = "templates/property.xslt"
 
     def __init__(self, manager):
         """
@@ -26,39 +22,28 @@ class SemanticClassDAO(AbstractDAO):
         Instantiate the DAO class and associate it with a DAO manager,
         which manages the connection.
 
-        @param manager: class implementing AbstractDAOManager
+        @param manager: class implementing AbstractManager
         """
         self._manager = manager
         self.values = {}
 
-    def create(self, sclass, language='en'):
+    def create(self, sprop, language=None):
         """Override abstract method."""
-        stree = sclass.asElementTree()
-
+        stree = sprop.asElementTree()
         # Add atributes to the element tree
         if language is not None:
             stree.set('lang', language)
-        # SemanticClassDAO and MediaWikiApiConnector are coupled anyway.
-        stree.set('baseUrl', self._manager.connector.baseURL)
-
         # Apply the page.xslt template to create the markup for the wiki page
-        self.values["template"] = self._transform(stree, SemanticClassDAO.pageTemplatePath)
-
-        # Apply the form.xslt template to create the markup for the wiki form
-        self.values["form"] = self._transform(stree, SemanticClassDAO.formTemplatePath)
-
-        # Markup for the category page
-        self.values["category"] = self._transform(stree, SemanticClassDAO.categoryTemplatePath)
-
+        self.values["property"] = self._transform(stree, ObjectPropertyDAO.propertyTemplatePath)
         # Send to MediaWiki
-        self._manager.commit(sclass.name, self.values)
+        self._manager.commit(sprop.name, self.values)
 
-    def delete(self, sclass):
+    def delete(self, sprop):
         """Override abstract method."""
-        pages = ['template', 'form', 'category']
+        pages = ['property']
 
         # Send to MediaWiki
-        self._manager.delete(sclass.name, pages)
+        self._manager.delete(sprop.name, pages)
 
     def getValues(self):
         """Override abstract method."""
