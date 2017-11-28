@@ -25,7 +25,7 @@ class test_DatatypePropertyDAO(unittest.TestCase):
         self.assertTrue(propDAO)
         propDAO.create(sprop)
         result = propDAO.getValues()['property']
-        self.assertEqual("This is a property of type [[Has type::Date]].\n", result)
+        self.assertTrue("This is a property of type [[Has type::Date]]." in result)
 
     def testOneOfPropertyDAO(self):
         """Test a one-off propety (an enum)."""
@@ -51,7 +51,7 @@ class test_DatatypePropertyDAO(unittest.TestCase):
         self.assertTrue(propDAO)
         propDAO.create(sprop)
         result = propDAO.getValues()['property']
-        self.assertEqual("This is a property of type [[Has type::Text]].\n", result)
+        self.assertTrue("This is a property of type [[Has type::Text]]." in result)
 
 
 if __name__ == "__main__":

@@ -9,6 +9,40 @@
   
   <!-- Global variables -->
   <xsl:variable name="lang" select="/ObjectProperty/@lang" />
+
+  <!--
+      ###########################################
+      Process a datatype property
+      ###########################################
+  -->
+  <xsl:template match="/DatatypeProperty">
+
+      <!-- Property name (localized) -->
+      ==<xsl:apply-templates select="." mode="label" />==
+      
+      <!-- Property comment -->
+      <xsl:apply-templates select="." mode="comment"/>
+
+      <xsl:variable name="type">
+	<xsl:choose>
+	  <xsl:when test="@range='dateTime'">Date</xsl:when>
+	  <xsl:when test="@range='boolean'">Boolean</xsl:when>
+	  <xsl:when test="@range='string'">Text</xsl:when>
+	  <xsl:when test="@range='DataOneOf'">Text</xsl:when>
+	  <xsl:otherwise>Text</xsl:otherwise>
+	</xsl:choose>
+      </xsl:variable>
+      
+      This is a property of type [[Has type::<xsl:value-of select="$type"/>]].
+
+      <xsl:apply-templates select="allowedValues/allowed"/>
+      
+  </xsl:template>
+
+  <xsl:template match="allowed">
+    [[Allows value::<xsl:value-of select="."/>]]
+  </xsl:template>
+  
   
   <!--
       ###########################################
@@ -19,6 +53,9 @@
 
       <!-- Property name (localized) -->
       ==<xsl:apply-templates select="." mode="label" />==
+      
+      <!-- Property comment -->
+      <xsl:apply-templates select="." mode="comment"/>
       
       This is a property of type [[Has type::page]].
       

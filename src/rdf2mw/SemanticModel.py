@@ -218,6 +218,14 @@ class SemanticProperty(SemanticElement):
             selm.set('range', self._range)
         if self.domain:
             selm.set('domain', self.domain)
+        if self.allowedValues:
+            allowedValues = etree.Element('allowedValues')
+            for val in self.allowedValues:
+                allowed = etree.Element('allowed')
+                allowed.text = val
+                allowedValues.append(allowed)
+            selm.append(allowedValues)
+
         return(selm)
 
 
