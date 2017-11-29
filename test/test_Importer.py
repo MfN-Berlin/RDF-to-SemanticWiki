@@ -11,8 +11,8 @@ import unittest
 import configparser
 from rdf2mw.RDFParser import RDFParser
 from rdf2mw.Importer import Importer
-from rdf2mw.smw.Factory import Factory
-from rdf2mw.smw.MediaWikiApiConnector import MediaWikiApiConnector
+from smw.Factory import Factory
+from smw.MediaWikiApiConnector import MediaWikiApiConnector
 
 
 class test_Importer(unittest.TestCase):

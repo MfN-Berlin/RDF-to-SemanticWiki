@@ -57,7 +57,7 @@
       <!-- Property comment -->
       <xsl:apply-templates select="." mode="comment"/>
       
-      This is a property of type [[Has type::page]].
+      This is a property of type [[Has type::Text]].
       
   </xsl:template>
 

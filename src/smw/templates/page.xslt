@@ -69,9 +69,8 @@
       <xsl:apply-templates select="." mode="comment"/>
 
       <!--Property value-->
-      {{#arraymap:{{{<xsl:value-of select="@domain" />|}}}|@|x|*[[<xsl:value-of select="@range" />::x]]|\n\n}}
-
-      {{#if: {{{<xsl:value-of select="@domain" />}}} | {{#set: %s={{{<xsl:value-of select="@domain" />|}}} }} |}}
+      {{#arraymap:{{{<xsl:value-of select="@name"/>|}}}|@|x|*[[::[[<xsl:value-of select="@name"/>::x]]|[[<xsl:value-of select="@name"/>::x]]]]|\n\n}}
+      {{#if: {{{<xsl:value-of select="@name"/>}}} | {{#set: <xsl:value-of select="@name"/>={{{<xsl:value-of select="@name"/>|}}} }} |}}
       
     </xsl:if>
 

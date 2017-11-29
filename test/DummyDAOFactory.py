@@ -5,9 +5,9 @@ Created on 09.05.2016
 
 @author: Alvaro.Ortiz
 """
-from rdf2mw.smw.Factory import Factory
+from smw.Factory import Factory
 from rdf2mw.AbstractConnector import AbstractConnector
-from rdf2mw.smw.Manager import Manager
+from smw.Manager import Manager
 
 
 class DummyDAOFactory(Factory):

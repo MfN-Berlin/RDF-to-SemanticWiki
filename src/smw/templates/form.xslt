@@ -94,15 +94,14 @@
     <xsl:apply-templates select="." mode="comment"/>
     
     <!-- Object properties as a listbox -->
-    {{{field|<xsl:value-of select="@domain" />
-    |property=<xsl:value-of select="@domain" />
+    {{{field|<xsl:value-of select="@name"/>
+    |property=<xsl:value-of select="@name"/>
+    | values from category=<xsl:value-of select="@range"/>
     |input type=listbox
-    | values from category=<xsl:value-of select="@range" />
     |size=10
     |list
     |delimiter=@
     }}}
-
     <!-- Add an object link -->
     <div class="wt_toolbar">[<xsl:value-of select="$baseUrl" />Category:<xsl:value-of select="@name" /><xsl:text> </xsl:text><xsl:apply-templates select="." mode="label" />]</div>
 

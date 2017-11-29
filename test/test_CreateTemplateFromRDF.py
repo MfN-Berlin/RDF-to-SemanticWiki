@@ -9,8 +9,8 @@ Reads an OWL file, parses it and stores the correspondin templates in a wiki.
 import unittest
 import configparser
 from rdf2mw.RDFParser import RDFParser
-from rdf2mw.smw.MediaWikiApiConnector import MediaWikiApiConnector
-from rdf2mw.smw.Factory import Factory
+from smw.MediaWikiApiConnector import MediaWikiApiConnector
+from smw.Factory import Factory
 
 
 class test_CreateTemplateFromRDF(unittest.TestCase):

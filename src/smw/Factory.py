@@ -6,8 +6,8 @@ Created on 04.05.2016
 @author: Alvaro.Ortiz
 """
 from rdf2mw.AbstractFactory import AbstractFactory
-from rdf2mw.smw.SemanticDAO import SemanticClassDAO, DatatypePropertyDAO, ObjectPropertyDAO
-from rdf2mw.smw.Manager import Manager
+from smw.SemanticDAO import SemanticClassDAO, DatatypePropertyDAO, ObjectPropertyDAO
+from smw.Manager import Manager
 
 
 class Factory(AbstractFactory):
