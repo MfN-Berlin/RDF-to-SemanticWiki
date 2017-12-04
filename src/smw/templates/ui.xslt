@@ -53,5 +53,30 @@
     <xsl:param name="lang"/>
     <xsl:value-of select="$i18nTexts/i18n:msg[@key=$key]/i18n:text[@lang=$lang]"/>
   </xsl:template>
+
+  <!--
+      ########################
+      Collapsible info element
+      ########################
+  -->
+  <xsl:template match="SemanticClass|DatatypeProperty|ObjectProperty" mode="collapsibleInfo">    
+    &lt;div class="tip mw-collapsible mw-collapsed" id="mw-customcollapsible-<xsl:value-of select="@name"/>"&gt;
+      &lt;div class="mw-collapsible-content"&gt;
+	<!-- Property comment -->
+	<xsl:apply-templates select="." mode="comment"/>
+	<!-- Link to attribute page -->
+	[<xsl:value-of select="$baseUrl" />Property:<xsl:value-of select="@name" /><xsl:text> </xsl:text><xsl:apply-templates select="." mode="label" />]
+      &lt;/div&gt;
+    &lt;/div&gt; 
+  </xsl:template>
+
+  <!--
+      ########################
+      Help icon
+      ########################
+  -->
+  <xsl:variable name="helpIcon">https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Help-browser.svg/21px-Help-browser.svg.png</xsl:variable>
+  <xsl:template match="DatatypeProperty|ObjectProperty" mode="helpIcon">&lt;span class="mw-customtoggle mw-customtoggle-<xsl:value-of select="@name"/>"&gt;<xsl:value-of select="$helpIcon"/>&lt;/span&gt;</xsl:template>
+  <xsl:template match="SemanticClass" mode="helpIcon">&lt;span class="mw-customtoggle mw-customtoggle-<xsl:value-of select="@name"/>" style="float: right;margin-top: -60px;"&gt;<xsl:value-of select="$helpIcon"/>&lt;/span&gt;</xsl:template>
   
 </xsl:stylesheet>
