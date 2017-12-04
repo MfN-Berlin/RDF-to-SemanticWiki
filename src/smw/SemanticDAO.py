@@ -65,6 +65,7 @@ class SemanticClassDAO(SemanticElementDAO):
         # Add atributes to the element tree
         if language is not None:
             stree.set('lang', language)
+        
         # SemanticClassDAO and MediaWikiApiConnector are coupled anyway.
         stree.set('baseUrl', self._manager.connector.baseURL)
 
@@ -77,7 +78,7 @@ class SemanticClassDAO(SemanticElementDAO):
         # Markup for the category page
         self.values["category"] = self.transform(stree, SemanticElementDAO.categoryTemplatePath)
 
-        # Send to MediaWiki
+        # Send to MediaWiki (template, form and category pages)
         self._manager.commit(sclass.name, self.values)
 
     def delete(self, sclass):

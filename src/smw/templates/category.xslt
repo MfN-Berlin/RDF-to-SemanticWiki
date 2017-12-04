@@ -19,6 +19,12 @@
       ###########################################
   -->
   <xsl:template match="/SemanticClass">
+    <!-- Category name (localized) -->
+    {{DISPLAYTITLE:<xsl:apply-templates select="." mode="label"/>}}
+    
+    <!-- Property comment -->
+    <xsl:apply-templates select="." mode="comment"/>
+      
     {{#default_form:<xsl:value-of select="@name" />}}
     {{#forminput:form=<xsl:value-of select="@name" />|autocomplete on category=<xsl:value-of select="@name" />}}
   </xsl:template>

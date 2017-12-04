@@ -19,7 +19,12 @@
       ###########################################
   -->
   <xsl:template match="/SemanticClass">
-    &lt;noinclude&gt;{{#forminput:form=<xsl:value-of select="@name" />}}&lt;/noinclude&gt;
+    &lt;noinclude&gt;
+    <!-- Form name (localized) -->
+    {{DISPLAYTITLE:<xsl:apply-templates select="." mode="label"/>}}
+
+    {{#forminput:form=<xsl:value-of select="@name" />}}
+    &lt;/noinclude&gt;
 
     &lt;includeonly&gt;
     {{{for template|<xsl:value-of select="@name" />}}}
@@ -103,7 +108,7 @@
     |delimiter=@
     }}}
     <!-- Add an object link -->
-    <div class="wt_toolbar">[<xsl:value-of select="$baseUrl" />Category:<xsl:value-of select="@name" /><xsl:text> </xsl:text><xsl:apply-templates select="." mode="label" />]</div>
+    <div class="wt_toolbar">[<xsl:value-of select="$baseUrl" />Category:<xsl:apply-templates select="." mode="label"/><xsl:text> </xsl:text><xsl:apply-templates select="." mode="label" />]</div>
 
   </xsl:template>
 

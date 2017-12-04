@@ -53,6 +53,8 @@ class AbstractDAO:
               pages = ['template', 'form', 'category']
               ...
               self._manager.delete( myObj.name, pages )
+        @param obj object to delete, e.g. SemanticClass etc.
+        @param language to use, e.g. in case of a wiki, page names are localized.
         """
         raise NotImplementedError
 
