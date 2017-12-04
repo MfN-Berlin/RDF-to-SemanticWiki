@@ -77,6 +77,6 @@
   -->
   <xsl:variable name="helpIcon">https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Help-browser.svg/21px-Help-browser.svg.png</xsl:variable>
   <xsl:template match="DatatypeProperty|ObjectProperty" mode="helpIcon">&lt;span class="mw-customtoggle mw-customtoggle-<xsl:value-of select="@name"/>"&gt;<xsl:value-of select="$helpIcon"/>&lt;/span&gt;</xsl:template>
-  <xsl:template match="SemanticClass" mode="helpIcon">&lt;span class="mw-customtoggle mw-customtoggle-<xsl:value-of select="@name"/>" style="float: right;margin-top: -60px;"&gt;<xsl:value-of select="$helpIcon"/>&lt;/span&gt;</xsl:template>
-  
+  <xsl:template match="SemanticClass" mode="helpIcon">&lt;span class="mw-customtoggle mw-customtoggle-<xsl:value-of select="@name"/>" style="top: 60px;position: absolute;left: calc(100% - 51px);"&gt;<xsl:value-of select="$helpIcon"/>&lt;/span&gt;</xsl:template>
+
 </xsl:stylesheet>

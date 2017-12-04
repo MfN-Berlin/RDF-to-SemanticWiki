@@ -22,16 +22,11 @@
     &lt;noinclude&gt;
     <!-- Form name (localized) -->
     {{DISPLAYTITLE:<xsl:apply-templates select="." mode="label"/>}}
-
-    {{#forminput:form=<xsl:value-of select="@name" />}}
-    &lt;/noinclude&gt;
-
-    &lt;includeonly&gt;
+    {{#forminput:form=<xsl:value-of select="@name" />}}&lt;/noinclude&gt;
+    &lt;includeonly&gt;<xsl:apply-templates select="." mode="helpIcon"/>
+    <!-- Class info -->
+    <xsl:apply-templates select="." mode="collapsibleInfo" />    
     {{{for template|<xsl:value-of select="@name" />}}}
-    
-    <!-- Class comment -->
-    <xsl:apply-templates select="." mode="comment"/>
-
     <xsl:apply-templates select="DatatypeProperty" />
     <xsl:apply-templates select="ObjectProperty" />
 
@@ -57,11 +52,11 @@
       ###########################
   -->
   <xsl:template match="DatatypeProperty">
-    <!-- Property name (localized) -->
-    ==<xsl:apply-templates select="." mode="label"/>==
-
-    <!-- Property comment -->
-    <xsl:apply-templates select="." mode="comment"/>
+    <!-- Property name (localized) and help icon-->
+    ==<xsl:apply-templates select="." mode="label" /> <xsl:apply-templates select="." mode="helpIcon"/>==
+    
+    <!-- Property info -->
+    <xsl:apply-templates select="." mode="collapsibleInfo" />
     
     <!-- Form input fields -->
     <xsl:choose>
@@ -81,9 +76,6 @@
 	{{{field|<xsl:value-of select="@name" />|property=<xsl:value-of select="@name" />|input type=text}}}
       </xsl:otherwise>
     </xsl:choose>
-
-    <!-- Link to attribute page -->
-    [<xsl:value-of select="$baseUrl" />Property:<xsl:value-of select="@name" /><xsl:text> </xsl:text><xsl:apply-templates select="." mode="label" />]
   </xsl:template>
 
   <!--
@@ -92,11 +84,11 @@
       ##########################
   -->
   <xsl:template match="ObjectProperty">
-    <!-- Property name (localized) -->
-    ==<xsl:apply-templates select="." mode="label" />==
+    <!-- Property name (localized) and help icon-->
+    ==<xsl:apply-templates select="." mode="label" /> <xsl:apply-templates select="." mode="helpIcon"/>==
     
-    <!-- Property comment -->
-    <xsl:apply-templates select="." mode="comment"/>
+    <!-- Property info -->
+    <xsl:apply-templates select="." mode="collapsibleInfo" />
     
     <!-- Object properties as a listbox -->
     {{{field|<xsl:value-of select="@name"/>
@@ -107,8 +99,6 @@
     |list
     |delimiter=@
     }}}
-    <!-- Add an object link -->
-    <div class="wt_toolbar">[<xsl:value-of select="$baseUrl" />Category:<xsl:apply-templates select="." mode="label"/><xsl:text> </xsl:text><xsl:apply-templates select="." mode="label" />]</div>
 
   </xsl:template>
 

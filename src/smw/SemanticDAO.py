@@ -48,6 +48,7 @@ class SemanticElementDAO(AbstractDAO):
         resp = ""
         for line in lines:
             resp += line.lstrip() + "\n"
+
         return(resp)
 
 
