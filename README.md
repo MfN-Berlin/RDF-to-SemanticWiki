@@ -18,5 +18,5 @@ The second step is to convert the ontology into templates, forms and attributes 
 [Parser Functions](https://www.mediawiki.org/wiki/Extension:ParserFunctions)
 
 ## Usage
-This is a work in progress. See https://github.com/AlvaroOrtizTroncoso/RDF-to-MediaWiki/wiki for usage.
+This is a work in progress. See https://github.com/alvarosaurus/RDF-to-MediaWiki/wiki for usage.
 
