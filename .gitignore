@@ -1,7 +1,6 @@
 .project
 .pydevproject
 __pycache__
-__init__.py
 example/catalog-v001.xml
 test/testdata/catalog-v001.xml
 example/config.ini
