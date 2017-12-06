@@ -3,7 +3,7 @@
 Maintaining a semantic MediaWiki can be a lot of work, as any reasonably complex semantic wiki will require dozens of templates, forms and attribute pages.
 By separating the model from its implementation, it becomes easier to keep an overview of the semantic components used.
 
-The first step to do this is to model the semantic relationships as an ontology, using a modelling tool such as Protege. Alternatively, simple ontologies can modelled visually using UML and then converted into RDF (see https://github.com/AlvaroOrtizTroncoso/UML-ODM-to-OWL-XML).
+The first step to do this is to model the semantic relationships as an ontology, using a modelling tool such as Protege. Alternatively, simple ontologies can be [modelled visually using UML and then converted into RDF](https://github.com/alvarosaurus/UML-ODM-to-OWL-XML).
 
 The second step is to convert the ontology into templates, forms and attributes pages in the wiki. This script takes an ontology file in RDF format as input and creates the necessary wiki pages using the MediaWiki API.
 
@@ -18,5 +18,5 @@ The second step is to convert the ontology into templates, forms and attributes 
 [Parser Functions](https://www.mediawiki.org/wiki/Extension:ParserFunctions)
 
 ## Usage
-This is a work in progress. See https://github.com/alvarosaurus/RDF-to-MediaWiki/wiki for usage.
+This is a work in progress. See [here](https://github.com/alvarosaurus/RDF-to-MediaWiki/wiki) for usage.
 
