@@ -31,8 +31,6 @@ class RDFParser(AbstractParser):
         self._parseClasses()
         self._parseDataProperties()
         self._parseObjectProperties()
-        # Look for unions in the model
-        # self._parseUnions()
 
         return self._model
 

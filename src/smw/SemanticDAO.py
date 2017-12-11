@@ -55,7 +55,7 @@ class SemanticElementDAO(AbstractDAO):
 class SemanticClassDAO(SemanticElementDAO):
     """Provides a class DAO objects accessing the MediaWiki API."""
 
-    def __init__(self, manager):
+    def __init__(self, manager, layout=None):
         """Construct."""
         super().__init__(manager)
 
@@ -66,7 +66,10 @@ class SemanticClassDAO(SemanticElementDAO):
         # Add atributes to the element tree
         if language is not None:
             stree.set('lang', language)
-        
+
+        # Add order of properties to class pages
+        self._addLayout(stree)
+
         # SemanticClassDAO and MediaWikiApiConnector are coupled anyway.
         stree.set('baseUrl', self._manager.connector.baseURL)
 
@@ -92,6 +95,15 @@ class SemanticClassDAO(SemanticElementDAO):
     def getValues(self):
         """Override abstract method."""
         return self.values
+
+    def _addLayout(self, stree):
+        """
+        Add order of properties to class pages.
+
+        @param stree etree representing a semantic class
+        """
+        if self._manager.layout is None:
+            return
 
 
 class SemanticPropertyDAO(SemanticElementDAO):

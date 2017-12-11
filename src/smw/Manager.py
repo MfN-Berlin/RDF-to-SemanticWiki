@@ -13,13 +13,15 @@ class Manager(AbstractManager):
 
     _connector = None
 
-    def __init__(self, connector):
+    def __init__(self, connector, layout):
         """
         Construct.
 
         @param connector: the object that will be used to persist the DAO objects.
+        @param layout: an instance of smw.Layout
         """
         self._connector = connector
+        self._layout = layout
 
     def commit(self, name, values):
         """Override abstract method."""
@@ -39,3 +41,8 @@ class Manager(AbstractManager):
     def connector(self):
         """Get the connector."""
         return self._connector
+
+    @property
+    def layout(self):
+        """Get the layout object."""
+        return self._layout

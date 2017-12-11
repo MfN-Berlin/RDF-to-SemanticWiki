@@ -23,11 +23,13 @@ class Importer:
         self._parser = parser
         self._daoFactory = daoFactory
 
-    def run(self, modelPath, language=None):
+    def run(self, modelPath, language=None, layout=None):
         """
         Import RDF or OWL file.
 
         @param modelPath: ontology file to import
+        @param language: string language code
+        @param layout: layout file to use
         """
         # parse the file
         model = self._parser.parse(modelPath)
@@ -39,7 +41,7 @@ class Importer:
 
         # create all the class pages
         for sclass in model.classes.values():
-            classDao.create(sclass, language)
+            classDao.create(sclass, language, layout)
             print("Created pages for class %s" % sclass.name)
             # Create data property pages for this class
             for sprop in sclass.datatypeProperties:
