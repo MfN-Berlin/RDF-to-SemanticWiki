@@ -41,7 +41,7 @@ class Importer:
 
         # create all the class pages
         for sclass in model.classes.values():
-            classDao.create(sclass, language, layout)
+            classDao.create(sclass, language)
             print("Created pages for class %s" % sclass.name)
             # Create data property pages for this class
             for sprop in sclass.datatypeProperties:
