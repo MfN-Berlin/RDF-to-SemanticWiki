@@ -9,6 +9,8 @@ Tests the DAO classes without persisting to a back-end
 @author: Alvaro.Ortiz
 """
 import unittest
+from lxml import etree
+
 from DummyDAOFactory import DummyDAOFactory
 from rdf2mw.SemanticModel import SemanticClass, DatatypeProperty
 
@@ -37,6 +39,17 @@ class test_SemanticClassDAO(unittest.TestCase):
         factory = DummyDAOFactory(layoutFile=test_SemanticClassDAO.layoutpath)
         # could the layout object be read from file
         self.assertTrue(factory.layout)
+
+        sclass = factory.getSemanticClassDAO()
+        # SemanticClassDAO has a Layout object
+        self.assertTrue(sclass.layout)
+
+        root = sclass.layout.layoutTree.getroot()
+        expected = "hasName,hasSubject,hasStartDate,hasEndDate,isWholeDay,hasDetails,hasLocation,hasPriority"
+        props = root.findall("properties")
+        print(root.findall(".//properties"))
+        ## self.assertEqual(expected, props.attrib['order'])
+
 
     @unittest.skip("Skip unions for now")
     def testUnionClass(self):

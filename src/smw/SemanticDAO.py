@@ -58,6 +58,7 @@ class SemanticClassDAO(SemanticElementDAO):
     def __init__(self, manager, layout=None):
         """Construct."""
         super().__init__(manager)
+        self.layout = layout
 
     def create(self, sclass, language='en'):
         """Override abstract method."""

@@ -58,5 +58,5 @@ class Factory(AbstractFactory):
     def getSemanticClassDAO(self):
         """Override abstract method."""
         if self._classDAO is None:
-            self._classDAO = SemanticClassDAO(self.getDAOManager())
+            self._classDAO = SemanticClassDAO(self.getDAOManager(), self.layout)
         return self._classDAO
