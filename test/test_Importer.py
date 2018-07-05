@@ -136,14 +136,20 @@ class test_Importer(unittest.TestCase):
         self.assertTrue(self.connector.loadPage("Template:Entry"))
         self.assertTrue(self.connector.loadPage("Form:Entry"))
         self.assertTrue(self.connector.loadPage("Category:Entry"))
+        # test a data property
         self.assertTrue(self.connector.loadPage("Property:hasDetails"))
+        # test an object property
+        self.assertTrue(self.connector.loadPage("Property:hasLocation"))
 
         self.importer.delete(self.modelPath)
 
         self.assertFalse(self.connector.loadPage("Template:Entry"))
         self.assertFalse(self.connector.loadPage("Form:Entry"))
         self.assertFalse(self.connector.loadPage("Category:Entry"))
+        # test a data property
         self.assertFalse(self.connector.loadPage("Property:hasDetails"))
+        # test an object property
+        self.assertFalse(self.connector.loadPage("Property:hasLocation"))
 
     def tearDown(self):
         """Teardown."""

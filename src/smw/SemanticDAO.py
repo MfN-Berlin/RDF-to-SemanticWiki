@@ -116,8 +116,7 @@ class SemanticPropertyDAO(SemanticElementDAO):
 
     def delete(self, sprop):
         """Override abstract method."""
-        pages = ['property']
-
+        pages = ['Property']
         # Send to MediaWiki
         self._manager.delete(sprop.name, pages)
 

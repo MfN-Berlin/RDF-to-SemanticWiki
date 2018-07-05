@@ -41,14 +41,14 @@ class MediaWikiApiConnector(AbstractConnector):
         try:
             # PRE 1.27
             # Login request, pre 1.27
-            payload = {
-               'action': 'login', 'format': 'json',
-               'lgname': self._username, 'lgpassword': self._password}
+            # payload = {
+            #   'action': 'login', 'format': 'json',
+            #   'lgname': self._username, 'lgpassword': self._password}
 
             # POST 1.27
             # Get a login token
-            # payload = {
-            #    'action': 'query', 'meta': 'tokens', 'type': 'login', 'format': 'json'}
+            payload = {
+                'action': 'query', 'meta': 'tokens', 'type': 'login', 'format': 'json'}
             r1 = requests.post(self._apiUrl, data=payload)
             self._cookies = r1.cookies
 
@@ -57,9 +57,9 @@ class MediaWikiApiConnector(AbstractConnector):
 
             # store login token
             # pre 1.27
-            self._loginToken = r1.json()['login']['token']
+            # self._loginToken = r1.json()['login']['token']
             # post 1.27
-            # self._loginToken = r1.json()['query']['tokens']['logintoken']
+            self._loginToken = r1.json()['query']['tokens']['logintoken']
 
             # Workaround MediaWiki bug
             # see https://www.mediawiki.org/wiki/API:Login
@@ -72,11 +72,11 @@ class MediaWikiApiConnector(AbstractConnector):
 
             # login
             payload['lgtoken'] = self._loginToken
-            # payload['action'] = 'clientlogin'
-            # payload['logintoken'] = self._loginToken
-            # payload['username'] = self._username
-            # payload['password'] = self._password
-            # payload['loginreturnurl'] = self._contentUrl
+            payload['action'] = 'login'
+            #payload['logintoken'] = self._loginToken
+            payload['lgname'] = self._username
+            payload['lgpassword'] = self._password
+            #payload['loginreturnurl'] = self._contentUrl
             r2 = requests.post(self._apiUrl, data=payload, cookies=r1.cookies)
 
             # Check http status
@@ -122,7 +122,7 @@ class MediaWikiApiConnector(AbstractConnector):
             # Open the page to get the edit token
             payload = {
                 'action': 'query', 'prop': 'info', 'titles': title,
-                'intoken': 'edit', 'format': 'json'}
+                'meta': 'tokens', 'format': 'json'}
             r1 = requests.post(self._apiUrl, data=payload, cookies=self._cookies)
 
             # Check http status
@@ -131,7 +131,7 @@ class MediaWikiApiConnector(AbstractConnector):
             # if page does not exist
             if "-1" in r1.json()['query']['pages']:
                 # get the edit token
-                edittoken = r1.json()['query']['pages']["-1"]['edittoken']
+                edittoken = r1.json()['query']['tokens']["csrftoken"]
             else:
                 # page exists, do not overwrite
                 raise Exception('Page exists %s.' % title)

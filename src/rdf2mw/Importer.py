@@ -70,10 +70,11 @@ class Importer:
 
             # delete all the property pages
             for sprop in sclass.properties.values():
-                if isinstance(sprop, DatatypeProperty):
-                    propDao.delete(sprop)
+                propDao.delete(sprop)
+                # if isinstance(sprop, DatatypeProperty):
+                #    propDao.delete(sprop)
 
-                    
+
 class ImporterException(Exception):
     """Failed importer operation."""
 
