@@ -17,6 +17,9 @@
       <xsl:when test="labels/label[@lang=$lang]">
 	<xsl:value-of select="labels/label[@lang=$lang]" />
       </xsl:when>
+      <xsl:when test="labels/label[@lang='en']">
+	<xsl:value-of select="labels/label[@lang='en']" />
+      </xsl:when>
       <xsl:otherwise>
 	<xsl:value-of select="@name" />
       </xsl:otherwise>

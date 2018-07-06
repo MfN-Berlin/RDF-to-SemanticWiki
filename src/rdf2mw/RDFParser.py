@@ -67,8 +67,17 @@ class RDFParser(AbstractParser):
         # go through the "dataProperty" elements and add them to the model
         for element in properties:
 
-            # propName is the name of this property
-            propName = element.attrib[RDFParser.full('rdf:about')].split('#')[1]
+            # Name of this property
+            aboutString = element.attrib[RDFParser.full('rdf:about')]
+            # Property name is in the format URL#proName
+            if '#' in aboutString:
+                propName = element.attrib[RDFParser.full('rdf:about')].split('#')[1]
+            # Property name is in the format URL/proName
+            elif '/' in aboutString:
+                propName = element.attrib[RDFParser.full('rdf:about')].split('#')[-1]
+            else:
+                propName = aboutString
+
             prop = DatatypeProperty(propName)
 
             # localized labels of the property

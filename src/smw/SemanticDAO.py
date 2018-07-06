@@ -157,6 +157,8 @@ class DatatypePropertyDAO(SemanticPropertyDAO):
         # Add atributes to the element tree
         if language is not None:
             stree.set('lang', language)
+        else:
+            stree.set('lang', 'en')
         # Apply the page.xslt template to create the markup for the wiki page
         self.values["property"] = self.transform(stree, SemanticElementDAO.propertyTemplatePath)
         # Send to MediaWiki
