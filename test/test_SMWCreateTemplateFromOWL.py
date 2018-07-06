@@ -13,7 +13,7 @@ from smw.MediaWikiApiConnector import MediaWikiApiConnector
 from smw.Factory import Factory
 
 
-class test_CreateTemplateFromOWL(unittest.TestCase):
+class test_SMWCreateTemplateFromOWL(unittest.TestCase):
     """
     Test.
 

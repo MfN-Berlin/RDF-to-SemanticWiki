@@ -15,7 +15,7 @@ from smw.Factory import Factory
 from smw.MediaWikiApiConnector import MediaWikiApiConnector
 
 
-class test_Importer(unittest.TestCase):
+class test_SMWImporter(unittest.TestCase):
     """
     Test.
 

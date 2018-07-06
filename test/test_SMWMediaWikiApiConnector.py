@@ -10,7 +10,7 @@ import configparser
 from smw.MediaWikiApiConnector import MediaWikiApiConnector
 
 
-class test_MediaWikiApiConnector(unittest.TestCase):
+class test_SMWMediaWikiApiConnector(unittest.TestCase):
     """Test."""
 
     configPath = "../example/config.ini"

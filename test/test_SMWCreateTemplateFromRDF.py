@@ -13,7 +13,7 @@ from smw.MediaWikiApiConnector import MediaWikiApiConnector
 from smw.Factory import Factory
 
 
-class test_CreateTemplateFromRDF(unittest.TestCase):
+class test_SMWCreateTemplateFromRDF(unittest.TestCase):
     """
     Test.
 
