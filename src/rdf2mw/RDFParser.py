@@ -74,7 +74,7 @@ class RDFParser(AbstractParser):
                 propName = element.attrib[RDFParser.full('rdf:about')].split('#')[1]
             # Property name is in the format URL/proName
             elif '/' in aboutString:
-                propName = element.attrib[RDFParser.full('rdf:about')].split('#')[-1]
+                propName = element.attrib[RDFParser.full('rdf:about')].split('/')[-1]
             else:
                 propName = aboutString
 
@@ -91,7 +91,7 @@ class RDFParser(AbstractParser):
             for comment in comments:
                 lang = comment.attrib[RDFParser.full('xml:lang')]
                 prop.addComment(comment.text, lang)
-
+                
             # domainName is the name of the class this property belongs to
             domain = element.find(RDFParser.path('rdfs:domain', startWith='descendant'))
             domainName = domain.attrib[RDFParser.full('rdf:resource')].split('#')[1]

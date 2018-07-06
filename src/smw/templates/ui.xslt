@@ -36,7 +36,7 @@
 	&lt;div class="tip"&gt;<xsl:value-of select="comments/comment[@lang=$lang]" />&lt;/div&gt;
       </xsl:if>    
   </xsl:template>
-
+ 
   <!--
       #####################################
       Localized texts used in the templates
