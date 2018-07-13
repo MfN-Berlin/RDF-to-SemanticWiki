@@ -32,7 +32,7 @@ class test_SMWImporter(unittest.TestCase):
         """Setup."""
         # Read the configuration file
         config = configparser.ConfigParser()
-        config.read(test_Importer.configPath)
+        config.read(test_SMWImporter.configPath)
         # A parser which can parse RDF
         self.parser = RDFParser()
         # A connector which can login to a MediaWiki through the API
