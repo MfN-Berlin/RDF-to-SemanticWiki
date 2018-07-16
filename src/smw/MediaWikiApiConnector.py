@@ -129,12 +129,13 @@ class MediaWikiApiConnector(AbstractConnector):
             self._checkRequest(r1)
 
             # if page does not exist
-            if "-1" in r1.json()['query']['pages']:
-                # get the edit token
-                edittoken = r1.json()['query']['tokens']["csrftoken"]
-            else:
-                # page exists, do not overwrite
-                raise Exception('Page exists %s.' % title)
+            # if "-1" in r1.json()['query']['pages']:
+            #    get the edit token
+            #    edittoken = r1.json()['query']['tokens']["csrftoken"]
+            # else:
+            #    page exists, do not overwrite
+            #    raise Exception('Page exists %s.' % title)
+            edittoken = r1.json()['query']['tokens']["csrftoken"]
 
             payload = {
                 'action': 'edit', 'title': title, 'text': content,
