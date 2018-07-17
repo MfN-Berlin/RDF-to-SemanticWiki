@@ -67,6 +67,9 @@
     <!--Property value-->
     {{#arraymap:{{{<xsl:value-of select="@name"/>|}}}|@|x|*[[::[[<xsl:value-of select="@name"/>::x]]|[[<xsl:value-of select="@name"/>::x]]]]|\n\n}}
     {{#if: {{{<xsl:value-of select="@name"/>}}} | {{#set: <xsl:value-of select="@name"/>={{{<xsl:value-of select="@name"/>|}}} }} |}}
+    
+    <!--Add page to category for object property-->
+    {{#arraymap:{{{<xsl:value-of select="@name"/>|}}}|@|x|[[Category:x]]|\n\n}}
   </xsl:template>
   
 </xsl:stylesheet>
