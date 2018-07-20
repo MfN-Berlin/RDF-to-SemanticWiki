@@ -23,13 +23,12 @@ class Importer:
         self._parser = parser
         self._daoFactory = daoFactory
 
-    def run(self, modelPath, language=None, layout=None):
+    def run(self, modelPath, language=None):
         """
         Import RDF or OWL file.
 
         @param modelPath: ontology file to import
         @param language: string language code
-        @param layout: layout file to use
         """
         # parse the file
         model = self._parser.parse(modelPath)

@@ -91,7 +91,7 @@ class RDFParser(AbstractParser):
             for comment in comments:
                 lang = comment.attrib[RDFParser.full('xml:lang')]
                 prop.addComment(comment.text, lang)
-                
+
             # domainName is the name of the class this property belongs to
             domain = element.find(RDFParser.path('rdfs:domain', startWith='descendant'))
             domainName = domain.attrib[RDFParser.full('rdf:resource')].split('#')[1]
@@ -140,6 +140,12 @@ class RDFParser(AbstractParser):
             if range is not None:
                 rangeType = range.attrib[RDFParser.full('rdf:resource')].split('#')[1]
                 prop.range = rangeType
+
+            # set the global cardinality constraint of this property
+            typeConstraint = element.find(RDFParser.path('rdf:type', startWith='descendant'))
+            if typeConstraint is not None:
+                cardinality = typeConstraint.attrib[RDFParser.full('rdf:resource')].split('#')[1]
+                prop.cardinality = cardinality
 
             # if the class exists, add the property
             if domainName in self._model.getClassNames():

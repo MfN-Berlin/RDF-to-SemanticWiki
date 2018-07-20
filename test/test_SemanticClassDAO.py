@@ -9,7 +9,6 @@ Tests the DAO classes without persisting to a back-end
 @author: Alvaro.Ortiz
 """
 import unittest
-from lxml import etree
 
 from DummyDAOFactory import DummyDAOFactory
 from rdf2mw.SemanticModel import SemanticClass, DatatypeProperty
@@ -17,6 +16,7 @@ from rdf2mw.SemanticModel import SemanticClass, DatatypeProperty
 
 class test_SemanticClassDAO(unittest.TestCase):
     """Test."""
+
     layoutpath = "testdata/layout.xml"
 
     def testSimpleClass(self):
@@ -33,23 +33,6 @@ class test_SemanticClassDAO(unittest.TestCase):
         self.assertTrue("==test property" in template)  # Properties names H2
         # properties are in semantic mediawiki syntax
         self.assertTrue("[[test property::{{{test property|}}}]]" in template)
-
-    def testLayout(self):
-        """Test that the layout file is read and interpreted correctly."""
-        factory = DummyDAOFactory(layoutFile=test_SemanticClassDAO.layoutpath)
-        # could the layout object be read from file
-        self.assertTrue(factory.layout)
-
-        sclass = factory.getSemanticClassDAO()
-        # SemanticClassDAO has a Layout object
-        self.assertTrue(sclass.layout)
-
-        root = sclass.layout.layoutTree.getroot()
-        expected = "hasName,hasSubject,hasStartDate,hasEndDate,isWholeDay,hasDetails,hasLocation,hasPriority"
-        props = root.findall("properties")
-        print(root.findall(".//properties"))
-        ## self.assertEqual(expected, props.attrib['order'])
-
 
     @unittest.skip("Skip unions for now")
     def testUnionClass(self):

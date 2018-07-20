@@ -103,8 +103,17 @@ class SemanticClassDAO(SemanticElementDAO):
 
         @param stree etree representing a semantic class
         """
-        if self._manager.layout is None:
+        if self.layout is None:
             return
+        else:
+            # the name of the element processed
+            name = stree.attrib['name']
+            # the order of the properties in the layout file
+            root = self.layout.layoutTree.getroot()
+            order = root.find(".//page[@Name='']")
+
+            print(".//page[@Name='%s']" % name,order)
+
 
 
 class SemanticPropertyDAO(SemanticElementDAO):

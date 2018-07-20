@@ -198,6 +198,7 @@ class SemanticProperty(SemanticElement):
         self.domain = None
         self._range = None
         self.allowedValues = {}
+        self._cardinality = None
 
     @property
     def range(self):
@@ -210,6 +211,21 @@ class SemanticProperty(SemanticElement):
         if value.casefold() == "boolean".casefold():
             self.allowedValues = {'true', 'false'}
         self._range = value
+
+    @property
+    def cardinality(self):
+        """Getter for cardinality property."""
+        return self._cardinality
+
+    @cardinality.setter
+    def cardinality(self, value):
+        """
+        Setter for cardinality property.
+
+        Allowed values are None (no constraints apply) and 'FunctionalProperty' (there can be only one of).
+        @see https://www.w3.org/TR/owl-ref/#FunctionalProperty-def
+        """
+        self._cardinality = value
 
     def asElementTree(self):
         """Override."""
@@ -225,6 +241,8 @@ class SemanticProperty(SemanticElement):
                 allowed.text = val
                 allowedValues.append(allowed)
             selm.append(allowedValues)
+        if self.cardinality:
+            selm.set('cardinality', self.cardinality)
 
         return(selm)
 

@@ -111,6 +111,16 @@ class test_RDFParser(unittest.TestCase):
         sclass = model.classes['Entry']
         self.assertEqual("Event", sclass.properties["hasEvent"].range)
 
+    def testParseObjectPropertyCardinality(self):
+        """Test that global cardinality constraints are parsed correctly and that default is used."""
+        model = self.parser.parse(self.rdfpath)
+        # Entry/hasDescription is functional
+        sclass = model.classes['Entry']
+        self.assertEqual("FunctionalProperty", sclass.properties["hasDescription"].cardinality)
+        # Calendar/hasEntry is not functional
+        sclass = model.classes['Calendar']
+        self.assertFalse(sclass.properties["hasEntry"].cardinality)
+
     @unittest.skip("Skipping RDF union for now")
     def testParseUnion(self):
         """Test parsing united classes."""

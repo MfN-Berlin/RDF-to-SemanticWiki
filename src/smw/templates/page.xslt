@@ -23,7 +23,7 @@
     
     <!-- Class info -->
     <xsl:apply-templates select="." mode="collapsibleInfo" />
-    
+
     <xsl:apply-templates select="DatatypeProperty" mode="page"/>
     <xsl:apply-templates select="ObjectProperty" mode="page"/>
     
@@ -65,7 +65,14 @@
     <xsl:apply-templates select="." mode="collapsibleInfo" />
     
     <!--Property value-->
-    {{#arraymap:{{{<xsl:value-of select="@name"/>|}}}|@|x|*[[::[[<xsl:value-of select="@name"/>::x]]|[[<xsl:value-of select="@name"/>::x]]]]|\n\n}}
+    <xsl:choose>
+      <xsl:when test="@cardinality='FunctionalProperty'">
+	[[{{{<xsl:value-of select="@name" />}}}]]
+      </xsl:when>
+      <xsl:otherwise>
+	{{#arraymap:{{{<xsl:value-of select="@name"/>|}}}|@|x|*[[::[[<xsl:value-of select="@name"/>::x]]|[[<xsl:value-of select="@name"/>::x]]]]|\n\n}}
+      </xsl:otherwise>
+    </xsl:choose>
     {{#if: {{{<xsl:value-of select="@name"/>}}} | {{#set: <xsl:value-of select="@name"/>={{{<xsl:value-of select="@name"/>|}}} }} |}}
     
     <!--Add page to category for object property-->

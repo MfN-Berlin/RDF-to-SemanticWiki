@@ -90,15 +90,27 @@
     <!-- Property info -->
     <xsl:apply-templates select="." mode="collapsibleInfo" />
     
-    <!-- Object properties as a listbox -->
-    {{{field|<xsl:value-of select="@name"/>
-    |property=<xsl:value-of select="@name"/>
-    | values from category=<xsl:value-of select="@range"/>
-    |input type=listbox
-    |size=10
-    |list
-    |delimiter=@
-    }}}
+    <xsl:choose>
+      <xsl:when test="@cardinality='FunctionalProperty'">
+	<!-- Object property as a dropdown -->
+	{{{field|<xsl:value-of select="@name"/>
+	|property=<xsl:value-of select="@name"/>
+	| values from category=<xsl:value-of select="@range"/>
+	|input type=dropdown
+	}}}
+      </xsl:when>
+      <xsl:otherwise>
+	<!-- Object properties as a listbox -->
+	{{{field|<xsl:value-of select="@name"/>
+	|property=<xsl:value-of select="@name"/>
+	| values from category=<xsl:value-of select="@range"/>
+	|input type=listbox
+	|size=10
+	|list
+	|delimiter=@
+	}}}
+      </xsl:otherwise>
+    </xsl:choose>
 
   </xsl:template>
 
