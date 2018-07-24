@@ -25,8 +25,6 @@ try:
     optionsParser.add_option("-i", "--input", dest="modelPath", help="Path to ontology file")
     language = None
     optionsParser.add_option("-l", "--language", dest="language", help="Language of the wiki")
-    layout = None
-    optionsParser.add_option("-y", "--layout", dest="layout", help="Specifies the presentation of the ontology in the wiki")
 
     (options, args) = optionsParser.parse_args()
 
