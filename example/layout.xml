@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<layout>
-  <page name="Entry">
-    <properties order="hasName,hasSubject,hasStartDate,hasEndDate,isWholeDay,hasDetails,hasLocation,hasPriority"/>
-  </page>
-</layout>
