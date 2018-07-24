@@ -55,7 +55,7 @@ try:
     # A connector which can login to a MediaWiki through the API
     connector = MediaWikiApiConnector(config)
     # A factory for DAO objects which can persist a SemanticModel
-    daoFactory = Factory(connector, options.layout)
+    daoFactory = Factory(connector)
     # A wrapper for the import process
     importer = Importer(parser, daoFactory)
 

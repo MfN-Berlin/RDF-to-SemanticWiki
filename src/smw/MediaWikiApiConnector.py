@@ -8,11 +8,18 @@ import requests
 import urllib.parse
 import sys
 import traceback
-from rdf2mw.AbstractConnector import AbstractConnector, PageDoesNotExistException, ConnectionException
+from rdf2mw.AbstractConnector import AbstractConnector,\
+    PageDoesNotExistException, ConnectionException
 
 
 class MediaWikiApiConnector(AbstractConnector):
     """Connect to the MediaWiki API."""
+
+    # XSLT templates
+    pageTemplate = "page.xslt"
+    formTemplate = "form.xslt"
+    categoryTemplate = "category.xslt"
+    propertyTemplate = "property.xslt"
 
     # The URL to the Mediawiki API
     _apiUrl = None
@@ -35,6 +42,7 @@ class MediaWikiApiConnector(AbstractConnector):
         self._contentUrl = urllib.parse.urljoin(self.baseMwUrl, 'index.php')
         self._username = config.get('defaults', 'username')
         self._password = config.get('defaults', 'password')
+        self._tplDir = config.get('defaults', 'tplDir')
 
     def login(self):
         """Override abstract method."""
@@ -48,7 +56,8 @@ class MediaWikiApiConnector(AbstractConnector):
             # POST 1.27
             # Get a login token
             payload = {
-                'action': 'query', 'meta': 'tokens', 'type': 'login', 'format': 'json'}
+                'action': 'query', 'meta': 'tokens', 'type': 'login',
+                'format': 'json'}
             r1 = requests.post(self._apiUrl, data=payload)
             self._cookies = r1.cookies
 
@@ -73,10 +82,10 @@ class MediaWikiApiConnector(AbstractConnector):
             # login
             payload['lgtoken'] = self._loginToken
             payload['action'] = 'login'
-            #payload['logintoken'] = self._loginToken
+            # payload['logintoken'] = self._loginToken
             payload['lgname'] = self._username
             payload['lgpassword'] = self._password
-            #payload['loginreturnurl'] = self._contentUrl
+            # payload['loginreturnurl'] = self._contentUrl
             r2 = requests.post(self._apiUrl, data=payload, cookies=r1.cookies)
 
             # Check http status
@@ -100,7 +109,8 @@ class MediaWikiApiConnector(AbstractConnector):
 
             # Read a page
             payload = {'action': 'parse', 'page': title, 'format': 'json'}
-            r1 = requests.post(self._apiUrl, data=payload, cookies=self._cookies)
+            r1 = requests.post(self._apiUrl, data=payload,
+                               cookies=self._cookies)
 
             # Check http status
             self._checkRequest(r1)
@@ -123,7 +133,8 @@ class MediaWikiApiConnector(AbstractConnector):
             payload = {
                 'action': 'query', 'prop': 'info', 'titles': title,
                 'meta': 'tokens', 'format': 'json'}
-            r1 = requests.post(self._apiUrl, data=payload, cookies=self._cookies)
+            r1 = requests.post(self._apiUrl, data=payload,
+                               cookies=self._cookies)
 
             # Check http status
             self._checkRequest(r1)
@@ -140,7 +151,8 @@ class MediaWikiApiConnector(AbstractConnector):
             payload = {
                 'action': 'edit', 'title': title, 'text': content,
                 'token': edittoken, 'format': 'json'}
-            r1 = requests.post(self._apiUrl, data=payload, cookies=self._cookies)
+            r1 = requests.post(self._apiUrl, data=payload,
+                               cookies=self._cookies)
 
             # Check http status
             self._checkRequest(r1)
@@ -165,7 +177,8 @@ class MediaWikiApiConnector(AbstractConnector):
             payload = {
                 'action': 'query', 'prop': 'info', 'titles': title,
                 'meta': 'tokens', 'format': 'json'}
-            r1 = requests.post(self._apiUrl, data=payload, cookies=self._cookies)
+            r1 = requests.post(self._apiUrl, data=payload,
+                               cookies=self._cookies)
 
             # Check http status
             self._checkRequest(r1)
@@ -176,8 +189,10 @@ class MediaWikiApiConnector(AbstractConnector):
             # edittoken = r1.json()['query']['pages'][pageId]['edittoken']
             edittoken = r1.json()['query']['tokens']['csrftoken']
 
-            payload = {'action': 'delete', 'title': title, 'token': edittoken, 'format': 'json'}
-            r2 = requests.post(self._apiUrl, data=payload, cookies=self._cookies)
+            payload = {'action': 'delete', 'title': title,
+                       'token': edittoken, 'format': 'json'}
+            r2 = requests.post(self._apiUrl, data=payload,
+                               cookies=self._cookies)
 
             # Check http status
             self._checkRequest(r2)
@@ -193,25 +208,39 @@ class MediaWikiApiConnector(AbstractConnector):
             return False
 
     def _checkRequest(self, r):
-        """Check if a http request was successful, throw an exception otherwise."""
+        """
+        Check if a http request was successful.
+
+        @param r request object
+        @see http://docs.python-requests.org/en/master/user/quickstart/
+        @throws exception when response contains error.
+        """
         # Check http status
         if r.status_code != 200:
-            raise Exception('Failed request url %s status %d' % (self._apiUrl, r.status_code))
+            raise Exception('Failed request url %s status %d'
+                            % (self._apiUrl, r.status_code))
         # Check response code
         if 'error' in r.json():
             if(r.json()['error']['code'] == 'missingtitle'):
                 raise PageDoesNotExistException(
-                    'Failed request %s : %s' % (r.url, r.json()['error']['info']))
+                    'Failed request %s : %s'
+                    % (r.url, r.json()['error']['info']))
             else:
                 raise ConnectionException(
-                    'Failed request %s : %s' % (r.url, r.json()['error']['info']))
+                    'Failed request %s : %s'
+                    % (r.url, r.json()['error']['info']))
 
     @property
     def content(self):
-        """Get the content of a wiki page after it has been loaded with loadPage."""
+        """Get the content of a wiki page after it has been loaded."""
         return str(self._content)
 
     @property
     def baseURL(self):
         """Get the base URL of the wiki."""
         return self.baseMwUrl
+
+    @property
+    def tplDir(self):
+        """Get the template directory."""
+        return self._tplDir

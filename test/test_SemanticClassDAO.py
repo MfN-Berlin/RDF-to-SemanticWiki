@@ -17,8 +17,6 @@ from rdf2mw.SemanticModel import SemanticClass, DatatypeProperty
 class test_SemanticClassDAO(unittest.TestCase):
     """Test."""
 
-    layoutpath = "testdata/layout.xml"
-
     def testSimpleClass(self):
         """Test that template markdown is correct."""
         factory = DummyDAOFactory()

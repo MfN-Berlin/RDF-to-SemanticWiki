@@ -8,15 +8,11 @@ Created on 28.11.2017
 import os
 from lxml import etree
 from rdf2mw.AbstractDAO import AbstractDAO
+from smw.MediaWikiApiConnector import MediaWikiApiConnector
 
 
 class SemanticElementDAO(AbstractDAO):
     """Base class for all semantic element DAOs."""
-
-    pageTemplatePath = "templates/page.xslt"
-    formTemplatePath = "templates/form.xslt"
-    categoryTemplatePath = "templates/category.xslt"
-    propertyTemplatePath = "templates/property.xslt"
 
     _manager = None
 
@@ -29,18 +25,25 @@ class SemanticElementDAO(AbstractDAO):
 
         @param manager: class implementing AbstractDAOManager
         """
+
+        # The manager object
         self._manager = manager
+
+        # Array that will hold rendered markdown (page, form, class, property)
         self.values = {}
 
-    def transform(self, tree, tplPath):
+        # Path to the template directory, as specified in config.ini
+        self.tplDir = manager.connector.tplDir
+
+    def transform(self, tree, tplName):
         """
         Apply and XSLT transformation to obtain a string.
 
         @param tree etree input xml tree
-        @param tplPath path to the template, relative to this file
+        @param tplName name of the XSLT template to apply
         @return string containing wiki markup.
         """
-        fullPath = os.path.join(os.path.dirname(__file__), tplPath)
+        fullPath = os.path.join(os.path.dirname(__file__), self.tplDir, tplName)
         template = etree.parse(fullPath)
         transform = etree.XSLT(template)
         page = transform(tree)
@@ -55,10 +58,9 @@ class SemanticElementDAO(AbstractDAO):
 class SemanticClassDAO(SemanticElementDAO):
     """Provides a class DAO objects accessing the MediaWiki API."""
 
-    def __init__(self, manager, layout=None):
+    def __init__(self, manager):
         """Construct."""
         super().__init__(manager)
-        self.layout = layout
 
     def create(self, sclass, language='en'):
         """Override abstract method."""
@@ -68,20 +70,20 @@ class SemanticClassDAO(SemanticElementDAO):
         if language is not None:
             stree.set('lang', language)
 
-        # Add order of properties to class pages
-        self._addLayout(stree)
-
         # SemanticClassDAO and MediaWikiApiConnector are coupled anyway.
         stree.set('baseUrl', self._manager.connector.baseURL)
 
         # Apply the page.xslt template to create the markup for the wiki page
-        self.values["template"] = self.transform(stree, SemanticElementDAO.pageTemplatePath)
+        self.values["template"] = self.transform(
+            stree, MediaWikiApiConnector.pageTemplate)
 
         # Apply the form.xslt template to create the markup for the wiki form
-        self.values["form"] = self.transform(stree, SemanticElementDAO.formTemplatePath)
+        self.values["form"] = self.transform(
+            stree, MediaWikiApiConnector.formTemplate)
 
         # Markup for the category page
-        self.values["category"] = self.transform(stree, SemanticElementDAO.categoryTemplatePath)
+        self.values["category"] = self.transform(
+            stree, MediaWikiApiConnector.categoryTemplate)
 
         # Send to MediaWiki (template, form and category pages)
         self._manager.commit(sclass.name, self.values)
@@ -96,24 +98,6 @@ class SemanticClassDAO(SemanticElementDAO):
     def getValues(self):
         """Override abstract method."""
         return self.values
-
-    def _addLayout(self, stree):
-        """
-        Add order of properties to class pages.
-
-        @param stree etree representing a semantic class
-        """
-        if self.layout is None:
-            return
-        else:
-            # the name of the element processed
-            name = stree.attrib['name']
-            # the order of the properties in the layout file
-            root = self.layout.layoutTree.getroot()
-            order = root.find(".//page[@Name='']")
-
-            print(".//page[@Name='%s']" % name,order)
-
 
 
 class SemanticPropertyDAO(SemanticElementDAO):
@@ -148,7 +132,8 @@ class ObjectPropertyDAO(SemanticPropertyDAO):
         if language is not None:
             stree.set('lang', language)
         # Apply the page.xslt template to create the markup for the wiki page
-        self.values["property"] = self.transform(stree, SemanticElementDAO.propertyTemplatePath)
+        self.values["property"] = self.transform(
+            stree, MediaWikiApiConnector.propertyTemplate)
         # Send to MediaWiki
         self._manager.commit(sprop.name, self.values)
 
@@ -169,6 +154,7 @@ class DatatypePropertyDAO(SemanticPropertyDAO):
         else:
             stree.set('lang', 'en')
         # Apply the page.xslt template to create the markup for the wiki page
-        self.values["property"] = self.transform(stree, SemanticElementDAO.propertyTemplatePath)
+        self.values["property"] = self.transform(
+            stree, MediaWikiApiConnector.propertyTemplate)
         # Send to MediaWiki
         self._manager.commit(sprop.name, self.values)

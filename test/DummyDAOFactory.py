@@ -18,10 +18,10 @@ class DummyDAOFactory(Factory):
     the manager object with a dummy manager
     """
 
-    def __init__(self, lang=None, layoutFile=None):
+    def __init__(self, lang=None):
         """Construct."""
-        Factory.__init__(self, lang, layoutFile)
-        self._manager = DummyManager(DummyConnector(), self.layout)
+        Factory.__init__(self, lang)
+        self._manager = DummyManager(DummyConnector())
 
 
 class DummyManager(Manager):
@@ -43,3 +43,8 @@ class DummyConnector(AbstractConnector):
     def baseURL(self):
         """Get the base URL of the wiki."""
         return "dummy"
+
+    @property
+    def tplDir(self):
+        """Get the template directory."""
+        return "templates"

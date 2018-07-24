@@ -13,15 +13,14 @@ class Manager(AbstractManager):
 
     _connector = None
 
-    def __init__(self, connector, layout):
+    def __init__(self, connector):
         """
         Construct.
 
-        @param connector: the object that will be used to persist the DAO objects.
-        @param layout: an instance of smw.Layout
+        @param connector: the object that will be used to
+        persist the DAO objects.
         """
         self._connector = connector
-        self._layout = layout
 
     def commit(self, name, values):
         """Override abstract method."""
@@ -33,7 +32,7 @@ class Manager(AbstractManager):
     def delete(self, name, pages):
         """Override abstract method."""
         for namespace in pages:
-            # namespace contains e.g. "template", "form", "property" page contents
+            # namespace contains e.g. "template", "form", "property"
             pageName = '%s:%s' % (namespace, name)
             self._connector.deletePage(pageName)
 
@@ -41,8 +40,3 @@ class Manager(AbstractManager):
     def connector(self):
         """Get the connector."""
         return self._connector
-
-    @property
-    def layout(self):
-        """Get the layout object."""
-        return self._layout

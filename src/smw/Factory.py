@@ -8,7 +8,6 @@ Created on 04.05.2016
 from rdf2mw.AbstractFactory import AbstractFactory
 from smw.SemanticDAO import SemanticClassDAO, DatatypePropertyDAO, ObjectPropertyDAO
 from smw.Manager import Manager
-from smw.Layout import Layout
 
 
 class Factory(AbstractFactory):
@@ -25,22 +24,18 @@ class Factory(AbstractFactory):
     _classDAO = None
     _modelDAO = None
 
-    def __init__(self, connector, layoutFile=None):
+    def __init__(self, connector):
         """
         Construct.
 
         @param connector: An object implenenting AbstractConnector
-        @param layout: path to a XML layout file
         """
         self._connector = connector
-        self.layout = None
-        if layoutFile is not None:
-            self.layout = Layout(layoutFile)
 
     def getDAOManager(self):
         """Override abstract method."""
         if self._manager is None:
-            self._manager = Manager(self._connector, self.layout)
+            self._manager = Manager(self._connector)
         return self._manager
 
     def getDatatypePropertyDAO(self):
@@ -58,5 +53,5 @@ class Factory(AbstractFactory):
     def getSemanticClassDAO(self):
         """Override abstract method."""
         if self._classDAO is None:
-            self._classDAO = SemanticClassDAO(self.getDAOManager(), self.layout)
+            self._classDAO = SemanticClassDAO(self.getDAOManager())
         return self._classDAO
