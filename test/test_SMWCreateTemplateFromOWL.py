@@ -39,7 +39,7 @@ class test_SMWCreateTemplateFromOWL(unittest.TestCase):
         self.parser = OWLParser()
         self.model = self.parser.parse(self.owlpath)
         self.connector = MediaWikiApiConnector(config)
-        self.factory = Factory(self.connector)
+        self.factory = Factory(self.connector, "templates")
 
     def tearDown(self):
         """Teardown."""

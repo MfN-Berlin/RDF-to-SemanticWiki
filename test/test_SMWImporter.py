@@ -38,7 +38,7 @@ class test_SMWImporter(unittest.TestCase):
         # A connector which can login to a MediaWiki through the API
         self.connector = MediaWikiApiConnector(config)
         # A factory for DAO objects which can persist a SemanticModel
-        self.daoFactory = Factory(self.connector)
+        self.daoFactory = Factory(self.connector, "templates")
         # A wrapper for the import process
         self.importer = Importer(self.parser, self.daoFactory)
 

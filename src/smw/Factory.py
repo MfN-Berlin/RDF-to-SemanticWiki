@@ -24,18 +24,20 @@ class Factory(AbstractFactory):
     _classDAO = None
     _modelDAO = None
 
-    def __init__(self, connector):
+    def __init__(self, connector, tplDir):
         """
         Construct.
 
         @param connector: An object implenenting AbstractConnector
+        @param tplDir: Path to XSLT templates
         """
         self._connector = connector
+        self._tplDir = tplDir
 
     def getDAOManager(self):
         """Override abstract method."""
         if self._manager is None:
-            self._manager = Manager(self._connector)
+            self._manager = Manager(self._connector, self._tplDir)
         return self._manager
 
     def getDatatypePropertyDAO(self):

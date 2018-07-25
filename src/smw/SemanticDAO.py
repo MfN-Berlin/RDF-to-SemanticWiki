@@ -8,13 +8,16 @@ Created on 28.11.2017
 import os
 from lxml import etree
 from rdf2mw.AbstractDAO import AbstractDAO
-from smw.MediaWikiApiConnector import MediaWikiApiConnector
 
 
 class SemanticElementDAO(AbstractDAO):
     """Base class for all semantic element DAOs."""
 
-    _manager = None
+    # XSLT templates
+    pageTemplate = "page.xslt"
+    formTemplate = "form.xslt"
+    categoryTemplate = "category.xslt"
+    propertyTemplate = "property.xslt"
 
     def __init__(self, manager):
         """
@@ -25,7 +28,6 @@ class SemanticElementDAO(AbstractDAO):
 
         @param manager: class implementing AbstractDAOManager
         """
-
         # The manager object
         self._manager = manager
 
@@ -33,7 +35,7 @@ class SemanticElementDAO(AbstractDAO):
         self.values = {}
 
         # Path to the template directory, as specified in config.ini
-        self.tplDir = manager.connector.tplDir
+        self.tplDir = self._manager.tplDir
 
     def transform(self, tree, tplName):
         """
@@ -75,15 +77,15 @@ class SemanticClassDAO(SemanticElementDAO):
 
         # Apply the page.xslt template to create the markup for the wiki page
         self.values["template"] = self.transform(
-            stree, MediaWikiApiConnector.pageTemplate)
+            stree, SemanticElementDAO.pageTemplate)
 
         # Apply the form.xslt template to create the markup for the wiki form
         self.values["form"] = self.transform(
-            stree, MediaWikiApiConnector.formTemplate)
+            stree, SemanticElementDAO.formTemplate)
 
         # Markup for the category page
         self.values["category"] = self.transform(
-            stree, MediaWikiApiConnector.categoryTemplate)
+            stree, SemanticElementDAO.categoryTemplate)
 
         # Send to MediaWiki (template, form and category pages)
         self._manager.commit(sclass.name, self.values)
@@ -133,7 +135,7 @@ class ObjectPropertyDAO(SemanticPropertyDAO):
             stree.set('lang', language)
         # Apply the page.xslt template to create the markup for the wiki page
         self.values["property"] = self.transform(
-            stree, MediaWikiApiConnector.propertyTemplate)
+            stree, SemanticElementDAO.propertyTemplate)
         # Send to MediaWiki
         self._manager.commit(sprop.name, self.values)
 
@@ -155,6 +157,6 @@ class DatatypePropertyDAO(SemanticPropertyDAO):
             stree.set('lang', 'en')
         # Apply the page.xslt template to create the markup for the wiki page
         self.values["property"] = self.transform(
-            stree, MediaWikiApiConnector.propertyTemplate)
+            stree, SemanticElementDAO.propertyTemplate)
         # Send to MediaWiki
         self._manager.commit(sprop.name, self.values)

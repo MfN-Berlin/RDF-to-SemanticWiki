@@ -15,12 +15,6 @@ from rdf2mw.AbstractConnector import AbstractConnector,\
 class MediaWikiApiConnector(AbstractConnector):
     """Connect to the MediaWiki API."""
 
-    # XSLT templates
-    pageTemplate = "page.xslt"
-    formTemplate = "form.xslt"
-    categoryTemplate = "category.xslt"
-    propertyTemplate = "property.xslt"
-
     # The URL to the Mediawiki API
     _apiUrl = None
     # The URL to MediaWiki pages
@@ -42,7 +36,6 @@ class MediaWikiApiConnector(AbstractConnector):
         self._contentUrl = urllib.parse.urljoin(self.baseMwUrl, 'index.php')
         self._username = config.get('defaults', 'username')
         self._password = config.get('defaults', 'password')
-        self._tplDir = config.get('defaults', 'tplDir')
 
     def login(self):
         """Override abstract method."""

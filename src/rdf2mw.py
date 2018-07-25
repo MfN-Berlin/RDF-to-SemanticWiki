@@ -7,6 +7,7 @@ Created on 02.05.2016
 """
 
 import sys
+import os
 import configparser
 from optparse import OptionParser
 from rdf2mw.Importer import Importer, ImporterException
@@ -17,6 +18,10 @@ configPath = "example/config.ini"
 """Path to configuration file."""
 
 try:
+    # Read the configuration file
+    config = configparser.ConfigParser()
+    config.read(configPath)
+
     # Parse command-line options
     optionsParser = OptionParser()
     command = None
@@ -25,6 +30,8 @@ try:
     optionsParser.add_option("-i", "--input", dest="modelPath", help="Path to ontology file")
     language = None
     optionsParser.add_option("-l", "--language", dest="language", help="Language of the wiki")
+    templateDir = None
+    optionsParser.add_option("-t", "--templates", dest="templateDir", help="Path to template directory")
 
     (options, args) = optionsParser.parse_args()
 
@@ -46,14 +53,18 @@ try:
     if options.command not in ['remove', 'import']:
         raise ImporterException("Unknown command")
 
-    # Read the configuration file
-    config = configparser.ConfigParser()
-    config.read(configPath)
+    # Path to templates directory
+    if options.templateDir is not None:
+        tplDir = options.templateDir
+    else:
+        tplDir = config.get('defaults', 'tplDir')
+    if not os.path.isdir(tplDir):
+        raise ImporterException("Template directory not found")
 
     # A connector which can login to a MediaWiki through the API
     connector = MediaWikiApiConnector(config)
     # A factory for DAO objects which can persist a SemanticModel
-    daoFactory = Factory(connector)
+    daoFactory = Factory(connector, tplDir)
     # A wrapper for the import process
     importer = Importer(parser, daoFactory)
 

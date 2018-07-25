@@ -13,14 +13,16 @@ class Manager(AbstractManager):
 
     _connector = None
 
-    def __init__(self, connector):
+    def __init__(self, connector, tplDir):
         """
         Construct.
 
         @param connector: the object that will be used to
         persist the DAO objects.
+        @param tplDir: Path to XSLT templates
         """
         self._connector = connector
+        self._tplDir = tplDir
 
     def commit(self, name, values):
         """Override abstract method."""
@@ -40,3 +42,8 @@ class Manager(AbstractManager):
     def connector(self):
         """Get the connector."""
         return self._connector
+
+    @property
+    def tplDir(self):
+        """Get the template directory."""
+        return self._tplDir

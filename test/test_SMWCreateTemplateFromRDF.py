@@ -35,7 +35,7 @@ class test_SMWCreateTemplateFromRDF(unittest.TestCase):
         self.parser = RDFParser()
         self.model = self.parser.parse(self.rdfpath)
         self.connector = MediaWikiApiConnector(config)
-        self.factory = Factory(self.connector)
+        self.factory = Factory(self.connector, "templates")
 
     def tearDown(self):
         """Teardown."""
