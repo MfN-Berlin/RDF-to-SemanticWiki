@@ -1,5 +1,5 @@
 """
-Import an Ontology in RDF or OWL format into a semantic MediaWiki.
+Import an Ontology in RDF format into a semantic MediaWiki.
 
 Created on 02.05.2016
 

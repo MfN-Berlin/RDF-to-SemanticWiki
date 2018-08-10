@@ -23,8 +23,8 @@ class test_RDFParser(unittest.TestCase):
         """Test that the parser can be instantiated."""
         self.assertTrue(self.parser)
 
-    def testLoadOWLFile(self):
-        """Test thet a OWL file can be read."""
+    def testLoadFile(self):
+        """Test thet an ontology file can be read."""
         self.assertTrue(self.parser.parse(self.rdfpath))
 
     def testParseClasses(self):

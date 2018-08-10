@@ -1,5 +1,5 @@
 """
-Parse an OWL file in XML format.
+Parse an RDF file in XML format.
 
 Created on 02.05.2016
 
@@ -159,7 +159,7 @@ class RDFParser(AbstractParser):
 
     def _checkRDF(self):
         """
-        Check that the loaded file is actually an OWL file.
+        Check that the loaded file is actually an RDF file.
 
         @return boolean,string: True or False, error message (or None if True)
         """

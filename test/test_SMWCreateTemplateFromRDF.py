@@ -2,7 +2,7 @@
 Test.
 
 Created on 12.05.2016
-Reads an OWL file, parses it and stores the correspondin templates in a wiki.
+Reads an ontology file, parses it and stores the correspondin templates in a wiki.
 
 @author: Alvaro.Ortiz
 """

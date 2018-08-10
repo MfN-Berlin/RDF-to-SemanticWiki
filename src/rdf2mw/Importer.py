@@ -1,5 +1,5 @@
 """
-Import an RDF or OWL file into a semantic MediaWiki.
+Import an RDF file into a semantic MediaWiki.
 
 Created on 02.05.2016
 
@@ -8,7 +8,7 @@ Created on 02.05.2016
 from rdf2mw.SemanticModel import DatatypeProperty
 
 class Importer:
-    """Import an RDF or OWL file into a data sink (e.g. semantic MediaWiki API)."""
+    """Import an RDF file into a data sink (e.g. semantic MediaWiki API)."""
 
     _parser = None
     _daoFactory = None
@@ -17,7 +17,7 @@ class Importer:
         """
         Construct.
 
-        @param parser: parses an RDF or OWL file into a dom object
+        @param parser: parses an RDF file into a dom object
         @param daoFactory: a factory of DAO objects (that persist e.g. in semantic MediaWiki API)
         """
         self._parser = parser
@@ -25,7 +25,7 @@ class Importer:
 
     def run(self, modelPath, language=None):
         """
-        Import RDF or OWL file.
+        Import RDF  file.
 
         @param modelPath: ontology file to import
         @param language: string language code

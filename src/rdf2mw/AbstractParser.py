@@ -14,7 +14,7 @@ class AbstractParser:
         Parse an ontology.
 
         @param path:string path to a file
-        @return SemanticModel: a object representing the parsed OWL
+        @return SemanticModel: a object representing the parsed ontology
         @raise exception: if parsing failed.
         """
         raise NotImplementedError
