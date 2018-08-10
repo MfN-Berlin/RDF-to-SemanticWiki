@@ -42,10 +42,6 @@ try:
         # A parser which can parse RDF
         from rdf2mw.RDFParser import RDFParser
         parser = RDFParser()
-    elif ".owl" in options.modelPath:
-        # A parser which can parse OWL
-        from rdf2mw.OWLParser import OWLParser
-        parser = OWLParser()
     else:
         raise ImporterException("Unknown input file format.")
 
