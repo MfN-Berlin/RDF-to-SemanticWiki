@@ -104,6 +104,12 @@ class RDFParser(AbstractParser):
             else:
                 prop.range = "Literal"
 
+            # set the global cardinality constraint of this property
+            typeConstraint = element.find(RDFParser.path('rdf:type', startWith='descendant'))
+            if typeConstraint is not None:
+                cardinality = typeConstraint.attrib[RDFParser.full('rdf:resource')].split('#')[1]
+                prop.cardinality = cardinality
+
             # if the class exists, add the property
             if domainName in self._model.getClassNames():
                 self._model.classes[domainName].addProperty(prop)

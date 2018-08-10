@@ -22,6 +22,7 @@ class test_SemanticClassDAO(unittest.TestCase):
         factory = DummyDAOFactory()
         sclass = SemanticClass("test class")
         sprop = DatatypeProperty("test property")
+        sprop.cardinality = 'FunctionalProperty'
         sclass.addProperty(sprop)
         classDAO = factory.getSemanticClassDAO()
         self.assertTrue(classDAO)
