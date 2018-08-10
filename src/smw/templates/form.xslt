@@ -78,20 +78,28 @@
     
     <!-- Form input fields -->
     <xsl:choose>
-      <xsl:when test="@range='Literal'">
-	{{{field|<xsl:value-of select="@name" />|property=<xsl:value-of select="@name" />|input type=textarea|editor=wikieditor|rows=10}}}
-      </xsl:when>
-      <xsl:when test="@range='boolean'">
-	{{{field|<xsl:value-of select="@name" />|property=<xsl:value-of select="@name" />|input type=radiobutton| mandatory|default=false}}}
-      </xsl:when>
-      <xsl:when test="@range='dateTime'">
-	{{{field|<xsl:value-of select="@name" />|property=<xsl:value-of select="@name" />|input type=date}}}
-      </xsl:when>
-      <xsl:when test="@range='int'">
-	{{{field|<xsl:value-of select="@name" />|property=<xsl:value-of select="@name" />|input type=text|size=10}}}
+      <xsl:when test="@cardinality='FunctionalProperty'">
+	<xsl:choose>
+	  <xsl:when test="@range='Literal'">
+	    {{{field|<xsl:value-of select="@name" />|property=<xsl:value-of select="@name" />|input type=textarea|editor=wikieditor|rows=10}}}
+	  </xsl:when>
+	  <xsl:when test="@range='boolean'">
+	    {{{field|<xsl:value-of select="@name" />|property=<xsl:value-of select="@name" />|input type=radiobutton| mandatory|default=false}}}
+	  </xsl:when>
+	  <xsl:when test="@range='dateTime'">
+	    {{{field|<xsl:value-of select="@name" />|property=<xsl:value-of select="@name" />|input type=date}}}
+	  </xsl:when>
+	  <xsl:when test="@range='int'">
+	    {{{field|<xsl:value-of select="@name" />|property=<xsl:value-of select="@name" />|input type=text|size=10}}}
+	  </xsl:when>
+	  <xsl:otherwise>
+	    {{{field|<xsl:value-of select="@name" />|property=<xsl:value-of select="@name" />|input type=text}}}
+	  </xsl:otherwise>
+	</xsl:choose>
       </xsl:when>
       <xsl:otherwise>
-	{{{field|<xsl:value-of select="@name" />|property=<xsl:value-of select="@name" />|input type=text}}}
+	<xsl:value-of select="$i18nTexts/multipleValues[@lang = $lang]"/>
+	{{{field|<xsl:value-of select="@name" />|property=<xsl:value-of select="@name" />|input type=text|list|delimiter=;}}}
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -118,6 +126,7 @@
 	}}}
       </xsl:when>
       <xsl:otherwise>
+	<xsl:value-of select="$i18nTexts/multipleChoice[@lang = $lang]"/>&lt;br/&gt;
 	<!-- Object properties as a listbox -->
 	{{{field|<xsl:value-of select="@name"/>
 	|property=<xsl:value-of select="@name"/>

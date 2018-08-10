@@ -43,23 +43,15 @@
       #####################################
   -->
   <i18n:messages>
-    <i18n:msg key="None">
-      <i18n:text lang="en">No results found.</i18n:text>
-      <i18n:text lang="de">Keine Angabe.</i18n:text>
-    </i18n:msg>
-    <i18n:msg key="Multiple">
-      <i18n:text lang="en">Input multiple values separated by ";".</i18n:text>
-      <i18n:text lang="de">Eingabe mehrerer Werte durch ";" trennen.</i18n:text>
-    </i18n:msg>
+    <noResults lang="en">No results found.</noResults>
+    <noResults lang="de">Keine Angabe.</noResults>
+    <multipleValues lang="en">Input multiple values separated by ";".</multipleValues>
+    <multipleValues lang="de">Eingabe mehrerer Werte durch ";" trennen.</multipleValues>
+    <multipleChoice lang="en">Ctrl + click to select multiple values / de-select values.</multipleChoice>
+    <multipleChoice lang="de">Strg + klick markiert mehrere Werte / löscht markierte Werte.</multipleChoice>
   </i18n:messages>
   
   <xsl:variable name="i18nTexts" select="document('')/*/i18n:messages"/>
-  
-  <xsl:template name="i18n">
-    <xsl:param name="key"/>
-    <xsl:param name="lang"/>
-    <xsl:value-of select="$i18nTexts/i18n:msg[@key=$key]/i18n:text[@lang=$lang]"/>
-  </xsl:template>
 
   <!--
       ########################

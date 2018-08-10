@@ -55,7 +55,7 @@
 	[[<xsl:value-of select="@name" />::{{{<xsl:value-of select="@name" />|}}}]]
       </xsl:when>
       <xsl:otherwise>
-	{{#arraymap:{{{<xsl:value-of select="@name"/>|}}}|@|x|*[[::[[<xsl:value-of select="@name"/>::x]]|[[<xsl:value-of select="@name"/>::x]]]]|\n\n}}
+	{{#arraymap:{{{<xsl:value-of select="@name"/>|}}}|;|x|*[[::[[<xsl:value-of select="@name"/>::x]]|[[<xsl:value-of select="@name"/>::x]]]]|\n\n}}
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
