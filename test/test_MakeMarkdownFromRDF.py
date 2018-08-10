@@ -63,20 +63,6 @@ class test_MakeMarkdownFromRDF(unittest.TestCase):
         result = classDAO.getValues()['template']
         self.assertTrue("=Entry" in result)
 
-    @unittest.skip("Skipping RDF union for the moment.")
-    def testUnionClass(self):
-        """Test that pages creted from uniting classes have correct markdown."""
-        uclass = self.model.classes['Entry']
-        classDAO = self.factory.getSemanticClassDAO()
-        classDAO.create(uclass)
-        result = classDAO.getValues()['template']
-        self.assertTrue("=Entry" in result)
-        self.assertTrue("'''hasPriority''': [[hasPriority::{{{hasPriority|}}}]]" in result)
-        self.assertTrue("==Event" in result)
-        self.assertTrue("==Description" in result)
-        self.assertTrue("==Location" in result)
-        self.assertFalse("==Calendar" in result)
-
 
 if __name__ == "__main__":
     # import sys;sys.argv = ['', 'Test.testName']

@@ -33,25 +33,6 @@ class test_SemanticClassDAO(unittest.TestCase):
         # properties are in semantic mediawiki syntax
         self.assertTrue("[[test property::{{{test property|}}}]]" in template)
 
-    @unittest.skip("Skip unions for now")
-    def testUnionClass(self):
-        """Test that markdown generated from class unions is correct."""
-        factory = DummyDAOFactory()
-        sclass = SemanticClass("test class")
-        uclass = SemanticClass("test class 2")
-        uclass.addProperty(DatatypeProperty("test property"))
-        sclass.uniteWith(uclass)
-        classDAO = factory.getSemanticClassDAO()
-        classDAO.create(sclass)
-        template = classDAO.getValues()['template']
-        self.assertTrue("{{test class" in template)
-        # union class names are header 2
-        self.assertTrue("==test class 2" in template)
-        # a call to the template of the union class
-        self.assertTrue("{{test class 2" in template)
-        # the property value is passed to the template
-        self.assertTrue("| test property = {{{test property|}}}" in template)
-
 
 if __name__ == "__main__":
     # import sys;sys.argv = ['', 'Test.testName']

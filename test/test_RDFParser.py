@@ -121,20 +121,6 @@ class test_RDFParser(unittest.TestCase):
         sclass = model.classes['Calendar']
         self.assertFalse(sclass.properties["hasEntry"].cardinality)
 
-    @unittest.skip("Skipping RDF union for now")
-    def testParseUnion(self):
-        """Test parsing united classes."""
-        model = self.parser.parse(self.rdfpath)
-        entry = model.classes["Entry"]
-        # Entry is composed of classes Event, Description and Location
-        self.assertEquals(3, len(entry.unionOf))
-
-    @unittest.skip("Skipping RDF union for now")
-    def testParseNotUnion(self):
-        """Test."""
-        model = self.parser.parse(self.rdfpath)
-        entry = model.classes["Description"]
-        self.assertEquals(0, len(entry.unionOf))  # Description doesn't have union classes
 
 if __name__ == "__main__":
     # import sys;sys.argv = ['', 'Test.testName']
