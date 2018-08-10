@@ -50,7 +50,14 @@
     <!-- Property info -->
     <xsl:apply-templates select="." mode="collapsibleInfo" />
     <!--Property value-->
-    [[<xsl:value-of select="@name" />::{{{<xsl:value-of select="@name" />|}}}]]
+    <xsl:choose>
+      <xsl:when test="@cardinality='FunctionalProperty'">
+	[[<xsl:value-of select="@name" />::{{{<xsl:value-of select="@name" />|}}}]]
+      </xsl:when>
+      <xsl:otherwise>
+	{{#arraymap:{{{<xsl:value-of select="@name"/>|}}}|@|x|*[[::[[<xsl:value-of select="@name"/>::x]]|[[<xsl:value-of select="@name"/>::x]]]]|\n\n}}
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <!--
@@ -74,7 +81,6 @@
 	{{#arraymap:{{{<xsl:value-of select="@name"/>|}}}|@|x|*[[::[[<xsl:value-of select="@name"/>::x]]|[[<xsl:value-of select="@name"/>::x]]]]|\n\n}}
       </xsl:otherwise>
     </xsl:choose>
-    {{#if: {{{<xsl:value-of select="@name"/>}}} | {{#set: <xsl:value-of select="@name"/>={{{<xsl:value-of select="@name"/>|}}} }} |}}
     
     <!--Add page to category for object property-->
     {{#arraymap:{{{<xsl:value-of select="@name"/>|}}}|@|x|[[Category:x]]|\n\n}}

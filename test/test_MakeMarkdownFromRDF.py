@@ -47,14 +47,12 @@ class test_MakeMarkdownFromRDF(unittest.TestCase):
         classDAO = self.factory.getSemanticClassDAO()
         classDAO.create(simpleClass)
         result = classDAO.getValues()['template']
+        print(result)
         self.assertTrue("Description" in result)
         self.assertTrue("==Subject" in result)
         self.assertTrue("[[hasSubject::{{{hasSubject|}}}]]" in result)
         self.assertTrue("==Details" in result)
         self.assertTrue("[[hasDetails::{{{hasDetails|}}}]]" in result)
-        # Don't create a "Location" template if doing a "Description" template
-        # (don't mix up class variables with instance variables)
-        self.assertFalse("{{Location" in result)
 
     def testClassWithObjectProperties(self):
         """Test that template markdown is correct."""
