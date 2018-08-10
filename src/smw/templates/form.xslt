@@ -19,31 +19,49 @@
       ###########################################
   -->
   <xsl:template match="/SemanticClass">
+    <!-- Top of page -->
+    <xsl:call-template name="header"/>
+
+    
+    {{{for template|<xsl:value-of select="@name" />}}}
+    <xsl:apply-templates select="DatatypeProperty" mode="form"/>
+    <xsl:apply-templates select="ObjectProperty" mode="form"/>
+    {{{end template}}}
+
+    <!-- Buttons -->
+    <xsl:call-template name="buttons"/>
+
+    <!-- Bottom of page -->
+    <xsl:apply-templates select="." mode="footer"/>
+
+  </xsl:template>
+
+  <!-- FORM HEADER -->
+  <xsl:template name="header">
     &lt;noinclude&gt;
     <!-- Form name (localized) -->
     {{DISPLAYTITLE:<xsl:apply-templates select="." mode="label"/>}}
-    {{#forminput:form=<xsl:value-of select="@name" />}}&lt;/noinclude&gt;
+    {{#forminput:form=<xsl:value-of select="@name" />}}
+    &lt;/noinclude&gt;
     &lt;includeonly&gt;<xsl:apply-templates select="." mode="helpIcon"/>
     <!-- Class info -->
     <xsl:apply-templates select="." mode="collapsibleInfo" />    
-    {{{for template|<xsl:value-of select="@name" />}}}
-    <xsl:apply-templates select="DatatypeProperty" />
-    <xsl:apply-templates select="ObjectProperty" />
-
-    {{{end template}}}
-
-    <!--Buttons-->
+  </xsl:template>
+  
+  <!-- FORM BUTTONS -->
+  <xsl:template name="buttons">    
     {{{standard input|minor edit}}}{{{standard input|watch}}}
 
     {{{standard input|save}}}{{{standard input|changes}}}
 
     {{{standard input|cancel}}}
-    
+  </xsl:template>
+  
+  <!-- FORM FOOTER -->
+  <xsl:template match="/SemanticClass" mode="footer">    
     <!--Suppress table-of-contents and paragraph edit links-->
     __NOTOC__
     __NOEDITSECTION__
-    &lt;/includeonly&gt;
-
   </xsl:template>
 
   <!--
@@ -51,7 +69,7 @@
       Process a datatype property
       ###########################
   -->
-  <xsl:template match="DatatypeProperty">
+  <xsl:template match="DatatypeProperty" mode="form">
     <!-- Property name (localized) and help icon-->
     ==<xsl:apply-templates select="." mode="label" /> <xsl:apply-templates select="." mode="helpIcon"/>==
     
@@ -83,7 +101,7 @@
       Process an object property
       ##########################
   -->
-  <xsl:template match="ObjectProperty">
+  <xsl:template match="ObjectProperty" mode="form">
     <!-- Property name (localized) and help icon-->
     ==<xsl:apply-templates select="." mode="label" /> <xsl:apply-templates select="." mode="helpIcon"/>==
     

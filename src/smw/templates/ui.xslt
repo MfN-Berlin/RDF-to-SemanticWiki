@@ -47,6 +47,10 @@
       <i18n:text lang="en">No results found.</i18n:text>
       <i18n:text lang="de">Keine Angabe.</i18n:text>
     </i18n:msg>
+    <i18n:msg key="Multiple">
+      <i18n:text lang="en">Input multiple values separated by ";".</i18n:text>
+      <i18n:text lang="de">Eingabe mehrerer Werte durch ";" trennen.</i18n:text>
+    </i18n:msg>
   </i18n:messages>
   
   <xsl:variable name="i18nTexts" select="document('')/*/i18n:messages"/>
@@ -67,10 +71,8 @@
       &lt;div class="mw-collapsible-content"&gt;
 	<!-- Property comment -->
 	<xsl:apply-templates select="." mode="comment"/>
-	<!-- Link to attribute page -->
-	[<xsl:value-of select="$baseUrl" />Property:<xsl:value-of select="@name" /><xsl:text> </xsl:text><xsl:apply-templates select="." mode="label" />]
       &lt;/div&gt;
-    &lt;/div&gt; 
+    &lt;/div&gt;
   </xsl:template>
 
   <!--
@@ -79,7 +81,9 @@
       ########################
   -->
   <xsl:variable name="helpIcon">https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Help-browser.svg/21px-Help-browser.svg.png</xsl:variable>
-  <xsl:template match="DatatypeProperty|ObjectProperty" mode="helpIcon">&lt;span class="mw-customtoggle mw-customtoggle-<xsl:value-of select="@name"/>"&gt;<xsl:value-of select="$helpIcon"/>&lt;/span&gt;</xsl:template>
+  <xsl:variable name="linkIcon">https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Icon_External_Link.svg/150px-Icon_External_Link.svg.png</xsl:variable>
+
+  <xsl:template match="DatatypeProperty|ObjectProperty" mode="helpIcon">&lt;span class="mw-customtoggle mw-customtoggle-<xsl:value-of select="@name"/>"&gt;<xsl:value-of select="$helpIcon"/>&lt;/span&gt;&lt;span class="tiplink"&gt;[[Property:<xsl:value-of select="@name"/>|&amp;nbsp;]]&lt;/span&gt;</xsl:template>
   <xsl:template match="SemanticClass" mode="helpIcon">&lt;span class="mw-customtoggle mw-customtoggle-<xsl:value-of select="@name"/>" style="top: 60px;position: absolute;left: calc(100% - 51px);"&gt;<xsl:value-of select="$helpIcon"/>&lt;/span&gt;</xsl:template>
 
 </xsl:stylesheet>

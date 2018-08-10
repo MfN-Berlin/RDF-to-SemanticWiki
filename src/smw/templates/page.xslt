@@ -18,19 +18,23 @@
       ###########################################
   -->
   <xsl:template match="/SemanticClass">
-
-    <xsl:apply-templates select="." mode="helpIcon"/>
-    
-    <!-- Class info -->
+    <!-- Top of page -->
+    <xsl:apply-templates select="." mode="helpIcon"/>    
     <xsl:apply-templates select="." mode="collapsibleInfo" />
 
+    <!-- Content -->
     <xsl:apply-templates select="DatatypeProperty" mode="page"/>
     <xsl:apply-templates select="ObjectProperty" mode="page"/>
     
+    <!-- Bottom of page -->
+    <xsl:apply-templates select="." mode="footer"/>
+  </xsl:template>
+
+  <!-- FOOTER -->
+  <xsl:template match="/SemanticClass" mode="footer">
     <!--Suppress table-of-contents and paragraph edit links-->
     __NOTOC__
     __NOEDITSECTION__
-	
     <!-- Add a category for all classes using this template -->
     &lt;includeonly&gt;[[Category:<xsl:value-of select="@name"/>]]&lt;/includeonly&gt;
   </xsl:template>
@@ -42,14 +46,11 @@
   -->
   <xsl:template match="DatatypeProperty" mode="page">
     <!-- Property name (localized) and help icon-->
-    ==<xsl:apply-templates select="." mode="label" /> <xsl:apply-templates select="." mode="helpIcon"/>==
-    
+    ===<xsl:apply-templates select="." mode="label" /> <xsl:apply-templates select="." mode="helpIcon"/>===
     <!-- Property info -->
     <xsl:apply-templates select="." mode="collapsibleInfo" />
-
     <!--Property value-->
     [[<xsl:value-of select="@name" />::{{{<xsl:value-of select="@name" />|}}}]]
-    
   </xsl:template>
   
   <!--
@@ -59,7 +60,7 @@
   -->
   <xsl:template match="ObjectProperty" mode="page">
     <!-- Property name (localized) and help icon-->
-    ==<xsl:apply-templates select="." mode="label" /> <xsl:apply-templates select="." mode="helpIcon"/>==
+    ===<xsl:apply-templates select="." mode="label" /> <xsl:apply-templates select="." mode="helpIcon"/>===
     
     <!-- Property info -->
     <xsl:apply-templates select="." mode="collapsibleInfo" />
