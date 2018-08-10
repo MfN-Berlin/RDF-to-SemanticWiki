@@ -20,7 +20,7 @@ class test_RDFParser(unittest.TestCase):
         self.parser = RDFParser()
 
     def testInstantiate(self):
-        """Test."""
+        """Test that the parser can be instantiated."""
         self.assertTrue(self.parser)
 
     def testLoadOWLFile(self):
