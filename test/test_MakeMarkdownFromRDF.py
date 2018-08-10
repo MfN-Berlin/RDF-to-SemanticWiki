@@ -47,7 +47,6 @@ class test_MakeMarkdownFromRDF(unittest.TestCase):
         classDAO = self.factory.getSemanticClassDAO()
         classDAO.create(simpleClass)
         result = classDAO.getValues()['template']
-        print(result)
         self.assertTrue("Description" in result)
         self.assertTrue("==Subject" in result)
         self.assertTrue("[[hasSubject::{{{hasSubject|}}}]]" in result)
@@ -57,7 +56,6 @@ class test_MakeMarkdownFromRDF(unittest.TestCase):
     def testClassWithObjectProperties(self):
         """Test that template markdown is correct."""
         sClass = self.model.classes['Calendar']
-        print(sClass.serialize())
         classDAO = self.factory.getSemanticClassDAO()
         classDAO.create(sClass)
         result = classDAO.getValues()['template']
