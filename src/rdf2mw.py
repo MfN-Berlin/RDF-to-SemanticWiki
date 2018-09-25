@@ -25,7 +25,7 @@ try:
     # Parse command-line options
     optionsParser = OptionParser()
     command = None
-    optionsParser.add_option("-a", "--action", dest="command", help="Action can be one of import or remove")
+    optionsParser.add_option("-a", "--action", dest="command", help="Action can be one of import, remove or test")
     modelPath = None
     optionsParser.add_option("-i", "--input", dest="modelPath", help="Path to ontology file")
     language = None
@@ -46,7 +46,7 @@ try:
         raise ImporterException("Unknown input file format.")
 
     # Check command
-    if options.command not in ['remove', 'import']:
+    if options.command not in ['remove', 'import', 'test']:
         raise ImporterException("Unknown command")
 
     # Path to templates directory
@@ -69,6 +69,9 @@ try:
         importer.run(options.modelPath, options.language)
     elif options.command == "remove":
         importer.delete(options.modelPath)
+    elif options.command == "test":
+        parser.parse(options.modelPath)
+        print(str(parser._model))
     else:
         raise ImporterException("Unknown error")
 

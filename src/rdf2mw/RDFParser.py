@@ -8,7 +8,7 @@ Created on 02.05.2016
 
 from lxml import etree
 from rdf2mw.AbstractParser import AbstractParser
-from rdf2mw.SemanticModel import SemanticModel, SemanticClass, DatatypeProperty, ObjectProperty
+from rdf2mw.SemanticModel import SemanticModel, SemanticClass, DatatypeProperty, ObjectProperty, Enumeration
 
 
 class RDFParser(AbstractParser):
@@ -44,20 +44,34 @@ class RDFParser(AbstractParser):
         # go through the "Class" elements and add them to the model
         for element in declarations:
             className = element.attrib[RDFParser.full('rdf:about')].split('#')[1]
-            sclass = SemanticClass(className)
-            self._model.addClass(sclass)  # add class to model
 
-            # localized labels of the class
-            labels = element.findall(RDFParser.path('rdfs:label', startWith='descendant'))
-            for label in labels:
-                lang = label.attrib[RDFParser.full('xml:lang')]
-                sclass.addLabel(label.text, lang)
+            # is this class a collection?
+            oneof = element.findall(RDFParser.path('owl:oneOf', startWith='descendant'))
+            if len(oneof) > 0:
+                enum = Enumeration(className)
+                self._model.addEnum(enum)
+                items = oneof[0].findall(RDFParser.path('rdf:Description', startWith='descendant'))
+                for item in items:
+                    itemName = item.attrib[RDFParser.full('rdf:about')].split('#')[1]
+                    itemElement = etree.Element('item')
+                    itemElement.text = itemName
+                    enum.add(itemElement)
 
-            # localized comment of the class
-            comments = element.findall(RDFParser.path('rdfs:comment', startWith='descendant'))
-            for comment in comments:
-                lang = comment.attrib[RDFParser.full('xml:lang')]
-                sclass.addComment(comment.text, lang)
+            else:
+                sclass = SemanticClass(className)
+                self._model.addClass(sclass)  # add class to model
+
+                # localized labels of the class
+                labels = element.findall(RDFParser.path('rdfs:label', startWith='descendant'))
+                for label in labels:
+                    lang = label.attrib[RDFParser.full('xml:lang')]
+                    sclass.addLabel(label.text, lang)
+
+                # localized comment of the class
+                comments = element.findall(RDFParser.path('rdfs:comment', startWith='descendant'))
+                for comment in comments:
+                    lang = comment.attrib[RDFParser.full('xml:lang')]
+                    sclass.addComment(comment.text, lang)
 
     def _parseDataProperties(self):
         """Get the data properties."""

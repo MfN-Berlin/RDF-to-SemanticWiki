@@ -18,6 +18,9 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    
+
+
     <!-- https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#hasDescription -->
 
     <owl:ObjectProperty rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#hasDescription">
@@ -64,6 +67,17 @@
     </owl:ObjectProperty>
     
 
+
+    <!-- https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#hasPriority -->
+
+    <owl:ObjectProperty rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#hasPriority">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#Entry"/>
+        <rdfs:range rdf:resource="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#Priority"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -73,6 +87,7 @@
      -->
 
     
+
 
     <!-- https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#hasDetails -->
 
@@ -126,23 +141,9 @@
 
     <owl:DatatypeProperty rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#hasPriority">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:domain rdf:resource="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#Entry"/>
-        <rdfs:range rdf:resource="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#Priority"/>
-        <rdfs:label xml:lang="en">Priority</rdfs:label>
-        <rdfs:label xml:lang="de">Priorität</rdfs:label>
     </owl:DatatypeProperty>
     
-    <owl:Class rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#Priority">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:oneOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#low"/>
-                    <rdf:Description rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#medium"/>
-                    <rdf:Description rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#high"/>
-                </owl:oneOf>
-            </owl:Class>
-        </owl:equivalentClass>
-    </owl:Class>
+
 
     <!-- https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#hasStartDate -->
 
@@ -218,6 +219,103 @@
     <!-- https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#Location -->
 
     <owl:Class rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#Location"/>
+    
+
+
+    <!-- https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#Priority -->
+
+    <owl:Class rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#Priority">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#high"/>
+                    <rdf:Description rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#low"/>
+                    <rdf:Description rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#medium"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#Priority2 -->
+
+    <owl:Class rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#Priority2">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#high2"/>
+                    <rdf:Description rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#low2"/>
+                    <rdf:Description rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#medium2"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#high -->
+
+    <owl:NamedIndividual rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#high"/>
+    
+
+
+    <!-- https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#high2 -->
+
+    <owl:NamedIndividual rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#high2"/>
+    
+
+
+    <!-- https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#low -->
+
+    <owl:NamedIndividual rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#low"/>
+    
+
+
+    <!-- https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#low2 -->
+
+    <owl:NamedIndividual rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#low2"/>
+    
+
+
+    <!-- https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#medium -->
+
+    <owl:NamedIndividual rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#medium"/>
+    
+
+
+    <!-- https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#medium2 -->
+
+    <owl:NamedIndividual rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#medium2"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotations
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#hasPriority">
+        <rdfs:label xml:lang="en">Priority</rdfs:label>
+        <rdfs:label xml:lang="de">Priorität</rdfs:label>
+    </rdf:Description>
 </rdf:RDF>
 
+
+
+<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
 

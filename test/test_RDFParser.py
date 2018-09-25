@@ -24,11 +24,11 @@ class test_RDFParser(unittest.TestCase):
         self.assertTrue(self.parser)
 
     def testLoadFile(self):
-        """Test thet an ontology file can be read."""
+        """Test that an ontology file can be read."""
         self.assertTrue(self.parser.parse(self.rdfpath))
 
     def testParseClasses(self):
-        """Test parsng ontology classes."""
+        """Test parsing ontology classes."""
         model = self.parser.parse(self.rdfpath)
         self.assertEqual(5, model.countClasses())
         classNames = model.getClassNames()

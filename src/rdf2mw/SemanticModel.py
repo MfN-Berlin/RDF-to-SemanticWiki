@@ -19,10 +19,16 @@ class SemanticModel:
         """Construct a semantic model class."""
         # dictionary of name -> class
         self.classes = {}
+        # dictionary of name -> enum
+        self.enums = {}
 
     def addClass(self, sclass):
         """Add a semantic class to the model."""
         self.classes[sclass.name] = sclass
+        
+    def addEnum(self, enum):
+        """Add an enumeration to the model."""
+        self.enums[enum.name] = enum
 
     def countClasses(self):
         """
@@ -39,6 +45,14 @@ class SemanticModel:
         @return array of strings
         """
         return self.classes.keys()
+
+    def __str__(self):
+        resp = ""
+        for e in self.enums:
+            resp += self.enums[e].serialize()        
+        for c in self.classes:
+            resp += self.classes[c].serialize()
+        return resp
 
 
 class SemanticElement:
@@ -261,3 +275,25 @@ class ObjectProperty(SemanticProperty):
     def __init__(self, name):
         """Constructor."""
         super().__init__(name)
+
+
+class Enumeration(SemanticProperty):
+    """A class description of the enumeration kind."""
+
+    def __init__(self, name):
+        """Constructor."""
+        super().__init__(name)
+        self.items = []
+
+    def add(self, item):
+        """Append an item to the enumeration."""
+        self.items.append(item)
+
+    def asElementTree(self):
+        """Override."""
+        selm = super().asElementTree()
+
+        for item in self.items:
+            selm.append(item)
+
+        return(selm)
