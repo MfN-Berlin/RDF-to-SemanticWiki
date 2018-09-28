@@ -71,7 +71,7 @@ try:
         importer.delete(options.modelPath)
     elif options.command == "test":
         parser.parse(options.modelPath)
-        print(str(parser._model))
+        #print(str(parser._model))
     else:
         raise ImporterException("Unknown error")
 

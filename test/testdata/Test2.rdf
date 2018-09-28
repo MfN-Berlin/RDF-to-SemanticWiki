@@ -74,6 +74,8 @@
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#Entry"/>
         <rdfs:range rdf:resource="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#Priority"/>
+        <rdfs:label xml:lang="en">Priority</rdfs:label>
+        <rdfs:label xml:lang="de">Priorität</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -135,15 +137,6 @@
         <rdfs:label xml:lang="en">Name</rdfs:label>
     </owl:DatatypeProperty>
     
-
-
-    <!-- https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#hasPriority -->
-
-    <owl:DatatypeProperty rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#hasPriority">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-    </owl:DatatypeProperty>
-    
-
 
     <!-- https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#hasStartDate -->
 

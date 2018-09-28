@@ -39,7 +39,7 @@
   </xsl:template>
 
   <xsl:template match="allowed">
-    [[Allows value::<xsl:value-of select="."/>]]
+    * [[Allows value::<xsl:value-of select="."/>]]
   </xsl:template>
   
   

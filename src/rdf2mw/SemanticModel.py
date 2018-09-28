@@ -49,7 +49,7 @@ class SemanticModel:
     def __str__(self):
         resp = ""
         for e in self.enums:
-            resp += self.enums[e].serialize()        
+            resp += self.enums[e].serialize()    
         for c in self.classes:
             resp += self.classes[c].serialize()
         return resp
@@ -211,7 +211,7 @@ class SemanticProperty(SemanticElement):
         super().__init__(name)
         self.domain = None
         self._range = None
-        self.allowedValues = {}
+        self._allowedValues = {}
         self._cardinality = None
 
     @property
@@ -222,9 +222,9 @@ class SemanticProperty(SemanticElement):
     @range.setter
     def range(self, value):
         """Setter for range property."""
-        if value.casefold() == "boolean".casefold():
-            self.allowedValues = {'true', 'false'}
         self._range = value
+        if self.range == "boolean":
+            self.allowedValues = {'true', 'false'}
 
     @property
     def cardinality(self):
@@ -240,6 +240,20 @@ class SemanticProperty(SemanticElement):
         @see https://www.w3.org/TR/owl-ref/#FunctionalProperty-def
         """
         self._cardinality = value
+
+    @property
+    def allowedValues(self):
+        """Getter for allowedValues."""
+        return self._allowedValues
+
+    @allowedValues.setter
+    def allowedValues(self, values):
+        """
+        Setter for allowedValues property.
+
+        Allowed values are None (no constraints apply) or an array of values.
+        """
+        self._allowedValues = values
 
     def asElementTree(self):
         """Override."""
@@ -288,6 +302,13 @@ class Enumeration(SemanticProperty):
     def add(self, item):
         """Append an item to the enumeration."""
         self.items.append(item)
+
+    def asList(self):
+        """Return a representation of the enumeration as list."""
+        resp = []
+        for item in self.items:
+            resp.append(item.text)
+        return resp
 
     def asElementTree(self):
         """Override."""

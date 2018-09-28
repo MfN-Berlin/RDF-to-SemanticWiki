@@ -118,6 +118,13 @@ class RDFParser(AbstractParser):
             else:
                 prop.range = "Literal"
 
+            # allowed values from enumeration if applicable
+            if prop.range in self._model.enums:
+                vals = []
+                for item in self._model.enums[prop.range].asList():
+                    vals.append(item)
+                prop.allowedValues = vals
+
             # set the global cardinality constraint of this property
             typeConstraint = element.find(RDFParser.path('rdf:type', startWith='descendant'))
             if typeConstraint is not None:

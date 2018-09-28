@@ -77,9 +77,21 @@
     <xsl:apply-templates select="." mode="collapsibleInfo" />
     
     <!-- Form input fields -->
+    <xsl:value-of select='/Enumeration'/>
     <xsl:choose>
       <xsl:when test="@cardinality='FunctionalProperty'">
 	<xsl:choose>
+	  <!--
+	      Enumeration properties have the name of their enumeration class as range attribute,
+	      and the allowed values are a child element. 
+	  -->
+	  <xsl:when test="allowedValues">
+	    <!-- Property as a dropdown -->
+	    {{{field|<xsl:value-of select="@name"/>
+	    |property=<xsl:value-of select="@name"/>
+	    |input type=dropdown
+	    }}}
+	  </xsl:when>
 	  <xsl:when test="@range='Literal'">
 	    {{{field|<xsl:value-of select="@name" />|property=<xsl:value-of select="@name" />|input type=textarea|editor=wikieditor|rows=10}}}
 	  </xsl:when>

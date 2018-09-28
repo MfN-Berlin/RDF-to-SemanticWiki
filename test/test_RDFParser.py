@@ -82,6 +82,13 @@ class test_RDFParser(unittest.TestCase):
         self.assertTrue("Das ist der Absatz" in sclass.properties["hasDetails"].getComment('de'))
         self.assertTrue("This is the section", sclass.properties["hasDetails"].getComment('en'))
 
+    def testParseDataPropertyAllowedValues(self):
+        """Test parsing allowed properties of data properties."""
+        model = self.parser.parse(self.rdfpath)
+        sclass = model.classes['Entry']
+        sprop = sclass.properties['hasPriority']
+        self.assertTrue(sorted({'low', 'medium', 'high'}) == sorted(sprop.allowedValues))
+
     def testParseObjectProperties(self):
         """Test parsing object properties."""
         model = self.parser.parse(self.rdfpath)

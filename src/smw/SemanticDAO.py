@@ -45,6 +45,7 @@ class SemanticElementDAO(AbstractDAO):
         @param tplName name of the XSLT template to apply
         @return string containing wiki markup.
         """
+        #print(etree.tostring(tree, encoding="utf8", method="xml"))
         fullPath = os.path.join(os.path.dirname(__file__), self.tplDir, tplName)
         template = etree.parse(fullPath)
         transform = etree.XSLT(template)
