@@ -25,7 +25,7 @@ class SemanticModel:
     def addClass(self, sclass):
         """Add a semantic class to the model."""
         self.classes[sclass.name] = sclass
-        
+
     def addEnum(self, enum):
         """Add an enumeration to the model."""
         self.enums[enum.name] = enum

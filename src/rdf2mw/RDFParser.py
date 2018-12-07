@@ -31,15 +31,41 @@ class RDFParser(AbstractParser):
         self._parseClasses()
         self._parseDataProperties()
         self._parseObjectProperties()
+        self._parseInheritance()
 
         return self._model
 
-    def _parseClasses(self):
+    def _parseInheritance(self):
         """
-        Get the class name declarations.
+        Resolve the inheritance relationships between classes.
 
-        @return: array of class names
+        If an inheritance relationship is found, then add the
+        properties of the superclass to the subclass.
+        Run this method AFTER all others.
         """
+        declarations = self._doc.findall(RDFParser.path("owl:Class"))
+        # go through the "Class" elements
+        for element in declarations:
+            # find subclasses
+            superclasses = element.findall(RDFParser.path("rdfs:subClassOf", startWith='descendant'))
+            if len(superclasses) == 0:
+                continue
+            # get the corresponding semantic elements in the model
+            superclassName = superclasses[0].attrib[RDFParser.full('rdf:resource')].split('#')[1]
+            sSuperclass = self._model.classes[superclassName]
+            subclassName = element.attrib[RDFParser.full('rdf:about')].split('#')[1]
+            sSubClass = self._model.classes[subclassName]
+
+            # add the properties of the superclass to the subclass
+            dataProperties = sSuperclass.datatypeProperties
+            for dataProperty in dataProperties:
+                sSubClass.addProperty(dataProperty)
+            objProperties = sSuperclass.objectProperties
+            for objProperty in objProperties:
+                sSubClass.addProperty(objProperty)
+
+    def _parseClasses(self):
+        """Get the class name declarations."""
         declarations = self._doc.findall(RDFParser.path("owl:Class"))
         # go through the "Class" elements and add them to the model
         for element in declarations:

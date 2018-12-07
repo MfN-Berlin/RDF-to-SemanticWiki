@@ -18,6 +18,7 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    
     <!-- https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#hasDescription -->
 
     <owl:ObjectProperty rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#hasDescription">
@@ -187,9 +188,6 @@
     //
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
-
-    
-
 
     <!-- https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#Calendar -->
 

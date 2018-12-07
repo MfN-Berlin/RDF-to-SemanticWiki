@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar"
+     xml:base="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar"/>
+
+    <owl:Class rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#Superclass"/>
+    <owl:Class rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#Subclass">
+        <rdfs:subClassOf rdf:resource="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#Superclass"/>      
+    </owl:Class>
+
+    <owl:DatatypeProperty rdf:about="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#testProp1">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/calendar#Superclass"/>
+        <rdfs:label xml:lang="en">Test1</rdfs:label>
+        <rdfs:label xml:lang="de">Test1</rdfs:label>
+    </owl:DatatypeProperty>
+
+</rdf:RDF>
