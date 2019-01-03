@@ -30,6 +30,7 @@ class Manager(AbstractManager):
             # values contains e.g. "template" and "form" page contents
             pageName = '%s:%s' % (key, name)
             self._connector.createPage(pageName, values[key])
+            self._connector.protectPage(pageName)
 
     def delete(self, name, pages):
         """Override abstract method."""

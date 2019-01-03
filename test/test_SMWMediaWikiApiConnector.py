@@ -50,6 +50,12 @@ class test_SMWMediaWikiApiConnector(unittest.TestCase):
         self.assertTrue(self.connector.createPage('Test', 'Test content'))
         self.assertTrue(self.connector.loadPage('Test'))
 
+    def testProtectPage(self):
+        """Test that a page can be protected."""
+        # Note: page has to be regular content page for this test, not a special page
+        self.assertTrue(self.connector.createPage('Test2', 'Test2 content'))
+        self.assertTrue(self.connector.protectPage('Test2'))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -33,6 +33,15 @@ class AbstractConnector:
         """
         raise NotImplementedError
 
+    def protectPage(self, title):
+        """
+        Protect a page, e.g. if it was created automatically.
+
+        @param title: title of the wiki page to create
+        @return True (if page was protected) or False (if page could not be protected)
+        """
+        raise NotImplementedError
+
     def deletePage(self, title):
         """
         Delete a page.

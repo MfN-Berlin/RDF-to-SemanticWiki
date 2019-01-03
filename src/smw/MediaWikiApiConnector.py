@@ -156,6 +156,37 @@ class MediaWikiApiConnector(AbstractConnector):
             traceback.print_exc(file=sys.stdout)
             return False
 
+    def protectPage(self, title):
+        """Override abstract method."""
+        try:
+            # Attempt to Login
+            if not self.login():
+                return False
+            # get a  csrf token
+            payload = {
+                'action': 'query', 'type': 'csrf',
+                'meta': 'tokens', 'format': 'json'}
+            r1 = requests.post(self._apiUrl, data=payload,
+                               cookies=self._cookies)
+            edittoken = r1.json()['query']['tokens']['csrftoken']
+
+            payload = {
+                'action': 'protect', 'title': title,
+                'token': edittoken, 'format': 'json',
+                'expiry': 'never', 'reason': 'automatically generated page',
+                'protections': 'edit=sysop|move=sysop'}
+            r1 = requests.post(self._apiUrl, data=payload,
+                               cookies=self._cookies)
+            print(r1.json())
+            # Check http status
+            self._checkRequest(r1)
+
+            return True
+
+        except:
+            traceback.print_exc(file=sys.stdout)
+            return False
+
     def deletePage(self, title):
         """Override abstract method."""
         try:
@@ -188,7 +219,7 @@ class MediaWikiApiConnector(AbstractConnector):
                                cookies=self._cookies)
 
             # Check http status
-            self._checkRequest(r2)
+            # self._checkRequest(r2)
 
             return True
 
