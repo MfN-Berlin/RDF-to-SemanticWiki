@@ -80,6 +80,7 @@ class MediaWikiApiConnector(AbstractConnector):
             payload['lgpassword'] = self._password
             # payload['loginreturnurl'] = self._contentUrl
             r2 = requests.post(self._apiUrl, data=payload, cookies=r1.cookies)
+            #print(r2.json())
 
             # Check http status
             self._checkRequest(r2)
@@ -177,7 +178,6 @@ class MediaWikiApiConnector(AbstractConnector):
                 'protections': 'edit=sysop|move=sysop'}
             r1 = requests.post(self._apiUrl, data=payload,
                                cookies=self._cookies)
-            print(r1.json())
             # Check http status
             self._checkRequest(r1)
 
