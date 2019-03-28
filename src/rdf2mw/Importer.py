@@ -23,7 +23,7 @@ class Importer:
         self._parser = parser
         self._daoFactory = daoFactory
 
-    def run(self, modelPath, language=None):
+    def run(self, modelPath, mediaSource, language=None):
         """
         Import RDF  file.
 
@@ -40,7 +40,7 @@ class Importer:
 
         # create all the class pages
         for sclass in model.classes.values():
-            classDao.create(sclass, language)
+            classDao.create(sclass, mediaSource, language)
             print("Created pages for class %s" % sclass.name)
             # Create data property pages for this class
             for sprop in sclass.datatypeProperties:

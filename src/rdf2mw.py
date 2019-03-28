@@ -32,6 +32,8 @@ try:
     optionsParser.add_option("-l", "--language", dest="language", help="Language of the wiki")
     templateDir = None
     optionsParser.add_option("-t", "--templates", dest="templateDir", help="Path to template directory")
+    mediaSource = None
+    optionsParser.add_option("-m", "--media", dest="mediaSource", help="Use internal or external media source")
 
     (options, args) = optionsParser.parse_args()
 
@@ -57,6 +59,10 @@ try:
     if not os.path.isdir(tplDir):
         raise ImporterException("Template directory not found")
 
+    # media source
+    if options.mediaSource is None:
+        options.mediaSource = "local"
+   
     # A connector which can login to a MediaWiki through the API
     connector = MediaWikiApiConnector(config)
     # A factory for DAO objects which can persist a SemanticModel
@@ -66,7 +72,7 @@ try:
 
     # Run the importer
     if options.command == "import":
-        importer.run(options.modelPath, options.language)
+        importer.run(options.modelPath, options.mediaSource, options.language)
     elif options.command == "remove":
         importer.delete(options.modelPath)
     elif options.command == "test":

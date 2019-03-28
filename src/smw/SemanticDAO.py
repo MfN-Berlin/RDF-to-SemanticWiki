@@ -65,11 +65,14 @@ class SemanticClassDAO(SemanticElementDAO):
         """Construct."""
         super().__init__(manager)
 
-    def create(self, sclass, language='en'):
+    def create(self, sclass, mediaSource, language='en'):
         """Override abstract method."""
         stree = sclass.asElementTree()
 
-        # Add atributes to the element tree
+        # Add attributes to the element tree
+        if mediaSource is not None:
+            stree.set('mediaSource', mediaSource)
+
         if language is not None:
             stree.set('lang', language)
 
