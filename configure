@@ -1,0 +1,25 @@
+#! /bin/bash
+# Base URL of the MediaWiki installation
+read -p "Base URL of the MediaWiki installation: " BASE_MW_URL;
+echo "";
+
+# Username of the MediaWiki API bot user
+read -p "Username of the MediaWiki API bot user: " API_USERNAME;
+echo "";
+
+# Password of the MediaWiki API bot user
+read -s -p  "Password of the MediaWiki API bot user: " API_PASS;
+echo "";
+
+# Template path, relative to the SemanticDAO package.
+read -p "Template path: " TPL_DIR;
+echo "";
+
+## Create config.ini file
+cp src/config.tpl config.ini;
+sed -i "s|@@BASE_MW_URL@@|$BASE_MW_URL|g" config.ini
+sed -i "s|@@API_USERNAME@@|$API_USERNAME|g" config.ini
+sed -i "s|@@API_PASS@@|$API_PASS|g" config.ini
+sed -i "s|@@TPL_DIR@@|$TPL_DIR|g" config.ini
+
+echo "Saved configuration file to config.ini"

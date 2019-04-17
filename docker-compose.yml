@@ -1,0 +1,7 @@
+version: '3'
+services:
+   ontology:
+      build: ./
+      container_name: ${ONTOLOGY_CONTAINER_NAME}
+      volumes:
+       - "${MOUNT}/rdf/config.ini:/config.ini"

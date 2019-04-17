@@ -20,3 +20,17 @@ The second step is to convert the ontology into templates, forms and attributes 
 ## Usage
 This is a work in progress. See [here](https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/wikis/home) for usage.
 
+# Installation
+Use `configure`, `make`, `make install` to setup the container.
+
+Create the wiki configuration
+```
+./configure
+```
+You can edit the file `config.ini` for additional settings.
+
+Build the docker images
+```
+make
+```
+

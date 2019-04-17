@@ -3,7 +3,7 @@
 __pycache__
 example/catalog-v001.xml
 test/testdata/catalog-v001.xml
-example/config.ini
+config.ini
 test/.coverage
 *.pyc
 *~
