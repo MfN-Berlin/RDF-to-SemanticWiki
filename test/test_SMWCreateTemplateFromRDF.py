@@ -22,7 +22,7 @@ class test_SMWCreateTemplateFromRDF(unittest.TestCase):
     """
 
     # path to configuration file
-    configPath = "/config.ini"
+    configPath = "./test.ini"
     # path to example RDF file
     rdfpath = "testdata/Test.rdf"
 

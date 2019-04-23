@@ -13,7 +13,7 @@ from smw.MediaWikiApiConnector import MediaWikiApiConnector
 class test_SMWMediaWikiApiConnector(unittest.TestCase):
     """Test."""
 
-    configPath = "/config.ini"
+    configPath = "./test.ini"
     """Path to configuration file"""
 
     config = None

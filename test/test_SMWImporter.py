@@ -24,7 +24,7 @@ class test_SMWImporter(unittest.TestCase):
     """
 
     # path to configuration file
-    configPath = "/config.ini"
+    configPath = "./test.ini"
     # path to the ontology example
     modelPath = "testdata/Test.rdf"
 

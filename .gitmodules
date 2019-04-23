@@ -1,0 +1,3 @@
+[submodule "test/test-wiki"]
+	path = test/test-wiki
+	url = git@gitlab.com:alvarosaurus/ontology-wiki.git

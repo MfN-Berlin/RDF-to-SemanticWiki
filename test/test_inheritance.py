@@ -20,7 +20,7 @@ class test_inheritance(unittest.TestCase):
         self.parser = RDFParser()
 
     def test01(self):
-        """Tst that subclass inherits all properties from superclass."""
+        """Test that subclass inherits all properties from superclass."""
         model = self.parser.parse(self.rdfpath)
         superclass = model.classes["Superclass"]
         subclass = model.classes["Subclass"]
