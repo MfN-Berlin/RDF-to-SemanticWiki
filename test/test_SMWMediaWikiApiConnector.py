@@ -13,7 +13,7 @@ from smw.MediaWikiApiConnector import MediaWikiApiConnector
 class test_SMWMediaWikiApiConnector(unittest.TestCase):
     """Test."""
 
-    configPath = "../example/config.ini"
+    configPath = "/config.ini"
     """Path to configuration file"""
 
     config = None
@@ -34,7 +34,7 @@ class test_SMWMediaWikiApiConnector(unittest.TestCase):
 
     def testReadConfigFile(self):
         """Test that the config file can be read."""
-        self.assertIsNotNone(self.config.get('defaults', 'baseMwURL'))
+        self.assertIsNotNone(self.config.get('defaults', 'BASE_MW_URL'))
 
     def testInstantiate(self):
         """Test that a connector can be instantiated."""

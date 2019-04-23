@@ -1,8 +1,8 @@
-# Settings for MediaWiki and database
+#### MediaWiki and API settings ###
+# see https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/wikis/home
 # use 'make configure' to generate this file
 
-# Path to the mount on the host, where persistent files will be stored
-MOUNT=./mount
+[defaults]
 # Base URL of the MediaWiki installation
 BASE_MW_URL=@@BASE_MW_URL@@
 # Username of the MediaWiki API bot user

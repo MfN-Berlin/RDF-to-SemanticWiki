@@ -31,11 +31,11 @@ class MediaWikiApiConnector(AbstractConnector):
 
     def __init__(self, config):
         """Construct the connector."""
-        self.baseMwUrl = config.get('defaults', 'baseMwURL')
+        self.baseMwUrl = config.get('defaults', 'BASE_MW_URL')
         self._apiUrl = urllib.parse.urljoin(self.baseMwUrl, 'api.php')
         self._contentUrl = urllib.parse.urljoin(self.baseMwUrl, 'index.php')
-        self._username = config.get('defaults', 'username')
-        self._password = config.get('defaults', 'password')
+        self._username = config.get('defaults', 'API_USERNAME')
+        self._password = config.get('defaults', 'API_PASS')
 
     def login(self):
         """Override abstract method."""
