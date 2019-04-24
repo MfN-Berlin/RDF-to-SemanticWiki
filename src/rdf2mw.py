@@ -14,7 +14,7 @@ from rdf2mw.Importer import Importer, ImporterException
 from smw.Factory import Factory
 from smw.MediaWikiApiConnector import MediaWikiApiConnector
 
-configPath = "example/config.ini"
+configPath = "/config.ini"
 """Path to configuration file."""
 
 try:
@@ -40,12 +40,9 @@ try:
     # Check file type
     if not (".rdf" in options.modelPath or ".owl" in options.modelPath):
         raise ImporterException("Unknown file type")
-    if ".rdf" in options.modelPath:
-        # A parser which can parse RDF
-        from rdf2mw.RDFParser import RDFParser
-        parser = RDFParser()
-    else:
-        raise ImporterException("Unknown input file format.")
+    # A parser which can parse RDF
+    from rdf2mw.RDFParser import RDFParser
+    parser = RDFParser()
 
     # Check command
     if options.command not in ['remove', 'import', 'test']:
@@ -72,7 +69,7 @@ try:
 
     # Run the importer
     if options.command == "import":
-        importer.run(options.modelPath, options.mediaSource, options.language)
+        importer.run(options.modelPath, options.language)
     elif options.command == "remove":
         importer.delete(options.modelPath)
     elif options.command == "test":

@@ -3,7 +3,7 @@
 # use 'make configure' to generate this file
 
 [defaults]
-# Base URL of the MediaWiki installation
+# Base URL of the MediaWiki installation (should start with http://)
 BASE_MW_URL=@@BASE_MW_URL@@
 # Username of the MediaWiki API bot user
 API_USERNAME=@@API_USERNAME@@
