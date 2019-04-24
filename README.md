@@ -7,19 +7,6 @@ The first step to do this is to model the semantic relationships as an ontology,
 
 The second step is to convert the ontology into templates, forms and attributes pages in the wiki. This script takes an ontology file in RDF format as input and creates the necessary wiki pages using the MediaWiki API.
 
-## Prerequisites
-* Python 3
-* To install the necessary Python packages, do: `pip3 install -r requirements.txt`
-* [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki), [SemanticMediaWiki](https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki).
-* Additional MediaWiki extensions:
-[Page Forms](https://www.semantic-mediawiki.org/wiki/Extension:Page_Forms),
-[User Functions](https://www.mediawiki.org/wiki/Extension:UserFunctions),
-[Header Tabs](https://www.mediawiki.org/wiki/Extension:Header_Tabs),
-[Parser Functions](https://www.mediawiki.org/wiki/Extension:ParserFunctions)
-
-## Usage
-This is a work in progress. See [here](https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/wikis/home) for usage.
-
 # Installation
 Use `configure`, `make` to setup the container.
 
