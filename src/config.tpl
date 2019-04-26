@@ -1,6 +1,6 @@
 #### MediaWiki and API settings ###
 # see https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/wikis/home
-# use 'make configure' to generate this file
+# use './configure' to generate this file
 
 [defaults]
 # Base URL of the MediaWiki installation (should start with http://)

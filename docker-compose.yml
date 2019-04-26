@@ -1,7 +1,33 @@
 version: '3'
 services:
+   db:
+      image: mariadb:10.4
+      restart: always
+      container_name: ${DB_CONTAINER_NAME}
+      environment:
+        MYSQL_ROOT_PASSWORD: ${INSTALLDBPASS}
+      volumes:
+        - "${MOUNT}/basic-wiki/db:/var/lib/mysql"
+   wiki:
+      build: ./test/basic-wiki/smw
+      restart: always
+      container_name: ${SMW_CONTAINER_NAME}
+      ports:
+         - "80:80"
+      links:
+         - db
+      volumes:
+        - "${MOUNT}/basic-wiki/LocalSettings.php:/var/www/html/LocalSettings.php"
+        - "${MOUNT}/basic-wiki/uploads:/var/www/html/images"
+        - "${MOUNT}/basic-wiki/apache2.conf:/etc/apache2/apache2.conf"
+      logging:
+        driver: none
    ontology:
       build: ./
       container_name: ${ONTOLOGY_CONTAINER_NAME}
+      links:
+         - wiki
       volumes:
        - "${MOUNT}/rdf/config.ini:/config.ini"
+       - "${MOUNT}/rdf/ontology.owl:/ontology.owl"
+       - "${MOUNT}/rdf/templates:/templates"

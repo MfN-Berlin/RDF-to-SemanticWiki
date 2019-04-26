@@ -32,8 +32,6 @@ try:
     optionsParser.add_option("-l", "--language", dest="language", help="Language of the wiki")
     templateDir = None
     optionsParser.add_option("-t", "--templates", dest="templateDir", help="Path to template directory")
-    mediaSource = None
-    optionsParser.add_option("-m", "--media", dest="mediaSource", help="Use internal or external media source")
 
     (options, args) = optionsParser.parse_args()
 
