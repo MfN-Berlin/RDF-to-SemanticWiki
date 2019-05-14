@@ -39,7 +39,8 @@ test:
 	-mkdir -p ${MOUNT}/basic-wiki
 	cp test/basic-wiki.ini test/basic-wiki/config.ini
 	$(MAKE) -C test/basic-wiki/ build	
-	sleep 20
+	echo wait for the database container to start
+	sleep 60
 	$(MAKE) -C test/basic-wiki/ install
 	sleep 20
 
@@ -54,10 +55,10 @@ test:
 
 # stop all containers
 	-docker stop ${SMW_CONTAINER_NAME}
-	-docker rm ${DB_CONTAINER_NAME}
 	-docker stop ${ONTOLOGY_CONTAINER_NAME}
-	-docker rm ${SMW_CONTAINER_NAME}
 	-docker stop ${DB_CONTAINER_NAME}
+	-docker rm ${SMW_CONTAINER_NAME}
+	-docker rm ${DB_CONTAINER_NAME}
 	-docker rm ${ONTOLOGY_CONTAINER_NAME}
 # delete the test data
 	sudo rm -rf mount
