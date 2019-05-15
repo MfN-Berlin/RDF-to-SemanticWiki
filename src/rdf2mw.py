@@ -25,13 +25,13 @@ try:
     # Parse command-line options
     optionsParser = OptionParser()
     command = None
-    optionsParser.add_option("-a", "--action", dest="command", help="Action can be one of import, remove or test")
+    optionsParser.add_option("-a", "--action", default="import", dest="command", help="Action can be one of import, remove or test")
     modelPath = None
     optionsParser.add_option("-i", "--input", dest="modelPath", help="Path to ontology file")
     language = None
-    optionsParser.add_option("-l", "--language", dest="language", help="Language of the wiki")
+    optionsParser.add_option("-l", "--language", default="en", dest="language", help="Language of the wiki")
     templateDir = None
-    optionsParser.add_option("-t", "--templates", dest="templateDir", help="Path to template directory")
+    optionsParser.add_option("-t", "--templates", default="src/smw/templates", dest="templateDir", help="Path to template directory")
 
     (options, args) = optionsParser.parse_args()
 
