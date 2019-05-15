@@ -46,3 +46,9 @@ sudo make ontology=example/Calendar.rdf templates=src/smw/templates import
 These correspond to the classes in the example ontology provided in example/Calendar.rdf.
 2. Click on `Location`, create a new Location called `The Met`.
 
+# Advanced usage
+## Removing an ontology
+This will remove all forms, templates, attributes and categories corresponding to the last imported ontology
+```
+sudo make remove
+```
