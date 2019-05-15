@@ -145,6 +145,7 @@
     <!-- http://mfn-berlin.de/sammlung/calendar_simple#Entry -->
 
     <owl:Class rdf:about="http://mfn-berlin.de/sammlung/calendar_simple#Entry">
+        <rdfs:label xml:lang="en">Entry</rdfs:label>
         <rdfs:label xml:lang="de">Eintrag</rdfs:label>
     </owl:Class>
     
@@ -153,6 +154,7 @@
     <!-- http://mfn-berlin.de/sammlung/calendar_simple#Location -->
 
     <owl:Class rdf:about="http://mfn-berlin.de/sammlung/calendar_simple#Location">
+        <rdfs:label xml:lang="en">Location</rdfs:label>
         <rdfs:label xml:lang="de">Ort</rdfs:label>
     </owl:Class>
 </rdf:RDF>
