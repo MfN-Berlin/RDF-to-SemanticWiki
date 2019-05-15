@@ -69,12 +69,17 @@ import:
 	-sudo rm -rf ${MOUNT}/rdf/config.ini
 	sudo cp config.ini ${MOUNT}/rdf/
 	sudo cp $(ontology) ${MOUNT}/rdf/ontology.owl
-	sudo cp -r $(templates) ${MOUNT}/rdf/templates
+	sudo cp -r $(templates) ${MOUNT}/rdf/
 	$(up)
 # load the ontology into the wiki
 	docker exec -ti ${ONTOLOGY_CONTAINER_NAME} script -q -c "\
 	export PYTHONPATH=.:/src && \
-	python src/rdf2mw.py -a import -i /ontology.owl -l de -t /templates/"
+	python src/rdf2mw.py -a import -i /ontology.owl -l en -t /templates/"
+
+remove:
+	docker exec -ti ${ONTOLOGY_CONTAINER_NAME} script -q -c "\
+	export PYTHONPATH=.:/src && \
+	python src/rdf2mw.py -a remove -i /ontology.owl"
 
 ###################################
 #       Commands
@@ -87,7 +92,7 @@ endef
 
 define down
 	$(export_env) && \
-	docker-compose -f docker-compose.yml down
+	docker-compose down
 endef
 
 define export_env
