@@ -25,22 +25,24 @@ Build the docker images and containers, start a test wiki, load the example onto
 make test
 ```
 
-# Usage
-If the test pass succesfully, then `docker ps` should show a Docker container for the importer ("ontology-import"), as well as a wiki and a database ("smw-wiki" and "smw-db").
+## Install the wiki
+If the tests pass successfully, you can install the wiki by calling
+```
+make install
+```
+This will create a directory `mount/basic-wiki` on the host, to persist the wiki settings and database.
+
+# Basic usage
 You can now import an ontology into a wiki. In the following example, I will use the basic wiki installed during testing.
 
-1. Open http://localhost to make sure the basic wiki is running.
-2. Create the configuration for the ontology importer by running ```./configure```. Accept the defaults.
-
-Build the docker images, create volumes on the host, copy configuration, start
+1. Create the configuration for the ontology importer by running ```./configure```. Accept the defaults.
+2. Open `http://localhost` to make sure the basic wiki is running.
+3. Call the ontology import script, import the example ontology provided, using the default templates:
 ```
-make
-```
-
-Run the tests
-```
-make test
+sudo make ontology=example/Calendar.rdf templates=src/smw/templates import
 ```
 
-
+1. Open the page `http://localhost/html/Special:Categories`, you should see 2 categories: `Entry`and `Location`.
+These correspond to the classes in the example ontology provided in example/Calendar.rdf.
+2. Click on `Location`, create a new Location called `The Met`.
 

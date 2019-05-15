@@ -54,10 +54,6 @@ try:
     if not os.path.isdir(tplDir):
         raise ImporterException("Template directory not found")
 
-    # media source
-    if options.mediaSource is None:
-        options.mediaSource = "local"
-   
     # A connector which can login to a MediaWiki through the API
     connector = MediaWikiApiConnector(config)
     # A factory for DAO objects which can persist a SemanticModel
