@@ -1,5 +1,8 @@
 FROM python:3
 
+# install some utilities
+apt-get update && apt-get install nano
+
 # Install Python requirements
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
