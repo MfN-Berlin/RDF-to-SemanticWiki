@@ -1,7 +1,7 @@
 FROM python:3
 
 # install some utilities
-apt-get update && apt-get install nano
+RUN apt-get update && apt-get install nano
 
 # Install Python requirements
 COPY requirements.txt ./
