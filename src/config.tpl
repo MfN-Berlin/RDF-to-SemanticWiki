@@ -3,7 +3,7 @@
 # use './configure' to generate this file
 
 [defaults]
-# Base URL of the MediaWiki installation (should start with http://)
+# Base URL of the MediaWiki installation (should start with http:// and end with a slash.)
 BASE_MW_URL=@@BASE_MW_URL@@
 # Username of the MediaWiki API bot user
 API_USERNAME=@@API_USERNAME@@
