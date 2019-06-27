@@ -78,6 +78,7 @@ class MediaWikiApiConnector(AbstractConnector):
             # payload['logintoken'] = self._loginToken
             payload['lgname'] = self._username
             payload['lgpassword'] = self._password
+            payload['lgdomain'] = "local"
             # payload['loginreturnurl'] = self._contentUrl
             r2 = requests.post(self._apiUrl, data=payload, cookies=r1.cookies)
             #print(r2.json())
