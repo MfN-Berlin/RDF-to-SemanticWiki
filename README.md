@@ -8,6 +8,18 @@ The first step to do this is to model the semantic relationships as an ontology,
 The second step is to convert the ontology into categories, templates, forms and property pages in the wiki. This script takes an ontology file in RDF/XML format as input and creates the necessary wiki pages using the MediaWiki API.
 
 # Installation
+A wiki is provided as a Docker container for running the tests. You will need to install Docker on your machine to run it. Install [Docker](https://www.docker.com/get-started) and [Docker Compose](https://docs.docker.com/compose/install/), then do:
+
+# Testing
+Start the test wiki and run the tests
+```
+docker-compose up -d
+make test
+```
+
+
+# OLD
+# Installation
 ## Get Docker
 This script is provided as a Docker container. You will need to install Docker on your machine to run it. Get Docker at: https://www.docker.com/get-started
 
