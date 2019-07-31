@@ -1,29 +1,32 @@
 version: '3'
 services:
    db:
-      image: mariadb:10.4
-      container_name: ${DB_CONTAINER_NAME}
+      image: aot29/test-wiki-db
+      container_name: basic-db
       environment:
-        MYSQL_ROOT_PASSWORD: ${INSTALLDBPASS}
+        MYSQL_ROOT_PASSWORD: secret123
       volumes:
-        - "${MOUNT}/basic-wiki/db:/var/lib/mysql"
+        - "./mount/db:/var/lib/mysql"
+
    wiki:
-      build: ./test/basic-wiki/smw
-      container_name: ${SMW_CONTAINER_NAME}
+      image: aot29/test-wiki-smw
+      container_name: basic-wiki
       ports:
          - "80:80"
       links:
          - db
-      volumes:
-        - "${MOUNT}/basic-wiki/LocalSettings.php:/var/www/html/LocalSettings.php"
-        - "${MOUNT}/basic-wiki/uploads:/var/www/html/images"
-        - "${MOUNT}/basic-wiki/apache2.conf:/etc/apache2/apache2.conf"
+
+   data: 
+      image: aot29/test-wiki-data
+      container_name: basic-data
+      tty: true
+
    ontology:
       build: ./
-      container_name: ${ONTOLOGY_CONTAINER_NAME}
+      container_name: ontology-import
       links:
          - wiki
       volumes:
-       - "${MOUNT}/rdf/config.ini:/config.ini"
-       - "${MOUNT}/rdf/ontology.owl:/ontology.owl"
-       - "${MOUNT}/rdf/templates:/templates"
+       - "./mount/rdf:/rdf"
+       - "./mount/test:/test"
+      tty: true
