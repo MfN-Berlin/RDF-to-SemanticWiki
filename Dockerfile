@@ -12,6 +12,3 @@ COPY src /src
 
 # Copy the tests to the image
 COPY test /test
-
-# keep container running
-CMD sleep infinity
