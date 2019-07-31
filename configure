@@ -1,6 +1,6 @@
 #! /bin/bash
 # Base URL of the MediaWiki installation
-BASE_MW_URL=http://smw-wiki
+BASE_MW_URL=http://basic-wiki/
 read -p "Base URL of the MediaWiki installation ($BASE_MW_URL): " ANSWER_1;
 if [ ${ANSWER_1} ];
 then BASE_MW_URL=$ANSWER_1;
