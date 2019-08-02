@@ -33,8 +33,10 @@ TEST_DBNAME=basic_wiki
 
 test:|rm_test_data wiki
 	cp -r test ${MOUNT}
-# run tests
-	docker exec -ti ${ONTOLOGY_CONTAINER_NAME} script -q -c "cd /test && ./test.sh"
+# run unit tests
+	docker exec -ti ${ONTOLOGY_CONTAINER_NAME} script -q -c "cd /test && export PYTHONPATH=${PYTHONPATH}:../src:./unit && python -m unittest unit/*.py"
+# run integration tests
+	docker exec -ti ${ONTOLOGY_CONTAINER_NAME} script -q -c "cd /test && export PYTHONPATH=${PYTHONPATH}:../src:./integration && python -m unittest integration/*.py"
 
 wiki:
 	docker-compose up -d
