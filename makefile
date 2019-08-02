@@ -31,19 +31,12 @@ TEST_DBPASS=secret123
 # The database name
 TEST_DBNAME=basic_wiki
 
-build:
-#	$(down)
-#	$(remove)
-# make volumes directories on the host, copy configuration
-	-mkdir -p ${MOUNT}/rdf
-	-mkdir -p ${MOUNT}/test
-#	-sudo cp config.ini ${MOUNT}/rdf
-# build and start the containers
-#	$(up)
-
-#test:install
-test:|rm_test_data build
+test:|rm_test_data wiki
 	cp -r test ${MOUNT}
+# run tests
+	docker exec -ti ${ONTOLOGY_CONTAINER_NAME} script -q -c "cd /test && ./test.sh"
+
+wiki:
 	docker-compose up -d
 # re-create the database in the test container
 	docker exec -ti ${TEST_DB_CONTAINER_NAME} script -q -c "echo \"drop database if exists ${TEST_DBNAME};\" > /tmp/query.sql"
@@ -53,8 +46,7 @@ test:|rm_test_data build
 	docker cp ${TEST_DATA_CONTAINER_NAME}:/dump.sql /tmp/
 	docker cp /tmp/dump.sql ${TEST_DB_CONTAINER_NAME}:/tmp
 	docker exec -ti ${TEST_DB_CONTAINER_NAME} script -q -c "mysql -u${TEST_DBUSER} -p${TEST_DBPASS} ${TEST_DBNAME} < /tmp/dump.sql"
-# run tests
-	docker exec -ti ${ONTOLOGY_CONTAINER_NAME} script -q -c "cd /test && ./test.sh"
+
 
 # Stop and remove test data and containers
 rm_test_data:
@@ -64,27 +56,14 @@ rm_test_data:
 	-docker rm ${TEST_DATA_CONTAINER_NAME}
 	-docker rm ${ONTOLOGY_CONTAINER_NAME}
 
-#install:
-# build and install a basic wiki
-#	-mkdir -p ${MOUNT}/basic-wiki
-#	cp test/basic-wiki.ini test/basic-wiki/config.ini
-#	$(MAKE) -C test/basic-wiki/ build	
-#	#echo wait for the database container to start
-#	sleep 30
-#	$(MAKE) -C test/basic-wiki/ install
-
 # import an ontology into the wiki
 import:
-#	$(down)
-#	$(remove)
 # copy configuration, templates and ontology to mount, start importer
 # 'ontology' and 'templates' are passed from the command-line as 'make ontology=xxx.owl templates=src/smw/templates import'
 	-sudo mkdir -p ${MOUNT}/rdf
-#	-sudo rm -rf ${MOUNT}/rdf/config.ini
 	sudo cp config.ini ${MOUNT}/rdf/
 	sudo cp $(ontology) ${MOUNT}/rdf/ontology.owl
 	sudo cp -r $(templates) ${MOUNT}/rdf/
-#	$(up)
 # load the ontology into the wiki
 	docker exec -ti ${ONTOLOGY_CONTAINER_NAME} script -q -c "\
 	export PYTHONPATH=.:/src && \
@@ -111,18 +90,7 @@ define down
 endef
 
 define export_env
-#	export SMW_CONTAINER_NAME=${SMW_CONTAINER_NAME} && \
-#	export DB_CONTAINER_NAME=${DB_CONTAINER_NAME} && 
 	export ONTOLOGY_CONTAINER_NAME=${ONTOLOGY_CONTAINER_NAME} && \
 	export INSTALLDBPASS=${INSTALLDBPASS} && \
 	export MOUNT=${MOUNT}
 endef
-
-#define remove
-#	-docker stop ${SMW_CONTAINER_NAME}
-#	-docker stop ${ONTOLOGY_CONTAINER_NAME}
-#	-docker stop ${DB_CONTAINER_NAME}
-#	-docker rm ${SMW_CONTAINER_NAME}
-#	-docker rm ${DB_CONTAINER_NAME}
-#	-docker rm ${ONTOLOGY_CONTAINER_NAME}
-#endef
