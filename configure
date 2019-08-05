@@ -1,6 +1,6 @@
 #! /bin/bash
 # Base URL of the MediaWiki installation
-BASE_MW_URL=http://basic-wiki/
+BASE_MW_URL=http://basic-wiki/wiki/
 read -p "Base URL of the MediaWiki installation ($BASE_MW_URL): " ANSWER_1;
 if [ ${ANSWER_1} ];
 then BASE_MW_URL=$ANSWER_1;
@@ -24,7 +24,7 @@ fi
 echo "";
 
 # Template path, relative to the SemanticDAO package.
-TPL_DIR=src/smw/templates
+TPL_DIR=/src/smw/templates
 read -p "Template path ($TPL_DIR): " ANSWER_4;
 if [ ${ANSWER_4} ];
 then TPL_DIR=$ANSWER_1;

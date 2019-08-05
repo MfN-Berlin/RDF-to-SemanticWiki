@@ -14,7 +14,7 @@ from rdf2mw.Importer import Importer, ImporterException
 from smw.Factory import Factory
 from smw.MediaWikiApiConnector import MediaWikiApiConnector
 
-configPath = "/config.ini"
+configPath = "/rdf/config.ini"
 """Path to configuration file."""
 
 try:
@@ -68,7 +68,7 @@ try:
         importer.delete(options.modelPath)
     elif options.command == "test":
         parser.parse(options.modelPath)
-        #print(str(parser._model))
+        print(str(parser._model))
     else:
         raise ImporterException("Unknown error")
 
