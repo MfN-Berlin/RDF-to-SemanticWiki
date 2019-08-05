@@ -43,7 +43,8 @@ class RDFParser(AbstractParser):
         properties of the superclass to the subclass.
         Run this method AFTER all others.
         """
-        declarations = self._doc.findall(RDFParser.path("owl:Class") + "|" + RDFParser.path("rdfs:Class"))
+        declarations = self._doc.findall(RDFParser.path("owl:Class"))
+        declarations += self._doc.findall(RDFParser.path("rdfs:Class"))
         # go through the "Class" elements
         for element in declarations:
             # find subclasses
