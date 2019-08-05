@@ -7,17 +7,51 @@ The first step to do this is to model the semantic relationships as an ontology,
 
 The second step is to convert the ontology into categories, templates, forms and property pages in the wiki. This script takes an ontology file in RDF/XML format as input and creates the necessary wiki pages using the MediaWiki API.
 
-# Installation
+# Install using Docker
 A wiki is provided as a Docker container for running the tests. You will need to install Docker on your machine to run it. Install [Docker](https://docs.docker.com/install/) and [Docker Compose](https://docs.docker.com/compose/install/), then do:
-
-# Testing
-Start the test wiki and run the tests
 ```
 docker-compose up -d
+make install
+```
+This will install a basic semantic MediaWiki in 3 Docker containers. You try out the wiki by opening `http://localhost`.
+
+## Testing
+Make sure the wiki is running, the do:
+```
 make test
 ```
+This will run unit test and integratin tests. Integration test use the wiki API and can take a while to run.
+When test are finished, you should see a test coverage report.
 
+## Usage
+If all tests passed, you now have a running wiki and a functioning environment for managing a semantic wiki using an ontology. Do `docker ps` to get an overview of running containers.
+You should see 4 containers:
+* `ontology-import` contains the Python interpreter and libraries necessary for working with ontologies.
+* `basic-wiki` provides the web server and PHP scripts for the wiki.
+* `basic-db` provides the database engine. The data for your wiki installation is mounted on your file system in `mount/db`.
+* `basic-data` contains installation data and is only used during installation.
 
+To stop the wiki do: `docker-compose down`
+
+To bring it up again do `docker-compose up -d`. Check that the wiki started by opening `http://localhost`.
+
+## Example
+The example shows how to create a wikis forms, templates, categories and properties by importing an ontology in to the wiki. The example ontology is "Friend of a Friend" (FOAF), a well-known ontology for describing sociial networks (Brickley, Miller, 2015).
+FOAF is provided here in RDF/XML format: `example/foaf.rdf`. You can get an overview of FOAF using an ontology visualiszer, like http://www.visualdataweb.de/webvowl/#foaf.
+
+To load FOAF into the wiki, do:
+```
+cp config.ini mount/rdf # copy the configuration file to the mount point
+cp example/foaf.rdf mount/rdf/ # copy the ontology into the mount point, so that it is accessible from the container
+docker exec -ti ontology-import bash # open a terminal into the container
+export PYTHONPATH=.:/src # make sure Python finds the script
+python /src/rdf2mw.py -a import -i /rdf/foaf.rdf -l en -t /src/smw/templates/ # import 
+```
+
+# References
+Brickley, D. and Miller, L., 2015. FOAF Vocabulary Specification 0.99 (2014). Namespace Document. Available online: http://xmlns.com/foaf/spec/ (accessed on 5 August 2019).
+
+#############################################
 # OLD
 # Installation
 ## Get Docker
