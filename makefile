@@ -57,7 +57,10 @@ install:
 	docker cp /tmp/dump.sql ${TEST_DB_CONTAINER_NAME}:/tmp
 	docker exec -ti ${TEST_DB_CONTAINER_NAME} script -q -c "mysql -u${TEST_DBUSER} -p${TEST_DBPASS} ${TEST_DBNAME} < /tmp/dump.sql"
 	echo "You can try out the wiki at http://localhost"
-
+# copy the configuration file to the mount point
+	cp config.ini mount/rdf
+# make sure Python finds the script
+	docker exec -ti ${ONTOLOGY_CONTAINER_NAME} script -q -c "export PYTHONPATH=.:/src"
 
 # Stop and remove test data and containers
 rm_test_data:
