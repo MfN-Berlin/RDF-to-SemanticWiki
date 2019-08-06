@@ -51,7 +51,6 @@
     <owl:AnnotationProperty rdf:about="http://www.w3.org/2003/06/sw-vocab-status/ns#term_status"/>
     
 
-
     <!-- http://xmlns.com/foaf/0.1/membershipClass -->
 
     <owl:AnnotationProperty rdf:about="http://xmlns.com/foaf/0.1/membershipClass">
