@@ -24,7 +24,9 @@ This will run unit test and integratin tests. Integration test use the wiki API 
 When test are finished, you should see a test coverage report.
 
 ## Usage
-If all tests passed, you now have a running wiki and a functioning environment for managing a semantic wiki using an ontology. Do `docker ps` to get an overview of running containers.
+If all tests passed, you now have a running wiki and a functioning environment for managing a semantic wiki using an ontology.
+To bring it up again do `docker-compose up -d`. Check that the wiki started by opening `http://localhost`.
+Do `docker ps` to get an overview of running containers.
 You should see 4 containers:
 * `ontology-import` contains the Python interpreter and libraries necessary for working with ontologies.
 * `basic-wiki` provides the web server and PHP scripts for the wiki.
@@ -33,18 +35,15 @@ You should see 4 containers:
 
 To stop the wiki do: `docker-compose down`
 
-To bring it up again do `docker-compose up -d`. Check that the wiki started by opening `http://localhost`.
-
 ## Example
-The example shows how to create a wikis forms, templates, categories and properties by importing an ontology in to the wiki. The example ontology is "Friend of a Friend" (FOAF), a well-known ontology for describing sociial networks (Brickley, Miller, 2015).
-FOAF is provided here in RDF/XML format: `example/foaf.rdf`. You can get an overview of FOAF using an ontology visualiszer, like http://www.visualdataweb.de/webvowl/#foaf.
+The example shows how to create a wikis forms, templates, categories and properties by importing an ontology in to the wiki.
+The example ontology is "Friend of a Friend" (FOAF), a well-known ontology for describing sociial networks (Brickley, Miller, 2015).
+FOAF is provided here in RDF/XML format: `example/foaf.rdf`. You can get an overview of FOAF using an ontology visualizer, like [VOWL](http://www.visualdataweb.de/webvowl/).
 
 To load FOAF into the wiki, do:
 ```
-cp config.ini mount/rdf # copy the configuration file to the mount point
 cp example/foaf.rdf mount/rdf/ # copy the ontology into the mount point, so that it is accessible from the container
 docker exec -ti ontology-import bash # open a terminal into the container
-export PYTHONPATH=.:/src # make sure Python finds the script
 python /src/rdf2mw.py -a import -i /rdf/foaf.rdf -l en -t /src/smw/templates/ # import 
 ```
 
