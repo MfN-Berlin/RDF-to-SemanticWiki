@@ -44,7 +44,7 @@ To load FOAF into the wiki, do:
 ```
 cp example/foaf.rdf mount/rdf/ # copy the ontology into the mount point, so that it is accessible from the container
 docker exec -ti ontology-import bash # open a terminal into the container
-python /src/rdf2mw.py -a import -i /rdf/foaf.rdf -l en -t /src/smw/templates/ # import 
+python /src/rdf2mw.py -i /rdf/foaf.rdf # import FOAF into the wiki
 ```
 
 # References
