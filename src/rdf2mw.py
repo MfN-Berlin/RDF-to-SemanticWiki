@@ -31,7 +31,7 @@ try:
     language = None
     optionsParser.add_option("-l", "--language", default="en", dest="language", help="Language of the wiki")
     templateDir = None
-    optionsParser.add_option("-t", "--templates", default="src/smw/templates", dest="templateDir", help="Path to template directory")
+    optionsParser.add_option("-t", "--templates", default="/src/smw/templates", dest="templateDir", help="Path to template directory")
 
     (options, args) = optionsParser.parse_args()
 
@@ -47,10 +47,11 @@ try:
         raise ImporterException("Unknown command")
 
     # Path to templates directory
-    if options.templateDir is not None:
-        tplDir = options.templateDir
-    else:
-        tplDir = config.get('defaults', 'tplDir')
+    #if options.templateDir is not None:
+    #    tplDir = options.templateDir
+    #else:
+    #    tplDir = config.get('defaults', 'tplDir')
+    tplDir = options.templateDir
     if not os.path.isdir(tplDir):
         raise ImporterException("Template directory not found")
 

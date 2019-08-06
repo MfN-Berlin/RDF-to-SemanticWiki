@@ -32,7 +32,8 @@ class AbstractParser:
         'owl': "http://www.w3.org/2002/07/owl#",
         'xml': "http://www.w3.org/XML/1998/namespace",
         'xsd': "http://www.w3.org/2001/XMLSchema#",
-        'rdfs': "http://www.w3.org/2000/01/rdf-schema#"
+        'rdfs': "http://www.w3.org/2000/01/rdf-schema#",
+        'vs': "http://www.w3.org/2003/06/sw-vocab-status/ns#"
     }
 
     @staticmethod

@@ -46,7 +46,8 @@ class SemanticElementDAO(AbstractDAO):
         @return string containing wiki markup.
         """
         # print(etree.tostring(tree, encoding="utf8", method="xml"))
-        fullPath = os.path.join(os.path.dirname(__file__), self.tplDir, tplName)
+        # fullPath = os.path.join(os.path.dirname(__file__), self.tplDir, tplName)
+        fullPath = os.path.join(self.tplDir, tplName)
         template = etree.parse(fullPath)
         transform = etree.XSLT(template)
         page = transform(tree)
@@ -54,7 +55,6 @@ class SemanticElementDAO(AbstractDAO):
         resp = ""
         for line in lines:
             resp += line.lstrip() + "\n"
-
         return(resp)
 
 

@@ -18,7 +18,7 @@ class DummyDAOFactory(Factory):
     the manager object with a dummy manager
     """
 
-    def __init__(self, lang=None, tplDir="templates"):
+    def __init__(self, lang=None, tplDir="/src/smw/templates"):
         """Construct."""
         Factory.__init__(self, DummyConnector(), tplDir)
         self._manager = DummyManager(DummyConnector(), tplDir)
