@@ -28,7 +28,7 @@ If all tests passed, you now have a running wiki and a functioning environment f
 To bring it up again do `docker-compose up -d`. Check that the wiki started by opening `http://localhost`.
 Do `docker ps` to get an overview of running containers.
 You should see 4 containers:
-* `ontology-import` contains the Python interpreter and libraries necessary for working with ontologies.
+* `ontology-import` contains the Python interpreter and libraries necessary for working with ontologies.make install
 * `basic-wiki` provides the web server and PHP scripts for the wiki.
 * `basic-db` provides the database engine. The data for your wiki installation is mounted on your file system in `mount/db`.
 * `basic-data` contains installation data and is only used during installation.
@@ -37,7 +37,7 @@ To stop the wiki do: `docker-compose down`
 
 ## Example
 The example shows how to create a wikis forms, templates, categories and properties by importing an ontology in to the wiki.
-The example ontology is "Friend of a Friend" (FOAF), a well-known ontology for describing sociial networks (Brickley, Miller, 2015).
+The example ontology is "Friend of a Friend" (FOAF), a well-known ontology for describing social networks (Brickley, Miller, 2015).
 FOAF is provided here in RDF/XML format: `example/foaf.rdf`. You can get an overview of FOAF using an ontology visualizer, like [VOWL](http://www.visualdataweb.de/webvowl/).
 
 To load FOAF into the wiki, do:
