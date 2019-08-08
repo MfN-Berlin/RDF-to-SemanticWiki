@@ -40,7 +40,11 @@ The example shows how to create a wikis forms, templates, categories and propert
 The example ontology is "Friend of a Friend" (FOAF), a well-known ontology for describing social networks (Brickley, Miller, 2015).
 FOAF is provided here in RDF/XML format: `example/foaf.rdf`. You can get an overview of FOAF using an ontology visualizer, like [VOWL](http://www.visualdataweb.de/webvowl/).
 
-To load FOAF into the wiki, do:
+To load FOAF into the wiki, make sure the wiki is running,
+```
+docker-compose up -d
+```
+then do:
 ```
 cp example/foaf.rdf mount/rdf/ # copy the ontology into the mount point, so that it is accessible from the container
 docker exec -ti ontology-import bash # open a terminal into the container
