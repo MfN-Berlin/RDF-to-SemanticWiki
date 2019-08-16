@@ -29,7 +29,7 @@ To bring it up again do `docker-compose up -d`. Check that the wiki started by o
 
 Do `docker ps` to get an overview of running containers.
 You should see 4 containers:
-* `ontology-import` contains the Python interpreter and libraries necessary for working with ontologies.make install
+* `ontology-import` contains the Python interpreter and libraries necessary for working with ontologies.
 * `basic-wiki` provides the web server and PHP scripts for the wiki.
 * `basic-db` provides the database engine. The data for your wiki installation is mounted on your file system in `mount/db`.
 * `basic-data` contains installation data and is only used during installation.
