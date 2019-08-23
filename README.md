@@ -1,19 +1,16 @@
 
 # RDF-to-MediaWiki
 Maintaining a semantic MediaWiki is challenging, as any reasonably complex semantic wiki will require dozens of categories, templates, forms and property pages.
-By separating the model from its implementation, it becomes easier to keep an overview of the semantic components used.
-
-The first step to do this is to model the semantic relationships as an ontology, using a modelling tool such as Protege.
-
-The second step is to convert the ontology into categories, templates, forms and property pages in the wiki. This script takes an ontology file in RDF/XML format as input and creates the necessary wiki pages using the MediaWiki API.
+This script takes an ontology file in RDF/XML format as input and creates the necessary wiki pages using the MediaWiki API.
 
 # Install using Docker
-A wiki is provided as a Docker container for running the tests. You will need to install Docker on your machine to run it. Install [Docker](https://docs.docker.com/install/) and [Docker Compose](https://docs.docker.com/compose/install/), then do:
+A wiki is provided as a Docker container for running the tests. You will need to install Docker on your machine to run it. Install [Docker](https://docs.docker.com/install/) and [Docker Compose](https://docs.docker.com/compose/install/).
+Clone the repository, then start the containers:
 ```
 docker-compose up -d
 make install
 ```
-This will install a basic semantic MediaWiki in 3 Docker containers. You try out the wiki by opening `http://localhost`.
+This will install a basic semantic MediaWiki in 3 Docker containers. Try out the wiki by opening `http://localhost` in a browser.
 
 ## Testing
 Make sure the wiki is running, then do:
@@ -47,10 +44,17 @@ docker-compose up -d
 ```
 then do:
 ```
-cp example/foaf.rdf mount/rdf/ # copy the ontology into the mount point, so that it is accessible from the container
-docker exec -ti ontology-import bash # open a terminal into the container
-python /src/rdf2mw.py -i /rdf/foaf.rdf # import FOAF into the wiki
+# copy the ontology into the mount point, so that it is accessible from the container
+cp example/foaf.rdf mount/rdf/
+
+# open a terminal into the container
+docker exec -ti ontology-import bash
+
+# import FOAF into the wiki
+python /src/rdf2mw.py -i /rdf/foaf.rdf 
 ```
+Once the example ontology has been imported, open the wiki in a browser `http://localhost`. You should now see an additional section on the sidebar menu containing all the classes in the FOAF ontology.
+
 
 # Contributing
 If you wish to contribute to the software or need support, please [contact the maintainer](mailto:alvaro,ortiztroncoso@mfn.berlin).
