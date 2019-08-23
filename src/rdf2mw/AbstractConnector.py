@@ -13,7 +13,7 @@ class AbstractConnector:
         """Login to a wiki."""
         raise NotImplementedError
 
-    def loadPage(self, title, content):
+    def loadPage(self, title):
         """
         Load a page (from a private wiki or not), using username and password.
 
