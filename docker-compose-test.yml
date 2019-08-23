@@ -2,6 +2,9 @@ version: '3'
 services:
    ontology:
       build: ./
-      container_name: ${ONTOLOGY_CONTAINER_NAME}
+      container_name: ontology-import
       volumes:
-       - "${MOUNT}/rdf/config.ini:/config.ini"
+       - ".mount/rdf:/rdf"
+       - "./test:/test"
+       - "./src:/src"
+      tty: true
