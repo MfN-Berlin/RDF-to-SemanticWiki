@@ -25,7 +25,9 @@ class AbstractFactory:
     def getSemanticClassDAO(self):
         """
         Create a DAO object for the corresponding semantic class.
-
-        @param layout: String path to XML file containing layout information.
         """
+        raise NotImplementedError
+
+    def getModelDAO(self):
+        """Create a DAO object for the semantic model."""
         raise NotImplementedError
