@@ -29,4 +29,5 @@ services:
       volumes:
        - "./mount/rdf:/rdf"
        - "./mount/test:/test"
+       - "./src:/src"
       tty: true
