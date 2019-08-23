@@ -39,6 +39,10 @@ class DummyManager(Manager):
 class DummyConnector(AbstractConnector):
     """A dummy class for testing."""
 
+    def loadPage(self, title):
+        self._content = ""
+        return(True)
+
     @property
     def baseURL(self):
         """Get the base URL of the wiki."""

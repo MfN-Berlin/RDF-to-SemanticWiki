@@ -45,6 +45,16 @@ class SemanticModel:
         @return array of strings
         """
         return self.classes.keys()
+    
+    def asElementTree(self):
+        """
+        Get a representation of this semantic class as an XML element tree.
+
+        @return etree
+        """
+        # name
+        selm = etree.Element('Model')
+        selm.set('name', 'model')
 
     def __str__(self):
         resp = ""

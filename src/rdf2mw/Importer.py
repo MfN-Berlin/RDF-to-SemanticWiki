@@ -34,10 +34,14 @@ class Importer:
         model = self._parser.parse(modelPath)
 
         # create DAO objects
+        modelDao = self._daoFactory.getModelDAO()
         classDao = self._daoFactory.getSemanticClassDAO()
         dataPropDao = self._daoFactory.getDatatypePropertyDAO()
         objectPropDao = self._daoFactory.getObjectPropertyDAO()
 
+        # Create the pages for the ontology
+        modelDao.create(model, language)
+        
         # create all the class pages
         for sclass in model.classes.values():
             classDao.create(sclass, language)

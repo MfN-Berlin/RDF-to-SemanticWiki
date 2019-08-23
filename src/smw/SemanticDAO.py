@@ -57,7 +57,6 @@ class SemanticElementDAO(AbstractDAO):
             resp += line.lstrip() + "\n"
         return(resp)
 
-
 class SemanticClassDAO(SemanticElementDAO):
     """Provides a class DAO objects accessing the MediaWiki API."""
 
@@ -161,3 +160,40 @@ class DatatypePropertyDAO(SemanticPropertyDAO):
             stree, SemanticElementDAO.propertyTemplate)
         # Send to MediaWiki
         self._manager.commit(sprop.name, self.values)
+
+
+class ModelDAO(SemanticElementDAO):
+    """Provides a DAO object for the model as a whole."""
+
+    def __init__(self, manager):
+        """Construct."""
+        super().__init__(manager)
+
+    def create(self, model, language=None):
+        #stree = model.asElementTree()
+        # add class pages to sidebar
+        #sidebar = "* Ontology\n"
+        # create all the class pages
+        #for sclass in model.classes.values():       
+        #    sidebar = sidebar + "** %s\n" % sclass.name
+        # Send to MediaWiki
+        #self.values["property"] = self.transform(
+        #    stree, SemanticElementDAO.sidebarTemplate)
+        sidebar = "* navigation\n"
+        sidebar += "** mainpage|mainpage-description\n"
+        sidebar += "** recentchanges-url|recentchanges\n"
+        sidebar += "** randompage-url|randompage\n"
+        sidebar += "** helppage|help-mediawiki\n"
+        sidebar += "* SEARCH\n"
+        sidebar += "* TOOLBOX\n"
+        sidebar += "* LANGUAGES\n"
+        sidebar += "* Ontology\n"
+        for sclass in model.classes.values():       
+            sidebar = sidebar + "** :category:%s|%s\n" % (sclass.name, sclass.name)
+        # Send to MediaWiki        
+        self.values["MediaWiki"] = sidebar
+        self._manager.commit('Sidebar', self.values)
+
+    def getValues(self):
+        """Override abstract method."""
+        return self.values

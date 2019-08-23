@@ -13,7 +13,7 @@ from rdf2mw.SemanticModel import SemanticModel, SemanticClass, DatatypeProperty,
 
 class test_SemanticModel(unittest.TestCase):
     """Test."""
-
+    
     def test_GetDatatypeProperties(self):
         """Test that getter for datatype properties returns only datatype properties."""
         sclass = SemanticClass("test")

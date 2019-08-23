@@ -6,7 +6,7 @@ Created on 04.05.2016
 @author: Alvaro.Ortiz
 """
 from rdf2mw.AbstractFactory import AbstractFactory
-from smw.SemanticDAO import SemanticClassDAO, DatatypePropertyDAO, ObjectPropertyDAO
+from smw.SemanticDAO import SemanticClassDAO, DatatypePropertyDAO, ObjectPropertyDAO, ModelDAO
 from smw.Manager import Manager
 
 
@@ -57,3 +57,9 @@ class Factory(AbstractFactory):
         if self._classDAO is None:
             self._classDAO = SemanticClassDAO(self.getDAOManager())
         return self._classDAO
+
+    def getModelDAO(self):
+        """Override abstract method."""
+        if self._modelDAO is None:
+            self._modelDAO = ModelDAO(self.getDAOManager())
+        return self._modelDAO

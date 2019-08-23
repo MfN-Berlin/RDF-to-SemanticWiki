@@ -50,6 +50,16 @@ class test_SMWImporter(unittest.TestCase):
         except:
             self.assertFalse(True)
 
+    def test_ClassSidebar(self):
+        """Test that the wiki sidebar contains all the classes from the ontology"""
+        self.importer.run(self.modelPath)
+        self.connector.loadPage("MediaWiki:Sidebar")
+        self.assertTrue('Calendar' in self.connector.content)
+        self.assertTrue('Description' in self.connector.content)
+        self.assertTrue('Entry' in self.connector.content)
+        self.assertTrue('Event' in self.connector.content)
+        self.assertTrue('Location' in self.connector.content)
+
     def test_ClassPagesCreated(self):
         """Test that a form: and a template: page was created for each class in the example ontology."""
         self.importer.run(self.modelPath)

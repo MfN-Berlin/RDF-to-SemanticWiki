@@ -32,6 +32,18 @@ class test_MakeMarkdownFromRDF(unittest.TestCase):
         # stores markdown in factory.value, does not create mediawiki pages
         self.factory = DummyDAOFactory()
 
+    def testModel(self):
+        """Test that sidebar is generated for all classes in the model."""
+        dao = self.factory.getModelDAO()
+        dao.create(self.model)
+        sidebar = dao.getValues()['MediaWiki']
+        # all classes should be listed in the sidebar
+        self.assertTrue('Calendar' in sidebar)
+        self.assertTrue('Description' in sidebar)
+        self.assertTrue('Entry' in sidebar)
+        self.assertTrue('Event' in sidebar)
+        self.assertTrue('Location' in sidebar)
+
     def testProperty(self):
         """Test that property markdown is correct."""
         # The "Event" class has a property called "Priority"
