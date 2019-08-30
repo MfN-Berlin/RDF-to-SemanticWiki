@@ -14,7 +14,7 @@ from rdf2mw.Importer import Importer, ImporterException
 from smw.Factory import Factory
 from smw.MediaWikiApiConnector import MediaWikiApiConnector
 
-configPath = "/rdf/config.ini"
+configPath = "/config.ini"
 """Path to configuration file."""
 
 try:

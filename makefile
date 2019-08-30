@@ -34,8 +34,6 @@ TEST_DBNAME=basic_wiki
 # Run test with coverage.
 # See https://stackoverflow.com/questions/36517137/how-to-properly-use-coverage-py-in-python#36524004
 test:
-# update tests, in case they have changed
-	cp -r test ${MOUNT}
 # cleanup old coverage report
 	docker exec -ti ${ONTOLOGY_CONTAINER_NAME} script -q -c "rm test/.coverage"
 # run unit tests

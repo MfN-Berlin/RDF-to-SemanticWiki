@@ -27,7 +27,8 @@ services:
       links:
          - wiki
       volumes:
-       - "./mount/rdf:/rdf"
-       - "./mount/test:/test"
+       - "./rdf:/rdf"
+       - "./test:/test"
        - "./src:/src"
+       - "./config.ini:/config.ini"
       tty: true

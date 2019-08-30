@@ -32,7 +32,8 @@ fi
 echo "";
 
 ## Create config.ini file
-cp src/config.tpl config.ini;
+mkdir config
+cp src/config.tpl config/config.ini;
 sed -i "s|@@BASE_MW_URL@@|$BASE_MW_URL|g" config.ini
 sed -i "s|@@API_USERNAME@@|$API_USERNAME|g" config.ini
 sed -i "s|@@API_PASS@@|$API_PASS|g" config.ini
