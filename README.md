@@ -1,4 +1,3 @@
-
 # RDF-to-MediaWiki
 Maintaining a semantic MediaWiki is challenging, as any reasonably complex semantic wiki will require dozens of categories, templates, forms and property pages.
 This script takes an ontology file in RDF/XML format as input and creates the necessary wiki pages using the MediaWiki API.
@@ -20,7 +19,7 @@ make test
 This will run unit test and integration tests. Integration test use the wiki API and can take a while to run.
 When tests are finished, you should see a test coverage report.
 
-# Usage
+# Importing an ontology
 If all tests passed, you now have a running wiki and a functioning environment for managing a semantic wiki using an ontology.
 To bring it up again do `docker-compose up -d`. Check that the wiki started by opening `http://localhost`.
 
@@ -34,7 +33,7 @@ You should see 4 containers:
 To stop the wiki do: `docker-compose down`
 
 # Example
-The example shows how to create a wikis forms, templates, categories and properties by importing an ontology in to the wiki.
+The example shows how to create a wiki forms, templates, categories and properties by importing an ontology in to the wiki.
 The example ontology is "Friend of a Friend" (FOAF), a well-known ontology for describing social networks (Brickley, Miller, 2015).
 FOAF is provided here in RDF/XML format: `example/foaf.rdf`. You can get an overview of FOAF using an ontology visualizer, like [VOWL](http://www.visualdataweb.de/webvowl/).
 

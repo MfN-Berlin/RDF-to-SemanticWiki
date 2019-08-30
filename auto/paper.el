@@ -5,6 +5,7 @@
     "berners1998semantic"
     "di2006automatic"
     "kiniti2013wikis"
+    "noy2001ontology"
     "ortiz2016"
     "patzschke2016"
     "DBLP:journals/aimatters/Musen15"
