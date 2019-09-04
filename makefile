@@ -44,6 +44,8 @@ test:
 	docker exec -ti ${ONTOLOGY_CONTAINER_NAME} script -q -c "cd /test && export PYTHONPATH=${PYTHONPATH}:../src:./integration && py.test integration/*.py --cov=../src --cov-report="
 # show test coverage report
 	docker exec -ti ${ONTOLOGY_CONTAINER_NAME} script -q -c "cd /test && coverage report -m"
+# cleanup caches
+	docker exec -ti ${ONTOLOGY_CONTAINER_NAME} script -q -c "cd /test && rm -rf integration/__pycache__ && rm -rf unit/__pycache__"
 
 install:
 # re-create the database in the test container
@@ -79,13 +81,13 @@ import:
 # load the ontology into the wiki
 	docker exec -ti ${ONTOLOGY_CONTAINER_NAME} script -q -c "\
 	export PYTHONPATH=.:/src && \
-	python src/rdf2mw.py -a import -i /ontology.owl -l en -t /templates/"
+	python src/rdf2smw.py -a import -i /ontology.owl -l en -t /templates/"
 
 # remove the current ontology from the wiki
 remove:
 	docker exec -ti ${ONTOLOGY_CONTAINER_NAME} script -q -c "\
 	export PYTHONPATH=.:/src && \
-	python src/rdf2mw.py -a remove -i /ontology.owl"
+	python src/rdf2smw.py -a remove -i /ontology.owl"
 
 ###################################
 #       Commands

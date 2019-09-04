@@ -4,11 +4,11 @@ This script takes an ontology file in RDF/XML format as input and creates the ne
 
 # Install using Docker
 
-**On Linux:**
+**Install Docker on Linux:**
 A wiki is provided as a Docker container for running the tests. You will need to install Docker on your machine to run it. Install [Docker](https://docs.docker.com/install/) and [Docker Compose](https://docs.docker.com/compose/install/).
 
-**On Windows:**
-The recommended way to install Docker on Windows is to install a Linux virtual machine using Oracle Virtual Box (https://www.virtualbox.org/) and then to proceed as above. For the Linux installation, you might want to choose a command-line oriented or a server version of some distribution, such as Debian (https://www.debian.org/distrib/index.en.html).
+**Install Docker on Windows:**
+The recommended way to install Docker on Windows is to install a Linux virtual machine using Oracle Virtual Box (https://www.virtualbox.org/) and then to proceed as above. For the Linux virtual machine, you might want to choose a command-line oriented or a server version of some distribution, such as Debian (https://www.debian.org/distrib/index.en.html).
 
 Clone the repository, then start the containers:
 ```
@@ -21,7 +21,16 @@ You now need to create a configuration file. For testing, accept the defaults gi
 ./configure
 make install
 ```
-This will install RDF-to-MediaWiki along with a basic semantic MediaWiki for testing. Try out the wiki by opening `http://localhost` in a browser.
+This will install RDF-to-MediaWiki along with a basic semantic MediaWiki for testing.
+
+Do `docker ps` to get an overview of running containers.
+You should see 4 containers:
+* `ontology-import` contains the Python interpreter and libraries necessary for working with ontologies.
+* `basic-wiki` provides the web server and PHP libraries for the wiki.
+* `basic-db` provides the database engine. The data for your wiki installation is mounted on your file system in `mount/db`.
+* `basic-data` contains installation data and is only used during installation.
+
+Try out the wiki by opening `http://localhost` in a browser.
 
 ## Testing
 Make sure the wiki is running, then do:
@@ -33,19 +42,12 @@ When tests are finished, you should see a test coverage report.
 
 # Importing an ontology
 If all tests passed, you now have a running wiki and a functioning environment for managing a semantic wiki using an ontology.
-To bring it up again do `docker-compose up -d`. Check that the wiki started by opening `http://localhost`.
-
-Do `docker ps` to get an overview of running containers.
-You should see 4 containers:
-* `ontology-import` contains the Python interpreter and libraries necessary for working with ontologies.
-* `basic-wiki` provides the web server and PHP libraries for the wiki.
-* `basic-db` provides the database engine. The data for your wiki installation is mounted on your file system in `mount/db`.
-* `basic-data` contains installation data and is only used during installation.
-
-To stop the wiki do: `docker-compose down`
+Check that the wiki started by opening `http://localhost`. If necessary, bring it up again by calling `docker-compose up -d`.
 
 # Example
-The example shows how to create a wiki forms, templates, categories and properties by importing an ontology in to the wiki.
+The example shows how to create wiki forms, templates, categories and properties by importing an ontology in to the wiki. Then some data is created using these forms and the data is retrieved using semantic queries.
+
+## Importing the example ontology
 The example ontology is "Friend of a Friend" (FOAF), a well-known ontology for describing social networks (Brickley, Miller, 2015).
 FOAF is provided here in RDF/XML format: `example/foaf.rdf`. You can get an overview of FOAF using an ontology visualizer, like [VOWL](http://www.visualdataweb.de/webvowl/).
 
@@ -55,13 +57,9 @@ docker-compose up -d
 ```
 then do:
 ```
-
-# open a terminal into the container
-docker exec -ti ontology-import bash
-
-# import FOAF into the wiki
-python /src/rdf2mw.py -i /rdf/foaf.rdf 
+./rdf2smw --input /rdf/foaf.rdf
 ```
+
 Once the example ontology has been imported, open the wiki in a browser `http://localhost`. You should now see an additional section on the sidebar menu containing all the classes in the FOAF ontology (if you don't, try reloading the page).
 
 ## Creating some example content
@@ -73,7 +71,16 @@ The example ontology, Friend-of-a-Friend (FOAF) can be used to model social netw
 5. Click on "Person", you should see 4 entries. Open "Alice", klick on "Edit with form" (upper right).
 6. Scroll down to the input field "knows", click one or more persons Alice knows (it doesn't matter which ones), "Save".
 7. Repeat for "Bob", "Caroline" and "David".
-8. Open your user page, "Sysop" (upper right corner), create it. 
+
+## Retreiving data using semantic queries
+1. Login ("Sysop"/"secret123"), open your user page, "User:Sysop" (upper right corner), create it. 
+2. Type this query and save it
+```
+==Who knows who?==
+{{#ask: [[Category:Person]]
+|?knows
+}}
+```
 
 # Contributing
 If you wish to contribute to the software or need support, please [contact the maintainer](mailto:alvaro,ortiztroncoso@mfn.berlin).

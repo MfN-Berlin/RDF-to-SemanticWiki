@@ -75,15 +75,13 @@
     <!--Property value-->
     <xsl:choose>
       <xsl:when test="@cardinality='FunctionalProperty'">
-	[[{{{<xsl:value-of select="@name" />}}}]]
+	[[<xsl:value-of select="@name" />::{{{<xsl:value-of select="@name" />|}}}]]
       </xsl:when>
       <xsl:otherwise>
 	{{#arraymap:{{{<xsl:value-of select="@name"/>|}}}|@|x|*[[x]]|\n\n}}
+	{{#arraymap:{{{<xsl:value-of select="@name"/>|}}}|@|x|{{#set: <xsl:value-of select="@name" />=x }}|}}
       </xsl:otherwise>
-    </xsl:choose>
-    
-    <!--Add page to category for object property-->
-    {{#arraymap:{{{<xsl:value-of select="@name"/>|}}}|@|x|[[Category:x]]|\n\n}}
+    </xsl:choose>    
   </xsl:template>
   
 </xsl:stylesheet>

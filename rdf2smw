@@ -1,0 +1,6 @@
+#! /bin/bash
+docker exec -ti ontology-import script -q -c "python /src/rdf2smw.py $1 $2"
+docker exec -ti basic-wiki script -q -c "\
+php extensions/SemanticMediaWiki/maintenance/rebuildData.php -ftpv && \
+php extensions/SemanticMediaWiki/maintenance/rebuildData.php -v && \
+php maintenance/runJobs.php"
