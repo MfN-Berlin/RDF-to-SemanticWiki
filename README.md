@@ -98,6 +98,8 @@ You can also export your data in a format suitable for further processing. This 
 ```
 There are many more possibilities for querying data, plese see the Semantic mediawiki documentation on [inline queries](https://www.semantic-mediawiki.org/wiki/Help:Inline_queries) and [result formats](https://www.semantic-mediawiki.org/wiki/Help:Result_formats).
 
+Please see the project's documentation on Gitlab for information on [advanced usage](https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/wikis/).
+
 # Contributing
 If you wish to contribute to the software or need support, please [contact the maintainer](mailto:alvaro,ortiztroncoso@mfn.berlin).
 Please report problems using the [issue tracker](https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/issues).
