@@ -1,4 +1,4 @@
-# RDF-to-MediaWiki
+# RDF-to-SemanticWiki
 Maintaining a semantic MediaWiki is challenging, as any reasonably complex semantic wiki will require dozens of categories, templates, forms and property pages.
 This script takes an ontology file in RDF/XML format as input and creates the necessary wiki pages using the MediaWiki API.
 
@@ -14,15 +14,16 @@ Clone the repository, then start the containers:
 ```
 git clone git@gitlab.com:alvarosaurus/RDF-to-SemanticWiki.git
 cd RDF-to-SemanticWiki
+```
+You now need to create a configuration file. For testing, accept the defaults given by the configure script:
+```
 docker-compose up -d
-```
-You now need to create a configuration file. For testing, accept the defaults given by the configure script.
-```
 ./configure
+```
+This will install RDF-to-MediaWiki along with a basic semantic MediaWiki for testing:
+```
 make install
 ```
-This will install RDF-to-MediaWiki along with a basic semantic MediaWiki for testing.
-
 Do `docker ps` to get an overview of running containers.
 You should see 4 containers:
 * `ontology-import` contains the Python interpreter and libraries necessary for working with ontologies.
@@ -68,20 +69,39 @@ The example ontology, Friend-of-a-Friend (FOAF) can be used to model social netw
 2. Find the "Ontology" menu on the left hand-side of the page
 3. Click on "Person", type-in "Alice", ignore the rest of the form, scroll to the bottom, save the page.
 4. Repeat with "Bob", "Caroline" and "David".
-5. Click on "Person", you should see 4 entries. Open "Alice", klick on "Edit with form" (upper right).
+5. Click on "Person", you should see 4 entries. Open "Alice", klick on "Edit with form" (upper right). If you can't see the "Edit with form" Button, try the "More->Refresh" menu item.
 6. Scroll down to the input field "knows", click one or more persons Alice knows (it doesn't matter which ones), "Save".
 7. Repeat for "Bob", "Caroline" and "David".
 
 ## Retreiving data using semantic queries
-1. Login ("Sysop"/"secret123"), open your user page, "User:Sysop" (upper right corner), create it. 
-2. Type this query and save it
+Login ("Sysop"/"secret123"), open your user page, "User:Sysop" (upper right corner), create it. 
+Type this query and save the page
 ```
 ==Who knows who?==
 {{#ask: [[Category:Person]]
+|mainlabel=who
 |?knows
 }}
 ```
 You can now see an tabular overview of the simple social network you just recorded.
+
+You can also query for specific values, e.g. to get a list of Bob's friends:
+```
+==Who knows Bob?==
+{{#ask: [[Category:Person]][[knows::~Bob]]
+}} are friends of Bob.
+```
+You can also export your data in a format suitable for further processing. This code will add a download link. Click on it to open the data in a spreadsheet or to import the data in a visualization tool (e.g. [Palladio](http://hdlab.stanford.edu/palladio-app/#/visualization))
+```
+==Export==
+{{#ask: [[Category:Person]]
+|mainlabel=who
+|?knows
+|format=csv
+|sep=;
+}}
+```
+There are many more possibilities for querying data, plese see the Semantic mediawiki documentation on [inline queries](https://www.semantic-mediawiki.org/wiki/Help:Inline_queries) and [result formats](https://www.semantic-mediawiki.org/wiki/Help:Result_formats).
 
 # Contributing
 If you wish to contribute to the software or need support, please [contact the maintainer](mailto:alvaro,ortiztroncoso@mfn.berlin).
