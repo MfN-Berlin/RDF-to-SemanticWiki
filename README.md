@@ -81,6 +81,7 @@ The example ontology, Friend-of-a-Friend (FOAF) can be used to model social netw
 |?knows
 }}
 ```
+You can now see an tabular overview of the simple social network you just recorded.
 
 # Contributing
 If you wish to contribute to the software or need support, please [contact the maintainer](mailto:alvaro,ortiztroncoso@mfn.berlin).
