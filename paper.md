@@ -30,7 +30,7 @@ The mapping between the ontology constructs and the wiki artefacts is as follows
 ``RDF-to-SemanticWiki`` is designed to be used by computer scientists researching computer-mediated collaboration and ontology engineering. ``RDF-to-SemanticWiki`` supports research by providing a way to create collaboration environments for working on complex scientific projects, while enforcing structure and consistency. As ontologies can be reused and extended [noy2001ontology], ``RDF-to-SemanticWiki`` facilitates knowledge transfer between projects, as taxonomies and vocabularies found useful in one project can be used to construct a wiki for a second project. As discussed above, ``RDF-to-SemanticWiki`` supports the conversion of semantic classes, attributes and relations, class inheritance and cardinality. This is a subset of the constructs defined by the RDF/XML specification [@rdfspec]. More work is needed to extend the possibilities of ``RDF-to-SemanticWiki`` so as to pave the way for more expressive collaboration environments.
 
 # Acknowledgements
-``RDF-to-SemanticWiki`` development was in part endowed through the project "Knowledge Transfer Concept for Research Contents, Methods and Competences in Research Museums" at the Museum für Naturkunde Berlin, funded by the German Federal Ministry of Education and Research (BMBF), grant no. 01IO1632.
+``RDF-to-SemanticWiki`` development was sustained in part by the project "Knowledge Transfer Concept for Research Contents, Methods and Competences in Research Museums" at the Museum für Naturkunde Berlin, funded by the German Federal Ministry of Education and Research (BMBF), grant no. 01IO1632.
 
 
 # References
