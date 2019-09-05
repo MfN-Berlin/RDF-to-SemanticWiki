@@ -52,11 +52,7 @@ The example shows how to create wiki forms, templates, categories and properties
 The example ontology is "Friend of a Friend" (FOAF), a well-known ontology for describing social networks (Brickley, Miller, 2015).
 FOAF is provided here in RDF/XML format: `example/foaf.rdf`. You can get an overview of FOAF using an ontology visualizer, like [VOWL](http://www.visualdataweb.de/webvowl/).
 
-To load FOAF into the wiki, make sure the wiki is running,
-```
-docker-compose up -d
-```
-then do:
+To load FOAF into the wiki, make sure the wiki is running, then do:
 ```
 ./rdf2smw --input /rdf/foaf.rdf
 ```
@@ -88,8 +84,7 @@ You can now see an tabular overview of the simple social network you just record
 You can also query for specific values, e.g. to get a list of Bob's friends:
 ```
 ==Who knows Bob?==
-{{#ask: [[Category:Person]][[knows::~Bob]]
-}} are friends of Bob.
+{{#ask: [[Category:Person]][[knows::~Bob]]}} are friends of Bob.
 ```
 You can also export your data in a format suitable for further processing. This code will add a download link. Click on it to open the data in a spreadsheet or to import the data in a visualization tool (e.g. [Palladio](http://hdlab.stanford.edu/palladio-app/#/visualization))
 ```
