@@ -101,7 +101,7 @@ There are many more possibilities for querying data, plese see the Semantic medi
 Please see the project's documentation on Gitlab for information on [advanced usage](https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/wikis/).
 
 # Contributing
-If you wish to contribute to the software or need support, please [contact the maintainer](mailto:alvaro,ortiztroncoso@mfn.berlin).
+If you wish to contribute to the software or need support, please [contact the maintainer](mailto:alvaro.ortiztroncoso@mfn.berlin).
 Please report problems using the [issue tracker](https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/issues).
 
 # References
