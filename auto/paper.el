@@ -11,6 +11,7 @@
     "DBLP:journals/aimatters/Musen15"
     "rdfspec"
     "smw"
-    "wikipediasemantic"))
+    "wikipediasemantic"
+    "oren2006semantic"))
  :bibtex)
 
