@@ -41,7 +41,6 @@ make test
 This will run unit test and integration tests. Integration test use the wiki API and can take a while to run.
 When tests are finished, you should see a test coverage report.
 
-# Importing an ontology
 If all tests passed, you now have a running wiki and a functioning environment for managing a semantic wiki using an ontology.
 Check that the wiki started by opening `http://localhost`. If necessary, bring it up again by calling `docker-compose up -d`.
 
@@ -70,6 +69,8 @@ The example ontology, Friend-of-a-Friend (FOAF) can be used to model social netw
 7. Repeat for "Bob", "Caroline" and "David".
 
 ## Retreiving data using semantic queries
+Now that you have some example content, you can leverage the capabilities of Semantic MediaWiki to access your data.
+
 Login ("Sysop"/"secret123"), open your user page, "User:Sysop" (upper right corner), create it. 
 Type this query and save the page
 ```
