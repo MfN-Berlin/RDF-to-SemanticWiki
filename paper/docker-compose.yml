@@ -1,0 +1,7 @@
+version: '3'
+services:
+   pdflatex:
+      image: aot29/pdflatex:latest
+      container_name: ${LTX_CONTAINER}
+      volumes:
+         - "./:${MOUNT}"
