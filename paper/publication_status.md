@@ -3,7 +3,7 @@ JOSS, 05.09.2019, 07.09.2019, version 1.0
 Ubiquity, 13.09.2019,13.09.2019,version 1.1
 
 Good possibilities:
-* http://www.emeraldgrouppublishing.com/services/publishing/ijcs/index.htm word, structured abstract, case study
+* http://www.emeraldgrouppublishing.com/services/publishing/ijcs/index.htm structured abstract, case study
 
 
 Unchecked Possibilities:
