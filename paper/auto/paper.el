@@ -6,9 +6,6 @@
     "IJCS_template"
     "IJCS_template10")
    (LaTeX-add-labels
-    "eq:jaa"
-    "theo1"
-    "lemma1"
     "one"
     "tab1"
     "a1")
