@@ -3,27 +3,20 @@
  (lambda ()
    (TeX-run-style-hooks
     "latex2e"
-    "IJCS_template"
-    "IJCS_template10")
-   (LaTeX-add-labels
-    "one"
-    "tab1"
-    "a1")
+    "ijcs_template"
+    "ijcs_template10")
    (LaTeX-add-bibitems
-    "braley"
-    "chhikara"
-    "gupta95a"
-    "gupta95b"
-    "gupta97"
-    "gurland94"
-    "gurland95"
-    "jorgensen"
-    "mills71"
-    "park99"
-    "tang"
-    "winkler"
-    "wong88"
-    "wong89"
-    "wong91"))
+    "berners1998"
+    "corcho2003"
+    "diiorio2006"
+    "gandon2014"
+    "kiniti2013"
+    "musen2015"
+    "noy2001"
+    "oren2006"
+    "ortiz2016"
+    "patzschke2016"
+    "pieterse2014"
+    "zhou2007"))
  :latex)
 

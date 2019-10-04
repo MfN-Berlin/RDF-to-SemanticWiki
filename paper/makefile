@@ -17,7 +17,6 @@ article:clean prepare
 	docker exec -ti ${LTX_CONTAINER} script -q -c " \
 	cd ${MOUNT}/temp && \
 	pdflatex $(ARTICLE).tex && \
-	bibtex $(ARTICLE) && \
 	pdflatex $(ARTICLE) && \
 	pdflatex $(ARTICLE).tex"
 	mv -f ./temp/$(ARTICLE).pdf .
@@ -26,7 +25,7 @@ article:clean prepare
 # cleanup output and temp files
 clean:
 	rm -f $(ARTICLE).pdf; \
-	rm -fr temp/*
+	rm -fr paper/temp/*
 
 # copy all files required by latex to the temp dir
 prepare:

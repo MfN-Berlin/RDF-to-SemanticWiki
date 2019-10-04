@@ -10,3 +10,4 @@ test/.coverage
 *\#
 *.BACKUP.*
 .\#*
+paper/temp

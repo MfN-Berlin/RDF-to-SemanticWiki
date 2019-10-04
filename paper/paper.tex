@@ -10,7 +10,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %\documentclass[draft]{ijcs}
-\documentclass{IJCS_template}
+\documentclass{ijcs_template}
 
 \begin{document}
 
@@ -27,8 +27,8 @@
 
 \author{Ortiz Troncoso, Alvaro}
 
-\address{Museum für Naturkunde - Leibniz Institute for Research on Evolution and Biodiversity, Invalidenstrasse 43, 10115 Berlin, Germany 
-\email{alvaro.OrtizTroncoso@mfn.berlin}
+\address{Museum f\"ur Naturkunde - Leibniz Institute for Research on Evolution and Biodiversity, Invalidenstrasse 43, 10115 Berlin, Germany 
+\email{alvaro.OrtizTroncoso@mfn.berlin}}
 
 \maketitle
 
@@ -40,10 +40,10 @@
 \section*{Abstract}
 \begin{abstract}
 \newline\textbf{Purpose: Maintaining a semantic wiki is challenging. Coping with increasingly complex wikis led to the development of a methodical approach for simplifying the creation and maintenance of semantic wikis} - 
-\newline\textbf{Approach: The methodical approach used involves modeling the semantic relationships underlying the information in the wiki as an ontology, and then automatically creating the wiki from the ontology constructs} - 
-\newline\textbf{Findings: the approach was implemented as open source software that maps ontology constructs to the wiki artifacts. Implementation details are discussed.} - 
+\newline\textbf{Approach: The methodical approach used involves modeling the semantic relationships underlying the information in the wiki as an ontology, and then programmatically creating the wiki from the ontology constructs} - 
+\newline\textbf{Findings: The approach was implemented as open source software that maps ontology constructs to the wiki artifacts, implementation details are discussed.} - 
 \newline\textbf{Practical implications: Semantic wikis support research at the Museum of Natural History Berlin by providing services for developing and documenting collection management and imaging procedures or annotating archive material. Additionally to these internally available wikis, some wikis are available on the Web, as publication medium for conference presentations or providing additional material for exhibitions. A total of 16 semantic wikis are currently online on the museum's servers.} - 
-\newline\textbf{Value: a methodical approach for creating and maintaining wikis greatly simplifies these tasks. Furthermore, reusing vocabularies and taxonomies throughout several projects becomes manageable.} -
+\newline\textbf{Value: A methodical approach for creating and maintaining wikis greatly simplifies these tasks. Furthermore, reusing vocabularies and taxonomies throughout several projects becomes manageable.} -
 
 \end{abstract}
 
@@ -52,249 +52,81 @@
 \Papertype{Case study}
 
 \section{Introduction}
-Wikis are web platforms allowing for collaborative authoring of information. With certainty, the best known wiki is Wikipedia, but wikis are also being used to setup corporate intranets, private collaboration environments or knowledge bases. A semantic wiki is a wiki whose functionality has been extended to encode information in a structured and machine-readable way: information encoded semantically forms a "consistent logical web of data" \citep{berners1998semantic}, that can be used for enriching information with metadata, checking the conformance of information against an agreed upon schema, or accessing and combining data from different sources \citep{oren2006semantic}. Semantic wikis therefore combine the metadata and conformance aspects required by knowledge management, with the possibility to access and build-upon a corpus of collaboratively collected knowledge. 
+Wikis are web platforms allowing for collaborative authoring of information. With certainty, the best known wiki is Wikipedia, but wikis are also being used to setup corporate intranets, private collaboration environments or knowledge bases. A semantic wiki is a wiki whose functionality has been extended to encode information in a structured and machine-readable way: information encoded semantically forms a "consistent logical web of data" \cite{berners1998}, that can be used for enriching information with metadata, checking the conformance of information against an agreed upon schema, or accessing and combining data from different sources \cite{oren2006}. Semantic wikis therefore combine the metadata and conformance aspects required by knowledge management, with the possibility to access and build-upon a corpus of collaboratively collected knowledge. 
 
-Semantic wikis have been used at the Museum für Naturkunde Berlin (Museum of Natural History Berlin) since 2015. A total of 16 semantic wikis are currently online on the museum's server. Most of these wikis are part of the museum's intranet, and support research by providing services for developing and documenting collection management and imaging procedures or annotating archive material. On the other hand, some wikis are available on the Web, as publication medium for conference presentations or providing additional material for exhibitions. An example of a publicly accessible semantic wiki running at the Museum of Natural History Berlin is the \href{http://biowikifarm.net/v-mfn/panda_en/index.php}{Wiki supplementing the Panda exhibition}.
+Semantic wikis have been used at the Museum f\"ur Naturkunde Berlin (Museum of Natural History Berlin) since 2015. A total of 16 semantic wikis are currently online on the museum's server. Most of these wikis are part of the museum's intranet, and support research by providing services for developing and documenting collection management and imaging procedures or annotating archive material. On the other hand, some wikis are available on the Web, as publication medium for conference presentations or providing additional material for exhibitions. An example of a publicly accessible semantic wiki running at the Museum of Natural History Berlin is the Wiki supplementing the Panda exhibition (http://biowikifarm.net/v-mfn/panda\_en/index.php).
 
-The construction and provisioning of wikis has been the subject of two research projects at the Museum \citep{patzschke2016}. The experience gained demonstrates that creating and maintaining a semantic wiki is challenging, a major difficulty being that the complexity of the information stored in the wiki tends to increase as the user base grows, and new ideas are integrated into the wiki's semantic structure \citep{kiniti2013wikis}. This increase in complexity can take several forms: the number of document types increases, the number of attributes per document increases, external vocabularies are added to the wiki, category trees become more complex. On the other hand, complex information offers more possibilities for gaining new insights, as categories and properties can be combined through semantic queries into new data. For example, querying the biographies of collectors in the wiki of the museum's historical division can be visualized as a map showing where the museum has collected specimens in the past (see \citet{ortiz2016} for this and other examples of semantic queries).
+The construction and provisioning of wikis has been the subject of two research projects at the Museum \cite{patzschke2016}. The experience gained demonstrates that creating and maintaining a semantic wiki is challenging, a major difficulty being that the complexity of the information stored in the wiki tends to increase as the user base grows, and new ideas are integrated into the wiki's semantic structure \cite{kiniti2013}. This increase in complexity can take several forms: the number of document types increases, the number of attributes per document increases, external vocabularies are added to the wiki, category trees become more complex. On the other hand, complex information offers more possibilities for gaining new insights, as categories and properties can be combined through semantic queries into new data. For example, querying the biographies of collectors in the wiki of the museum's historical division can be visualized as a map showing where the museum has collected specimens in the past (see \cite{ortiz2016} for this and other examples of semantic queries).
 
 \section{Methodical approach}
-Coping with this increasing complexity led to the development of a methodical approach for simplifying the creation and maintenance of semantic wikis. One way to create a semantic wiki is to model the semantic relationships underlying the information in the wiki as an ontology, and then to customize a wiki to reflect the constructs described by the ontology \citep{di2006automatic}. 
+Coping with this increasing complexity led to the development of a methodical approach for simplifying the creation and maintenance of semantic wikis. One way to create a semantic wiki is to model the semantic relationships underlying the information in the wiki as an ontology, and then to customize a wiki to reflect the constructs described by the ontology \cite{diiorio2006}. 
 
-At this point it might be necessary to clarify the concept of ontology. A basic definition of what an ontology is in the realm of knowledge engineering was given by Gruber and Borst (cited in \citep{corcho2003methodologies}): an ontology is made of clear-cut and formal definitions of the concepts in a domain, and these definitions are accepted by the community of practitioners of that domain. Another way to put Gruber and Borst's definition: an ontology is a collaboratively constructed, formalized mind map.
-Another definition of ontology can be gained from information theory. \citet{pieterse2014lists} differentiate between five types of fundamental information structures: linear lists, hierarchical taxonomies, poly-hierarchical lattices, thesauri combining hierarchies with various kinds of relations between concepts, and ontologies, which extend thesauri with a set of rules for inferring new knowledge. This definition emphasizes the role of logical inference rules, and paves the way for the role ontologies play in machine learning (see \citet{zhou2007ontology} for a road map).
+At this point it might be necessary to clarify the concept of ontology. A basic definition of what an ontology is in the realm of knowledge engineering was given by Gruber and Borst (cited in \cite{corcho2003}): an ontology is made of clear-cut and formal definitions of the concepts in a domain, and these definitions are accepted by the community of practitioners of that domain. Another way to put Gruber and Borst's definition: an ontology is a collaboratively constructed, formalized mind map.
+Another definition of ontology can be gained from information theory. \citeauthor{pieterse2014} differentiate between five types of fundamental information structures: linear lists, hierarchical taxonomies, poly-hierarchical lattices, thesauri combining hierarchies with various kinds of relations between concepts, and ontologies, which extend thesauri with a set of rules for inferring new knowledge. This definition emphasizes the role of logical inference rules, and paves the way for the role ontologies play in machine learning (see \citeauthor{zhou2007} for a road map).
 
-Ontology engineering is a vast topic by itself, yet a simple methodology could follow these basic steps \citep{noy2001ontology}: obtaining domain information by consulting experts and gathering specific vocabularies (e.g. in the case of Museum of Natural History Berlin, zoological taxonomy, stratigraphical vocabulary and others); subsequently, modelling the ontology in an external tool such as Protégé \citep{musen2015protege}, and storing the result as an RDF/XML file \citep{rdfspec}. Software implemented at the Museum automates the conversion of the ontology file into web pages and forms in the wiki. This software is \href{https://github.com/MfN-Berlin/RDF-to-SemanticWiki}{distributed under an Open Source License}, in the hope that it can be useful for computer scientists researching computer-mediated collaboration and ontology engineering.
+Ontology engineering is a vast topic by itself, yet a simple methodology could follow these basic steps \cite{noy2001}: obtaining domain information by consulting experts and gathering specific vocabularies (e.g. in the case of Museum of Natural History Berlin, zoological taxonomy, stratigraphical vocabulary and others); subsequently, modeling the ontology in an external tool such as Protégé \cite{musen2015}, and storing the result as an RDF/XML file \cite{musen2015}. Software implemented at the Museum automates the conversion of the ontology file into web pages and forms in the wiki. This software is distributed under an Open Source License (https://github.com/MfN-Berlin/RDF-to-SemanticWiki), in the hope that it can be useful for computer scientists researching computer-mediated collaboration and ontology engineering.
 
 \section{Implementation details}
-The process by which the conversion of the ontology into a wiki is automated is implemented as follows: the RDF/XML file representing the ontology is parsed into an in-memory semantic model. Then, for each object in the model, a data access object (DAO) is created using a factory class. A connection is established with the wiki's web service (API). Finally, each DAO object saves itself to the wiki, using the wiki's API. With an ontology as input, the software knows two commands: ``import'' creates the necessary wiki pages, ``delete'' removes the corresponding wiki pages. The layout of the wiki is customizable through templating: templates can be used to specify the order in which elements should appear, as well as to filter out or hide some elements. The software is written in Python, templates are in XSLT. The resulting wiki pages are compatible with the \href{https://www.semantic-mediawiki.org}{semantic extension} to the popular MediaWiki software.
+The process by which the conversion of the ontology into a wiki is automated is implemented as follows: the RDF/XML file representing the ontology is parsed into an in-memory semantic model. Then, for each object in the model, a data access object (DAO) is created using a factory class. A connection is established with the wiki's web service (API). Finally, each DAO object saves itself to the wiki, using the wiki's API. With an ontology as input, the software knows two commands: ``import'' creates the necessary wiki pages, ``delete'' removes the corresponding wiki pages. The layout of the wiki is customizable through templating: templates can be used to specify the order in which elements should appear, as well as to filter out or hide some elements. The software is written in Python, templates are in XSLT. The resulting wiki pages are compatible with the semantic extension to the popular MediaWiki software (https://www.semantic-mediawiki.org).
 
-Ontology constructs are mapped to the wiki artifacts according to these rules: ontology classes are mapped to forms, templates and page categories; data attributes are mapped to property pages of the corresponding data type; relations between objects are rendered as links between pages. The cardinality of attributes is enforced through appropriate form input fields. Class inheritance is supported. Furthermore, navigation elements are added to the wiki, to enable creating, listing and editing content following the structure defined by the ontology. The information stored in the wiki using these forms and templates is thus structured and consistent, and can be accessed using \href{https://www.semantic-mediawiki.org}{semantic queries}.
+Ontology constructs are mapped to the wiki artifacts according to these rules: ontology classes are mapped to forms, templates and page categories; data attributes are mapped to property pages of the corresponding data type; relations between objects are rendered as links between pages. The cardinality of attributes is enforced through appropriate form input fields. Class inheritance is supported. Furthermore, navigation elements are added to the wiki, to enable creating, listing and editing content following the structure defined by the ontology. The information stored in the wiki using these forms and templates is thus structured and consistent, and can be accessed using semantic queries (https://www.semantic-mediawiki.org).
 
 \section{Conclusions and future work}
-The method presented here and the associated software support research at the Museum of Natural History Berlin by providing a way to create collaboration environments for working on complex scientific projects, while enforcing structure and consistency. Conceivably, the method and software could be applied to other research institutions and even to areas of industry that face similar knowledge management challenges. Furthermore, as ontologies can be reused and extended \citep{noy2001ontology}, the methodical approach facilitates knowledge transfer between projects, as taxonomies and vocabularies found useful in one project can be used to construct a wiki for a second project. As discussed above, the implemented software supports the conversion of semantic classes, attributes and relations, class inheritance and cardinality. This is a subset of the constructs defined by the RDF/XML specification \citep{rdfspec}. More work is needed to extend the possibilities of the software so as to pave the way for more expressive collaboration environments.
+The method presented here and the associated software support research at the Museum of Natural History Berlin by providing a way to create collaboration environments for working on complex scientific projects, while enforcing structure and consistency. Conceivably, the method and software could be applied to other research institutions and even to areas of industry that face similar knowledge management challenges. Furthermore, as ontologies can be reused and extended \cite{noy2001}, the methodical approach facilitates knowledge transfer between projects, as taxonomies and vocabularies found useful in one project can be used to construct a wiki for a second project. As discussed above, the implemented software supports the conversion of semantic classes, attributes and relations, class inheritance and cardinality. This is a subset of the constructs defined by the RDF/XML specification \cite{musen2015}. More work is needed to extend the possibilities of the software so as to pave the way for more expressive collaboration environments.
 
 \section{Acknowledgements}
-Software development at Museum für Naturkunde Berlin was sustained in part by the project ``Knowledge Transfer Concept for Research Contents, Methods and Competences in Research Museums'', funded by the German Federal Ministry of Education and Research (BMBF), grant no. 01IO1632.
+Software development at Museum f\"ur Naturkunde Berlin was sustained in part by the project ``Knowledge Transfer Concept for Research Contents, Methods and Competences in Research Museums'', funded by the German Federal Ministry of Education and Research (BMBF), grant no. 01IO1632.
 
-
-
-
-
-\section{Illustrations and Photographs}
-Figures are to be supplied at the end of the article. An indication
-of where the figure should go should be made on a line after the
-paragraph in which they are first mentioned, in bold font, e.g.
-'Figure 1 here'.  Please send one set of originals with copies. If
-the author requires the publisher to reduce the figures, ensure that
-the figures (including letterings and numbers) are large enough to
-be clearly seen after reduction. Photos are acceptable.
-
-\begin{figure}[th]
-\centerline{\psfig{file=ijcsf1.eps,width=5cm}}
-\vspace*{8pt}
-\caption{A schematic illustration of dissociative recombination. The
-direct mechanism, 4m$^2_\pi$ is initiated when the molecular ion
-S$_{\rm L}$ captures an electron with kinetic energy.\label{one}}
-\end{figure}
-
-Figure~\ref{one} are to be sequentially numbered in Arabic
-numerals. The caption must be placed below the figure. Typeset in 8 pt
-roman with baselineskip of 10~pt. Long captions are to be justified by
-the ``page-width''.  Use double spacing between a caption and the text
-that follows immediately.
-
-Previously published material must be accompanied by written
-permission from the author and publisher.
-
-\section{Tables}
-Tables should be inserted in the text as close to the point of
-reference as possible. Some space should be left above and below
-the table.
-
-Table~\ref{tab1} should be numbered sequentially in the text in
-Roman numerals. Captions are to be centralized above the tables.
-Typeset tables and captions in 8 pt roman with baselineskip of 10
-pt. Long captions are to be justified by the ``table-width''.
-
-\begin{table}[th]
-\tbl{Comparison of acoustic for frequencies for piston-cylinder
-problem.\label{tab1}}
-{\begin{tabular}{@{}cccc@{}} \toprule
-Piston mass & Analytical frequency & TRIA6-$S_1$ model &
-\% Error \\
-& (Rad/s) & (Rad/s) \\ \colrule
-1.0\hphantom{00} & \hphantom{0}281.0 & \hphantom{0}280.81 & 0.07 \\
-0.1\hphantom{00} & \hphantom{0}876.0 & \hphantom{0}875.74 & 0.03 \\
-0.01\hphantom{0} & 2441.0 & 2441.0\hphantom{0} & 0.0\hphantom{0} \\
-0.001 & 4130.0 & 4129.3\hphantom{0} & 0.16\\ \botrule
-\end{tabular} }
-\begin{tabnote}
-Table notes
-\end{tabnote}
-\begin{tabfootnote}
-\tabmark{a} Table footnote A\\
-\tabmark{b} Table footnote B
-\end{tabfootnote}
-\end{table}
-
-If tables need to extend over to a second page, the continuation of
-the table should be preceded by a caption, e.g.~``{\it Table~1.}
-$(${\it Continued}$)$''. Notes to tables are placed below the final
-row of the table and should be flushleft.  Footnotes in tables
-should be indicated by superscript lowercase letters and placed beneath
-the table.
-
-\section{Running Heads}
-Please provide a shortened runninghead (not more than eight words) for
-the title of your paper. This will appear on the top right-hand side
-of your paper.
-
-\section{Footnotes}
-Footnotes should be numbered sequentially in Arabic
-numbers.\footnote{Footnotes should be typeset in 8 pt Arabic at the
-bottom of the page.}
-
-\section*{Acknowledgments}
-This section should come before the References. Funding information
-may also be included here.Please keep as brief as possible.
-
-\appendix
-
-\section{Appendices}
-
-Appendices should be used only when absolutely necessary. They should
-come after the References. If there is more than one appendix, number
-them alphabetically. Number displayed equations occurring in the
-Appendix in this way, e.g.~(\ref{a1}), (A.2), etc.
-\begin{equation}
-\mu(n, t) = \frac{\sum^\infty_{i=1} 1(d_i < t,
-N(d_i) = n)}{\int^t_{\sigma=0} 1(N(\sigma) = n)d\sigma}\,.
-\label{a1}
-\end{equation}
 
 \section*{References}
-The references section should be labeled ``References'' and should appear
-at the end of the paper. Authors should follow a consistent format
-for the reference entries. For journal names, use the standard abbreviations.
-An sample format is given in the following page:
-
-\subsection*{Citations in Text}
-Since the references are unnumbered, citations to them in the text
-must identify them by authors' names and year of
-publication. References should be cited in text in square brackets by
-giving the last name of the author and the date of publication,
-e.g. \cite{wong89}. A comma should be present before the date.  For
-papers by two authors, the last names are joined by ``and''
-e.g. \cite{hussaini}. Papers by three and more authors should be cited
-by  giving the last name of the first author followed by {\it et al}.
-and the date (note that {\it et al}. is in italics and that a period
-follows the abbreviation al.).
-
-References are given in brackets unless the author's name is part
-of the sentence, e.g. ``the a-model \cite{gupta97}''
-but ``according to \citeauthor{gupta97} \shortcite{gupta97}.''
-If a citation cites two or more papers, they should be separated
-by a semicolon: \cite{gurland94,wong89}.
-If two or more papers by the same author(s) are cited together, the
-author(s) should be listed once, with the dates of the papers separated
-by a semicolon:
-(\citeauthor{gurland94}, \citeyear{gurland94}; \citeyear{gurland95}).
-Papers by the same author(s) published in the same
-year should be distinguished by appending a, b, c, etc., to the
-date: e.g. (\citeauthor{gupta95a}, \citeyear{gupta95a}; \citeyear{gupta95b}).
-
-\subsection*{Reference List}
-Reference entries should be ordered alphabetically, starting with the
-last name of the first author, followed by the first author's
-initial(s), and so on for each additional author. For papers with more
-than three authors, the last name and initials of the first author
-only should be listed, followed by a comma and {\it et al}.  Multiple
-entries for one author or one group of authors should be ordered
-chronologically, and multiple entries for the same year (including
-references with three authors that may be cited in the text as
-``{\it et al}.'') should be distinguished by appending sequential
-lowercase letters to the year; e.g. Gupta and Akman (1995a);
-Gupta and Akman (1995b).
-
 \begin{thebibliography}
-\bibitem[\protect\citeauthoryear{Al-Hussaini and
-Abd-El-Hakim}{1989}]{hussaini}
-Al-Hussaini, E. K. and Abd-El-Hakim, N. S. (1989). Failure rate of the
-inverse Gaussian-Weibull mixture model. {\it Ann. Inst. Stat. Math.},
-{\bf 41}: 617--622.
+\bibitem[\protect\citeauthoryear{Berners-Lee, T. {\it et al}.}{1998}]{berners1998}
+Berners-Lee, T. et al. (1998). Semantic web road map.
 
-\bibitem[\protect\citeauthoryear{Bradley and Gupta}{2001}]{braley}
-Bradley, D. M. and Gupta, R. C. (2001). The mean residual life and
-its limiting behaviour. Submitted for publication.
+\bibitem[\protect\citeauthoryear{Corcho, O., Fernández-López, M., and Gómez-Pérez, A.}{2003}]{corcho2003}
+Corcho, O., Fernández-López, M., and Gómez-Pérez, A. (2003). Methodologies, tools and languages for
+building ontologies. where is their meeting point? {\it Data \& knowledge engineering}, 46(1):41–64.
 
-\bibitem[\protect\citeauthoryear{Chhikara and Folks}{1977}]{chhikara}
-Chhikara, R. S. and Folks, J. L. (1977). The inverse Gaussian
-distribution as a lifetime model. {\it Technometrics,} {\bf 19}:
-461--468.
+\bibitem[\protect\citeauthoryear{Di Iorio, A. {\it et al}.}{2006}]{diiorio2006}
+Di Iorio, A., Fabbri, M., Presutti, V., and Vitali, F. (2006). Automatic deployment of semantic wikis: a
+prototype. {\it In SemWiki}.
 
-\bibitem[\protect\citeauthoryear{Gupta and Akman}{1995a}]{gupta95a}
-Gupta, R. C. and Akman, O. (1995a). Mean residual life function
-for certain types of non-monotonic ageing.
-{\it Comm. Stat. Stoch. Models,} {\bf 11}, 3, pp.~219--225.
+\bibitem[\protect\citeauthoryear{Gandon, F. and Schreiber, G.}{2014}]{gandon2014}
+Gandon, F. and Schreiber, G. (2014). Rdf 1.1 xml syntax. [Online; accessed 1-July-2019].
 
-\bibitem[\protect\citeauthoryear{Gupta and Akman}{1995b}]{gupta95b}
-Gupta, R. C. and Akman, O (1995b). On the reliability studies of a
-weighted inverse Gaussian model. {\it J. Stat. Planning Inference},
-{\bf 48}: 69--83.
+\bibitem[\protect\citeauthoryear{Kiniti, S. and Standing, C.}{2013}]{kiniti2013}
+Kiniti, S. and Standing, C. (2013). Wikis as knowledge management systems: issues and challenges.
+{\it Journal of Systems and Information Technology}, 15(2):189–201.
 
-\bibitem[\protect\citeauthoryear{Gupta {\it et~al}.}{1997}]{gupta97}
-Gupta, R. C., Kannan, N. and Raychaudhari, A. (1997). Analysis of
-log normal survival data. {\it Math. Biosci.}, {\bf 139}: 103--115.
+\bibitem[\protect\citeauthoryear{Musen, M. A.}{2015}]{musen2015}
+Musen, M. A. (2015). The protégé project: a look back and a look forward. {\it AI Matters}, 1(4):4–12.
 
-\bibitem[\protect\citeauthoryear{Gurland and Sethuraman}{1994}]{gurland94}
-Gurland, J. and Sethuraman, J. (1994). Reversal of increasing
-failure rates when pooling failure data. {\it Technometrics,}
-{\bf 36}: 416--418.
+\bibitem[\protect\citeauthoryear{Noy, N. and McGuinness, D.}{2001}]{noy2001}
+Noy, N. and McGuinness, D. (2001). Ontology development 101: A guide to creating your first ontology.
 
-\bibitem[\protect\citeauthoryear{Gurland and Sethuraman}{1995}]{gurland95}
-Gurland, J. and Sethuraman, J. (1995). How pooling data may
-reverse increasing failure rate. {\it J. Am. Stat. Assoc.},
-{\bf 90}: 1416--1423.
+\bibitem[\protect\citeauthoryear{Oren, E. {\it et al}.}{2006}]{oren2006}
+Oren, E., Möller, K., Scerri, S., Handschuh, S., and Sintek, M. (2006). What are semantic annotations.
+{\it Relatório técnico}. DERI Galway, 9:62.
 
-\bibitem[\protect\citeauthoryear{Jorgensen {\it et~al}.}{1991}]{jorgensen}
-Jorgensen, B., Seshadri, V. and Whitmore, G. A. (1991). On the
-mixture of the inverse Gaussian distribution with its complementary
-reciprocal. {\it Scand. J. Stat.}, {\bf 18}: 77--89.
+\bibitem[\protect\citeauthoryear{Ortiz Troncoso, A.}{2016}]{ortiz2016}
+Ortiz-Troncoso, A. (2016). Erfahrungen aus dem Projekt Wiki-Ansatz und kollaboratives Arbeiten im Forschungsmuseum,
+{\it Citizen Science-Wiki-Workshop 08.04.16 Ludwig- Maximilians-Universit\"at München}, DOI: 10.13140/RG.2.1.1597.2247
 
-\bibitem[\protect\citeauthoryear{Mills}{1971}]{mills71}
-Mills, E. S. (1971). The value of urban land. {\it The
-Quality of the Urban Environment}, ed.~H. S. Perloff, Wiley, New York.
+\bibitem[\protect\citeauthoryear{Patzschke, E., Ortiz-Troncoso, A., and Abele, A.}{2016}]{patzschke2016}
+Patzschke, E., Ortiz-Troncoso, A., and Abele, A. (2016). Wiki-ansatz und kollaboratives arbeiten im
+forschungsmuseum: Schlussbericht.
 
-\bibitem[\protect\citeauthoryear{Park}{1999}]{park99}
-Park, W. R. (1999). {\it The Theory and Practice of
-Econometrics}, 2nd edn. Wiley, New York.
+\bibitem[\protect\citeauthoryear{Pieterse, V. and Kourie, D. G.}{2014}]{pieterse2014}
+Pieterse, V. and Kourie, D. G. (2014). Lists, taxonomies, lattices, thesauri and ontologies: paving a
+pathway through a terminological jungle. {\it KO Knowledge Organization}, 41(3):217–229.
 
-\bibitem[\protect\citeauthoryear{Tang {\it et~al}.}{1999}]{tang}
-Tang, L. C., Lu, Y. and Chew, E. P. (1999). Mean residual lifetime
-distributions. {\it IEEE Trans. Reliabil.}, {\bf 48}: 73--78.
+\bibitem[\protect\citeauthoryear{Zhou, L.}{2007}]{zhou2007}
+Zhou, L. (2007). Ontology learning: state of the art and open issues. {\it Information Technology and
+Management}, 8(3):241–252.
 
-\bibitem[\protect\citeauthoryear{Winkler {\it et~al}.}{1972}]{winkler}
-Winkler, R. L., Roodman, G. M. and Britney, R. R. (1972). The
-determination of partial moments. {\it Manag. Sci.},
-{\bf 19}: 290--296.
-
-\bibitem[\protect\citeauthoryear{Wong}{1988}]{wong88}
-Wong, K. L. (1988). The bathtub does not hold water any more.
-{\it Qual. Reliabil. Eng. Int.}, {\bf 4}: 279--282.
-
-\bibitem[\protect\citeauthoryear{Wong}{1989}]{wong89}
-Wong, K. L. (1989). The roller-coaster curve is in.
-{\it Qual. Reliabil. Eng. Int.}, {\bf 5}: 29--36.
-
-\bibitem[\protect\citeauthoryear{Wong}{1991}]{wong91}
-Wong, K. L. (1991). The physical basis for the roller-coaster
-hazard rate curve for electronics. {\it Qual. Reliabil.
-Eng. Int.}, {\bf 7}: 489--495.
 \end{thebibliography}
 
-
 \section*{Corresponding author}
-XXX can be contacted at: xxx@ntu.edu.sg.
+Ortiz Troncoso, Alvaro can be contacted at: alvaro.OrtizTroncoso@mfn.berlin.
 
 \end{document}
