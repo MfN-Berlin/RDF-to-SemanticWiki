@@ -1055,8 +1055,8 @@
     \the\hour:\multiply\hour60\advance\minute-\hour\the\minute}
 %
 %
-\def\draftnote{\today\quad\currenttime\quad
-Emerald/INSTRUCTION FILE\qquad\jobname}%
+\def\draftnote{%\today\quad\currenttime\quad Emerald/INSTRUCTION FILE\qquad\jobname
+}%
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
