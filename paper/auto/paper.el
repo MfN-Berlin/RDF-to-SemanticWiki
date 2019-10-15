@@ -5,6 +5,8 @@
     "latex2e"
     "ijcs_template"
     "ijcs_template10")
+   (LaTeX-add-labels
+    "tab1")
    (LaTeX-add-bibitems
     "berners1998"
     "corcho2003"
