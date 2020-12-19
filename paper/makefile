@@ -25,13 +25,13 @@ article:clean prepare
 # cleanup output and temp files
 clean:
 	rm -f $(ARTICLE).pdf; \
-	rm -fr paper/temp/*
+	rm -fr ./temp/*
 
 # copy all files required by latex to the temp dir
 prepare:
 	-mkdir -p temp && \
-	cp -r ./templates/* temp && \
-	cp *.tex *.bib temp
+	cp templates/* temp \
+	cp *.tex *.bib *.cls *.dtx *.ins temp
 
 ###################################
 #       Commands

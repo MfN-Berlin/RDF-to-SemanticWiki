@@ -1,144 +1,55 @@
-%%
-%% This is file `sample-manuscript.tex',
-%% generated with the docstrip utility.
-%%
-%% The original source files were:
-%%
-%% samples.dtx  (with options: `manuscript')
-%% 
-%% IMPORTANT NOTICE:
-%% 
-%% For the copyright see the source file.
-%% 
-%% Any modified versions of this file must be renamed
-%% with new filenames distinct from sample-manuscript.tex.
-%% 
-%% For distribution of the original source see the terms
-%% for copying and modification in the file samples.dtx.
-%% 
-%% This generated file may be distributed as long as the
-%% original source files, as listed above, are part of the
-%% same distribution. (The sources need not necessarily be
-%% in the same archive or directory.)
-%%
-%% The first command in your LaTeX source must be the \documentclass command.
-\documentclass[manuscript,screen,review]{acmart}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Trim Size: 9.75in x 6.5in
+%% Text Area: 8in (include Runningheads) x 5in
+%% ijcs.tex   :   1-1-2008
+%% TeX file to use with ws-ijcs.cls written in Latex2E.
+%% The content, structure, format and layout of this style file is the
+%% property of  Emerald Group Publishing Limited Co. Pte. Ltd.
+%% Copyright 2008, by  Emerald Group Publishing Limited
+%% All rights are reserved.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%
-%% \BibTeX command to typeset BibTeX logo in the docs
-\AtBeginDocument{%
-  \providecommand\BibTeX{{%
-    \normalfont B\kern-0.5em{\scshape i\kern-0.25em b}\kern-0.8em\TeX}}}
+%\documentclass[draft]{ijcs}
+\documentclass{ijcs_template}
 
-%% Rights management information.  This information is sent to you
-%% when you complete the rights form.  These commands have SAMPLE
-%% values in them; it is your responsibility as an author to replace
-%% the commands and values with those provided to you when you
-%% complete the rights form.
-\setcopyright{acmcopyright}
-\copyrightyear{}
-\acmYear{}
-\acmDOI{}
-
-%% These commands are for a PROCEEDINGS abstract or paper.
-%%\acmConference[Woodstock '18]{Woodstock '18: ACM Symposium on Neural
-%%  Gaze Detection}{June 03--05, 2018}{Woodstock, NY}
-%%\acmBooktitle{Woodstock '18: ACM Symposium on Neural Gaze Detection,
-%%  June 03--05, 2018, Woodstock, NY}
-%%\acmPrice{15.00}
-%%\acmISBN{978-1-4503-XXXX-X/18/06}
-
-
-%%
-%% Submission ID.
-%% Use this when submitting an article to a sponsored event. You'll
-%% receive a unique submission ID from the organizers
-%% of the event, and this ID should be used as the parameter to this command.
-%%\acmSubmissionID{123-A56-BU3}
-
-%%
-%% The majority of ACM publications use numbered citations and
-%% references.  The command \citestyle{authoryear} switches to the
-%% "author year" style.
-%%
-%% If you are preparing content for an event
-%% sponsored by ACM SIGGRAPH, you must use the "author year" style of
-%% citations and references.
-%% Uncommenting
-%% the next command will enable that style.
-%%\citestyle{acmauthoryear}
-
-%%
-%% end of the preamble, start of the body of the document source.
 \begin{document}
 
-%%
-%% The "title" command has an optional parameter,
-%% allowing the author to define a "short title" to be used in page headers.
+%%%%%%%%%%%%%%%%%%%%% Publisher's Area please ignore %%%%%%%%%%%%%%%
+%
+%\catchline{}{}{}{}{}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\markboth{Ortiz Troncoso, Alvaro}
+{Ontology-based approach to creating semantic wikis}
+
 \title{Ontology-based approach to creating semantic wikis}
 
-%%
-%% The "author" command and its associated commands are used to define
-%% the authors and their affiliations.
-%% Of note is the shared affiliation of the first two authors, and the
-%% "authornote" and "authornotemark" commands
-%% used to denote shared contribution to the research.
 \author{Ortiz Troncoso, Alvaro}
-\email{alvaro.OrtizTroncoso@mfn.berlin}
-\orcid{0000-0001-7620-1907}
-\affiliation{%
-  \institution{Museum f\"ur Naturkunde - Leibniz Institute for Research on Evolution and Biodiversity}
-  \streetaddress{Invalidenstrasse 43}
-  \city{Berlin}
-  \country{Germany}
-  \postcode{10115}
-}
 
-%%
-%% By default, the full list of authors will be used in the page
-%% headers. Often, this list is too long, and will overlap
-%% other information printed in the page headers. This command allows
-%% the author to define a more concise list
-%% of authors' names for this purpose.
-%% \renewcommand{\shortauthors}{Trovato and Tobin, et al.}
+\address{Museum f\"ur Naturkunde - Leibniz Institute for Research on Evolution and Biodiversity, Invalidenstrasse 43, 10115 Berlin, Germany 
+\email{alvaro.OrtizTroncoso@mfn.berlin}}
 
-%%
-%% The abstract is a short summary of the work to be presented in the
-%% article.
+\maketitle
+
+\begin{history}
+\received{(Day Month Year)}
+\revised{(Day Month Year)}
+\end{history}
+
+\section*{Abstract}
 \begin{abstract}
-Maintaining a semantic wiki is challenging. Coping with increasingly complex wikis led to the development of a methodical approach for simplifying the creation and maintenance of semantic wikis.
-The methodical approach used involves modeling the semantic relationships underlying the information in the wiki as an ontology, and then programmatically creating the wiki from the ontology constructs.
-A methodical approach for creating and maintaining wikis greatly simplifies the creation and maintenance of semantic wikis. Furthermore, reusing vocabularies and taxonomies throughout several projects becomes manageable.
-The approach was implemented as open source software that maps ontology constructs to the wiki artifacts, implementation details are discussed.
-Semantic wikis support research at the Museum of Natural History Berlin by providing services for developing and documenting collection management and imaging procedures or annotating archive material. Additionally to these internally available wikis, some wikis are available on the Web, as publication medium for conference presentations or providing additional material for exhibitions. A total of 16 semantic wikis are currently online on the museum's servers.
+\newline\textbf{Purpose: Maintaining a semantic wiki is challenging. Coping with increasingly complex wikis led to the development of a methodical approach for simplifying the creation and maintenance of semantic wikis} - 
+\newline\textbf{Approach: The methodical approach used involves modeling the semantic relationships underlying the information in the wiki as an ontology, and then programmatically creating the wiki from the ontology constructs} - 
+\newline\textbf{Findings: A methodical approach for creating and maintaining wikis greatly simplifies the creation and maintenance of semantic wikis. Furthermore, reusing vocabularies and taxonomies throughout several projects becomes manageable.} - 
+\newline\textbf{Practical implications: The approach was implemented as open source software that maps ontology constructs to the wiki artifacts, implementation details are discussed.} - 
+\newline\textbf{Value: Semantic wikis support research at the Museum of Natural History Berlin by providing services for developing and documenting collection management and imaging procedures or annotating archive material. Additionally to these internally available wikis, some wikis are available on the Web, as publication medium for conference presentations or providing additional material for exhibitions. A total of 16 semantic wikis are currently online on the museum's servers.} -
+
 \end{abstract}
 
-%%
-%% The code below is generated by the tool at http://dl.acm.org/ccs.cfm.
-%% Please copy and paste the code instead of the example below.
-%%
-\begin{CCSXML}
-<ccs2012>
-<concept>
-<concept_id>10003120.10003130.10003233.10003301</concept_id>
-<concept_desc>Human-centered computing~Wikis</concept_desc>
-<concept_significance>500</concept_significance>
-</concept>
-</ccs2012>
-\end{CCSXML}
+\keywords{semantic web, ontology engineering, collaborative authoring}
 
-\ccsdesc[500]{Human-centered computing~Wikis}
-
-%%
-%% Keywords. The author(s) should pick words that accurately describe
-%% the work being presented. Separate the keywords with commas.
-\keywords{semantic wikis, ontology engineering, collaborative authoring}
-
-
-%%
-%% This command processes the author and affiliation and title
-%% information and builds the first part of the formatted document.
-\maketitle
+\Papertype{Case study}
 
 \section{Introduction}
 Wikis are web platforms allowing for collaborative authoring of information. With certainty, the best known wiki is Wikipedia, but wikis are also being used to setup corporate intranets, private collaboration environments or knowledge bases. A semantic wiki is a wiki whose functionality has been extended to encode information in a structured and machine-readable way: information encoded semantically forms a "consistent logical web of data" \cite{berners1998}, that can be used for enriching information with metadata, checking the conformance of information against an agreed upon schema, or accessing and combining data from different sources \cite{oren2006}. Semantic wikis therefore combine the metadata and conformance aspects required by knowledge management, with the possibility to access and build-upon a corpus of collaboratively collected knowledge. 
@@ -160,38 +71,72 @@ The process by which the conversion of the ontology into a wiki is automated is 
 
 Ontology constructs are mapped to the wiki artifacts according to these rules: ontology classes are mapped to forms, templates and page categories; data attributes are mapped to property pages of the corresponding data type; relations between objects are rendered as links between pages. The cardinality of attributes is enforced through appropriate form input fields. Class inheritance is supported. Furthermore, navigation elements are added to the wiki, to enable creating, listing and editing content following the structure defined by the ontology. The information stored in the wiki using these forms and templates is thus structured and consistent, and can be accessed using semantic queries (https://www.semantic-mediawiki.org).
 
-\begin{table*}
-  \caption{Ontology to MediaWiki mapping}
-  \label{tab1}
-  \begin{tabular}{ccl}
-    \toprule
+\begin{table}[th]
+  \tbl{Ontology to MediaWiki mapping.\label{tab1}}
+  {\begin{tabular}{@{}cccc@{}} \toprule
      Ontology element & MediaWiki markup & Example \\
-    \midrule
      Class & Template:Classname, Form:Classname, Category:Classname & The ontology class "Entry" is mapped to Template:Entry, Form:Entry and Category:Entry \\
      Datatype property & Property:propertyname, markup in the corresponding class' template & The property "HasDetails" of the class "Entry" is mapped to the page Property:HasDetails and a snippet of markup is added to the page Template:Entry \\
      Object property & The objects in the range are listed in the domain class' form & 
-    \bottomrule
-  \end{tabular}
-\end{table*}
+   \end{tabular} }
+\end{table}
 
 \section{Conclusions and future work}
 The method presented here and the associated software support research at the Museum of Natural History Berlin by providing a way to create collaboration environments for working on complex scientific projects, while enforcing structure and consistency. Conceivably, the method and software could be applied to other research institutions and even to areas of industry that face similar knowledge management challenges. Furthermore, as ontologies can be reused and extended \cite{noy2001}, the methodical approach facilitates knowledge transfer between projects, as taxonomies and vocabularies found useful in one project can be used to construct a wiki for a second project. As discussed above, the implemented software supports the conversion of semantic classes, attributes and relations, class inheritance and cardinality. This is a subset of the constructs defined by the RDF/XML specification \cite{musen2015}. More work is needed to extend the possibilities of the software so as to pave the way for more expressive collaboration environments.
 
-\section{Citations and Bibliographies}
-
-\begin{verbatim}
-  \bibliographystyle{ACM-Reference-Format}
-  \bibliography{paper.bib}
-\end{verbatim}
-
-\section{Acknowledgments}
-\begin{verbatim}
-  \begin{acks}
+\section{Acknowledgements}
 Software development at Museum f\"ur Naturkunde Berlin was sustained in part by the project ``Knowledge Transfer Concept for Research Contents, Methods and Competences in Research Museums'', funded by the German Federal Ministry of Education and Research (BMBF), grant no. 01IO1632.
-  \end{acks}
-\end{verbatim}
+
+
+\section*{References}
+\begin{thebibliography}
+\bibitem[\protect\citeauthoryear{Berners-Lee, T. {\it et al}.}{1998}]{berners1998}
+Berners-Lee, T. et al. (1998). Semantic web road map.
+
+\bibitem[\protect\citeauthoryear{Corcho, O., Fernández-López, M., and Gómez-Pérez, A.}{2003}]{corcho2003}
+Corcho, O., Fernández-López, M., and Gómez-Pérez, A. (2003). Methodologies, tools and languages for
+building ontologies. where is their meeting point? {\it Data \& knowledge engineering}, 46(1):41–64.
+
+\bibitem[\protect\citeauthoryear{Di Iorio, A. {\it et al}.}{2006}]{diiorio2006}
+Di Iorio, A., Fabbri, M., Presutti, V., and Vitali, F. (2006). Automatic deployment of semantic wikis: a
+prototype. {\it In SemWiki}.
+
+\bibitem[\protect\citeauthoryear{Gandon, F. and Schreiber, G.}{2014}]{gandon2014}
+Gandon, F. and Schreiber, G. (2014). Rdf 1.1 xml syntax. [Online; accessed 1-July-2019].
+
+\bibitem[\protect\citeauthoryear{Kiniti, S. and Standing, C.}{2013}]{kiniti2013}
+Kiniti, S. and Standing, C. (2013). Wikis as knowledge management systems: issues and challenges.
+{\it Journal of Systems and Information Technology}, 15(2):189–201.
+
+\bibitem[\protect\citeauthoryear{Musen, M. A.}{2015}]{musen2015}
+Musen, M. A. (2015). The protégé project: a look back and a look forward. {\it AI Matters}, 1(4):4–12.
+
+\bibitem[\protect\citeauthoryear{Noy, N. and McGuinness, D.}{2001}]{noy2001}
+Noy, N. and McGuinness, D. (2001). Ontology development 101: A guide to creating your first ontology.
+
+\bibitem[\protect\citeauthoryear{Oren, E. {\it et al}.}{2006}]{oren2006}
+Oren, E., Möller, K., Scerri, S., Handschuh, S., and Sintek, M. (2006). What are semantic annotations.
+{\it Relatório técnico}. DERI Galway, 9:62.
+
+\bibitem[\protect\citeauthoryear{Ortiz Troncoso, A.}{2016}]{ortiz2016}
+Ortiz-Troncoso, A. (2016). Erfahrungen aus dem Projekt Wiki-Ansatz und kollaboratives Arbeiten im Forschungsmuseum,
+{\it Citizen Science-Wiki-Workshop 08.04.16 Ludwig- Maximilians-Universit\"at München}, DOI: 10.13140/RG.2.1.1597.2247
+
+\bibitem[\protect\citeauthoryear{Patzschke, E., Ortiz-Troncoso, A., and Abele, A.}{2016}]{patzschke2016}
+Patzschke, E., Ortiz-Troncoso, A., and Abele, A. (2016). Wiki-ansatz und kollaboratives arbeiten im
+forschungsmuseum: Schlussbericht.
+
+\bibitem[\protect\citeauthoryear{Pieterse, V. and Kourie, D. G.}{2014}]{pieterse2014}
+Pieterse, V. and Kourie, D. G. (2014). Lists, taxonomies, lattices, thesauri and ontologies: paving a
+pathway through a terminological jungle. {\it KO Knowledge Organization}, 41(3):217–229.
+
+\bibitem[\protect\citeauthoryear{Zhou, L.}{2007}]{zhou2007}
+Zhou, L. (2007). Ontology learning: state of the art and open issues. {\it Information Technology and
+Management}, 8(3):241–252.
+
+\end{thebibliography}
+
+\section*{Corresponding author}
+Ortiz Troncoso, Alvaro can be contacted at: alvaro.OrtizTroncoso@mfn.berlin.
 
 \end{document}
-\endinput
-%%
-%% End of file `sample-manuscript.tex'.
