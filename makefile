@@ -31,9 +31,12 @@ TEST_DBPASS=secret123
 # The database name
 TEST_DBNAME=basic_wiki
 
+update_pytest:
+	docker exec -ti ${ONTOLOGY_CONTAINER_NAME} script -q -c "pip install -U pluggy && pip install -U pytest "
+
 # Run test with coverage.
 # See https://stackoverflow.com/questions/36517137/how-to-properly-use-coverage-py-in-python#36524004
-test:
+test:update_pytest
 # cleanup old coverage report
 	docker exec -ti ${ONTOLOGY_CONTAINER_NAME} script -q -c "rm test/.coverage"
 # run unit tests
