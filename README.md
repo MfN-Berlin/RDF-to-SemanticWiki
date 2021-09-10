@@ -49,7 +49,7 @@ The example shows how to create wiki forms, templates, categories and properties
 
 ## Importing the example ontology
 The example ontology is "Friend of a Friend" (FOAF), a well-known ontology for describing social networks (Brickley, Miller, 2015).
-FOAF is provided here in RDF/XML format: `example/foaf.rdf`. You can get an overview of FOAF using an ontology visualizer, like [VOWL](http://www.visualdataweb.de/webvowl/).
+FOAF is provided here in RDF/XML format: `example/foaf.rdf`. You can get an overview of FOAF using an ontology visualizer, like [VOWL](http://vowl.visualdataweb.org/webvowl.html#installation).
 
 To load FOAF into the wiki, make sure the wiki is running, then do:
 ```
@@ -98,6 +98,15 @@ You can also export your data in a format suitable for further processing. This 
 }}
 ```
 There are many more possibilities for querying data, plese see the Semantic mediawiki documentation on [inline queries](https://www.semantic-mediawiki.org/wiki/Help:Inline_queries) and [result formats](https://www.semantic-mediawiki.org/wiki/Help:Result_formats).
+
+==Importing other ontologies==
+This software was created to import the [IKON ontology](https://via.naturkundemuseum.berlin/ontologies/ikon.rdf) for documenting scientific research activities. If you wish to import this or other ontologies, then place the ontology in the /rdf folder and import using the import command, i.e. 
+
+```
+./rdf2smw --input /rdf/ikon.rdf
+```
+
+__Note that the path to the rdf file is as seen from within the Docker container, so should start with `/rdf`.__
 
 Please see the project's documentation on Gitlab for information on [advanced usage](https://gitlab.com/alvarosaurus/RDF-to-SemanticWiki/wikis/).
 

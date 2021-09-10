@@ -48,11 +48,12 @@ class RDFParser(AbstractParser):
         # go through the "Class" elements
         for element in declarations:
             # find subclasses
-            superclasses = element.findall(RDFParser.path("rdfs:subClassOf", startWith='descendant'))
+            superclasses = element.findall(RDFParser.path(
+                "rdfs:subClassOf", startWith='descendant'))
             if len(superclasses) == 0:
                 continue
             # get the corresponding semantic elements in the model
-            #superclassName = superclasses[0].attrib[RDFParser.full('rdf:resource')].split('#')[1]
+            # superclassName = superclasses[0].attrib[RDFParser.full('rdf:resource')].split('#')[1]
             if RDFParser.full('rdf:resource') in superclasses[0].attrib:
                 superclassName = self._parseResourceString(superclasses[0])
                 if superclassName != 'Thing':
@@ -77,11 +78,13 @@ class RDFParser(AbstractParser):
             className = self._parseAboutString(element)
 
             # is this class a collection?
-            oneof = element.findall(RDFParser.path('owl:oneOf', startWith='descendant'))
+            oneof = element.findall(RDFParser.path(
+                'owl:oneOf', startWith='descendant'))
             if len(oneof) > 0:
                 enum = Enumeration(className)
                 self._model.addEnum(enum)
-                items = oneof[0].findall(RDFParser.path('rdf:Description', startWith='descendant'))
+                items = oneof[0].findall(RDFParser.path(
+                    'rdf:Description', startWith='descendant'))
                 for item in items:
                     # itemName = item.attrib[RDFParser.full('rdf:about')].split('#')[1]
                     itemName = self._parseAboutString(item)
@@ -92,17 +95,19 @@ class RDFParser(AbstractParser):
             else:
                 sclass = SemanticClass(className)
                 self._model.addClass(sclass)  # add class to model
-                lang = "en" # default language for labels and comments, unless specified with xml:lang property
+                lang = "en"  # default language for labels and comments, unless specified with xml:lang property
 
                 # localized labels of the class
-                labels = element.findall(RDFParser.path('rdfs:label', startWith='descendant'))
+                labels = element.findall(RDFParser.path(
+                    'rdfs:label', startWith='descendant'))
                 for label in labels:
                     if RDFParser.full('xml:lang') in label.attrib:
                         lang = label.attrib[RDFParser.full('xml:lang')]
                     sclass.addLabel(label.text, lang)
 
                 # localized comment of the class
-                comments = element.findall(RDFParser.path('rdfs:comment', startWith='descendant'))
+                comments = element.findall(RDFParser.path(
+                    'rdfs:comment', startWith='descendant'))
                 for comment in comments:
                     if RDFParser.full('xml:lang') in comment.attrib:
                         lang = comment.attrib[RDFParser.full('xml:lang')]
@@ -112,14 +117,15 @@ class RDFParser(AbstractParser):
         """Get the data properties."""
         # go through DataPropertyDomain elements
         properties = self._doc.findall(RDFParser.full("owl:DatatypeProperty"))
-        lang = "en" # default language for labels and comments, unless specified with xml:lang property
+        lang = "en"  # default language for labels and comments, unless specified with xml:lang property
 
         # go through the "dataProperty" elements and add them to the model
         for element in properties:
 
             # status of this property ('unstable','testing', 'stable' and 'archaic'), https://www.w3.org/2003/06/sw-vocab-status/ns#term_status
             # skip deprecated properties
-            status = element.find(RDFParser.path('vs:term_status', startWith='descendant'))
+            status = element.find(RDFParser.path(
+                'vs:term_status', startWith='descendant'))
             if status is not None and status.text == 'archaic':
                 continue
 
@@ -128,26 +134,30 @@ class RDFParser(AbstractParser):
             prop = DatatypeProperty(propName)
 
             # localized labels of the property
-            labels = element.findall(RDFParser.path('rdfs:label', startWith='descendant'))
+            labels = element.findall(RDFParser.path(
+                'rdfs:label', startWith='descendant'))
             for label in labels:
                 if RDFParser.full('xml:lang') in label.attrib:
                     lang = label.attrib[RDFParser.full('xml:lang')]
                 prop.addLabel(label.text, lang)
 
             # localized comment of the property
-            comments = element.findall(RDFParser.path('rdfs:comment', startWith='descendant'))
+            comments = element.findall(RDFParser.path(
+                'rdfs:comment', startWith='descendant'))
             for comment in comments:
                 if RDFParser.full('xml:lang') in comment.attrib:
                     lang = comment.attrib[RDFParser.full('xml:lang')]
                 prop.addComment(comment.text, lang)
 
             # domainName is the name of the class this property belongs to
-            domain = element.find(RDFParser.path('rdfs:domain', startWith='descendant'))
-            if domain is not None: # subproperties do not always have a domain
+            domain = element.find(RDFParser.path(
+                'rdfs:domain', startWith='descendant'))
+            if domain is not None:  # subproperties do not always have a domain
                 # domainName = domain.attrib[RDFParser.full('rdf:resource')].split('#')[1]
                 domainName = self._parseResourceString(domain)
             # rangeType is the variable type of this property
-            range = element.find(RDFParser.path('rdfs:range', startWith='descendant'))
+            range = element.find(RDFParser.path(
+                'rdfs:range', startWith='descendant'))
             if range is not None:
                 # rangeType = range.attrib[RDFParser.full('rdf:resource')].split('#')[1]
                 rangeType = self._parseResourceString(range)
@@ -163,9 +173,10 @@ class RDFParser(AbstractParser):
                 prop.allowedValues = vals
 
             # set the global cardinality constraint of this property
-            typeConstraint = element.find(RDFParser.path('rdf:type', startWith='descendant'))
+            typeConstraint = element.find(
+                RDFParser.path('rdf:type', startWith='descendant'))
             if typeConstraint is not None:
-                #cardinality = typeConstraint.attrib[RDFParser.full('rdf:resource')].split('#')[1]
+                # cardinality = typeConstraint.attrib[RDFParser.full('rdf:resource')].split('#')[1]
                 cardinality = self._parseResourceString(typeConstraint)
                 prop.cardinality = cardinality
 
@@ -177,7 +188,7 @@ class RDFParser(AbstractParser):
         """Get the object properties."""
         # go through ObjectProperty elements
         properties = self._doc.findall(RDFParser.full("owl:ObjectProperty"))
-        lang = "en" # default language for labels and comments, unless specified with xml:lang property
+        lang = "en"  # default language for labels and comments, unless specified with xml:lang property
 
         # go through the "ObjectProperty" elements and add them to the model
         for element in properties:
@@ -187,13 +198,15 @@ class RDFParser(AbstractParser):
             prop = ObjectProperty(propName)
 
             # domainName is the name of the class this property belongs to
-            domain = element.find(RDFParser.path('rdfs:domain', startWith='descendant'))
-            if domain is not None: # subproperties do not always have a domain
+            domain = element.find(RDFParser.path(
+                'rdfs:domain', startWith='descendant'))
+            if domain is not None:  # subproperties do not always have a domain
                 # domainName = domain.attrib[RDFParser.full('rdf:resource')].split('#')[1]
                 domainName = self._parseResourceString(domain)
 
             # localized labels of the property
-            labels = element.findall(RDFParser.path('rdfs:label', startWith='descendant'))
+            labels = element.findall(RDFParser.path(
+                'rdfs:label', startWith='descendant'))
             for label in labels:
                 #lang = label.attrib[RDFParser.full('xml:lang')]
                 #prop.addLabel(label.text, lang)
@@ -202,7 +215,8 @@ class RDFParser(AbstractParser):
                 prop.addLabel(label.text, lang)
 
             # localized comments of the property
-            comments = element.findall(RDFParser.path('rdfs:comment', startWith='descendant'))
+            comments = element.findall(RDFParser.path(
+                'rdfs:comment', startWith='descendant'))
             for comment in comments:
                 #lang = comment.attrib[RDFParser.full('xml:lang')]
                 #prop.addComment(comment.text, lang)
@@ -211,14 +225,16 @@ class RDFParser(AbstractParser):
                 prop.addComment(comment.text, lang)
 
             # rangeType is the variable type of this property
-            range = element.find(RDFParser.path('rdfs:range', startWith='descendant'))
+            range = element.find(RDFParser.path(
+                'rdfs:range', startWith='descendant'))
             if range is not None:
                 # rangeType = range.attrib[RDFParser.full('rdf:resource')].split('#')[1]
                 rangeType = self._parseResourceString(range)
                 prop.range = rangeType
 
             # set the global cardinality constraint of this property
-            typeConstraint = element.find(RDFParser.path('rdf:type', startWith='descendant'))
+            typeConstraint = element.find(
+                RDFParser.path('rdf:type', startWith='descendant'))
             if typeConstraint is not None:
                 # cardinality = typeConstraint.attrib[RDFParser.full('rdf:resource')].split('#')[1]
                 cardinality = self._parseResourceString(typeConstraint)
@@ -231,7 +247,7 @@ class RDFParser(AbstractParser):
     def _parseAboutString(self, element):
         """
         Parse the "rdf:about" property of element
-        
+
         @param: element, an etree element
         @return string, smplified version of the rdf:about property, for using as e.g. class name
         """
@@ -249,7 +265,7 @@ class RDFParser(AbstractParser):
     def _parseResourceString(self, element):
         """
         Parse the "rdf:resource" property of element
-        
+
         @param: element, an etree element
         @return string, smplified version of the rdf:resource property, for using as e.g. domain or range of object properties
         """
@@ -259,7 +275,8 @@ class RDFParser(AbstractParser):
             resp = element.attrib[RDFParser.full('rdf:resource')].split('#')[1]
         # Property name is in the format URL/proName
         elif '/' in resourceString:
-            resp = element.attrib[RDFParser.full('rdf:resource')].split('/')[-1]
+            resp = element.attrib[RDFParser.full(
+                'rdf:resource')].split('/')[-1]
         else:
             resp = resourceString
         return resp
