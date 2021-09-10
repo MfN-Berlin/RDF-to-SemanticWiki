@@ -99,7 +99,8 @@ You can also export your data in a format suitable for further processing. This 
 ```
 There are many more possibilities for querying data, plese see the Semantic mediawiki documentation on [inline queries](https://www.semantic-mediawiki.org/wiki/Help:Inline_queries) and [result formats](https://www.semantic-mediawiki.org/wiki/Help:Result_formats).
 
-==Importing other ontologies==
+## Importing other ontologies
+
 This software was created to import the [IKON ontology](https://via.naturkundemuseum.berlin/ontologies/ikon.rdf) for documenting scientific research activities. If you wish to import this or other ontologies, then place the ontology in the /rdf folder and import using the import command, i.e. 
 
 ```
