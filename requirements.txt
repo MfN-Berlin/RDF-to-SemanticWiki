@@ -8,7 +8,7 @@ coverage==4.4.1
 green==2.16.1
 idna==2.8
 importlib-metadata==0.19
-lxml==4.4.0
+lxml==4.9.1
 MarkupSafe==1.1.1
 more-itertools==7.2.0
 packaging==19.1
